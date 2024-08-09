@@ -1,0 +1,1 @@
+python -m pip install google-auth google-auth-oauthlib google-api-python-client pandas openpyxl flask openpyxl-image-loader better_profanity
