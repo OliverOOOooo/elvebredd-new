@@ -1,0 +1,815 @@
+<div>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/header.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+    <link rel="stylesheet" href="/static/css/fonts.css">
+
+    <script src="{{ url_for('static', filename='js/header.js') }}"></script>
+</div>
+<div>
+    <nav>
+        <div class="center headerElement auto" style="padding-left:70rem;">
+            <button onclick="openMenuBar()" class="center blank button lightHover">
+                <img id="menuImage" src="{{ url_for('static', filename='images/misc/menu.png') }}">
+            </button>
+            <button onclick="openMenuBar()" class="center blank button lightHover" style="padding-right:15rem;padding-bottom:7rem;">
+                <p class="headerText" id="menuTextButton">Menu</p>
+            </button>
+            <div id="headerSearchBar">
+                <div id="headerSearchBarMain">
+                    <input id="searchInput" placeholder="Search">
+                    <img id="searchIcon" src="{{ url_for('static', filename='images/misc/search.png')}}">
+                </div>
+                <div id="resultsPets">
+                    
+                </div>
+            </div>
+        </div>
+        <div class="center headerElement auto" class="logoText" style="position:absolute;left:50vw;transform:translateX(-50%)">
+            <button class="blank button lightHover">
+                <a class="bland" href="/">
+                    <img id="headerLogo" src="{{ url_for('static', filename='images/misc/logo.png')}}">
+                </a>
+            </button>
+        </div>
+        {% if loggedIn %}
+            <div class="center headerElement auto">
+                <div class="center" style="position:relative;">
+                    <div class="lightHover">
+                        <button id="notificationsDiv" onclick="displayNotifications();" class="blank button lightHover smallPadding">
+                            <img id="notificationIcon" src="{{ url_for('static', filename='images/misc/notification.png') }}">
+                            <div id="notificationCircle">
+                                <div style="width:14rem;height:14rem;display:flex;justify-content:center;align-items:center;">
+                                    <p id="notificationCount"></p>
+                                </div>
+                            </div>
+                        </button>
+                    </div>
+                    <div id="notificationsMenu">
+
+                    </div>
+                </div>
+                <div class="center" style="position:relative">
+                    <button class="blank button lightHover" style="padding-left:15rem;padding-right:0px;padding-top:6rem;">
+                        <img id="profilePicture" src="{{ url_for('static', filename=('images/profile/' + userData['profilePicture'])) }}">
+                    </button>
+                    <div id="profileMenu">
+                        <button class="bland blank button">
+                            <a class="blandHeader headerText profilePadding" href="/user/{{userID}}">Profile</a>
+                        </button>
+                        <button class="bland blank button">
+                            <a id="profileNotifications" class="blandHeader headerText profilePadding" href="/notifications">Notifications</a>
+                        </button>
+                        <button onclick="openPreferences()" class="bland blank button">
+                            <a class="blandHeader headerText profilePadding">Settings</a>
+                        </button>
+                        <div class="smallLine blackBackground" style="margin-top:5rem;margin-bottom:2rem;"> &nbsp; </div>
+                        <button onclick="logout()" class="blank button lightHover" name="action" value="logout">
+                            <a class="blandHeader headerText profilePadding">Sign Out</a>
+                        </button>
+                    </div>
+                </div>
+                <div class="center">
+                    <p id="username" class="headerText">{{userData["username"]}}</p>
+                </div>
+            </div>
+        {% else %}
+            <div class="center headerElement auto" style="padding-right:3vw;">
+                <div class="center">
+                    <button class="blank button lightHover">
+                        <a href="/login" class="bland" id="signInButtonHeader">
+                            <b class="headerText" style="font-weight:bold;padding-right:4.5rem;padding-bottom:0.5rem;font-size:14.7rem;">Sign In</b>
+                        </a>
+                    </button>
+                </div>
+                <div class="center">
+                    <button id="signUpButton" class="blank button lightHover" style="padding-right:5rem;">
+                        <a href="/signup" class="bland">
+                            <p id="signUpText">Sign Up</p>
+                        </a>
+                    </button>
+                </div>
+            </div>
+        {% endif %}
+    </nav>
+    <div id="settingsBackground" onclick="closeSettings()">
+        &nbsp;
+    </div>
+    <div id="settingsMenu">
+        <h1 style="margin:0px;padding:max(0.5vw, 1vh);font-size:max(2vw, 4vh);">Settings</h1>
+        <div style="display:flex;flex-direction:row;justify-content:center;align-items:center;width:100%;">
+            <div class="whiteUnderline">
+
+            </div>
+            <button id="openPreferencesButton" onclick="openPreferences()" class="bland blank button">
+                <b id="openPreferencesButtonText">Preferences</b>
+            </button>
+            <div class="whiteUnderline">
+
+            </div>
+            <button id="openMiscButton" onclick="openMisc()" class="bland blank button">
+                <b id="openMiscButtonText">Misc</b>
+            </button>
+            <div class="whiteUnderline">
+
+            </div>
+        </div>
+        <div id="preferences">
+
+        </div>
+        <div id="misc">
+
+        </div>
+        <button id="closeButtonSettings" onclick="closeSettings()" style="width:100px;height:30px;">
+            <p>Close</p>
+        </button>
+    </div>
+</div>
+<div id="menuBar">
+    <div>
+        <button onclick="closeMenuBar()" id="closeButtonMenu" class="blank button">
+            <img src="{{ url_for('static', filename='images/misc/x.png') }}">
+            <b>Close</b>
+        </button>
+        <div>
+            <a class="bland" href="/"><p>Home</p></a>
+            <a class="bland" href="https://elvebredd.com/ValueCalculator.html"><p>Pet value calculator</p></a>
+            <a class="bland" href="https://elvebredd.com/FAQ.html"><p>Help</p></a>
+            <a class="bland" href="/apply">Content Creator?</a>
+        </div>
+    </div>
+    <div>
+        <div class="line blackBackground"> </div>
+        <div>
+            <a class="bland" href="https://www.youtube.com/@Elvebredd/featured"><p>YouTube</p></a>
+            <a class="bland" href="https://discord.com/invite/Byny894ZQP"><p>Discord</p></a>
+            <a class="bland" href="https://www.tiktok.com/discover/elvebred"><p>TikTok</p></a>
+            <a class="bland" href="https://www.roblox.com/groups/7838569/Elvebred#!/about"><p>Roblox Group</p></a>
+            <a class="bland" href="https://www.roblox.com/users/323218394/profile"><p>Roblox Profile</p></a>
+        </div>
+    </div>
+</div>
+
+<div id=infoDiv>
+    <b>Info</b>
+    <p id="infoText"></p>
+</div>
+
+<div id="importantDiv">
+    <b id="importantTitle">Important</b>
+    <p id="importantText">Make sure to read this!</p>
+    <div style="display:flex;flex-direction:row;gap:max(1vw, 2vh);padding-top:max(2vw, 4vh);">
+        <button id="importantClose"><p>Go Back</p></button>
+        <button id="importantAccept"><p>Accept</p></button>
+    </div>
+</div>
+
+<div id="importantBackground"> &nbsp; </div>
+
+<script type="application/data" id="userDataDict-data">
+    {{ userData | tojson | safe }}
+</script>
+
+<script>
+    var loggedIn = "{{ loggedIn }}"
+    var notificationCountID = document.getElementById("notificationCount");
+    var notificationCircle = document.getElementById("notificationCircle");
+
+    var settingsMenu = document.getElementById("settingsMenu")
+    var settingsBackground = document.getElementById("settingsBackground")
+
+    var preferences = document.getElementById("preferences")
+    var misc = document.getElementById("misc")
+
+    var formData = new FormData();
+
+    var checkbox = document.querySelectorAll(".checkbox")
+
+    var menuBar = document.getElementById("menuBar")
+
+    var userDataDictElement = document.getElementById("userDataDict-data")
+    var userDataDict = JSON.parse(userDataDictElement.textContent)
+
+    var openMiscButtonText = document.getElementById("openMiscButtonText")
+    var openPreferencesButtonText = document.getElementById("openPreferencesButtonText")
+
+    var notificationsOpen = 0
+
+    var notificationsMenu = document.getElementById("notificationsMenu")
+
+    var infoDiv = document.getElementById("infoDiv")
+    var infoText = document.getElementById("infoText")
+
+    var verified = document.getElementById("verified")
+
+    var neonLegendaryPets = document.getElementById("neonLegendaryPets")
+    var defaultLegendaryPets = document.getElementById("defaultLegendaryPets")
+    var highTiers = document.getElementById("highTiers")
+    var items = document.getElementById("items")
+    var megaLegendaryPets = document.getElementById("megaLegendaryPets")
+    var preppyPets = document.getElementById("preppyPets")
+    var randoms = document.getElementById("randoms")
+
+    var allowUnderpays = document.getElementById("allowUnderpays")
+    var receiveEmailNotifications = document.getElementById("receiveEmailNotifications")
+    var receiveFriendRequestNotification = document.getElementById("receiveFriendRequestNotification")
+    var receiveNotifications = document.getElementById("receiveNotifications")
+
+    var importantDiv = document.getElementById("importantDiv")
+    var importantTitle = document.getElementById("importantTitle")
+    var importantText = document.getElementById("importantText")
+    var importantClose = document.getElementById("importantClose")
+    var importantAccept = document.getElementById("importantAccept")
+    var importantBackground = document.getElementById("importantBackground")
+
+    function giveImportantMessage(title, text, closeCommand, acceptCommand) {
+        importantDiv.style.display = "flex"
+        importantBackground.style.display = "flex"
+        importantText.innerText = text
+        importantTitle.innerText = title
+        importantClose.setAttribute("onclick", "closeImportantMessage(); " + closeCommand)
+        importantAccept.setAttribute("onclick", "closeImportantMessage(); " + acceptCommand)
+    }
+
+    function closeImportantMessage() {
+        importantDiv.style.display = "none"
+        importantBackground.style.display = "none"
+    }
+
+
+    function isMouseOverElement(mouseX, mouseY, element) {
+        const rect = element.getBoundingClientRect();
+        return (
+            mouseX >= rect.left &&
+            mouseX <= rect.right &&
+            mouseY >= rect.top &&
+            mouseY <= rect.bottom
+        );
+    }
+
+    window.addEventListener("mousemove", (event) => {
+        verified = document.getElementById("verified")
+        neonLegendaryPets = document.getElementById("neonLegendaryPets")
+        defaultLegendaryPets = document.getElementById("defaultLegendaryPets")
+        highTiers = document.getElementById("highTiers")
+        items = document.getElementById("items")
+        megaLegendaryPets = document.getElementById("megaLegendaryPets")
+        preppyPets = document.getElementById("preppyPets")
+        randoms = document.getElementById("randoms")
+        allowUnderpays = document.getElementById("allowUnderpays")
+        receiveEmailNotifications = document.getElementById("receiveEmailNotifications")
+        receiveFriendRequestNotification = document.getElementById("receiveFriendRequestNotification")
+        receiveNotifications = document.getElementById("receiveNotifications")
+        infoDiv.style.display = "none"
+        infoDiv.style.left = event.clientX.toString() + "px"
+        infoDiv.style.top = event.clientY.toString() + "px"
+        infoDiv.style.width = "max(12vw, 24vh);"
+        infoText.style.color = "black"
+        if (verified != undefined) {
+            if (isMouseOverElement(event.clientX, event.clientY, verified)) {
+                infoText.innerText = "This user is verified. We have authenticated this person through trusted documentation."
+                infoDiv.style.display = "flex"
+                infoDiv.style.left = verified.getBoundingClientRect().x + "px"
+                infoDiv.style.top = verified.getBoundingClientRect().y + "px"
+                infoText.style.color = "grey"
+                infoDiv.style.width = "max(18vw, 36vh);"
+            }
+        }
+        if (neonLegendaryPets != undefined) {
+            if (isMouseOverElement(event.clientX, event.clientY, neonLegendaryPets)) {
+                infoText.innerText = "There are 8 High Tiers in Adopt Me:       Crow, Evil Unicorn, Parrot, Owl, Frost Dragon, Giraffe, Bat Dragon and Shadow Dragon"
+                infoDiv.style.display = "flex"
+                infoDiv.style.left = (neonLegendaryPets.getBoundingClientRect().x - (neonLegendaryPets.getBoundingClientRect().width * 12)) + "px"
+                infoDiv.style.top = neonLegendaryPets.getBoundingClientRect().y + "px"
+            }
+        }
+        if (defaultLegendaryPets != undefined) {
+            if (isMouseOverElement(event.clientX, event.clientY, defaultLegendaryPets)) {
+                infoText.innerText = "Coming Soon!"
+                infoDiv.style.display = "flex"
+                infoDiv.style.left = (defaultLegendaryPets.getBoundingClientRect().x - (defaultLegendaryPets.getBoundingClientRect().width * 12)) + "px"
+                infoDiv.style.top = defaultLegendaryPets.getBoundingClientRect().y + "px"
+            }
+        }
+        if (highTiers != undefined) {
+            if (isMouseOverElement(event.clientX, event.clientY, highTiers)) {
+                infoText.innerText = "Coming Soon!"
+                infoDiv.style.display = "flex"
+                infoDiv.style.left = (highTiers.getBoundingClientRect().x - (highTiers.getBoundingClientRect().width * 12)) + "px"
+                infoDiv.style.top = highTiers.getBoundingClientRect().y + "px"
+            }
+        }
+        if (items != undefined) {
+            if (isMouseOverElement(event.clientX, event.clientY, items)) {
+                infoText.innerText = "Coming Soon!"
+                infoDiv.style.display = "flex"
+                infoDiv.style.left = (items.getBoundingClientRect().x - (items.getBoundingClientRect().width * 12)) + "px"
+                infoDiv.style.top = items.getBoundingClientRect().y + "px"
+            }
+        }
+        if (megaLegendaryPets != undefined) {
+            if (isMouseOverElement(event.clientX, event.clientY, megaLegendaryPets)) {
+                infoText.innerText = "Coming Soon!"
+                infoDiv.style.display = "flex"
+                infoDiv.style.left = (megaLegendaryPets.getBoundingClientRect().x - (megaLegendaryPets.getBoundingClientRect().width * 12)) + "px"
+                infoDiv.style.top = megaLegendaryPets.getBoundingClientRect().y + "px"
+            }
+        }
+        if (preppyPets != undefined) {
+            if (isMouseOverElement(event.clientX, event.clientY, preppyPets)) {
+                infoText.innerText = "Coming Soon!"
+                infoDiv.style.display = "flex"
+                infoDiv.style.left = (preppyPets.getBoundingClientRect().x - (preppyPets.getBoundingClientRect().width * 12)) + "px"
+                infoDiv.style.top = preppyPets.getBoundingClientRect().y + "px"
+            }
+        }
+        if (randoms != undefined) {
+            if (isMouseOverElement(event.clientX, event.clientY, randoms)) {
+                infoText.innerText = "Coming Soon!"
+                infoDiv.style.display = "flex"
+                infoDiv.style.left = (randoms.getBoundingClientRect().x - (randoms.getBoundingClientRect().width * 12)) + "px"
+                infoDiv.style.top = randoms.getBoundingClientRect().y + "px"
+            }
+        }
+        if (allowUnderpays != undefined) {
+            if (isMouseOverElement(event.clientX, event.clientY, allowUnderpays)) {
+                infoText.innerText = "Coming Soon!"
+                infoDiv.style.display = "flex"
+                infoDiv.style.left = (allowUnderpays.getBoundingClientRect().x - (allowUnderpays.getBoundingClientRect().width * 12)) + "px"
+                infoDiv.style.top = allowUnderpays.getBoundingClientRect().y + "px"
+            }
+        }
+        if (receiveEmailNotifications != undefined) {
+            if (isMouseOverElement(event.clientX, event.clientY, receiveEmailNotifications)) {
+                infoText.innerText = "Coming Soon!"
+                infoDiv.style.display = "flex"
+                infoDiv.style.left = (receiveEmailNotifications.getBoundingClientRect().x - (receiveEmailNotifications.getBoundingClientRect().width * 12)) + "px"
+                infoDiv.style.top = receiveEmailNotifications.getBoundingClientRect().y + "px"
+            }
+        }
+        if (receiveFriendRequestNotification != undefined) {
+            if (isMouseOverElement(event.clientX, event.clientY, receiveFriendRequestNotification)) {
+                infoText.innerText = "Coming Soon!"
+                infoDiv.style.display = "flex"
+                infoDiv.style.left = (receiveFriendRequestNotification.getBoundingClientRect().x - (receiveFriendRequestNotification.getBoundingClientRect().width * 12)) + "px"
+                infoDiv.style.top = receiveFriendRequestNotification.getBoundingClientRect().y + "px"
+            }
+        }
+        if (receiveNotifications != undefined) {
+            if (isMouseOverElement(event.clientX, event.clientY, receiveNotifications)) {
+                infoText.innerText = "Coming Soon!"
+                infoDiv.style.display = "flex"
+                infoDiv.style.left = (receiveNotifications.getBoundingClientRect().x - (receiveNotifications.getBoundingClientRect().width * 12)) + "px"
+                infoDiv.style.top = receiveNotifications.getBoundingClientRect().y + "px"
+            }
+        }
+    })
+
+    checkbox.forEach((button) => {
+        button.addEventListener("click", (event) => {
+            if (button.value == "0") {
+                button.value = "1"
+                button.style.opacity = 1
+            } else {
+                button.value = "0"
+                button.style.opacity = 0
+            }
+        })
+    })
+
+    checkbox.forEach((button) => {
+        if (button.value == "0") {
+            button.style.opacity = 0
+        } else {
+            button.style.opacity = 1
+        }
+    })
+
+    function updateNotifications() {
+        var userData = JSON.parse('{{ userData|tojson|safe }}')
+        var notificationsCount = 0;
+
+        for (var id in userData.notifications) {
+            if (userData.notifications.hasOwnProperty(id)) {
+                if (!userData.notifications[id].read) {
+                    notificationsCount++;
+                };
+            };
+        };
+
+    //    if (notificationsCount == 0) {
+    //        notificationsCount = ""
+    //    }
+
+        if (loggedIn == "True") {
+            notificationCountID.innerHTML = notificationsCount
+            if (notificationCountID.innerHTML == 0) {
+                notificationCircle.style.opacity = "0";
+            } else {
+                notificationCircle.style.opacity = "1";
+            };
+        };
+    };
+
+    updateNotifications()
+
+    if (loggedIn == "True") {
+        notificationsMenu.addEventListener("click", (event) => {
+            if (notificationsOpen == 1) {
+                notificationsOpen = 2
+            }
+        });
+    }
+
+    window.addEventListener("click", (event) => {
+        if (notificationsOpen == 1) {
+            displayNotifications()
+        } else if (notificationsOpen == 2) {
+            notificationsOpen = 1
+        };
+    });
+
+    function readNotifications() {
+        formData = new FormData();
+        formData.append('action', "readNotifications");
+
+        fetch('/api', {
+        method: 'POST',
+        body: formData
+        })
+        .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+        })
+        .then(data => {
+        if (data == "SUCCESS") {
+            notificationCountID.innerHTML = "0";
+            notificationCircle.style.opacity = "0";
+        }
+        })
+        .catch(error => {
+        console.error('There was a problem with the fetch operation:', error);
+        });
+    };
+
+
+    function displayNotifications() {
+        if (notificationsOpen == 1 || notificationsOpen == 2) {
+            notificationsMenu.style.display = "none"
+            notificationsOpen = 0
+        } else if (notificationsOpen == 0) {
+            notificationsMenu.style.display = "flex"
+            notificationsOpen = 2
+            formData = new FormData();
+            formData.append('action', "getUnreadNotifications");
+
+            fetch('/api', {
+            method: 'POST',
+            body: formData
+            })
+            .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+            })
+            .then(data => {
+                notificationsMenu.innerText = ""
+                if (data == "Nothing found") {
+                    const div = document.createElement("div")
+                    div.className = "notificationsTitleDiv"
+                    const txt = document.createElement("b")
+                    txt.innerText = "Notifications"
+                    div.appendChild(txt)
+                    const notifications = document.createElement("div")
+                    notifications.id = "notifications"
+                    notificationsMenu.appendChild(div)
+
+                    const message = document.createElement("div")
+                    message.className = "notification"
+                    const txt2 = document.createElement("b")
+                    txt2.style.width = "100%"
+                    txt2.style.textAlign = "center"
+                    txt2.innerText = "No New Notifications!"
+                    txt2.style.fontSize = "max(1vw, 2vh)"
+                    message.appendChild(txt2)
+                    
+                    notifications.appendChild(message)
+
+                    notificationsMenu.appendChild(notifications)
+
+                    const readAllNotifications = document.createElement("a")
+                    readAllNotifications.innerText = "Read All Notifications"
+                    readAllNotifications.style.padding = "max(1vw, 2vh)"
+                    readAllNotifications.style.fontSize = "max(1vw, 2vh)"
+                    readAllNotifications.style.color = "black"
+                    readAllNotifications.style.textDecoration = "none"
+                    readAllNotifications.href = "/notifications"
+                    notificationsMenu.appendChild(readAllNotifications)
+                } else {
+                    const div = document.createElement("div")
+                    div.className = "notificationsTitleDiv"
+                    const txt = document.createElement("b")
+                    txt.innerText = "Notifications"
+                    div.appendChild(txt)
+                    const notifications = document.createElement("div")
+                    notifications.id = "notifications"
+                    notificationsMenu.appendChild(div)
+
+                    for (const i in data) {
+                        const notificationDiv = document.createElement("div")
+                        if (data[i]["image"] != "blank") {
+                            notificationDiv.className = "notification"
+                        }
+
+                        const img = document.createElement("img")
+                        if (data[i]["image"] == "default.png") {
+                            img.src = "/static/images/notifications/default.png"
+                        } else {
+                            img.src = data[i]["image"]
+                        }
+
+                        img.style.width = "auto"
+                        img.style.height = "max(2.2vw, 4.4vh)"
+
+                        if (data[i]["image"] == "blank") {
+                            img.style.display = "none"
+                        }
+                        
+                        notificationDiv.appendChild(img)
+
+                        const notificationInfo = document.createElement("div")
+                        notificationInfo.className = "notificationInfo"
+
+                        const head = document.createElement("b")
+                        const body = document.createElement("p")
+                        head.style.fontSize = "max(1vw, 2vh)"
+                        body.style.fontSize = "max(0.8vw, 1.6vh)"
+                        body.style.margin = "0px"
+                        head.innerText = data[i]["head"]
+                        body.innerText = data[i]["body"]
+                        notificationInfo.appendChild(head)
+                        notificationInfo.appendChild(body)
+                        notificationDiv.appendChild(notificationInfo)
+
+                        notifications.appendChild(notificationDiv)
+                    }
+
+                    notificationsMenu.appendChild(notifications)
+
+                    const readAllNotifications = document.createElement("a")
+                    readAllNotifications.innerText = "Read All Notifications"
+                    readAllNotifications.style.padding = "max(1vw, 2vh)"
+                    readAllNotifications.style.fontSize = "max(1vw, 2vh)"
+                    readAllNotifications.style.color = "black"
+                    readAllNotifications.style.textDecoration = "none"
+                    readAllNotifications.href = "/notifications"
+                    notificationsMenu.appendChild(readAllNotifications)
+
+                    readNotifications()
+                }
+            })
+            .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+            });
+        }
+    }
+
+    function openPreferences() {
+        settingsMenu.style.display = "flex";
+        settingsBackground.style.display = "block"
+        document.getElementById("profileMenu").style.display = "none"
+        misc.style.display = "none"
+        preferences.style.display = "flex"
+        openPreferencesButtonText.style.color = "red";
+        openMiscButtonText.style.color = "black";
+    };
+
+    function openMisc() {
+        settingsMenu.style.display = "flex";
+        settingsBackground.style.display = "block"
+        document.getElementById("profileMenu").style.display = "none"
+        misc.style.display = "flex"
+        preferences.style.display = "none"
+        openPreferencesButtonText.style.color = "black";
+        openMiscButtonText.style.color = "red";
+
+    };
+
+    function closeSettings() {
+        settingsMenu.style.display = "none";
+        settingsBackground.style.display = "none"
+        misc.style.display = "none"
+        preferences.style.display = "none"
+    }
+
+    function nameKey(key) {
+        let formattedString = key.replace(/([A-Z])/g, ' $1');
+    
+        formattedString = formattedString.trim();
+        formattedString = formattedString.charAt(0).toUpperCase() + formattedString.slice(1);
+        
+        return formattedString;
+    }
+
+    function loadPreferences() {
+        if (loggedIn == "True") {
+            preferences.innerHTML = ""
+            Object.keys(userDataDict["preferences"]).forEach(key => {
+                const div = document.createElement("div")
+                div.className = "preferenceDiv"
+                const img = document.createElement("img")
+                img.className = "infoImg"
+                img.value = key.toString()
+                img.src = "{{ url_for('static', filename='images/misc/info.png') }}"
+                img.id = key.toString()
+                const p = document.createElement("p")
+                p.className = "noMargin"
+                p.style.width = "100%"
+                p.style.paddingLeft = "max(1vw, 2vh)"
+                p.style.fontSize = "max(1.2vw, 2.4vh)"
+                p.innerText = nameKey(key)
+                const div2 = document.createElement("div")
+                div2.className = "preference"
+                const button = document.createElement("button")
+                button.className = "blank checkbox noPadding preferenceButton"
+                button.name = "checkbox"
+                button.setAttribute("onclick", "modifyPreference('" + key + "')")
+                button.value = userDataDict["preferences"][key].toString()
+                button.id = key.toString()
+                const img2 = document.createElement("img")
+                img2.className = "preferenceImage"
+                img2.id = key.toString() + "Image"
+                img2.src = "{{ url_for('static', filename='images/misc/checked.png') }}"
+                if (button.value == 0) {
+                    img2.style.display = "none"
+                }
+
+                button.appendChild(img2)
+                div2.appendChild(button)
+
+                div.appendChild(img)
+                div.appendChild(p)
+                div.appendChild(div2)
+
+                preferences.appendChild(div)
+            })
+        }
+    }
+
+    loadPreferences()
+
+    function loadMisc() {
+        if (loggedIn == "True") {
+            misc.innerHTML = ""
+            Object.keys(userDataDict["settings"]).forEach(key => {
+                const div = document.createElement("div")
+                div.className = "preferenceDiv"
+                const img = document.createElement("img")
+                img.className = "infoImg"
+                img.value = key.toString()
+                img.src = "{{ url_for('static', filename='images/misc/info.png') }}"
+                img.id = key.toString()
+                const p = document.createElement("p")
+                p.className = "noMargin"
+                p.style.width = "100%"
+                p.style.paddingLeft = "max(1vw, 2vh)"
+                p.style.fontSize = "max(1.2vw, 2.4vh)"
+                p.innerText = nameKey(key)
+                const div2 = document.createElement("div")
+                div2.className = "preference"
+                const button = document.createElement("button")
+                button.className = "blank checkbox noPadding preferenceButton"
+                button.name = "checkbox"
+                button.setAttribute("onclick", "modifyPreference('" + key + "')")
+                button.value = userDataDict["settings"][key].toString()
+                button.id = key.toString()
+                const img2 = document.createElement("img")
+                img2.className = "preferenceImage"
+                img2.id = key.toString() + "Image"
+                img2.src = "{{ url_for('static', filename='images/misc/checked.png') }}"
+                if (button.value == 0) {
+                    img2.style.display = "none"
+                }
+
+                button.appendChild(img2)
+                div2.appendChild(button)
+
+                div.appendChild(img)
+                div.appendChild(p)
+                div.appendChild(div2)
+
+                misc.appendChild(div)
+            })
+        }
+    }
+
+    loadMisc()
+
+    function modifyPreference(preference) {
+        const button = document.getElementById(preference)
+        const img = document.getElementById(preference + "Image")
+        if (button.value == 0) {
+            value = 1
+        } else {
+            value = 0
+        }
+        formData = new FormData();
+        formData.append('preference', preference)
+        formData.append('value', value)
+        formData.append('action', "modifyPreference");
+
+        fetch('/api', {
+        method: 'POST',
+        body: formData
+        })
+        .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+        })
+        .then(data => {
+        if (data == "SUCCESS") {
+            if (button.value == 1) {
+                button.value = 0
+                img.style.display = "none"
+            } else {
+                button.value = 1
+                img.style.display = "flex"
+            }
+        }
+        })
+        .catch(error => {
+        console.error('There was a problem with the fetch operation:', error);
+        });
+    }
+
+    function logout() {
+        formData = new FormData();
+        formData.append('href', (window.location.href).toString())
+        formData.append('action', "logout");
+
+        fetch('/api', {
+        method: 'POST',
+        body: formData
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json()
+        })
+        .then(data => {
+            if (data == "SUCCESS") {
+                window.location.reload()
+            }
+        })
+        .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+        });
+    };
+
+    function modifyMisc(misc, value) {
+        if (value == 0) {
+            value = 1
+        } else {
+            value = 0
+        }
+        formData = new FormData();
+        formData.append('misc', misc)
+        formData.append('value', value)
+        formData.append('action', "modifyMisc");
+
+        fetch('/api', {
+        method: 'POST',
+        body: formData
+        })
+        .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+        })
+        .then(data => {
+        if (data == "SUCCESS") {
+            
+        }
+        })
+        .catch(error => {
+        console.error('There was a problem with the fetch operation:', error);
+        });
+    }
+
+    function openMenuBar() {
+        menuBar.style.transform = "translateX(0%)"
+    }
+
+    function closeMenuBar() {
+        menuBar.style.transform = "translateX(-125%)"
+    }
+
+    closeSettings()
+
+</script>

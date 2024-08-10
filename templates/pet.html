@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pet</title>
+    <script src=""></script>
+    <link rel="stylesheet" href="https://use.typekit.net/uju1lhj.css">
+    <link rel="stylesheet" href="../static/css/pet.css">
+</head>
+<body>
+    <header>
+        {% include "header.html" %}
+    </header>
+        <main style="width:100%;display:flex;flex-direction:row;justify-content:center;">
+            <div style="display:flex;flex-direction:column;width:60vw;">
+                <div style="padding-top:100px;">
+
+                </div>
+                <div style="display:flex;flex-direction:row;align-items:center;gap:20px;height:60px;margin-right:100%;">
+                    <img id="arrow" src="../static/images/misc/arrow.png">
+                    <b id="petTitle">{{ pets[pet]["name"] }}</b>
+                </div>
+                <div id="mainSelection">
+                    <div style="display:flex;flex-direction:row;gap:max(3vw, 6vh);">
+                        <b onclick="selectListing()" id="selectListingsText">Listings</b>
+                        <b onclick="selectWiki()" id="selectWikiText">Wiki</b>
+                    </div>
+                    <img src="{{ pets[pet]['image'] }}">
+                </div>
+                <div style="display:flex;flex-direction:row;">
+                    <div style="display:flex;flex-direction:column;align-items:center;gap:max(2vw, 4vh);">
+                        <div id="petInformation">
+                            <div style="display:flex;flex-direction:row;align-items:center;justify-content:center;gap:max(1vw,2vh);">
+                                <p class="noMargin">Rarity:</p>
+                                <b class="noMargin">{{ pets[pet]["rarity"] }}</b>
+                            </div>
+                            <img src="{{ pets[pet]['image'] }}" style="width:max(15vw,30vh);height:max(15vw,30vh)">
+                            <b id="petName">{{ pets[pet]["name"] }}</b>
+                            <div style="width:80%;height:1px;background-color:black;"></div>
+                            <div class="petInfoShort">
+                                <p class="noMargin">Default</p>
+                                <b class="noMargin" id="defaultValue">0</b>
+                            </div>
+                            <div class="petInfoShort">
+                                <p class="noMargin">Neon</p>
+                                <b class="noMargin" id="neonValue">0</b>
+                            </div>
+                            <div class="petInfoShort">
+                                <p class="noMargin">Mega</p>
+                                <b class="noMargin" id="megaValue">0</b>
+                            </div>
+                        </div>
+                        <div class="sharkFrostButton orangeRed">
+                            <div class="sharkText" onclick="selectSharkButton()"><b class="sharkFrostText">SHARK</b></div>
+                            <div class="frostText" onclick="selectFrostButton()"><b class="sharkFrostText">FROST</b></div>
+                            <button class="blank button sharkButton" onclick="selectSharkButton()">
+                                &nbsp;
+                            </button>
+                            <button class="blank button frostButton" onclick="selectFrostButton()">
+                                &nbsp;
+                            </button>
+                            <div class="buttonSelected orangeRed">
+                                &nbsp;
+                            </div>
+                        </div>
+                    </div>
+                    <div style="width:auto;">
+                        <div id="listings">
+    
+                        </div>
+                        <div id="wiki">
+                            <b>Coming soon...</b>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <footer>
+        {% include "footer.html" %}
+    </footer>
+</body>
+</html>
+
+<script>
+    var wiki = document.getElementById("wiki")
+    var listings = document.getElementById("listings")
+    var selectListingsText = document.getElementById("selectListingsText")
+    var selectWikiText = document.getElementById("selectWikiText")
+
+    var sharkFrostButtonSelected = document.querySelectorAll(".buttonSelected")
+    var calculateWithValue = "shark"
+
+    var defaultValueElement = document.getElementById("defaultValue")
+    var neonValueElement = document.getElementById("neonValue")
+    var megaValueElement = document.getElementById("megaValue")
+
+    var defaultValue = "{{ pets[pet]['rvalue'] }}"
+    var neonValue = "{{ pets[pet]['nvalue'] }}"
+    var megaValue = "{{ pets[pet]['mvalue'] }}"
+
+    defaultValue = parseFloat(defaultValue)
+    neonValue = parseFloat(neonValue)
+    megaValue = parseFloat(megaValue)
+
+
+
+    function selectListing() {
+        listings.style.diplay = "flex"
+        wiki.style.display = "none"
+        selectListingsText.style.color = "red"
+        selectWikiText.style.color = "black"
+    }
+
+    function selectWiki() {
+        listings.style.diplay = "none"
+        wiki.style.display = "flex"
+        selectListingsText.style.color = "black"
+        selectWikiText.style.color = "red"
+    }
+
+    function selectSharkButton() {
+        sharkFrostButtonSelected.forEach((button) => {
+            button.style.left = "0%"
+        })
+        calculateWithValue = "shark"
+        calculateValue()
+    }
+
+    window.addEventListener("resize", (event) => {
+        sharkFrostButtonSelected.forEach((button) => {
+            button.style.transition = "0s ease"
+        })
+        setTimeout((event) => {
+            sharkFrostButtonSelected.forEach((button) => {
+                button.style.transition = "0.33s ease-in-out"
+            })
+        }, 100)
+    })
+
+    function selectFrostButton() {
+        sharkFrostButtonSelected.forEach((button) => {
+            button.style.left = "47%"
+        })
+        calculateWithValue = "frost"
+        calculateValue()
+    }
+
+    function calculateValue() {
+        if (calculateWithValue == "frost") {
+            defaultValueElement.innerText = (defaultValue / 105).toFixed(2).toString()
+            neonValueElement.innerText = (neonValue / 105).toFixed(2).toString()
+            megaValueElement.innerText = (megaValue / 105).toFixed(2).toString()
+        } else {
+            defaultValueElement.innerText = defaultValue.toFixed(2).toString()
+            neonValueElement.innerText = neonValue.toFixed(2).toString()
+            megaValueElement.innerText = megaValue.toFixed(2).toString()
+        }
+    }
+
+    selectListing()
+    selectSharkButton()
+
+</script>

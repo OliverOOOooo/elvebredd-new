@@ -1,0 +1,1683 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Index</title>
+    <script src="../static/js/index.js"></script>
+    <link rel="stylesheet" href="https://use.typekit.net/uju1lhj.css">
+</head>
+<body style="background-color:rgb(253, 249, 234);">
+    <header>
+        {% include "header.html" %}
+    </header>
+    <div style="width:100vw;height:600rem;position:relative;" id="slides">
+        <div class="slide">
+            <div style="position:relative;width:100%;height:100%;">
+                <div style="width:100vw;height:575rem;overflow:hidden;">
+                    <img style="width:100%;height:100%;object-fit: cover;object-position: center;" src="../static/images/misc/image100.png">
+                </div>
+                <img style="position:absolute;height:400rem;width:auto;right:5%;top:15%;" src="../static/images/misc/image101.png">
+                <div style="position:absolute;z-index:11;left:0%;top:0%;width:100vw;height:575rem;background:linear-gradient(180deg, rgb(0,0,0,0) 0%, rgb(253, 249, 234, 1) 100%)"></div>
+                <div style="position:absolute;width:435rem;height:40%;background:none;left:3%;bottom:40%;z-index:20;display:flex;align-items:center;flex-direction:column;">
+                    <p style="font-size:30.1rem;font-weight:bold;color:rgb(253, 249, 234);margin:0px;">USED BY</p>
+                    <div style="display:flex;align-items:center;justify-content:center;height:100rem;">
+                        <p style="font-size:120rem;font-weight:bold;color:rgb(253, 249, 234);margin:0px;padding-top:10rem;">1M+</p>
+                    </div>
+                    <p style="font-size:42.2rem;font-weight:200;color:rgb(253, 249, 234);margin:0px;">ADOPT ME TRADERS</p>
+                    <div style="display:flex;flex-direction:row;gap:10rem;align-items:center;margin-top:45rem;margin-left:10rem;">
+                        <div style="width:2rem;height:40rem;background-color:rgb(253, 249, 234);margin-left:10rem;"></div>
+                        <p style="font-size:19rem;font-weight:normal;color:rgb(253, 249, 234);margin:0px;">Use the same Adopt Me Values as the best traders in the world</p>
+                    </div>
+                    <div style="width:100%;padding-top:21rem;margin-left:30rem;">
+                        <a href="/value-calculator">
+                            <button class="frontMenuButton">
+                                <p>Value calculator</p>
+                            </button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="slide">
+            <div style="position:relative;width:100%;height:100%;">
+                <div style="width:100vw;height:575rem;overflow:hidden;">
+                    <img style="width:100%;height:100%;object-fit: cover;object-position: center;" src="../static/images/misc/image100.png">
+                </div>
+                <img style="position:absolute;height:400rem;width:auto;right:5%;top:15%;" src="../static/images/misc/image101.png">
+                <div style="position:absolute;z-index:11;left:0%;top:0%;width:100vw;height:575rem;background:linear-gradient(180deg, rgb(0,0,0,0) 0%, rgb(253, 249, 234, 1) 100%)"></div>
+                <div style="position:absolute;width:435rem;height:40%;background:none;left:30%;bottom:40%;z-index:20;display:flex;align-items:center;flex-direction:column;">
+                    <p style="font-size:30.1rem;font-weight:bold;color:rgb(253, 249, 234);margin:0px;">USED BY</p>
+                    <div style="display:flex;align-items:center;justify-content:center;height:100rem;">
+                        <p style="font-size:120rem;font-weight:bold;color:rgb(253, 249, 234);margin:0px;padding-top:10rem;">1M+</p>
+                    </div>
+                    <p style="font-size:42.2rem;font-weight:200;color:rgb(253, 249, 234);margin:0px;">ADOPT ME TRADERS</p>
+                    <div style="display:flex;flex-direction:row;gap:10rem;align-items:center;margin-top:45rem;margin-left:10rem;">
+                        <div style="width:2rem;height:40rem;background-color:rgb(253, 249, 234);margin-left:10rem;"></div>
+                        <p style="font-size:19rem;font-weight:normal;color:rgb(253, 249, 234);margin:0px;">Use the same Adopt Me Values as the best traders in the world</p>
+                    </div>
+                    <div style="width:100%;padding-top:21rem;margin-left:30rem;">
+                        <a href="/value-calculator">
+                            <button class="frontMenuButton">
+                                <p>Value calculator</p>
+                            </button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="position:absolute;width:100vw;height:550rem;top:0%;left:0%;display:flex;flex-direction:column-reverse;align-items:center;">
+        <div id="slidesInfo">
+
+        </div>
+    </div>
+
+    <main class="maxWidth main" style="display:flex;flex-direction:column;justify-content:center;overflow:hidden;">
+        <div style="width:100%;padding-right:10%;">
+            <p style="font-size:22rem;font-weight:bold;font-family:'Aileron', sans-serif;margin:0px;padding:10rem;" class="listingsTitles">Suggested</p>
+        </div>
+        <div id="listingsCategory1" class="listings">
+
+        </div>
+        <div style="width:100%">
+            <p style="font-size:22rem;font-weight:bold;font-family:'Aileron', sans-serif;margin:0px;padding:10rem;" class="listingsTitles">Recent</p>
+        </div>
+        <div id="listingsCategory2" class="listings">
+
+        </div>
+        <div style="width:100%">
+            <p style="font-size:22rem;font-weight:bold;font-family:'Aileron', sans-serif;margin:0px;padding:10rem;" class="listingsTitles">Overpay</p>
+        </div>
+        <div id="listingsCategory3" class="listings">
+
+        </div>
+    </main>
+
+    <div id="addInventory">
+        <div style="display:flex;flex-direction:row;justify-content:space-between;padding-right:5%;padding-left:5%;">
+            <div class="center" style="gap:max(0.25vw, 0.5vh);padding:max(0.5vw, 1vh);">
+                <img id="filterImage" src="../static/images/misc/menu.png">
+                <p id="filterText">Filter</p>
+            </div>
+            <div id="petSearchDiv" class="center">
+                <input id="petSearch" placeholder="Search" onkeyup="searchUpPets()">
+                <img id="petSearchImage" src="../static/images/misc/search.png">
+            </div>
+        </div>
+        <div style="display:flex;flex-direction:row;justify-content:space-between;gap:0.5vw">
+            <div id="filter">
+                <div id="filterButtons">
+                    <button id="all" class="filterButton" onclick="filter('all', 0)"><b class="filterButtonText">All</b></button>
+                    <button id="pets" class="filterButton" onclick="filter('pets', 0)"><b class="filterButtonText">Pets</b></button>
+                    <button id="common" class="filterButton" onclick="filter('common', 0)"><b class="filterButtonText">Common</b></button>
+                    <button id="eggs" class="filterButton" onclick="filter('eggs', 0)"><b class="filterButtonText">Eggs</b></button>
+                    <button id="legendary" class="filterButton" onclick="filter('legendary', 0)"><b class="filterButtonText">Legendary</b></button>
+                    <button id="other" class="filterButton" onclick="filter('other', 0)"><b class="filterButtonText">Other</b></button>
+                    <button id="petWear" class="filterButton" onclick="filter('pet wear', 0)"><b class="filterButtonText">Pet Wear</b></button>
+                    <button id="rare" class="filterButton" onclick="filter('rare', 0)"><b class="filterButtonText">Rare</b></button>
+                    <button id="ultraRare" class="filterButton" onclick="filter('ultra rare', 0)"><b class="filterButtonText">Ultra-Rare</b></button>
+                    <button id="uncommon" class="filterButton" onclick="filter('uncommon', 0)"><b class="filterButtonText">Uncommon</b></button>
+                    <button id="vehicles" class="filterButton" onclick="filter('vehicles', 0)"><b class="filterButtonText">Vehicles</b></button>
+                </div>
+            </div>
+            <div class="center">
+                <div id="petImages">
+
+                </div>
+            </div>
+        </div>
+        <div id="imageButtons">
+            <button id="flyButton" onclick="enableFly()">
+                <h1 style="color:white;">F</h1>
+            </button>
+            <button id="rideButton" onclick="enableRide()">
+                <h1 style="color:white;">R</h1>
+            </button>
+            <button id="regularButton" onclick="enableRegular()">
+                <h1 style="color:white;">D</h1>
+            </button>
+            <button id="neonButton" onclick="enableNeon()">
+                <h1 style="color:white;">N</h1>
+            </button>
+            <button id="megaButton" onclick="enableMega()">
+                <h1 style="color:white;">M</h1>
+            </button>
+        </div>
+        <div id="closeButton" onclick="closeInventory()">
+            <img style="width:max(1.5vw, 3vh);aspect-ratio: 1/1;" src="../static/images/misc/close.svg">
+        </div>
+    </div>
+    <div id="listingInterface2">
+        <img src="/static/images/misc/logo.png">
+        <div id="listingInterface2Information">
+            <div>
+                <p style="font-size:40rem;font-weight:900;color:rgb(253, 249, 234);">Your Offer</p>
+                <p id="yourOfferValue" style="font-size:25rem;font-weight:800;margin-left:10rem;color:rgb(253, 249, 234);">69420</p>
+                <div id="listingInterface2YourOfferPets" class="listingInterface2PetsDiv">
+                    <div>
+                        <img src="/static/images/pets/Birthday Butterfly 2023.png">
+                        <div>
+                            <div style="background:linear-gradient(135deg, rgb(142, 202, 232) 0%, rgb(47, 152, 204) 50%, rgb(0, 134, 200) 100%);">
+                                <p>F</p>
+                            </div>
+                            <div style="background:linear-gradient(135deg, rgb(255, 197, 220) 0%, rgb(237, 44, 121) 50%, rgb(255, 0, 101) 100%);">
+                                <p>R</p>
+                            </div>
+                            <div style="background:linear-gradient(135deg, rgb(187, 80, 253) 0%, rgb(69, 3, 198) 50%, rgb(81, 28, 182) 100%);">
+                                <p>M</p>
+                            </div>
+                            <div style="background:linear-gradient(135deg, rgb(193, 255, 110) 0%, rgb(140, 198, 63) 50%, rgb(19, 114, 11) 100%);">
+                                <p>N</p>
+                            </div>
+                        </div>
+                    </div>   
+                </div>
+            </div>
+            <div>
+                <p style="font-size:100rem;font-weight:900;color:rgb(253, 249, 234);">2</p>
+                <div style="width:0.5rem;height:225rem;background-color:rgb(243, 239, 223)"></div>
+            </div>
+            <div>
+                <p style="font-size:40rem;font-weight:900;">Their Offer</p>
+                <p id="theirOfferValue"  style="font-size:25rem;font-weight:800;margin-right:10rem;">69420</p>
+                <div id="listingInterface2TheirOfferPets" class="listingInterface2PetsDiv">
+                    <div>
+                        <img src="/static/images/pets/Birthday Butterfly 2023.png">
+                        <div>
+                            <div style="background:linear-gradient(135deg, rgb(142, 202, 232) 0%, rgb(47, 152, 204) 50%, rgb(0, 134, 200) 100%);">
+                                <p>F</p>
+                            </div>
+                            <div style="background:linear-gradient(135deg, rgb(255, 197, 220) 0%, rgb(237, 44, 121) 50%, rgb(255, 0, 101) 100%);">
+                                <p>R</p>
+                            </div>
+                            <div style="background:linear-gradient(135deg, rgb(187, 80, 253) 0%, rgb(69, 3, 198) 50%, rgb(81, 28, 182) 100%);">
+                                <p>M</p>
+                            </div>
+                            <div style="background:linear-gradient(135deg, rgb(193, 255, 110) 0%, rgb(140, 198, 63) 50%, rgb(19, 114, 11) 100%);">
+                                <p>N</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <p style="font-size:16rem;font-weight:bold;color:rgb(109, 107, 112);margin-top:110rem;">You Can Offer With</p>
+        <div id="listingInterface2Preferences">
+            <p>High Tiers</p>
+            <p style="font-weight:bold;">|</p>
+            <p>Mega Legs</p>
+            <p style="font-weight:bold;">|</p>
+            <p>Neon Legs</p>
+            <p style="font-weight:bold;">|</p>
+            <p>Default Legs</p>
+            <p style="font-weight:bold;">|</p>
+            <p>Preppy</p>
+            <p style="font-weight:bold;">|</p>
+            <p>2019 Pets</p>
+            <p style="font-weight:bold;">|</p>
+            <p>Randoms</p>
+            <p style="font-weight:bold;">|</p>
+            <p>Items</p>
+        </div>
+        <div id="listingInterface2Main">
+            <div style="width:50%">
+                <div style="display:flex;flex-direction:row;gap:10rem;">
+                    <button id="changeButton"><p>Change</p></button>
+                    <button id="finishButton"><p>Finish</p></button>
+                </div>
+                <div id="sharkValueRequestedDiv" style="display:flex;flex-direction:row;gap:2rem;width:180rem;justify-content:center;margin-top:10rem;">
+                    <p style="font-size: 20rem;font-weight:200;color:rgb(54, 53, 55);">YOU ADD: </p>
+                    <p id="sharkValueRequested" style="font-size:20rem;font-weight:500;color:rgb(54, 53, 55);">2</p>
+                </div>
+            </div>
+            <div style="width:35%;display:flex;flex-direction:column;margin-left:20%;gap:10rem;">
+                <div style="display:flex;flex-direction:row;gap:3rem;">
+                    <p style="color:rgb(54, 53, 55);font-size:14rem;font-weight:200;">Listed: </p>
+                    <p id="timeAgoListed" style="color:rgb(54, 53, 55);font-size:14rem;font-weight:500;">24 Minutes Ago</p>
+                </div>
+                <div style="display:flex;flex-direction:row;gap:3rem;">
+                    <p style="color:rgb(54, 53, 55);font-size:14rem;font-weight:200;">Total Offers: </p>
+                    <p id="totalOffers" style="color:rgb(54, 53, 55);font-size:14rem;font-weight:500;">3</p>
+                </div>
+                <div style="display:flex;flex-direction:row;gap:3rem;">
+                    <p style="color:rgb(54, 53, 55);font-size:14rem;font-weight:200;">Roblox User: </p>
+                    <p id="listingRobloxUsername" style="color:rgb(54, 53, 55);font-size:14rem;font-weight:500;">EmanuelNorsk</p>
+                </div>
+                <div style="display:flex;flex-direction:row;gap:3rem;">
+                    <p style="color:rgb(54, 53, 55);font-size:14rem;font-weight:200;">Trades Completed by This User: </p>
+                    <p id="completedTradesByUser" style="color:rgb(54, 53, 55);font-size:14rem;font-weight:500;">62</p>
+                </div>
+            </div>
+        </div>
+        <div style="display:flex;flex-direction:row;justify-content:space-between;align-items:center;width:90%;margin-top:35rem;">
+            <div style="height:0.75rem;width:275rem;background-color:rgb(109, 107, 112);"></div>
+            <p style="font-size:25rem;font-weight:700;color:rgb(109, 107, 112);letter-spacing:2.5rem;">OFFERS</p>
+            <div style="height:0.75rem;width:275rem;background-color:rgb(109, 107, 112);"></div>
+        </div>
+        <div id="offers">
+            <div class="offer">
+                <div>
+                    <div>
+                        <img src="/static/images/pets/Birthday Butterfly 2023.png">
+                        <div>
+                            <div style="background:linear-gradient(135deg, rgb(142, 202, 232) 0%, rgb(47, 152, 204) 50%, rgb(0, 134, 200) 100%);">
+                                <p>F</p>
+                            </div>
+                            <div style="background:linear-gradient(135deg, rgb(255, 197, 220) 0%, rgb(237, 44, 121) 50%, rgb(255, 0, 101) 100%);">
+                                <p>R</p>
+                            </div>
+                            <div style="background:linear-gradient(135deg, rgb(187, 80, 253) 0%, rgb(69, 3, 198) 50%, rgb(81, 28, 182) 100%);">
+                                <p>M</p>
+                            </div>
+                            <div style="background:linear-gradient(135deg, rgb(193, 255, 110) 0%, rgb(140, 198, 63) 50%, rgb(19, 114, 11) 100%);">
+                                <p>N</p>
+                            </div>
+                        </div>
+                    </div>              
+                </div>
+                <div>
+                    <div>
+                        <p>SHARK VALUE</p>
+                        <p>2</p>
+                    </div>
+                    <div>
+                        <p>EmanuelNorsk</p>
+                        <img src="/static/images/profile/coolDragon.png">
+                    </div>
+                    <div>
+                        <p>24 Minutes Ago</p>
+                    </div>
+                    <div>
+                        <p>Pending</p>
+                    </div>
+                </div>
+            </div>
+            <div class="offerLine"></div>
+        </div>
+    </div>
+    <div onclick="closeListingInterface2()" id="listingInterface2Background">
+        &nbsp;
+    </div>
+    <div onclick="closeInventory()" id="addInventoryBackground">
+        &nbsp;
+    </div>
+    <div id="errorDiv">
+        <b id="errorText"></b>
+    </div>
+    <div id="messageDiv">
+        <b id="messageText"></b>
+    </div>
+    <div id="leftArrow" onclick="scrollBackward()">
+        <img src="/static/images/misc/arrow.png">
+    </div>
+    <div id="rightArrow" onclick="scrollForward()">
+        <img src="/static/images/misc/arrow.png">
+    </div>
+    <footer>
+        {% include "footer.html" %}
+    </footer>
+</body>
+</html>
+
+<script type="application/data" id="tradesDict">
+    {{ trades | tojson | safe }}
+</script>
+
+<script type="application/data" id="petsDict-data">
+    {{ pets | tojson | safe }}
+</script>
+
+<script type="application/data" id="userDataDict-data">
+    {{ userData | tojson | safe }}
+</script>
+
+<script>
+    var autoScroll = 0
+
+    var tradesDictElement = document.getElementById("tradesDict")
+    var trades = JSON.parse(tradesDict.textContent)
+
+    var petsDictElement = document.getElementById("petsDict-data")
+    var petsDict = JSON.parse(petsDictElement.textContent)
+
+    var listingsCategory1 = document.getElementById("listingsCategory1")
+    var listingsCategory2 = document.getElementById("listingsCategory2")
+    var listingsCategory3 = document.getElementById("listingsCategory3")
+
+    var calculateWithValue = "shark"
+
+    var addPetToType = ""
+
+    var displayPetsFirstTime = 0
+
+    var petSearch = document.getElementById("petSearch")
+    var lastFilter = "all"
+
+    var errorDiv = document.getElementById("errorDiv")
+    var errorText = document.getElementById("errorText")
+
+    var addInventory = document.getElementById("addInventory")
+    var addInventoryBackground = document.getElementById("addInventoryBackground")
+
+    var filterElement = document.getElementById("filter")
+    var petImages = document.getElementById("petImages")
+    var filterButtons = document.getElementById("filterButtons")
+
+    var petImage = document.querySelectorAll(".petImage")
+
+    var flyButton = document.getElementById("flyButton")
+    var rideButton = document.getElementById("rideButton")
+    var regularButton = document.getElementById("regularButton")
+    var neonButton = document.getElementById("neonButton")
+    var megaButton = document.getElementById("megaButton")
+
+    var messageDiv = document.getElementById("messageDiv")
+    var messageText = document.getElementById("messageText")
+
+    var fly = 0
+    var ride = 0
+    var regular = 1
+    var neon = 0
+    var mega = 0
+
+    var all = document.getElementById("all")
+    var pets = document.getElementById("pets")
+    var common = document.getElementById("common")
+    var eggs = document.getElementById("eggs")
+    var legendary = document.getElementById("legendary")
+    var other = document.getElementById("other")
+    var petWear = document.getElementById("petWear")
+    var rare = document.getElementById("rare")
+    var ultraRare = document.getElementById("ultraRare")
+    var uncommon = document.getElementById("uncommon")
+    var vehicles = document.getElementById("vehicles")
+
+    var petSearch = document.getElementById("petSearch")
+    var lastFilter = "all"
+
+    var addInventory = document.getElementById("addInventory")
+    var addInventoryBackground = document.getElementById("addInventoryBackground")
+
+    var filterElement = document.getElementById("filter")
+    var petImages = document.getElementById("petImages")
+    var filterButtons = document.getElementById("filterButtons")
+
+    var petAdded = document.getElementById("petAdded")
+    var petAddedText = document.getElementById("petAddedText")
+
+    var petsAdded = 0
+
+    var listingPart1 = document.getElementById("listingPart1")
+    var listingPart2 = document.getElementById("listingPart2")
+
+    var owner = document.getElementById("owner")
+
+    var listingValue = document.getElementById("listingValue")
+
+    var modifyTheirOfferElement = document.getElementById("modifyTheirOffer")
+    var modifyYourOfferElement = document.getElementById("modifyYourOffer")
+
+    var mYO = 0
+    var mTO = 0
+
+    var slideClass = document.querySelectorAll(".slide")
+
+    var slides = document.getElementById("slides")
+    var slidesInfo = document.getElementById("slidesInfo")
+    var slideOn = Math.floor(Math.random() * slides.children.length)
+    if (slideOn == slides.children.length && slideOn !== 0) {
+        slideOn -= 1
+    }
+
+    var currentListing = 0
+
+    var listingAcceptButton = document.getElementById("listingAcceptButton")
+    var listingCustomOfferButton = document.getElementById("listingCustomOfferButton")
+
+    var offerAccepted = false
+
+    var lastUsedKey = "-1"
+
+    var listingPart1Dict = {}
+    var listingPart2Dict = {}
+
+    var scrollSpeed = 3
+    var selectedCategory = 0
+    var listings = document.querySelectorAll(".listings")
+
+    var mouseX = 0
+    var mouseY = 0
+
+    var leftArrow = document.getElementById("leftArrow")
+    var rightArrow = document.getElementById("rightArrow")
+
+    var listingsTitles = document.querySelectorAll(".listingsTitles")
+    var listingSize = 310
+    
+    var offers = document.getElementById("offers")
+    var listingInterface2Preferences = document.getElementById("listingInterface2Preferences")
+    var listingInterface2Main = document.getElementById("listingInterface2Main")
+    var listingInterface2Background = document.getElementById("listingInterface2Background")
+    var listingInterface2YourOfferPets = document.getElementById("listingInterface2YourOfferPets")
+    var listingInterface2TheirOfferPets = document.getElementById("listingInterface2TheirOfferPets")
+    var yourOfferValue = document.getElementById("yourOfferValue")
+    var theirOfferValue = document.getElementById("theirOfferValue")
+    var sharkValueRequested = document.getElementById("sharkValueRequested")
+    var sharkValueRequestedDiv = document.getElementById("sharkValueRequestedDiv")
+    var timeAgoListed = document.getElementById("timeAgoListed")
+    var totalOffers = document.getElementById("totalOffers")
+    var listingRobloxUsername = document.getElementById("listingRobloxUsername")
+    var completedTradesByUser = document.getElementById("completedTradesByUser")
+    var changeButton = document.getElementById("changeButton")
+    var finishButton = document.getElementById("finishButton")
+    
+
+    function setAddPetTypeTo(type) {
+        addPetType = type
+    }
+
+    setTimeout(event => {
+        for (let i = 0; i < slides.children.length; i++) {
+            slides.children[i].style.transition = "1s ease";
+        }
+    }, 100)
+
+    function createListingPetDivWithKey(data, key, counter2, tradePart) {
+        const petDiv = document.createElement("div")
+        petDiv.className = "petDiv"
+        const img = document.createElement("img")
+        img.src = petsDict[data[key]["offer"][tradePart][counter2.toString()]["id"]]["image"]
+        img.style.maxWidth = "25px"
+        img.style.maxHeight = "25px"
+        petDiv.appendChild(img)
+
+        const attributeDiv = document.createElement("div")
+        attributeDiv.className = "attributeDiv"
+
+        if (data[key]["offer"][tradePart][counter2.toString()]["fly"] == "1") {
+            const flyDiv = document.createElement("div")
+            flyDiv.className = "listingPetAttribute"
+            flyDiv.style.background = "linear-gradient(135deg, rgb(142, 202, 232) 0%, rgb(47, 152, 204) 50%, rgb(0, 134, 200) 100%)"
+            const txt1 = document.createElement("b")
+            txt1.innerText = "F"
+            flyDiv.appendChild(txt1)
+            attributeDiv.appendChild(flyDiv)
+        }
+
+        if (data[key]["offer"][tradePart][counter2.toString()]["ride"] == "1") {
+            const rideDiv = document.createElement("div")
+            rideDiv.className = "listingPetAttribute"
+            rideDiv.style.background = "linear-gradient(135deg, rgb(255, 197, 220) 0%, rgb(237, 44, 121) 50%, rgb(255, 0, 101) 100%)"
+            const txt2 = document.createElement("b")
+            txt2.innerText = "R"
+            rideDiv.appendChild(txt2)
+            attributeDiv.appendChild(rideDiv)
+        }
+
+        if (data[key]["offer"][tradePart][counter2.toString()]["neon"] == "1") {
+            const neonDiv = document.createElement("div")
+            neonDiv.className = "listingPetAttribute"
+            neonDiv.style.background = "linear-gradient(135deg, rgb(193, 255, 110) 0%, rgb(140, 198, 63) 50%, rgb(19, 114, 11) 100%)"
+            const txt3 = document.createElement("b")
+            txt3.innerText = "N"
+            neonDiv.appendChild(txt3)
+            attributeDiv.appendChild(neonDiv)
+        }
+
+        if (data[key]["offer"][tradePart][counter2.toString()]["mega"] == "1") {
+            const megaDiv = document.createElement("div")
+            megaDiv.className = "listingPetAttribute"
+            megaDiv.style.background = "linear-gradient(135deg, rgb(187, 80, 253) 0%, rgb(69, 3, 198) 50%, rgb(81, 28, 182) 100%)"
+            const txt4 = document.createElement("b")
+            txt4.innerText = "M"
+            megaDiv.appendChild(txt4)
+            attributeDiv.appendChild(megaDiv)
+        }
+
+        petDiv.appendChild(attributeDiv)
+
+        return petDiv
+    }
+
+    function acceptOfferWithKey(key) {
+        if (offerAccepted == false) {
+            formData = new FormData();
+            formData.append('key', key)
+            formData.append('action', "acceptOfferWithKey");
+
+            fetch('/api', {
+            method: 'POST',
+            body: formData
+            })
+            .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+            })
+            .then(data => {
+            if (data == "SUCCESS") {
+                displayMessage("You accepted the offer!")
+                closeListingInterface2()
+            } else {
+                displayError(data)
+            }
+            })
+            .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+            });  
+        }
+    }
+
+    function sendCustomOfferWithKey() {
+        formData = new FormData();
+        formData.append('trade1', JSON.stringify(listingPart1Dict))
+        formData.append('trade2', JSON.stringify(listingPart2Dict))
+        formData.append('user', currentListing["owner"])
+        formData.append('action', "sendCustomOffer");
+
+        fetch('/api', {
+        method: 'POST',
+        body: formData
+        })
+        .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+        })
+        .then(data => {
+        if (data == "SUCCESS") {
+            displayMessage("You sent a custom offer!")
+            closeListingInterface2()
+        } else {
+            displayError(data)
+        }
+        })
+        .catch(error => {
+        console.error('There was a problem with the fetch operation:', error);
+        }); 
+    }
+
+    function displayMessage(message) {
+        messageDiv.style.bottom = "10%"
+        messageText.innerText = message
+        setTimeout((event) => {
+            messageDiv.style.bottom = "-100%"
+        }, 2000)
+    }
+
+    function showUserListings(listings, target) {
+        target.innerHTML = ""
+        target.setAttribute("scroll", "0")
+        target.setAttribute("firstScroll", "1")
+        var id = 0
+        Object.keys(listings).forEach(key => {
+            const div = document.createElement("div")
+            div.className = "userListingsListing"
+            div.setAttribute("id", id)
+
+            div.setAttribute("data-key", key)
+
+            const div2 = document.createElement("div")
+            div2.className = "userListingUpper"
+
+            const div5 = document.createElement("div")
+            div5.className = "userListingLine"
+
+            const txt1 = document.createElement("b")
+            txt1.innerText = "Your Offer"
+            txt1.style.color = "red"
+
+            const txt2 = document.createElement("b")
+            var text = (listings[key]["offer"]["giveValue"] - listings[key]["offer"]["takeValue"]).toFixed(1)
+            if (parseFloat(text) <= 0) {
+                txt2.style.color = "black"
+                text = (Math.abs(parseFloat(text))).toString()
+            } else {
+                txt2.style.color = "red"
+                div5.style.backgroundColor = "red"
+            }
+            if (text.length > 3) {
+                txt2.style.fontSize = (32 / (text.length / 3)).toString() + "px"
+            } else {
+                txt2.style.fontSize = "32px"
+            }
+            txt2.innerText = text
+            txt2.className = "userListingValue"
+
+            const txt3 = document.createElement("b")
+            txt3.innerText = "Their Offer"
+
+            div2.appendChild(txt1)
+            div2.appendChild(txt2)
+            div2.appendChild(txt3)
+
+            const div3 = document.createElement("div")
+            div3.className = "listingInfo"
+
+            const div4 = document.createElement("div")
+
+            div4.className = "Grid3x3Listing"
+
+            var counter = 0
+        
+            while (counter < 9) {
+                if (listings[key]["offer"]["give"][counter] == undefined) {
+                    const petDiv = document.createElement("div")
+                    petDiv.className = "petDiv"
+                    div4.appendChild(petDiv)
+                } else {
+                    if (counter == 8 && listings[key]["offer"]["give"].length > 9) {
+                        const petDiv = document.createElement("div")
+                        petDiv.className = "petDiv"
+                        const txt4 = document.createElement("b")
+                        txt4.innerText = "+" + (listings[key]["offer"]["give"].length - 8).toString()
+                        txt4.style.fontSize = "16px"
+                        petDiv.appendChild(txt4)
+                        div4.appendChild(petDiv)
+                    } else {
+                        const petDiv = document.createElement("div")
+                        petDiv.className = "petDiv"
+                        const img = document.createElement("img")
+                        img.src = petsDict[listings[key]["offer"]["give"][counter]["id"]]["image"]
+                        petDiv.appendChild(img)
+
+                        const attributeDiv = document.createElement("div")
+                        attributeDiv.className = "attributeDiv"
+
+                        if (listings[key]["offer"]["give"][counter]["fly"] == "1") {
+                            const flyDiv = document.createElement("div")
+                            flyDiv.className = "listingPetAttribute flyDiv"
+                            const txt1 = document.createElement("b")
+                            txt1.innerText = "F"
+                            flyDiv.appendChild(txt1)
+                            attributeDiv.appendChild(flyDiv)
+                        }
+
+                        if (listings[key]["offer"]["give"][counter]["ride"] == "1") {
+                            const rideDiv = document.createElement("div")
+                            rideDiv.className = "listingPetAttribute rideDiv"
+                            const txt2 = document.createElement("b")
+                            txt2.innerText = "R"
+                            rideDiv.appendChild(txt2)
+                            attributeDiv.appendChild(rideDiv)
+                        }
+
+                        if (listings[key]["offer"]["give"][counter]["neon"] == "1") {
+                            const neonDiv = document.createElement("div")
+                            neonDiv.className = "listingPetAttribute neonDiv"
+                            const txt3 = document.createElement("b")
+                            txt3.innerText = "N"
+                            neonDiv.appendChild(txt3)
+                            attributeDiv.appendChild(neonDiv)
+                        }
+
+                        if (listings[key]["offer"]["give"][counter]["mega"] == "1") {
+                            const megaDiv = document.createElement("div")
+                            megaDiv.className = "listingPetAttribute"
+                            const txt4 = document.createElement("b")
+                            txt4.innerText = "M"
+                            megaDiv.appendChild(txt4)
+                            attributeDiv.appendChild(megaDiv)
+                        }
+
+                        petDiv.appendChild(attributeDiv)
+                        div4.appendChild(petDiv)
+                    }
+                }
+                counter += 1
+            }
+
+            const div6 = document.createElement("div")
+            div6.className = "Grid3x3Listing"
+
+            counter = 0
+
+            while (counter < 9) {
+                if (listings[key]["offer"]["take"][counter] == undefined) {
+                    const petDiv = document.createElement("div")
+                    petDiv.className = "petDiv"
+                    div6.appendChild(petDiv)
+                } else {
+                    if (counter == 8 && listings[key]["offer"]["take"].length > 9) {
+                        const petDiv = document.createElement("div")
+                        petDiv.className = "petDiv"
+                        const txt4 = document.createElement("b")
+                        txt4.innerText = "+" + (listings[key]["offer"]["take"].length - 8).toString()
+                        txt4.style.fontSize = "16px"
+                        petDiv.appendChild(txt4)
+                        div6.appendChild(petDiv)
+                    } else {
+                        const petDiv = document.createElement("div")
+                        petDiv.className = "petDiv"
+                        const img = document.createElement("img")
+                        img.src = petsDict[listings[key]["offer"]["take"][counter]["id"]]["image"]
+                        petDiv.appendChild(img)
+
+                        const attributeDiv = document.createElement("div")
+                        attributeDiv.className = "attributeDiv"
+
+                        if (listings[key]["offer"]["take"][counter]["fly"] == "1") {
+                            const flyDiv = document.createElement("div")
+                            flyDiv.className = "listingPetAttribute flyDiv"
+                            const txt1 = document.createElement("b")
+                            txt1.innerText = "F"
+                            flyDiv.appendChild(txt1)
+                            attributeDiv.appendChild(flyDiv)
+                        }
+
+                        if (listings[key]["offer"]["take"][counter]["ride"] == "1") {
+                            const rideDiv = document.createElement("div")
+                            rideDiv.className = "listingPetAttribute rideDiv"
+                            const txt2 = document.createElement("b")
+                            txt2.innerText = "R"
+                            rideDiv.appendChild(txt2)
+                            attributeDiv.appendChild(rideDiv)
+                        }
+
+                        if (listings[key]["offer"]["take"][counter]["neon"] == "1") {
+                            const neonDiv = document.createElement("div")
+                            neonDiv.className = "listingPetAttribute neonDiv"
+                            const txt3 = document.createElement("b")
+                            txt3.innerText = "N"
+                            neonDiv.appendChild(txt3)
+                            attributeDiv.appendChild(neonDiv)
+                        }
+
+                        if (listings[key]["offer"]["take"][counter]["mega"] == "1") {
+                            const megaDiv = document.createElement("div")
+                            megaDiv.className = "listingPetAttribute"
+                            const txt4 = document.createElement("b")
+                            txt4.innerText = "M"
+                            megaDiv.appendChild(tx4t4)
+                            attributeDiv.appendChild(megaDiv)
+                        }
+
+                        petDiv.appendChild(attributeDiv)
+                        div6.appendChild(petDiv)
+                    }
+                }
+                counter += 1
+            }
+
+            div3.appendChild(div4)
+            div3.appendChild(div5)
+            div3.appendChild(div6)
+
+            div.appendChild(div2)
+            div.appendChild(div3)
+            if ( loggedIn == "True" ) {
+                div.setAttribute("onclick", "showUserListings2(" + JSON.stringify(listings[key]) + ")");
+            }
+            target.appendChild(div)
+            id += 1
+        })
+
+        updateUserListings(target, true)
+    }
+
+    function scrollBackward() {
+        var scroll = parseInt(selectedCategory.getAttribute("scroll"))
+        scroll -= scrollSpeed
+        selectedCategory.setAttribute("scroll", scroll.toString())
+        updateUserListings(selectedCategory, false)
+    }
+
+    function scrollForward() {
+        var scroll = parseInt(selectedCategory.getAttribute("scroll"))
+        scroll += scrollSpeed
+        selectedCategory.setAttribute("scroll", scroll.toString())
+        selectedCategory.setAttribute("firstScroll", "0")
+        updateUserListings(selectedCategory, false)
+    }
+
+    function mouseOverElement(element) {
+        if (element != undefined) {
+            const rect = element.getBoundingClientRect();
+            return (
+                mouseX >= rect.left &&
+                mouseX <= rect.right &&
+                mouseY >= rect.top &&
+                mouseY <= rect.bottom
+            );
+        } else {
+            return false
+        }
+    }
+
+    document.addEventListener("mousemove", event => {
+        var hover = 0
+        mouseX = event.clientX
+        mouseY = event.clientY
+        listings.forEach(element => {
+            if (mouseOverElement(element)) {
+                selectedCategory = element
+                hover = 1
+                updateArrows()
+            }
+        })
+        if (hover == 0) {
+            leftArrow.style.display = "none"
+            rightArrow.style.display = "none"
+        }
+    })
+
+    document.addEventListener("scroll", event => {
+        var hover = 0
+        listings.forEach(element => {
+            if (mouseOverElement(element)) {
+                selectedCategory = element
+                hover = 1
+                updateArrows()
+            }
+        })
+        if (hover == 0) {
+            leftArrow.style.display = "none"
+            rightArrow.style.display = "none"
+        }
+    })
+
+    window.addEventListener("resize", (event) => {
+        var hover = 0
+        listings.forEach(element => {
+            updateUserListings(element, true)
+            if (mouseOverElement(element)) {
+                selectedCategory = element
+                hover = 1
+                updateArrows()
+            }
+        })
+        if (hover == 0) {
+            leftArrow.style.display = "none"
+            rightArrow.style.display = "none"
+        }
+        slideClass.forEach(element => {
+            element.style.transition = "none"
+            void element.offsetWidth
+            element.style.transition = "1s ease"
+        })
+    })
+
+
+
+    function updateArrows() {
+        const rect = selectedCategory.getBoundingClientRect()
+        leftArrow.style.left = (rect.x + parseInt(selectedCategory.getAttribute("scrollOffset"))).toString() + "px"
+        leftArrow.style.top = (rect.y + 105).toString() + "px"
+        rightArrow.style.left = (rect.width - parseInt(selectedCategory.getAttribute("scrollOffset"))).toString() + "px"
+        rightArrow.style.top = (rect.y + 105).toString() + "px"
+        rightArrow.style.paddingLeft = (listingSize / 2 - ((listingSize / 2) - selectedCategory.getAttribute("scrollOffset")) / 2).toString() + "px"
+        leftArrow.style.paddingRight = (listingSize / 2 - ((listingSize / 2) - selectedCategory.getAttribute("scrollOffset")) / 2).toString() + "px"
+        leftArrow.style.display = "flex"
+        rightArrow.style.display = "flex"
+        if (selectedCategory.getAttribute("firstScroll") == "1") {
+            leftArrow.style.display = "none"
+        }
+    }
+
+
+    function updateUserListings(listings, resize) {
+        var scroll = parseInt(listings.getAttribute("scroll"))
+        var fitFor = parseInt((window.innerWidth - 100) / listingSize)
+        scrollSpeed = fitFor
+        var offset = ((fitFor / 2) - 0.5)
+        var id = 0
+        var listingOffset = 0
+        var left = 0
+        var right = 0
+        var posX = 0
+        var firstScroll = parseInt(listings.getAttribute("firstScroll"))
+        Array.from(listings.children).forEach(listing => {
+            id = parseInt(listing.getAttribute("id"))
+            left1 = (listingSize * (id - (scroll % listings.children.length) - offset))
+            left2 = (listingSize * (id - (scroll % listings.children.length) - (listings.children.length - 1) - offset))
+            left3 = (listingSize * (id - (scroll % listings.children.length) + (listings.children.length - 1) - offset))
+            leftOffset = Math.min(Math.abs(left1), Math.abs(left2), Math.abs(left3))
+            if (Math.abs(left1) == leftOffset) {
+                left = left1
+            } else if (Math.abs(left2) == leftOffset) {
+                left = left2
+            } else {
+                left = left3
+            }
+
+            right1 = (listingSize * ((id - (listings.children.length - 1)) - (scroll % listings.children.length) - offset))
+            right2 = (listingSize * ((id - (listings.children.length - 1)) - (scroll % listings.children.length) - (listings.children.length - 1) - offset))
+            right3 = (listingSize * ((id - (listings.children.length - 1)) - (scroll % listings.children.length) + (listings.children.length - 1) - offset))
+            rightOffset = Math.min(Math.abs(right1), Math.abs(right2), Math.abs(right3))
+            if (Math.abs(right1) == rightOffset) {
+                right = right1
+            } else if (Math.abs(right2) == rightOffset) {
+                right = right2
+            } else {
+                right = right3
+            }
+        
+
+            listingOffset = Math.min(Math.abs(left), Math.abs(right))
+            if (listingOffset == Math.abs(left)) {
+                listingOffset = left
+            } else {
+                listingOffset = right
+            }
+            posX = ((listings.offsetWidth / 2) + listingOffset).toString()
+            if ((Math.abs(listing.getBoundingClientRect().left - posX) > window.innerWidth) || resize == true) {
+                listing.style.transition = "none"
+            } else {
+                listing.style.transition = "1s ease"
+            }
+            listing.style.left = posX + "px"
+            if ((listingSize / 2) < posX && posX < window.innerWidth - (listingSize / 2)) {
+                listing.style.opacity = "1"
+                listing.style.filter = "brightness(100%)"
+                listing.style.cursor = "normal"
+            } else {
+                listing.style.opacity = "0.5"
+                listing.style.filter = "brightness(50%)"
+                listing.style.cursor = "pointer"
+                if (firstScroll == 1 && posX < window.innerWidth - (listingSize / 2)) {
+                    listing.style.opacity = "0"
+                }
+            }
+            if (id == (scroll % listings.children.length)) {
+                listings.setAttribute("scrollOffset", ((listings.offsetWidth / 2) + listingOffset - listingSize).toString())
+                listingsTitles.forEach(element => {
+                    element.style.marginLeft = (listingSize / 2 + ((listings.offsetWidth / 2) + listingOffset - listingSize)).toString() + "px"
+                })
+            }
+
+        })
+
+    }
+
+    function calculateTradeValueWithInput(trade1, trade2) {
+        var totalValue = 0
+        var value = ""
+        var trade1Value = 0
+        var trade2Value = 0
+        for (const i in trade1) {
+            value = ""
+            if (trade1[i].regular == "1") {
+                value += "rvalue"
+            } else if (trade1[i].neon == "1") {
+                value += "nvalue"
+            } else {
+                value += "mvalue"
+            }
+            if (trade1[i].fly == "1" && trade1[i].ride == "1") {
+                value += " - fly&ride"
+            } else if (trade1[i].fly == "1") {
+                value += " - fly"
+            } else if (trade1[i].ride == "1") {
+                value += " - ride"
+            }
+            trade1Value += petsDict[trade1[i].id][value]
+        }
+        for (const i in trade2) {
+            value = ""
+            if (trade2[i].regular == "1") {
+                value += "rvalue"
+            } else if (trade2[i].neon == "1") {
+                value += "nvalue"
+            } else {
+                value += "mvalue"
+            }
+            if (trade2[i].fly == "1" && trade2[i].ride == "1") {
+                value += " - fly&ride"
+            } else if (trade2[i].fly == "1") {
+                value += " - fly"
+            } else if (trade2[i].ride == "1") {
+                value += " - ride"
+            }
+            trade2Value += petsDict[trade2[i].id][value]
+        }
+
+        const oldTrade1Value = trade1Value
+        const oldTrade2Value = trade2Value
+
+        if (calculateWithValue == "frost") {
+            trade1Value /= 105
+            trade2Value /= 105
+        }
+
+        trade1Value = trade1Value.toFixed(2)
+        trade2Value = trade2Value.toFixed(2)
+
+        if (oldTrade1Value > 0 && trade1Value == 0) {
+            trade1Value = 0.01
+        }
+        if (oldTrade2Value > 0 && trade2Value == 0) {
+            trade2Value = 0.01
+        }
+
+        const finalValue = (trade1Value - trade2Value).toFixed(2)
+
+        return finalValue
+    }
+
+
+    function timeSince(timestamp) {
+        const nowInSeconds = Math.floor(Date.now() / 1000);
+        const timeAgoInSeconds = nowInSeconds - timestamp;
+
+        const seconds = timeAgoInSeconds.toFixed(0);
+        const minutes = Math.floor(seconds / 60).toFixed(0);
+        const hours = Math.floor(minutes / 60).toFixed(0);
+        const days = Math.floor(hours / 24).toFixed(0);
+        const months = Math.floor(days / 30).toFixed(0);
+        const years = Math.floor(months / 12).toFixed(0);
+
+        if (seconds < 100) {
+            return `${seconds} Seconds Ago`;
+        } else if (minutes < 100) {
+            return `${minutes} Minutes Ago`;
+        } else if (hours < 100) {
+            return `${hours} Hours Ago`;
+        } else if (days < 100) {
+            return `${days} Days Ago`;
+        } else if (years < 2) {
+            return `${months} Months Ago`;
+        } else {
+            return `${years} Years Ago`;
+        }
+    }
+
+    function showPreferences(listing) {
+        formData = new FormData();
+        formData.append('user', listing["owner"])
+        formData.append('action', "getUserData");
+
+        fetch('/api', {
+        method: 'POST',
+        body: formData
+        })
+        .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+        })
+        .then(data => {
+        if (data !== "ERROR") {
+            const userData = data
+            completedTradesByUser.innerText = userData["completedTrades"].length
+            if (userData["preferences"]["highTiers"] == 1) {
+                listingInterface2Preferences.children[0].style.fontWeight = "bold"
+            } else {
+                listingInterface2Preferences.children[0].style.fontWeight = "200"
+            }
+            if (userData["preferences"]["megaLegendaryPets"] == 1) {
+                listingInterface2Preferences.children[2].style.fontWeight = "bold"
+            } else {
+                listingInterface2Preferences.children[2].style.fontWeight = "200"
+            }
+            if (userData["preferences"]["neonLegendaryPets"] == 1) {
+                listingInterface2Preferences.children[4].style.fontWeight = "bold"
+            } else {
+                listingInterface2Preferences.children[4].style.fontWeight = "200"
+            }
+            if (userData["preferences"]["defaultLegendaryPets"] == 1) {
+                listingInterface2Preferences.children[6].style.fontWeight = "bold"
+            } else {
+                listingInterface2Preferences.children[6].style.fontWeight = "200"
+            }
+            if (userData["preferences"]["preppyPets"] == 1) {
+                listingInterface2Preferences.children[8].style.fontWeight = "bold"
+            } else {
+                listingInterface2Preferences.children[8].style.fontWeight = "200"
+            }
+            if (userData["preferences"]["randoms"] == 1) {
+                listingInterface2Preferences.children[10].style.fontWeight = "bold"
+            } else {
+                listingInterface2Preferences.children[10].style.fontWeight = "200"
+            }
+            if (userData["preferences"]["items"] == 1) {
+                listingInterface2Preferences.children[12].style.fontWeight = "bold"
+            } else {
+                listingInterface2Preferences.children[12].style.fontWeight = "200"
+            }
+            if (userData["preferences"]["allowUnderpays"] == 1) {
+                listingInterface2Preferences.children[14].style.fontWeight = "bold"
+            } else {
+                listingInterface2Preferences.children[14].style.fontWeight = "200"
+            }
+        } else {
+            
+        }
+        })
+        .catch(error => {
+        console.error('There was a problem with the fetch operation:', error);
+        }); 
+    }
+
+
+    function showUserListings2(listing) {
+        currentListing = listing
+        listingInterface2.style.display = "flex"
+        listingInterface2Background.style.display = "flex"
+        showOffers(listing)
+        showPreferences(listing)
+        theirOfferValue.innerText = listing["offer"]["takeValue"].toFixed(2)
+    
+        if (listing["extraSharkValueRequested"] == 0 || listing["extraSharkValueRequested"] == undefined) {
+            yourOfferValue.innerText = listing["offer"]["giveValue"].toFixed(2)
+            sharkValueRequestedDiv.style.display = "none"
+            finishButton.disabled = false
+        } else {
+            yourOfferValue.innerText = listing["offer"]["giveValue"].toFixed(2).toString() + " + " + listing["extraSharkValueRequested"].toString()
+            finishButton.disabled = true
+            sharkValueRequestedDiv.style.display = "flex"
+            sharkValueRequested.innerText = listing["extraSharkValueRequested"]
+        }
+
+        timeAgoListed.innerText = timeSince(listing["createdAt"])
+        totalOffers.innerText = listing["customOffers"].length
+
+        listingInterface2YourOfferPets.innerHTML = ""
+        for (const i in listing["offer"]["give"]) {
+            console.log(petsDict[listing["offer"]["give"][i]["id"]]["image"])
+            const div = document.createElement("div")
+            const img = document.createElement("img")
+            img.src = petsDict[listing["offer"]["give"][i]["id"]]["image"]
+            const div2 = document.createElement("div")
+            if (listing["offer"]["give"][i]["fly"] == 1) {
+                const div3 = document.createElement("div")
+                div3.style.background = "linear-gradient(135deg, rgb(142, 202, 232) 0%, rgb(47, 152, 204) 50%, rgb(0, 134, 200) 100%)"
+                const p = document.createElement("p")
+                p.innerText = "F"
+                div3.appendChild(p)
+                div2.appendChild(div3)
+            }
+            if (listing["offer"]["give"][i]["ride"] == 1) {
+                const div3 = document.createElement("div")
+                div3.style.background = "linear-gradient(135deg, rgb(255, 197, 220) 0%, rgb(237, 44, 121) 50%, rgb(255, 0, 101) 100%)"
+                const p = document.createElement("p")
+                p.innerText = "F"
+                div3.appendChild(p)
+                div2.appendChild(div3)
+            }
+            if (listing["offer"]["give"][i]["neon"] == 1) {
+                const div3 = document.createElement("div")
+                div3.style.background = "linear-gradient(135deg, rgb(187, 80, 253) 0%, rgb(69, 3, 198) 50%, rgb(81, 28, 182) 100%)"
+                const p = document.createElement("p")
+                p.innerText = "F"
+                div3.appendChild(p)
+                div2.appendChild(div3)
+            }
+            if (listing["offer"]["give"][i]["mega"] == 1) {
+                const div3 = document.createElement("div")
+                div3.style.background = "linear-gradient(135deg, rgb(193, 255, 110) 0%, rgb(140, 198, 63) 50%, rgb(19, 114, 11) 100%)"
+                const p = document.createElement("p")
+                p.innerText = "F"
+                div3.appendChild(p)
+                div2.appendChild(div3)
+            }
+            div.appendChild(img)
+            div.appendChild(div2)
+
+            listingInterface2YourOfferPets.appendChild(div)
+        }
+
+        listingInterface2TheirOfferPets.innerHTML = ""
+        for (const i in listing["offer"]["take"]) {
+            console.log(petsDict[listing["offer"]["take"][i]["id"]]["image"])
+            const div = document.createElement("div")
+            const img = document.createElement("img")
+            img.src = petsDict[listing["offer"]["take"][i]["id"]]["image"]
+            const div2 = document.createElement("div")
+            if (listing["offer"]["take"][i]["fly"] == 1) {
+                const div3 = document.createElement("div")
+                div3.style.background = "linear-gradient(135deg, rgb(142, 202, 232) 0%, rgb(47, 152, 204) 50%, rgb(0, 134, 200) 100%)"
+                const p = document.createElement("p")
+                p.innerText = "F"
+                div3.appendChild(p)
+                div2.appendChild(div3)
+            }
+            if (listing["offer"]["take"][i]["ride"] == 1) {
+                const div3 = document.createElement("div")
+                div3.style.background = "linear-gradient(135deg, rgb(255, 197, 220) 0%, rgb(237, 44, 121) 50%, rgb(255, 0, 101) 100%)"
+                const p = document.createElement("p")
+                p.innerText = "F"
+                div3.appendChild(p)
+                div2.appendChild(div3)
+            }
+            if (listing["offer"]["take"][i]["neon"] == 1) {
+                const div3 = document.createElement("div")
+                div3.style.background = "linear-gradient(135deg, rgb(187, 80, 253) 0%, rgb(69, 3, 198) 50%, rgb(81, 28, 182) 100%)"
+                const p = document.createElement("p")
+                p.innerText = "F"
+                div3.appendChild(p)
+                div2.appendChild(div3)
+            }
+            if (listing["offer"]["take"][i]["mega"] == 1) {
+                const div3 = document.createElement("div")
+                div3.style.background = "linear-gradient(135deg, rgb(193, 255, 110) 0%, rgb(140, 198, 63) 50%, rgb(19, 114, 11) 100%)"
+                const p = document.createElement("p")
+                p.innerText = "F"
+                div3.appendChild(p)
+                div2.appendChild(div3)
+            }
+            div.appendChild(img)
+            div.appendChild(div2)
+
+            listingInterface2TheirOfferPets.appendChild(div)
+        }
+
+    }
+
+    function closeListingInterface2() {
+        listingInterface2.style.display = "none"
+        listingInterface2Background.style.display = "none"
+    }
+
+    function showOffers(listing) {
+        offers.innerHTML = ""
+        for (const i in listing["customOffers"]) {
+            const div = document.createElement("div")
+            div.className = "offer"
+            const div2 = document.createElement("div")
+            for (const j in listing["customOffers"][i]["pets"]) {
+                const img = document.createElement("img")
+                img.src = petsDict[listing["customOffers"][i]["pets"][j]["id"]]["image"]
+                const div4 = document.createElement("div")
+                div4.appendChild(img)
+                const div5 = document.createElement("div")
+                if (listing["customOffers"][i]["pets"][j]["fly"] == 1) {
+                    const div6 = document.createElement("div")
+                    div6.style.background = "linear-gradient(135deg, rgb(142, 202, 232) 0%, rgb(47, 152, 204) 50%, rgb(0, 134, 200) 100%)"
+                    const p = document.createElement("p")
+                    p.innerText = "F"
+                    div6.appendChild(p)
+                    div5.appendChild(div6)
+                }
+                if (listing["customOffers"][i]["pets"][j]["ride"] == 1) {
+                    const div6 = document.createElement("div")
+                    div6.style.background = "linear-gradient(135deg, rgb(255, 197, 220) 0%, rgb(237, 44, 121) 50%, rgb(255, 0, 101) 100%)"
+                    const p = document.createElement("p")
+                    p.innerText = "R"
+                    div6.appendChild(p)
+                    div5.appendChild(div6)
+                }
+                if (listing["customOffers"][i]["pets"][j]["neon"] == 1) {
+                    const div6 = document.createElement("div")
+                    div6.style.background = "linear-gradient(135deg, rgb(193, 255, 110) 0%, rgb(140, 198, 63) 50%, rgb(19, 114, 11) 100%)"
+                    const p = document.createElement("p")
+                    p.innerText = "N"
+                    div6.appendChild(p)
+                    div5.appendChild(div6)
+                }
+                if (listing["customOffers"][i]["pets"][j]["mega"] == 1) {
+                    const div5 = document.createElement("div")
+                    div5.style.background = "linear-gradient(135deg, rgb(187, 80, 253) 0%, rgb(69, 3, 198) 50%, rgb(81, 28, 182) 100%)"
+                    const p = document.createElement("p")
+                    p.innerText = "M"
+                    div6.appendChild(p)
+                    div5.appendChild(div6)
+                }
+                div4.appendChild(div5)
+                div2.appendChild(div4)
+            }
+
+
+
+            div.appendChild(div2)
+            const div3 = document.createElement("div")
+
+            const div7 = document.createElement("div")
+            const p2 = document.createElement("p")
+            p2.innerText = "SHARK VALUE"
+            const p3 = document.createElement("p")
+            p3.innerText = (parseInt(listing["customOffers"][i]["value"]).toFixed(1)).toString()
+            div7.appendChild(p2)
+            div7.appendChild(p3)
+            div3.appendChild(div7)
+
+            const div8 = document.createElement("div")
+            const p4 = document.createElement("p")
+            if (listing["customOffers"][i]["ownerRobloxUsername"] != "") {
+                p4.innerText = listing["customOffers"][i]["ownerRobloxUsername"]
+            } else {
+                p4.innerText = listing["customOffers"][i]["ownerUsername"]
+            }       
+            console.log(listing["customOffers"][i])
+            const img2 = document.createElement("img")
+            img2.src = "/static/images/profile/" + listing["customOffers"][i]["ownerProfilePicture"]
+            div8.appendChild(p4)
+            div8.appendChild(img2)
+            div3.appendChild(div8)
+
+            const div9 = document.createElement("div")
+            const p5 = document.createElement("p")
+            p5.innerText = timeSince(listing["customOffers"][i]["createdAt"])
+            div9.appendChild(p5)
+            div3.appendChild(div9)
+        
+            const div10 = document.createElement("div")
+            const p6 = document.createElement("p")
+            p6.innerText = listing["customOffers"][i]["status"]
+            div10.appendChild(p6)
+            div3.appendChild(div10)
+
+            div.appendChild(div3)
+
+            offers.appendChild(div)
+            const line = document.createElement("div")
+            line.className = "offerLine"
+            if (i - 1 <= listing["customOffers"].length) {
+                offers.appendChild(line)
+            }
+
+        }
+
+    }
+
+    function displayPets() {
+        if (loggedIn == "True" && displayPetsFirstTime == 0) {
+            displayPetsFirstTime = 1
+            petImages.innerHTML = ""
+            Object.keys(petsDict).forEach(key => {
+                pet = petsDict[key]
+                if (pet["image"] !== "") {
+                    const div = document.createElement("div")
+                    div.className = "petImage"
+                    div.setAttribute("data-petname", pet["name"])
+                    div.setAttribute("data-name", pet["type"])
+                    div.setAttribute("data-value", pet["rarity"])
+                    div.setAttribute("onclick", "addPetToInventory(" + key.toString() + ")")
+                    const img = document.createElement("img")
+                    img.style.height = "max(3.5vw, 7vh)"
+                    img.style.aspectRatio = "1/1"
+                    img.setAttribute("onerror", "handleImageError(this)")
+                    img.src = pet["image"]
+                    div.appendChild(img)
+                    petImages.appendChild(div)
+                }
+            })
+        }
+    }
+
+    function openInventory() {
+        displayPets()
+        addInventory.style.display = "block"
+        addInventoryBackground.style.display = "block"
+        petImages.style.height = filterButtons.clientHeight + "px";
+    }
+
+    function closeInventory() {
+        addInventory.style.display = "none"
+        addInventoryBackground.style.display = "none"
+    }
+
+    function handleImageError(image) {
+        image.style.display = 'none';
+    }
+
+    function addPetToInventory(pet) {
+       if (addPetType == "listing1") {
+            listingPart1Dict.push({
+                "id":pet,
+                "fly":fly,
+                "ride":ride,
+                "regular":regular,
+                "neon":neon,
+                "mega":mega
+            })
+            showUserListings2(currentListing, 1)
+        } else if (addPetType == "listing2") {
+            listingPart2Dict.push({
+                "id":pet,
+                "fly":fly,
+                "ride":ride,
+                "regular":regular,
+                "neon":neon,
+                "mega":mega
+            })
+            showUserListings2(currentListing, 1)
+        }
+    };
+
+    function removePetFromInventory(type, pet) {
+        if (type == "listing1") {
+            listingPart1Dict.splice(pet, 1)
+            showUserListings2(currentListing, 1)
+        } else if (type == "listing2") {
+            listingPart2Dict.splice(pet, 1)
+            showUserListings2(currentListing, 1)
+        }
+    }
+
+    function updateViewsWithKey(key) {
+        formData = new FormData();
+        formData.append('key', key)
+        formData.append('action', "updateViewsOnTradeWithKey");
+
+        fetch('/api', {
+        method: 'POST',
+        body: formData
+        })
+        .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+        })
+        .then(data => {
+        if (data == "SUCCESS") {
+            
+        }
+        })
+        .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+        });
+    }
+
+    function displayError(error) {
+        errorDiv.style.bottom = "10%"
+        errorText.innerText = error
+        setTimeout((event) => {
+            errorDiv.style.bottom = "-100%"
+        }, 2000)
+    }
+
+    function filter(filter, preventLoop) {
+        lastFilter = filter
+        if (filter == "all") {
+            petImage.forEach(pet => {
+                pet.style.display = "flex";
+            });
+            resetFilterButtonBrightness()
+            all.style.filter = "brightness(1.2)"
+        } else if (filter == "pets") {
+            petImage.forEach(pet => {
+                if (pet.getAttribute("data-name") == "pets") {
+                    pet.style.display = "flex";
+                } else {
+                    pet.style.display = "none";
+                    filteredPets += 1
+                }
+            });
+            resetFilterButtonBrightness()
+            pets.style.filter = "brightness(1.2)"
+        } else if (filter == "common") {
+            petImage.forEach(pet => {
+                if (pet.getAttribute("data-value") == "common") {
+                    pet.style.display = "flex";
+                } else {
+                    pet.style.display = "none";
+                    filteredPets += 1
+                }
+            });
+            resetFilterButtonBrightness()
+            common.style.filter = "brightness(1.2)"
+        } else if (filter == "eggs") {
+            petImage.forEach(pet => {
+                if (pet.getAttribute("data-name") == "eggs") {
+                    pet.style.display = "flex";
+                } else {
+                    pet.style.display = "none";
+                    filteredPets += 1
+                }
+            });
+            resetFilterButtonBrightness()
+            eggs.style.filter = "brightness(1.2)"
+        } else if (filter == "legendary") {
+            petImage.forEach(pet => {
+                if (pet.getAttribute("data-value") == "legendary") {
+                    pet.style.display = "flex";
+                } else {
+                    pet.style.display = "none";
+                    filteredPets += 1
+                }
+            });
+            resetFilterButtonBrightness()
+            legendary.style.filter = "brightness(1.2)"
+        } else if (filter == "other") {
+            petImage.forEach(pet => {
+                if (pet.getAttribute("data-name") == "other") {
+                    pet.style.display = "flex";
+                } else {
+                    pet.style.display = "none";
+                    filteredPets += 1
+                }
+            });
+            resetFilterButtonBrightness()
+            other.style.filter = "brightness(1.2)"
+        } else if (filter == "pet wear") {
+            petImage.forEach(pet => {
+                if (pet.getAttribute("data-value") == "") {
+                    pet.style.display = "flex";
+                } else {
+                    pet.style.display = "none";
+                    filteredPets += 1
+                }
+            });
+            resetFilterButtonBrightness()
+            petWear.style.filter = "brightness(1.2)"
+        } else if (filter == "rare") {
+            petImage.forEach(pet => {
+                if (pet.getAttribute("data-value") == "rare") {
+                    pet.style.display = "flex";
+                } else {
+                    pet.style.display = "none";
+                    filteredPets += 1
+                }
+            });
+            resetFilterButtonBrightness()
+            rare.style.filter = "brightness(1.2)"
+        } else if (filter == "ultra rare") {
+            petImage.forEach(pet => {
+                if (pet.getAttribute("data-value") == "ultra rare") {
+                    pet.style.display = "flex";
+                } else {
+                    pet.style.display = "none";
+                    filteredPets += 1
+                }
+            });
+            resetFilterButtonBrightness()
+            ultraRare.style.filter = "brightness(1.2)"
+        } else if (filter == "uncommon") {
+            petImage.forEach(pet => {
+                if (pet.getAttribute("data-value") == "uncommon") {
+                    pet.style.display = "flex";
+                } else {
+                    pet.style.display = "none";
+                    filteredPets += 1
+                }
+            });
+            resetFilterButtonBrightness()
+            uncommon.style.filter = "brightness(1.2)"
+        } else if (filter == "vehicles") {
+            petImage.forEach(pet => {
+                if (pet.getAttribute("data-name") == "vehicles") {
+                    pet.style.display = "flex";
+                } else {
+                    pet.style.display = "none";
+                    filteredPets += 1
+                }
+            });
+            resetFilterButtonBrightness()
+            vehicles.style.filter = "brightness(1.2)"
+        }
+        if (preventLoop == 0) {
+            searchUpPets()
+        }
+    }
+
+    function searchUpPets() {
+        filteredPets = 0
+        filter(lastFilter, 1)
+        petImage = document.querySelectorAll(".petImage")
+        var length = 0
+        petImage.forEach(pet => {
+            if (pet.getAttribute("data-petname").toLowerCase().includes(petSearch.value) == false && pet.getAttribute("data-name").toLowerCase().includes(petSearch.value) == false && pet.getAttribute("data-value").toLowerCase().includes(petSearch.value) == false) {
+                pet.style.display = "none"
+            } else {
+                length += 1
+            };
+        });
+    };
+
+    function resetFilterButtonBrightness() {
+        all.style.filter = "brightness(1)"
+        pets.style.filter = "brightness(1)"
+        common.style.filter = "brightness(1)"
+        eggs.style.filter = "brightness(1)"
+        legendary.style.filter = "brightness(1)"
+        other.style.filter = "brightness(1)"
+        petWear.style.filter = "brightness(1)"
+        rare.style.filter = "brightness(1)"
+        ultraRare.style.filter = "brightness(1)"
+        uncommon.style.filter = "brightness(1)"
+        vehicles.style.filter = "brightness(1)"
+    }
+
+    function updateSlides() {
+        slidesInfo.innerHTML = "";
+        for (let i = 0; i < slides.children.length; i++) {
+            const div = document.createElement("div");
+            div.style.width = "7rem";
+            div.style.height = "7rem";
+            div.style.borderRadius = "100%";
+            if (i == slideOn) {
+                slides.children[i].style.opacity = "1";
+                div.style.backgroundColor = "rgb(255, 102, 102)";
+            } else {
+                slides.children[i].style.opacity = "0";
+                div.style.backgroundColor = "rgb(109, 107, 112)";
+            }
+            div.style.zIndex = "12";
+            div.setAttribute("onclick", "changeToSlide(" + i.toString() + ")");
+            div.style.cursor = "pointer";
+            slidesInfo.appendChild(div);
+        }
+        autoScroll += 1
+        const scroll = autoScroll
+        setTimeout(event => {
+            if (autoScroll == scroll) {
+                slideOn += 1
+                if (slideOn + 1 > slides.children.length) {
+                    slideOn = 0
+                }
+                updateSlides()
+            }
+        }, 10000)
+        
+        
+    }
+    
+    updateSlides()
+
+    function changeToSlide(number) {
+        slideOn = number
+        updateSlides()
+    }
+
+
+    showUserListings(trades["Suggested"], listingsCategory1)
+    showUserListings(trades["Recent"], listingsCategory2)
+    showUserListings(trades["Overpay"], listingsCategory3)
+
+
+</script>

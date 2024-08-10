@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup</title>
+    <link rel="stylesheet" href="static/css/index.css">
+    <link rel="stylesheet" href="static/css/signup.css">
+    <script src="static/js/signup.js"></script>
+    <link rel="stylesheet" href="https://use.typekit.net/uju1lhj.css">
+</head>
+<body>
+    <header>
+        {% include "header.html" %}
+    </header>
+    <main>
+        {% if signUp %}
+        <div class="center column bigMargin">
+            <h1 class="aileronBlack">Create Your Account</h1>
+            <form method="post" id="signUpForm" class="center column options smallGap">
+                <div id="seperateUsernames" class="flex row">
+                    <div class="column options">
+                        <input id="usernameInput" class="option blank" type="text" name="username" value="{{storedWebData['username']}}" placeholder="Choose a Username" autocomplete="on">
+                        <div class="line blackBackground">
+                            &nbsp;
+                        </div>
+                        <div>
+                            <p id="minUsernameLengthText" class="signUpInfoText red">Your username must be over 2 characters long!</p>
+                        </div>
+                        <div>
+                            &nbsp;
+                        </div>
+                    </div>
+                    <div class="column options">
+                        <input class="option blank" type="text" name="robloxUsername" value="{{storedWebData['robloxUsername']}}" placeholder="Roblox Username" autocomplete="off">
+                        <div class="line blackBackground">
+                            &nbsp;
+                        </div>
+                        <div>
+                            <p class="signUpInfoText darkgray leftTextAlign" id="optionalText">Optional</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="options column">
+                    <input id="emailInput" class="option blank" type="text" name="email" value="{{storedWebData['email']}}" placeholder="Email Address" autocomplete="on">
+                    <div class="line blackBackground">
+                        &nbsp;
+                    </div>
+                    <div>
+                        &nbsp;
+                    </div>
+                </div>
+                <div class="options column">
+                    <input id="confirmEmailInput" class="option blank" type="text" name="confirmEmail" value="{{storedWebData['confirmEmail']}}" placeholder="Confirm Email Address" autocomplete="off">
+                    <div class="line blackBackground">
+                        &nbsp;
+                    </div>
+                    <div>
+                        <p id="emailMatchText" class="signUpInfoText red">Your email must match!</p>
+                    </div>
+                    <div>
+                        &nbsp;
+                    </div>
+                </div>
+                <div class="options column">
+                    <input id="passwordInput" class="option blank" type="password" name="password" value="{{storedWebData['password']}}" placeholder="Password" autocomplete="off">
+                    <div class="line blackBackground">
+                        &nbsp;
+                    </div>
+                    <div>
+                        <p id="minPasswordLengthText" class="signUpInfoText red">Your password must be over 6 characters long!</p>
+                    </div>
+                    <div>
+                        &nbsp;
+                    </div>
+                </div>
+                <div class="options column">
+                    <input id="confirmPasswordInput" class="option blank" type="password" name="confirmPassword" value="{{storedWebData['confirmPassword']}}" placeholder="Confirm Password" autocomplete="off">
+                    <div class="line blackBackground">
+                        &nbsp;
+                    </div>
+                    <div>
+                        <p id="passwordMatchText" class="signUpInfoText red">Your password must match!</p>
+                    </div>
+                    <div>
+                        &nbsp;
+                    </div>
+                </div>
+                {% if message %}
+                    <p id="message">{{message}}</p>
+                {% endif %}
+                <div id="createAccountDiv">
+                    <p id="createAccountReadText">By clicking Create Account you confirm that you are 13 or over, agree to our <a href="/tos">Terms of Service</a>, and you acknowledge that you have read our <a href="privacy">Privacy Policy</a>.</p>
+                    <div class="center">
+                        <button id="createAccountButton" class="blank button buttonDesign1"type="submit" name="action" value="createAccount">
+                            <p class="buttonText">Create Account</p>
+                        </button>
+                    </div>
+                </div>
+                <div>
+                    <p id="infoConsentText">To withdraw your consent (including any consent you have previously given) and to learn more about your rights and how to exercise them, see the Privacy Policy.</p>
+                </div>
+            </form>
+        </div>
+        {% else %}
+        <div class="center column bigMargin">
+            <h1 class="aileronBlack">Sign In</h1>
+            <form method="post" id="signUpForm" class="center column options smallGap">
+                <div class="options column">
+                    <input id="emailInput" class="option blank" type="text" name="email" value="{{storedWebData['email']}}" placeholder="Email Address" autocomplete="on">
+                    <div class="line blackBackground">
+                        &nbsp;
+                    </div>
+                    <div>
+                        &nbsp;
+                    </div>
+                </div>
+                <div class="options column">
+                    <input id="passwordInput" class="option blank" type="password" name="password" value="{{storedWebData['password']}}" placeholder="Password" autocomplete="off">
+                    <div class="line blackBackground">
+                        &nbsp;
+                    </div>
+                    <div>
+                        <p id="minPasswordLengthText" class="signUpInfoText red">Your password must be over 6 characters long!</p>
+                    </div>
+                </div>
+                {% if message %}
+                    <p id="message">{{message}}</p>
+                {% endif %}
+                <div class="center maxWidth smallMargin" style="margin-top:30px;">
+                    <button id="signInButton" type="submit" name="action" value="signIn" class="blank button buttonDesign1 lightHover">
+                        <p class="buttonText">Sign In</p>
+                    </button>
+                </div>
+                <div class="center maxWidth smallMargin">
+                    <button type="submit" name="action" value="goBack" class="blank button buttonDesign1 lightHover">
+                        <p class="buttonText">Go Back</p>
+                    </button>
+                </div>
+                <div>
+                    <p class="signUpInfoText">Don't have an account? <a href="/signup">Sign Up</a></p>
+                    <p class="signUpInfoText"><a href="/reset-password">Forgot Password?</a></p>
+                </div>
+            </form>
+        </div>
+        {% endif %}
+    </main>
+    <footer>
+        {% include "footer.html" %}
+    </footer>
+</body>
+</html>

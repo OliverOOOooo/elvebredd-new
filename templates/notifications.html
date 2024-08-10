@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notifications</title>
+    <link rel="stylesheet" href="https://use.typekit.net/uju1lhj.css">
+</head>
+<body>
+    <header>
+        {% include "header.html" %}
+    </header>
+    <main style="width:100%;display:flex;justify-content:center;flex-direction:row;">
+        <div style="width:25%;min-height:100vh">
+
+        </div>
+        <div style="width:50%;display:flex;flex-direction:column;align-items:center;padding:max(2vw, 4vh);">
+            <b style="font-size:max(1.5vw, 3vh);text-align:center;width:100%;padding:max(1vw, 2vh);">Notifications</b>
+            <div id="allNotifications" style="width:100%;display:flex;flex-direction:column;align-items:center;border-top:1px solid white;border-bottom:1px solid white;padding-top:max(1vw, 2vh);padding-bottom:max(1vw, 2vh);">
+
+            </div>
+            <button id="loadMoreNotificationsButton" onclick="displayNotifications()" style="padding:max(1vw, 2vh);border:1px solid black; border-radius:max(1vw, 2vh);background:linear-gradient(135deg, rgb(243, 231, 214, 1) 0%, rgb(235, 229, 220, 1) 50%, rgb(253, 249, 234, 1) 100%);margin-top:max(2vw, 4vh);margin-bottom:max(1vw, 2vh);">
+                <b style="font-size:max(1vw, 2vh);">Load More Notifications</b>
+            </button>
+        </div>
+        <div style="width:25%;min-height:100vh">
+
+        </div>
+    </main>
+    <footer>
+        {% include "footer.html" %}
+    </footer>
+</body>
+</html>
+
+<script>
+    var notificationsLoaded = 0
+    var notifications = []
+    var allNotifications = document.getElementById("allNotifications")
+    var loadMoreNotificationsButton = document.getElementById("loadMoreNotificationsButton")
+    var notificationsDiv = document.getElementById("notificationsDiv")
+    var profileNotifications = document.getElementById("profileNotifications")
+
+    window.addEventListener("resize", (event) => {
+        if (notificationsDiv != undefined) {
+            notificationsDiv.style.display = "none"
+        }
+        if (profileNotifications != undefined) {
+            profileNotifications.style.display = "none"
+        }
+    })
+
+    if (notificationsDiv != undefined) {
+            notificationsDiv.style.display = "none"
+        }
+        if (profileNotifications != undefined) {
+            profileNotifications.style.display = "none"
+        }
+
+    function readNotifications() {
+        formData = new FormData();
+        formData.append('action', "readNotifications");
+
+        fetch('/api', {
+        method: 'POST',
+        body: formData
+        })
+        .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+        })
+        .then(data => {
+        if (data == "SUCCESS") {
+            notificationCountID.innerHTML = "0";
+            notificationCountDiv.style.display = "none";
+        }
+        })
+        .catch(error => {
+        console.error('There was a problem with the fetch operation:', error);
+        });
+    };
+
+    function displayNotifications() {
+        formData = new FormData();
+        formData.append('loaded', notificationsLoaded);
+        formData.append('action', "get20Notifications");
+
+        fetch('/api', {
+        method: 'POST',
+        body: formData
+        })
+        .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+        })
+        .then(data => {
+            allNotifications.innerHTML = ""
+            notifications = notifications.concat(data)
+            notificationsLoaded += data.length
+            for (const i in notifications) {
+                    const notificationDiv = document.createElement("div")
+                    notificationDiv.style.height = "max(6vw, 12vh)"
+                    notificationDiv.style.width = "100%"
+                    notificationDiv.style.display = "flex"
+                    notificationDiv.style.justifyContent = "center"
+                    notificationDiv.style.alignItems = "center"
+                    notificationDiv.style.flexDirection = "row"
+                    notificationDiv.style.alignItems = "center"
+                    notificationDiv.style.gap = "max(1vw, 2vh)"
+
+                    const img = document.createElement("img")
+                    img.src = "/static/images/notifications/default.png"
+
+                    img.style.width = "auto"
+                    img.style.height = "max(3vw, 6vh)"
+                    
+                    notificationDiv.appendChild(img)
+
+                    const notificationInfo = document.createElement("div")
+                    notificationInfo.className = "notificationInfo"
+
+                    const head = document.createElement("b")
+                    const body = document.createElement("p")
+                    head.style.fontSize = "max(1.6vw, 3.2vh)"
+                    body.style.fontSize = "max(1.2vw, 2.4vh)"
+                    body.style.margin = "0px"
+                    if ("head" in notifications[i]) {
+                        head.innerText = notifications[i]["head"]
+                        notificationInfo.appendChild(head)
+                    }
+                    body.innerText = notifications[i]["body"]
+                    notificationInfo.appendChild(body)
+                    notificationDiv.appendChild(notificationInfo)
+
+                    allNotifications.appendChild(notificationDiv)
+            }
+            if (data.length < 20) {
+                loadMoreNotificationsButton.style.display = "none"
+            }
+            readNotifications()
+        })
+        .catch(error => {
+        console.error('There was a problem with the fetch operation:', error);
+        });
+    }
+
+    displayNotifications()
+</script>

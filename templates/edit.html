@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Page</title>
+    <link rel="stylesheet" href="https://use.typekit.net/uju1lhj.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/edit.css') }}">
+</head>
+<body>
+    <header>
+        {% include "header.html" %}
+    </header>
+    <div style="width:100%;height:fit-content;position:relative;">
+        <div>
+            <p>Edit page</p>
+        </div>
+    </div>
+    <main>
+        <b class="blockTitle">Select Your Profile Picture</b>
+        <div class="center">
+            <div id="profilePictures">
+
+            </div>
+        </div>
+        <div style="width:100%;height:max(4vw, 8vh);">
+            
+        </div>
+        <b class="blockTitle">Change Personal Details</b>
+        <div id="changePersonalDetails">
+            <div class="inputDiv">
+                <b class="inputTitle">Username:</b>
+                <div style="display:inline-flex;align-items:center;">
+                    <p>Current: </p>
+                    <b style="font-size:max(0.75vw, 1.5vh)">{{ userData["username"] }}</b>
+                </div>
+                <div style="display:inline-flex;gap:max(0.5vw, 1vh);">
+                    <input id="usernameInput" placeholder="Type your new username here...">
+                    <button onclick="changeUsername()"><b class="buttonText">Submit</b></button>
+                </div>
+                <b class="inputTitle">Roblox Username:</b>
+                <div style="display:inline-flex;align-items:center;">
+                    <p>Current: </p>
+                    <b style="font-size:max(0.75vw, 1.5vh)">{{ userData["robloxUsername"] }}</b>
+                </div>
+                <div style="display:inline-flex;gap:max(0.5vw, 1vh);">
+                    <input id="robloxUsernameInput" placeholder="Type your new roblox username here...">
+                    <button onclick="changeRobloxUsername()"><b class="buttonText">Submit</b></button>
+                </div>
+                <b class="inputTitle" style="margin-bottom:max(1vw, 2vh);">Password:</b>
+                <div style="display:inline-flex;gap:max(0.5vw, 1vh);">
+                    <input id="passwordInput" placeholder="Type your new password here...">
+                    <button onclick="changePassword()"><b class="buttonText">Submit</b></button>
+                </div>
+                <p id="emailMessage">For security reasons, you cannot change your email at this current moment. Please contact our support team if you wish to change your email address. Click <a href="/support" style="color:red;">here</a> to contact support!</p>
+            </div>
+        </div>
+        <div id="errorDiv">
+            <b id="errorText"></b>
+        </div>
+        <div id="messageDiv">
+            <b id="messageText"></b>
+        </div>
+    </main>
+    <footer>
+        {% include "footer.html" %}
+    </footer>
+</body>
+</html>
+
+<script type="application/data" id="userDataDict-data">
+    {{ userData | tojson | safe }}
+</script>
+
+
+<script type="application/data" id="profilePicturesDict-data">
+    {{ profilePictures | tojson | safe }}
+</script>
+
+<script>
+    var userDataElement = document.getElementById("userDataDict-data")
+    var userDataDict = JSON.parse(userDataElement.textContent)
+
+    var profilePicturesElement = document.getElementById("profilePicturesDict-data")
+    var profilePicturesDict = JSON.parse(profilePicturesElement.textContent)
+
+    var profilePictures = document.getElementById("profilePictures")
+
+    var usernameInput = document.getElementById("usernameInput")
+    var robloxUsernameInput = document.getElementById("robloxUsernameInput")
+    var passwordInput = document.getElementById("passwordInput")
+
+    var errorDiv = document.getElementById("errorDiv")
+    var errorText = document.getElementById("errorText")
+
+    var messageDiv = document.getElementById("messageDiv")
+    var messageText = document.getElementById("messageText")
+
+    function displayProfilePictures() {
+        profilePictures.innerHTML = ""
+
+        console.log(profilePicturesDict)
+        console.log(userDataDict["collection"])
+
+        for (const i in profilePicturesDict) {
+            const div = document.createElement("div")
+            const img = document.createElement("img")
+
+            div.style.position = "relative"
+            div.style.width = "100px"
+            div.style.height = "100px"
+            div.style.padding = "10px"
+            div.style.borderRadius = "10px"
+            div.style.border = "1px solid black"
+            div.style.cursor = "pointer"
+            div.setAttribute("onclick", "setAsProfilePicture('" + profilePicturesDict[i] + "')")
+
+            img.src = "/static/images/profile/" + profilePicturesDict[i]
+            img.style.height = "100px"
+            img.style.aspectRatio = "1/1"
+            img.style.position = "absolute"
+
+            div.appendChild(img)
+
+            if (userDataDict["collection"].includes(profilePicturesDict[i]) == false) {
+                const img2 = document.createElement("img")
+                img2.style.height = "50px"
+                img2.style.width = "auto"
+                img2.style.left = "50%"
+                img2.style.top = "50%"
+                img2.style.transform = "translate(-50%, -50%)"
+
+                img2.src = "/static/images/misc/locked.png"
+                img2.style.position = "absolute"
+                img.style.filter = "brightness(0.5)"
+                div.appendChild(img2)
+            }
+
+            profilePictures.appendChild(div)
+        }
+    }
+
+    displayProfilePictures()
+
+    function setAsProfilePicture(picture) {
+        formData = new FormData();
+        formData.append('image', picture);
+        formData.append('action', "setAsProfilePicture");
+
+        fetch('/api', {
+        method: 'POST',
+        body: formData
+        })
+        .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+        })
+        .then(data => {
+            if (data == "SUCCESS") {
+                const img = document.getElementById("profilePicture")
+                img.src = "/static/images/profile/" + picture
+            }
+        })
+        .catch(error => {
+        console.error('There was a problem with the fetch operation:', error);
+        });
+    }
+
+    function changeUsername() {
+        console.log("HI")
+        formData = new FormData();
+        formData.append('username', usernameInput.value);
+        formData.append('action', "changeUsername");
+
+        fetch('/api', {
+        method: 'POST',
+        body: formData
+        })
+        .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+        })
+        .then(data => {
+            displayMessage("Username updated. Please reload the page to see the changes!")
+        })
+        .catch(error => {
+        console.error('There was a problem with the fetch operation:', error);
+        displayError("There was a problem with your request!")
+        });
+    }
+
+    function changeRobloxUsername() {
+        formData = new FormData();
+        formData.append('robloxUsername', robloxUsernameInput.value);
+        formData.append('action', "changeRobloxUsername");
+
+        fetch('/api', {
+        method: 'POST',
+        body: formData
+        })
+        .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+        })
+        .then(data => {
+            displayMessage("Roblox username updated. Please reload the page to see the changes!")
+        })
+        .catch(error => {
+        console.error('There was a problem with the fetch operation:', error);
+        displayError("There was a problem with your request!")
+        });
+    }
+
+    function changePassword() {
+        formData = new FormData();
+        formData.append('password', passwordInput.value);
+        formData.append('action', "changePassword");
+
+        fetch('/api', {
+        method: 'POST',
+        body: formData
+        })
+        .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+        })
+        .then(data => {
+            displayMessage("Password updated. Please reload the page to see the changes!")
+        })
+        .catch(error => {
+        console.error('There was a problem with the fetch operation:', error);
+        displayError("There was a problem with your request!")
+        });
+    }
+
+    function displayError(error) {
+        errorDiv.style.bottom = "10%"
+        errorText.innerText = error
+        setTimeout((event) => {
+            errorDiv.style.bottom = "-100%"
+        }, 2000)
+    }
+
+    function displayMessage(message) {
+        messageDiv.style.bottom = "10%"
+        messageText.innerText = message
+        setTimeout((event) => {
+            messageDiv.style.bottom = "-100%"
+        }, 2000)
+    }
+</script>

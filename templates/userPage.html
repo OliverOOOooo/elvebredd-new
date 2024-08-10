@@ -1,0 +1,4106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UserProfile</title>
+    <link rel="stylesheet" href="https://use.typekit.net/uju1lhj.css">
+    <link rel="stylesheet" href="../static/css/index.css">
+    <link rel="stylesheet" href="../static/css/userPage.css">
+</head>
+<body>
+    <header>
+        {% include "header.html" %}
+    </header>
+    <main style="width:75%">
+        <div id="upperUserPage">
+            <div style="width:25vw; display:flex; justify-content:center;">
+                <div id="dailyStreakDiv">
+                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid meet" version="1.0" viewBox="0.0 0.0 130.0 156.0" zoomAndPan="magnify" original_string_length="832">
+                        <g id="__id3236_seijkjdmo">
+                            <path d="m0 100.8c0-14.8 4-26.8 10.4-36 0 18.2 4.4 24.6 14 24.6 6.4 0 13-4.8 13-13 0-7.4-5-20.8-5-35.2s4.8-29.8 24.4-41.2c-4.4 11.6-6.2 21.4-6.2 29.4 0 21.2 12.8 30.8 24.2 30.8 9.2 0 18.8-6 18.8-23.4 6.2 6.8 9 14.6 9 22.4 0 12.4-6.8 23.4-6.8 33.4 0 8.2 6.6 13 13 13 11.4 0 14.8-10.2 14.8-27 3.4 5.8 6.4 17.2 6.4 27 0 29.2-27.6 50.4-58.4 50.4 26-9.8 30.8-22.8 30.8-37.4-6.4 11.4-13 13-16.2 13-19.6 0 1.6-37.4-32.6-63.4 5.6 12 7.8 22.4 7.8 30.8 0 18-9.8 27.8-19.2 27.8-8 0-16-6.4-19.2-20 0 19 5.6 37 30.6 49.2-39-6.4-53.6-30.8-53.6-55.2z" style="fill: inherit;"/>
+                        </g>
+                    </svg>
+                    <p>{{ profileData["dailyStreak"] }}</p>
+                </div>
+            </div>
+            <div style="width:25vw;display:flex;flex-direction:column;align-items:center;">
+                <img style="width:100px;height:100px;" src="{{ url_for('static', filename=('images/profile/' + profileData['profilePicture'])) }}">
+                <div style="display:flex;flex-direction:row;align-items:center;justify-content:center;gap:5px;">
+                    <p>{{ profileData["username"] }}</p>
+                    {% if profileData["verified"] %}
+                        <img id="verified" src="/static/images/misc/verified.png" style="width:10px;height:auto;">
+                    {% endif %}
+                </div>
+                <div class="center" style="gap:25px; text-align:center;">
+                    <div>
+                        <b id="listingAmount" class="noMargin">{{ profileData["trades"]|length }}</b>
+                        <p class="noMargin">Listings</p>
+                    </div>
+                    <div>
+                        <b class="noMargin">{{ profileData["completedTrades"]|length }}</b>
+                        <p class="noMargin">Trades</p>
+                    </div>
+                    <div>
+                        <b class="noMargin" id="inventoryLength">{{ profileData["inventory"]|length }}</b>
+                        <p class="noMargin">Inventory</p>
+                    </div>
+                </div>
+                <div class="center" style="padding-top:25px;gap:15px;">
+                    {% if profileID|string == userID|string %}
+                        <button onclick="setTradeTo(-1);openListingInterface()" class="profileButton" style="display:flex;align-items:center;justify-content:center;">
+                            <p class="noMargin" style="font-size:15px;">New Listing</p>
+                        </button>
+                        <button onclick="openInventory(); setAddPetTypeTo('inventory')" class="profileButton" style="display:flex;align-items:center;justify-content:center;">
+                            <p class="noMargin" style="font-size:15px;">Edit Inventory</p>
+                        </button>
+                    {% endif %}
+                </div>
+                <div class="center" style="padding-top:25px;gap:15px;flex-direction:column;">
+                    <div>
+                        <div class="sharkFrostButton orangeRed">
+                            <div class="sharkText" onclick="selectSharkButton()"><b class="sharkFrostText">SHARK</b></div>
+                            <div class="frostText" onclick="selectFrostButton()"><b class="sharkFrostText">FROST</b></div>
+                            <button class="blank button sharkButton" style="width:50%" onclick="selectSharkButton()">
+                                &nbsp;
+                            </button>
+                            <button class="blank button frostButton" style="width:50%" onclick="selectFrostButton()">
+                                &nbsp;
+                            </button>
+                            <div class="buttonSelected orangeRed">
+                                &nbsp;
+                            </div>
+                        </div>
+                    </div>
+                    <div class="center" style="flex-direction:row;gap:10px;align-items:center;">
+                        {% if profileData["robloxUsername"] %}
+                            <img style="width:12px;height:auto;" src="../static/images/misc/robloxLogo.png">
+                        {% endif %}
+                        <p style="font-size:12px;">{{ profileData["robloxUsername"] }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="center" style="width:25vw;display:flex;flex-direction:column;justify-content: flex-start;gap:10px;">
+                {% if profileID|string == userID|string %}
+                    <button onclick="openPreferences()" class="profileButton" style="display:flex;align-items:center;justify-content:center;">
+                        <p class="noMargin" style="font-size:15px;">Settings</p>
+                    </button>
+                    <button onclick="openHelp()" class="profileButton" style="display:flex;align-items:center;justify-content:center;">
+                        <p class="noMargin" style="font-size:15px;">Help</p>
+                    </button>
+                    <button onclick="openFriends()" class="profileButton" style="display:flex;align-items:center;justify-content:center;">
+                        <p class="noMargin" style="font-size:15px;">Friends</p>
+                    </button>
+                    <button onclick="editProfile()" class="profileButton" style="display:flex;align-items:center;justify-content:center;">
+                        <p class="noMargin" style="font-size:15px;text-decoration:none;color:black;">Edit Profile</p>
+                    </button>
+                {% elif loggedIn %}
+
+                    {% if userID in profileData["blocked"]%}
+                        <button id="friendButton" disabled=true class="profileButton disabled" style="display:flex;align-items:center;justify-content:center;">
+                            <p class="noMargin" style="font-size:15px;">User has blocked you!</p>
+                        </button>
+                    {% elif profileID|string not in userData["blocked"] %}
+                        {% if userID in profileData["friendRequests"]["received"] %}
+                            <button id="friendButton" disabled=true class="profileButton disabled" style="display:flex;align-items:center;justify-content:center;">
+                                <p class="noMargin" style="font-size:15px;">Friend request sent</p>
+                            </button>
+                        {% elif userID in profileData["friendRequests"]["sent"] %}
+                            <button id="friendButton" onclick="sendFriendRequest('{{ profileID }}')" class="profileButton" style="display:flex;align-items:center;justify-content:center;">
+                                <p class="noMargin" style="font-size:15px;">Add as friend</p>
+                            </button>
+                        {% elif userID in profileData["friends"] %}
+                            <button id="friendButton" onclick="removeFriend('{{ profileID }}')" class="profileButton" style="display:flex;align-items:center;justify-content:center;">
+                                <p class="noMargin" style="font-size:15px;">Remove as friend</p>
+                            </button>
+                        {% else %}
+                            <button id="friendButton" onclick="sendFriendRequest('{{ profileID }}')" class="profileButton" style="display:flex;align-items:center;justify-content:center;">
+                                <p class="noMargin" style="font-size:15px;">Send friend request</p>
+                            </button>
+                        {% endif %}
+                    {% endif %}
+
+                    {% if profileID|string not in userData["blocked"] %}
+                        <button id="blockButton" onclick="block('{{ profileID }}')" class="profileButton" style="display:flex;align-items:center;justify-content:center;">
+                            <p class="noMargin" style="font-size:15px;">Block</p>
+                        </button>
+                    {% else %}
+                        <button id="blockButton" onclick="unblock('{{ profileID }}')" class="profileButton" style="display:flex;align-items:center;justify-content:center;">
+                            <p class="noMargin" style="font-size:15px;">Unblock</p>
+                        </button>
+                    {% endif %}
+
+                    {% if userData["moderator"] == 1 %}
+                        <button id="banButton" onclick="ban('{{ profileID }}')" class="profileButton" style="display:flex;align-items:center;justify-content:center;">
+                            <p class="noMargin" style="font-size:15px;">Ban User</p>
+                        </button>
+                        <button id="makeContentCreatorButton" onclick="makeContentCreator('{{ profileID }}')" class="profileButton" style="display:flex;align-items:center;justify-content:center;">
+                            <p class="noMargin" style="font-size:15px;">Mark as Content Creator</p>
+                        </button>
+                    {% endif %}
+
+                {% endif %}
+            </div>
+        </div>
+        <div id="friendsBackground" onclick="closeFriends()">
+            &nbsp;
+        </div>
+        <div id="helpBackground" onclick="closeHelp()">
+            &nbsp;
+        </div>
+        <div id="friendsMenu">
+            <h1 style="margin:0px;font-size:max(2vw, 4vh)">Friends</h1>
+            <div style="display:flex;flex-direction:row;justify-content:center;align-items:center;width:90%;">
+                <p style="font-size:max(1vw, 2vh); text-align:center;">Add friends to <a style="color:red" href="/listings">trade</a> easily and compete with each other on the leaderboard!</p>
+            </div>
+            <div id="friendsDiv">
+
+            </div>
+            <div id="pendingDiv">
+
+            </div>
+            <div id="blockedDiv">
+
+            </div>
+            <div style="display:flex;flex-direction:row;align-items:center;justify-content:center;gap:max(0.3vw, 0.6vh);padding-bottom:max(1vw, 2vh);width:100%;padding-top:max(1vw, 2vh);">
+                <button class="menuButton" onclick="selectMoreOption('friends'); showFriends();">
+                    <p style="margin:0px;">Friends</p>
+                </button>
+                <button class="menuButton" onclick="selectMoreOption('pending'); showPending();">
+                    <p style="margin:0px;">Pending</p>
+                </button>
+                <button class="menuButton" onclick="selectMoreOption('blocked'); showBlocked()">
+                    <p style="margin:0px;">Blocked</p>
+                </button>
+            </div>
+            <button class="menuButton" onclick="closeFriends()" style="width:100px;height:30px;">
+                <p style="margin:0px;">Ok</p>
+            </button>
+        </div>
+        <div id="helpMenu">
+            <div style="display:flex;flex-direction:column;align-items:center;">
+                <h1 style="margin:0px;font-size:max(1.5vw, 3vh);padding:max(1vw, 2vh);text-align:center;">Help</h1>
+                <div style="display:flex;flex-direction:row;justify-content:center;align-items:center;width:80%;">
+                    <p style="font-size:max(1vw, 2vh);text-align:center;">If you wish to contact support, please join our <a href="https://discord.com/invite/Byny894ZQP" style="color:red;">discord server</a> to resolve your issues.</p>
+                </div>
+            </div>
+            <div style="width:100%;display:flex;flex-direction:column;align-items:center;">
+                <h1 style="margin:0px;font-size:max(1.2vw, 2.4vh);padding:max(1vw, 2vh);">Shortcuts</h1>
+                <div style="display:flex;flex-direction:column;justify-content:center;align-items:center;width:80%;gap:max(0.5vw, 1vh);">
+                    <p style="font-size:max(1vw, 2vh);text-align:center;margin:0px;"><a style="color:red;margin:0px;" href="/listings">Listings</a></p>
+                    <p style="font-size:max(1vw, 2vh);text-align:center;margin:0px;"><a style="color:red;margin:0px;" href="/">Home</a></p>
+                    <p style="font-size:max(1vw, 2vh);text-align:center;margin:0px;"><a style="color:red;margin:0px;" href="/tos">Terms of Service</a></p>
+                </div>
+            </div>
+            <button class="menuButton" onclick="closeHelp()">
+                <p style="margin:0px;">Close</p>
+            </button>
+        </div>
+        <div id="lowerUserPage" style="padding-top:25px;">
+            <div class="center" style="flex-direction:row;gap:50px;">
+                <b class="noMargin button bland" id="listingsButton" onclick="selectCategoryUser('listings')">Listings</b>
+                <b class="noMargin button bland" id="inventoryButton" onclick="selectCategoryUser('inventory')">Inventory</b>
+                <b class="noMargin button bland" id="wishlistButton" onclick="selectCategoryUser('wishlist'); ">Wishlist</b>
+                {% if profileID|string == userID|string %}
+                    <b class="noMargin button bland" id="inboxButton" onclick="selectCategoryUser('inbox')">Inbox</b>
+                    <b class="noMargin button bland" id="pendingButton" onclick="selectCategoryUser('pending')">Pending</b>
+                {% endif %}
+                <b class="noMargin button bland" id="historyButton" onclick="selectCategoryUser('history')">History</b>
+            </div>
+            <div style="padding-top:40px;" class="center">
+                <div id="userInventory">
+
+                </div>
+                <div id="userListings">
+
+                </div>
+                <div id="userWishlist">
+
+                </div>
+                <div id="userInbox">
+
+                </div>
+                <div id="userPending">
+
+                </div>
+                <div id="userHistory">
+
+                </div>
+            </div>
+        </div>
+        <div id="addInventory">
+            <div style="display:flex;flex-direction:row;justify-content:space-between;">
+                <div class="center" style="gap:0.25vw;padding:0.5vw;">
+                    <img id="filterImage" src="../static/images/misc/menu.png">
+                    <p id="filterText">Filter</p>
+                </div>
+                <div id="petSearchDiv" class="center">
+                    <input id="petSearch" placeholder="Search" onkeyup="searchUpPets()">
+                    <img id="petSearchImage" src="../static/images/misc/search.png">
+                </div>
+            </div>
+            <div style="display:flex;flex-direction:row;justify-content:space-between;gap:0.5vw">
+                <div id="filter">
+                    <div id="filterButtons">
+                        <button id="all" class="filterButton" onclick="filter('all', 0)"><b class="filterButtonText">All</b></button>
+                        <button id="pets" class="filterButton" onclick="filter('pets', 0)"><b class="filterButtonText">Pets</b></button>
+                        <button id="common" class="filterButton" onclick="filter('common', 0)"><b class="filterButtonText">Common</b></button>
+                        <button id="eggs" class="filterButton" onclick="filter('eggs', 0)"><b class="filterButtonText">Eggs</b></button>
+                        <button id="legendary" class="filterButton" onclick="filter('legendary', 0)"><b class="filterButtonText">Legendary</b></button>
+                        <button id="other" class="filterButton" onclick="filter('other', 0)"><b class="filterButtonText">Other</b></button>
+                        <button id="petWear" class="filterButton" onclick="filter('pet wear', 0)"><b class="filterButtonText">Pet Wear</b></button>
+                        <button id="rare" class="filterButton" onclick="filter('rare', 0)"><b class="filterButtonText">Rare</b></button>
+                        <button id="ultraRare" class="filterButton" onclick="filter('ultra rare', 0)"><b class="filterButtonText">Ultra-Rare</b></button>
+                        <button id="uncommon" class="filterButton" onclick="filter('uncommon', 0)"><b class="filterButtonText">Uncommon</b></button>
+                        <button id="vehicles" class="filterButton" onclick="filter('vehicles', 0)"><b class="filterButtonText">Vehicles</b></button>
+                    </div>
+                </div>
+                <div class="center">
+                    <div id="petImages">
+
+                    </div>
+                </div>
+            </div>
+            <div id="imageButtons">
+                <button id="flyButton" onclick="enableFly()">
+                    <h1 style="color:white;">F</h1>
+                </button>
+                <button id="rideButton" onclick="enableRide()">
+                    <h1 style="color:white;">R</h1>
+                </button>
+                <button id="regularButton" onclick="enableRegular()">
+                    <h1 style="color:white;">D</h1>
+                </button>
+                <button id="neonButton" onclick="enableNeon()">
+                    <h1 style="color:white;">N</h1>
+                </button>
+                <button id="megaButton" onclick="enableMega()">
+                    <h1 style="color:white;">M</h1>
+                </button>
+            </div>
+            <div id="closeButton" onclick="closeInventory()">
+                <img style="width:1.5vw;height:1.5vw;" src="../static/images/misc/close.svg">
+            </div>
+        </div>
+        <div id="listingInterface">
+            <div id="listingInterfaceUpper">
+                <div id="listingInformation">
+                    <b class="score" id="yourScore">0</b>
+                    <div style="display:flex; flex-direction:column;gap:10px;justify-content:center;">
+                        <div class="center">
+                            <div id="winFairLose">
+                                <svg viewbox="0 0 130 22">
+                                    <defs>
+                                    <mask id="mask" x="0" y="0" width="130" height="20">
+                                        <rect x="0" y="0" width="130" height="50" fill="#fff"/>
+                                        <text text-anchor="middle" x="65" y="15" dy="1" font-weight="bold">WIN FAIR LOSE</text>
+                                    </mask>
+                                    </defs>
+                                    <rect x="0" y="0" width="130" height="22" mask="url(#mask)" fill-opacity="0.05" rx="12" ry="12"/>    
+                                </svg>
+                            </div>
+                        </div>
+                        <div id="listingInformationMiddle">
+                            <div style="display:flex;flex-direction:row; justify-content:space-between;gap:max(1vw,2vh);">
+                                <b style="font-size:max(1.3vw,2.6vh);">YOUR OFFER</b>
+                                <b style="font-size:max(1.3vw,2.6vh);;">|</b>
+                                <b style="font-size:max(1.3vw,2.6vh);">THEIR OFFER</b>
+                            </div>
+                            <div class="center" style="position:relative;width:max(15vw, 30vh);">
+                                <div class="orangeRed" id="tradeBarBackground"></div>
+                                <div class="orangeRed" id="tradeBar"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <b class="score" id="theirScore">0</b>
+                </div>
+            </div>
+            <div id="listingInterfaceLower">
+                <div id="tradingPetsInterface">
+                    <div id="tradePart1">
+
+                    </div>
+                    <div id="differenceInValue"></div>
+                    <b id="differenceInValueText">101</b>
+                    <div id="tradePart2">
+
+                    </div>
+                </div>
+                <div id="listingInformation2">
+                    <div style="display:flex;flex-direction:column;gap:20px;">
+                        <b>Your Offer</b>
+                        <b id="yourScore2" style="font-size:28px; color:black;">0</b>
+                    </div>
+                    <div style="display:flex;flex-direction:column;gap:10px;" id="noModifyListing">
+                        <button class="profileButton" onclick="createListing(); closeListingInterface()"><p style="margin:0px;">Create</p></button>
+                        <button class="profileButton" onclick="closeListingInterface()"><p style="margin:0px;">Close</p></button>
+                    </div>
+                    <div style="display:flex;flex-direction:column;gap:10px;" id="modifyListing">
+                        <button class="profileButton" onclick="saveListing(); closeListingInterface()"><p style="margin:0px;">Save</p></button>
+                        <button class="profileButton" onclick="removeListing()"><p style="margin:0px;">Delete</p></button>
+                    </div>
+                    <div style="display:flex;flex-direction:column;gap:20px;">
+                        <b>Asking for</b>
+                        <b id="theirScore2" style="font-size:28px; color:black;">0</b>
+                    </div>
+                </div>
+                <div class="center">
+                    <div class="sharkFrostButton orangeRed">
+                        <div class="sharkText" onclick="selectSharkButton()"><b class="sharkFrostText">SHARK</b></div>
+                        <div class="frostText" onclick="selectFrostButton()"><b class="sharkFrostText">FROST</b></div>
+                        <button class="blank button sharkButton" onclick="selectSharkButton()">
+                            &nbsp;
+                        </button>
+                        <button class="blank button frostButton" onclick="selectFrostButton()">
+                            &nbsp;
+                        </button>
+                        <div class="buttonSelected orangeRed">
+                            &nbsp;
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="listingInterface2">
+            <div id="listingInterface2Upper">
+                <div style="padding:max(2vw, 4vh);display:flex;flex-direction:row;justify-content:space-between;height:100%;">
+                    <div style="display:flex;flex-direction:column;gap:4px;">
+                        <b class="listingInterface2TextBig">Your Offer</b>
+                        <button id="modifyYourOffer" class="l2button" onclick="modifyYourOffer()">Modify Your Offer</button>
+                    </div>
+                    <div style="display:flex;flex-direction:column;gap:4px;">
+                        <b class="listingInterface2TextBig red">Their Offer</b>
+                        <button id="modifyTheirOffer" class="l2button" onclick="modifyTheirOffer()">Modify Their Offer</button>
+                    </div>
+                </div>
+            </div>
+            <div id="listingInterface2Lower">
+                <div id="listingPart1Div">
+                    <div id="listingPart1">
+
+                    </div>
+                    <b id="listingCloseButton" onclick="closeListingInterface2()">Close</b>
+                </div>
+                <div style="height:100%;width:1px;background-color:black;position:relative;">
+                    <b id="listingValue">0</b>
+                </div>
+                <div id="listingPart2Div">
+                    <div id="listingPart2">
+
+                    </div>
+                    <b id="listingAcceptButton" onclick="acceptOffer()">Accept</b>
+                    <b id="listingCustomOfferButton" onclick="sendCustomOffer()">Send Custom Offer</b>
+                    <div id="ownerInfo">
+                        <b>Listing made by:</b>
+                        <b id="owner"></b>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div onclick="closeInventory()" id="addInventoryBackground">
+        &nbsp;
+    </div>
+    <div onclick="closeListingInterface()" id="listingInterfaceBackground">
+        &nbsp;
+    </div>
+    <div onclick="closeListingInterface2()" id="listingInterface2Background">
+        &nbsp;
+    </div>
+    <div id="petAdded">
+        <b id="petAddedText">You added a pet</b>
+    </div>
+    <div id="errorDiv">
+        <b id="errorText"></b>
+    </div>
+    <div id="messageDiv">
+        <b id="messageText"></b>
+    </div>
+    <div id="friendMoreOptions">
+
+    </div>
+    <footer>
+        {% include "footer.html" %}
+    </footer>
+</body>
+</html>
+
+<script type="application/data" id="petsDict-data">
+    {{ pets | tojson | safe }}
+</script>
+
+<script type="application/data" id="userDataDict-data">
+    {{ userData | tojson | safe }}
+</script>
+
+<script type="application/data" id="profileDataDict-data">
+    {{ profileData | tojson | safe }}
+</script>
+
+<script type="application/data" id="profileListings-data">
+    {{ profileListings | tojson | safe }}
+</script>
+
+<script>
+    var friendsBackground = document.getElementById("friendsBackground")
+    var friendsMenu = document.getElementById("friendsMenu")
+    var helpBackground = document.getElementById("helpBackground")
+    var helpMenu = document.getElementById("helpMenu")
+    var loggedIn = "{{ loggedIn }}"
+    var userID = "{{ userID }}"
+    var profileID = "{{ profileID }}"
+
+    var petsDictElement = document.getElementById("petsDict-data")
+    var petsDict = JSON.parse(petsDictElement.textContent)
+
+    var profileListingsElement = document.getElementById("profileListings-data")
+    var profileListings = JSON.parse(profileListingsElement.textContent)
+
+    var userListings = document.getElementById("userListings")
+
+    var userWishlist = document.getElementById("userWishlist")
+
+    var userInbox = document.getElementById("userInbox")
+    var userPending = document.getElementById("userPending")
+    var userHistory = document.getElementById("userHistory")
+
+    var userDataDictElement = document.getElementById("userDataDict-data")
+    var userDataDict = JSON.parse(userDataDictElement.textContent)
+    
+    var profileDataDictElement = document.getElementById("profileDataDict-data")
+    var profileDataDict = JSON.parse(profileDataDictElement.textContent)
+
+    var petImage = document.querySelectorAll(".petImage")
+
+    var flyButton = document.getElementById("flyButton")
+    var rideButton = document.getElementById("rideButton")
+    var regularButton = document.getElementById("regularButton")
+    var neonButton = document.getElementById("neonButton")
+    var megaButton = document.getElementById("megaButton")
+
+    var fly = 0
+    var ride = 0
+    var regular = 1
+    var neon = 0
+    var mega = 0
+
+    var all = document.getElementById("all")
+    var pets = document.getElementById("pets")
+    var common = document.getElementById("common")
+    var eggs = document.getElementById("eggs")
+    var legendary = document.getElementById("legendary")
+    var other = document.getElementById("other")
+    var petWear = document.getElementById("petWear")
+    var rare = document.getElementById("rare")
+    var ultraRare = document.getElementById("ultraRare")
+    var uncommon = document.getElementById("uncommon")
+    var vehicles = document.getElementById("vehicles")
+
+    var petSearch = document.getElementById("petSearch")
+    var lastFilter = "all"
+
+    var addInventory = document.getElementById("addInventory")
+    var addInventoryBackground = document.getElementById("addInventoryBackground")
+
+    var filterElement = document.getElementById("filter")
+    var petImages = document.getElementById("petImages")
+    var filterButtons = document.getElementById("filterButtons")
+
+    var petAdded = document.getElementById("petAdded")
+    var petAddedText = document.getElementById("petAddedText")
+
+    var petsAdded = 0
+
+    var friendButton = document.getElementById("friendButton")
+
+    var inventoryLength = document.getElementById("inventoryLength")
+
+    var userInventory = document.getElementById("userInventory")
+
+    var sharkFrostButtonSelected = document.querySelectorAll(".buttonSelected")
+    var calculateWithValue = "shark"
+
+    var tradePart1Element = document.getElementById("tradePart1")
+    var tradePart2Element = document.getElementById("tradePart2")
+
+    var filteredPets = 0
+
+    var addPetType = "inventory"
+
+    var tradePart1 = []
+    var tradePart2 = []
+
+    var listingInterface = document.getElementById("listingInterface")
+    var listingInterfaceBackground = document.getElementById("listingInterfaceBackground")
+
+    var tradeValue = document.getElementById("differenceInValueText")
+    var tradeArrow = document.getElementById("differenceInValue")
+
+    var yourScore = document.getElementById("yourScore")
+    var yourScore2 = document.getElementById("yourScore2")
+    var theirScore = document.getElementById("theirScore")
+    var theirScore2 = document.getElementById("theirScore2")
+
+    var listingAmount = document.getElementById("listingAmount")
+
+    var errorDiv = document.getElementById("errorDiv")
+    var errorText = document.getElementById("errorText")
+
+    var tradeBar = document.getElementById("tradeBar")
+
+    var listingsButton = document.getElementById("listingsButton")
+    var inventoryButton = document.getElementById("inventoryButton")
+    var wishlistButton = document.getElementById("wishlistButton")
+    var historyButton = document.getElementById("historyButton")
+
+    var modifyTrade = -1
+    var modifyListing = document.getElementById("modifyListing")
+    var noModifyListing = document.getElementById("noModifyListing")
+
+    var listingInterface2 = document.getElementById("listingInterface2")
+    var listingInterface2Background = document.getElementById("listingInterface2Background")
+
+    var listingPart1 = document.getElementById("listingPart1")
+    var listingPart2 = document.getElementById("listingPart2")
+
+    var owner = document.getElementById("owner")
+
+    var listingValue = document.getElementById("listingValue")
+
+    var modifyTheirOfferElement = document.getElementById("modifyTheirOffer")
+    var modifyYourOfferElement = document.getElementById("modifyYourOffer")
+
+    var mYO = 0
+    var mTO = 0
+
+    var currentListing = 0
+
+    var listingAcceptButton = document.getElementById("listingAcceptButton")
+    var listingCustomOfferButton = document.getElementById("listingCustomOfferButton")
+
+    var offerAccepted = false
+
+    var friendsDiv = document.getElementById("friendsDiv")
+    var pendingDiv = document.getElementById("pendingDiv")
+    var blockedDiv = document.getElementById("blockedDiv")
+
+    var friendData = ""
+    var currentFriendSelected = ""
+
+    var pendingData = ""
+
+    var friendMoreOptions = document.getElementById("friendMoreOptions")
+
+    let mouseX = 0;
+    let mouseY = 0;
+
+    var more = 0
+
+    var blockButton = document.getElementById("blockButton")
+
+    var displayPetsFirstTime = 0
+    var verified = document.getElementById("verified")
+
+    document.addEventListener('mousemove', function(event) {
+        mouseX = event.clientX;
+        mouseY = event.clientY;
+    });
+
+    function modifyYourOffer() {
+        if ( mYO == 0) {
+            mYO = 1
+            modifyYourOfferElement.style.border = "1px solid white"
+            showUserListings2(currentListing, "left")
+        } else {
+            mYO = 0
+            modifyYourOfferElement.style.border = "1px solid black"
+            showUserListings2(currentListing, "left")
+        }
+    }
+
+    function modifyTheirOffer() {
+        if ( mTO == 0) {
+            mTO = 1
+            modifyTheirOfferElement.style.border = "1px solid white"
+            showUserListings2(currentListing, "right")
+        } else {
+            mTO = 0
+            modifyTheirOfferElement.style.border = "1px solid black"
+            showUserListings2(currentListing, "right")
+        }
+    }
+
+    if (userID == profileID) {
+        var inboxButton = document.getElementById("inboxButton")
+        var pendingButton = document.getElementById("pendingButton")
+    }
+
+    function selectSharkButton() {
+        sharkFrostButtonSelected.forEach((button) => {
+            button.style.left = "0%"
+        })
+        calculateWithValue = "shark"
+        calculateTradeValue()
+        showUserListings()
+    }
+
+    window.addEventListener("resize", (event) => {
+        sharkFrostButtonSelected.forEach((button) => {
+            button.style.transition = "0s ease"
+        })
+        setTimeout((event) => {
+            sharkFrostButtonSelected.forEach((button) => {
+                button.style.transition = "0.33s ease-in-out"
+            })
+        }, 100)
+    })
+
+    function selectFrostButton() {
+        sharkFrostButtonSelected.forEach((button) => {
+            button.style.left = "47%"
+        })
+        calculateWithValue = "frost"
+        calculateTradeValue()
+        showUserListings()
+    }
+
+    function updateButtons() {
+        flyButton.style.filter = "saturate(" + fly.toString() +")"
+        rideButton.style.filter = "saturate(" + ride.toString() +")"
+        regularButton.style.filter = "saturate(" + regular.toString() +")"
+        neonButton.style.filter = "saturate(" + neon.toString() +")"
+        megaButton.style.filter = "saturate(" + mega.toString() +")"
+    }
+
+    updateButtons()
+
+    function openFriends() {
+        friendsMenu.style.display = "flex";
+        friendsBackground.style.display = "block"
+        document.getElementById("profileMenu").style.display = "none"
+    };
+
+    function closeFriends() {
+        friendsMenu.style.display = "none";
+        friendsBackground.style.display = "none"
+    }
+
+    function openHelp() {
+        helpMenu.style.display = "flex";
+        helpBackground.style.display = "block"
+        document.getElementById("profileMenu").style.display = "none"
+    };
+
+    function closeHelp() {
+        helpMenu.style.display = "none";
+        helpBackground.style.display = "none"
+    }
+
+    function handleImageError(image) {
+        image.style.display = 'none';
+    }
+
+    function setAddPetTypeTo(type) {
+        addPetType = type
+    }
+
+    function showTradePets() {
+        tradePart1Element.innerHTML = ""
+        tradePart2Element.innerHTML = ""
+        for (const i in tradePart1) {
+            const div = document.createElement("div")
+            div.className = 'tradePet trade1'
+            div.setAttribute('onclick', 'removePetFromInventory("trade1", ' + i.toString() + ')')
+            div.style.position = "relative";
+            div.style.cursor = "pointer"
+            div.style.display = "flex"
+            div.style.justifyContent = "center"
+            div.style.alignItems = "center"
+            const img = document.createElement("img")
+            img.src = petsDict[tradePart1[i].id].image
+            img.style.height = "max(3.8vw, 7.6vh)"
+            img.style.width = "max(3.8vw, 7.6vh)"
+            div.appendChild(img)
+
+            const attributesDiv = document.createElement("div")
+                attributesDiv.style.padding = "0px"
+                attributesDiv.style.position = "absolute"
+                attributesDiv.style.display = "flex"
+                attributesDiv.style.alignItems = "center"
+                attributesDiv.style.bottom = "4px"
+                attributesDiv.style.left = "4px"
+                attributesDiv.style.gap = "2px"
+
+                var attribute = ""
+
+            if (tradePart1[i]["fly"] == 1) {
+                    attribute = document.createElement("div")
+                    attribute.setAttribute("id", "flyButton")
+                    attribute.style.height = "max(1vw, 2vh)"
+                    attribute.style.width = "max(1vw, 2vh)"
+                    attribute.style.padding = "0px"
+                    attribute.style.borderRadius = "4px"
+                    text = document.createElement("b")
+                    text.innerHTML = "F"
+                    text.style.color = "white"
+                    text.style.fontSize = "max(0.6vw, 1.2vh)"
+                    attribute.appendChild(text)
+                    attributesDiv.appendChild(attribute)
+                }
+
+                if (tradePart1[i]["ride"] == 1) {
+                    attribute = document.createElement("div")
+                    attribute.setAttribute("id", "rideButton")
+                    attribute.style.height = "max(1vw, 2vh)"
+                    attribute.style.width = "max(1vw, 2vh)"
+                    attribute.style.padding = "0px"
+                    attribute.style.borderRadius = "4px"
+                    text = document.createElement("b")
+                    text.innerHTML = "R"
+                    text.style.color = "white"
+                    text.style.fontSize = "max(0.6vw, 1.2vh)"
+                    attribute.appendChild(text)
+                    attributesDiv.appendChild(attribute)
+                }
+
+                if (tradePart1[i]["neon"] == 1) {
+                    attribute = document.createElement("div")
+                    attribute.setAttribute("id", "neonButton")
+                    attribute.style.height = "max(1vw, 2vh)"
+                    attribute.style.width = "max(1vw, 2vh)"
+                    attribute.style.padding = "0px"
+                    attribute.style.borderRadius = "4px"
+                    text = document.createElement("b")
+                    text.innerHTML = "N"
+                    text.style.color = "white"
+                    text.style.fontSize = "max(0.6vw, 1.2vh)"
+                    attribute.appendChild(text)
+                    attributesDiv.appendChild(attribute)
+                }
+
+                if (tradePart1[i]["mega"] == 1) {
+                    attribute = document.createElement("div")
+                    attribute.setAttribute("id", "megaButton")
+                    attribute.style.height = "max(1vw, 2vh)"
+                    attribute.style.width = "max(1vw, 2vh)"
+                    attribute.style.padding = "0px"
+                    attribute.style.borderRadius = "4px"
+                    text = document.createElement("b")
+                    text.innerHTML = "M"
+                    text.style.color = "white"
+                    text.style.fontSize = "max(0.6vw, 1.2vh)"
+                    attribute.appendChild(text)
+                    attributesDiv.appendChild(attribute)
+                }
+
+                div.appendChild(img)
+                div.appendChild(attributesDiv)
+                tradePart1Element.appendChild(div)
+        }
+        for (const i in tradePart2) {
+            const div = document.createElement("div")
+            div.className = 'tradePet trade2'
+            div.setAttribute('onclick', 'removePetFromInventory("trade2", ' + i.toString() + ')')
+            div.style.position = "relative";
+            div.style.cursor = "pointer"
+            div.style.display = "flex"
+            div.style.justifyContent = "center"
+            div.style.alignItems = "center"
+            const img = document.createElement("img")
+            img.src = petsDict[tradePart2[i].id].image
+            img.style.height = "max(3.8vw, 7.6vh)"
+            img.style.width = "max(3.8vw, 7.6vh)"
+            div.appendChild(img)
+
+            const attributesDiv = document.createElement("div")
+                attributesDiv.style.padding = "0px"
+                attributesDiv.style.position = "absolute"
+                attributesDiv.style.display = "flex"
+                attributesDiv.style.alignItems = "center"
+                attributesDiv.style.bottom = "4px"
+                attributesDiv.style.left = "4px"
+                attributesDiv.style.gap = "2px"
+
+                var attribute = ""
+
+            if (tradePart2[i]["fly"] == 1) {
+                    attribute = document.createElement("div")
+                    attribute.setAttribute("id", "flyButton")
+                    attribute.style.height = "max(1vw, 2vh)"
+                    attribute.style.width = "max(1vw, 2vh)"
+                    attribute.style.padding = "0px"
+                    attribute.style.borderRadius = "4px"
+                    text = document.createElement("b")
+                    text.innerHTML = "F"
+                    text.style.color = "white"
+                    text.style.fontSize = "max(0.6vw, 1.2vh)"
+                    attribute.appendChild(text)
+                    attributesDiv.appendChild(attribute)
+                }
+
+                if (tradePart2[i]["ride"] == 1) {
+                    attribute = document.createElement("div")
+                    attribute.setAttribute("id", "rideButton")
+                    attribute.style.height = "max(1vw, 2vh)"
+                    attribute.style.width = "max(1vw, 2vh)"
+                    attribute.style.padding = "0px"
+                    attribute.style.borderRadius = "4px"
+                    text = document.createElement("b")
+                    text.innerHTML = "R"
+                    text.style.color = "white"
+                    text.style.fontSize = "max(0.6vw, 1.2vh)"
+                    attribute.appendChild(text)
+                    attributesDiv.appendChild(attribute)
+                }
+
+                if (tradePart2[i]["neon"] == 1) {
+                    attribute = document.createElement("div")
+                    attribute.setAttribute("id", "neonButton")
+                    attribute.style.height = "max(1vw, 2vh)"
+                    attribute.style.width = "max(1vw, 2vh)"
+                    attribute.style.padding = "0px"
+                    attribute.style.borderRadius = "4px"
+                    text = document.createElement("b")
+                    text.innerHTML = "N"
+                    text.style.color = "white"
+                    text.style.fontSize = "max(0.6vw, 1.2vh)"
+                    attribute.appendChild(text)
+                    attributesDiv.appendChild(attribute)
+                }
+
+                if (tradePart2[i]["mega"] == 1) {
+                    attribute = document.createElement("div")
+                    attribute.setAttribute("id", "megaButton")
+                    attribute.style.height = "max(1vw, 2vh)"
+                    attribute.style.width = "max(1vw, 2vh)"
+                    attribute.style.padding = "0px"
+                    attribute.style.borderRadius = "4px"
+                    text = document.createElement("b")
+                    text.innerHTML = "M"
+                    text.style.color = "white"
+                    text.style.fontSize = "max(0.6vw, 1.2vh)"
+                    attribute.appendChild(text)
+                    attributesDiv.appendChild(attribute)
+                }
+
+                div.appendChild(img)
+                div.appendChild(attributesDiv)
+                tradePart2Element.appendChild(div)
+        }
+
+        const addPet = document.createElement("div")
+        addPet.className = 'tradePet trade1'
+        addPet.setAttribute('onclick', 'setAddPetTypeTo("trade1"); openInventory();')
+        addPet.style.position = "relative";
+        addPet.style.display = "flex"
+        addPet.style.justifyContent = "center"
+        addPet.style.alignItems = "center"
+        addPet.style.cursor = "pointer"
+        const petimg = document.createElement("img")
+        petimg.src = "../static/images/misc/add.png"
+        petimg.style.height = "max(3.2vw, 6.4vh)"
+        petimg.style.width = "max(3.2vw, 6.4vh)"
+        addPet.appendChild(petimg)
+        tradePart1Element.appendChild(addPet)
+
+        const addPet2 = document.createElement("div")
+        addPet2.className = 'tradePet trade2'
+        addPet2.setAttribute('onclick', 'setAddPetTypeTo("trade2"); openInventory();')
+        addPet2.style.position = "relative";
+        addPet2.style.display = "flex"
+        addPet2.style.justifyContent = "center"
+        addPet2.style.alignItems = "center"
+        addPet2.style.cursor = "pointer"
+        const petimg2 = document.createElement("img")
+        petimg2.src = "../static/images/misc/add.png"
+        petimg2.style.height = "max(3.2vw, 6.4vh)"
+        petimg2.style.width = "max(3.2vw, 6.4vh)"
+        addPet2.appendChild(petimg2)
+        tradePart2Element.appendChild(addPet2)
+
+
+        trade1 = document.querySelectorAll(".trade1")
+        trade2 = document.querySelectorAll(".trade2")
+
+        for (i = trade1.length; i < 9 || i % 3 !== 0; i++) {
+            const div = document.createElement("div")
+            div.className = 'tradePet trade1'
+            div.setAttribute('onclick', 'openInventory()')
+            tradePart1Element.appendChild(div)
+        }
+
+        for (i = trade2.length; i < 9 || i % 3 !== 0; i++) {
+            const div = document.createElement("div")
+            div.className = 'tradePet trade2'
+            div.setAttribute('onclick', 'openInventory()')
+            tradePart2Element.appendChild(div)
+        }
+
+    }
+
+    showTradePets()
+
+    function removePetFromInventory(type, pet) {
+        if (type == "inventory") {
+            formData = new FormData();
+            formData.append('pet', (pet).toString())
+            formData.append('action', "removePetFromInventory");
+
+            fetch('/api', {
+            method: 'POST',
+            body: formData
+            })
+            .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+            })
+            .then(data => {
+            if (data == "SUCCESS") {
+                const id = userDataDict.inventory[pet].id
+                userDataDict.inventory.splice(pet, 1)
+
+                showInventoryPets()
+                
+                petsAdded -= 1
+                petAdded.style.bottom = "5vh"
+                petAdded.style.backgroundColor = "rgb(255, 0, 0)"
+                petAddedText.innerHTML = "You removed " + (petsDict[id]["name"]).toString() + " from your inventory!"
+                inventoryLength.innerHTML = parseInt(inventoryLength.innerHTML) - 1
+                var oldPetsAdded = petsAdded
+                setTimeout((event) => {
+                    if (oldPetsAdded == petsAdded) {
+                        petAdded.style.bottom = "-10vh"
+                    }
+                }, 1750)
+            }
+            })
+            .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+            });
+        } else if (type == "trade1") {
+            tradePart1.splice(pet, 1)
+            showTradePets()
+            calculateTradeValue()
+        } else if (type == "trade2") {
+            tradePart2.splice(pet, 1)
+            showTradePets()
+            calculateTradeValue()
+        } else if (type == "wishlist") {
+            formData = new FormData();
+            formData.append('pet', (pet).toString())
+            formData.append('action', "removePetFromWishlist");
+
+            fetch('/api', {
+            method: 'POST',
+            body: formData
+            })
+            .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+            })
+            .then(data => {
+            if (data == "SUCCESS") {
+                const id = userDataDict.wishlist[pet].id
+                userDataDict.wishlist.splice(pet, 1)
+
+                showWishlistPets()
+                
+                petsAdded -= 1
+                petAdded.style.bottom = "5vh"
+                petAdded.style.backgroundColor = "rgb(255, 0, 0)"
+                petAddedText.innerHTML = "You removed " + (petsDict[id]["name"]).toString() + " from your wishlist!"
+                var oldPetsAdded = petsAdded
+                setTimeout((event) => {
+                    if (oldPetsAdded == petsAdded) {
+                        petAdded.style.bottom = "-10vh"
+                    }
+                }, 1750)
+            }
+            })
+            .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+            });
+        } else if (type == "listing1") {
+            listingPart1Dict.splice(pet, 1)
+            showUserListings2(currentListing, 1)
+        } else if (type == "listing2") {
+            listingPart2Dict.splice(pet, 1)
+            showUserListings2(currentListing, 1)
+        }
+    }
+
+    function showWishlistPets() {
+        userWishlist.innerHTML = '';
+        if (profileID == userID) {
+            const div = document.createElement("div")
+            div.className = 'userInventoryPetImage'
+            div.setAttribute('onclick', 'openInventory(); setAddPetTypeTo("wishlist")')
+            const img = document.createElement("img")
+            img.src = "../static/images/misc/add.png"
+            img.style.height = "80px"
+            img.style.width = "80px"
+            img.style.filter = "brightness(0.5)"
+            div.appendChild(img)
+            userWishlist.appendChild(div)
+
+            for (const i in userDataDict.wishlist) {
+                const pet = userDataDict.wishlist[i]
+                const div = document.createElement("div")
+                div.className = 'userInventoryPetImage'
+                div.setAttribute('data-id', pet["id"])
+                div.setAttribute('data-petName', petsDict[pet["id"]].name)
+                div.setAttribute('data-name', petsDict[pet["id"]].type)
+                div.setAttribute('data-value', petsDict[pet["id"]].rarity)
+                div.setAttribute('onclick', "removePetFromInventory('wishlist', " + i.toString() + ")")
+
+                const img = document.createElement("img")
+                img.style.height = "90px"
+                img.style.width = "90px"
+                img.setAttribute("onerror", 'handleImageError(error)')
+                img.src = petsDict[pet["id"]].image
+
+                const attributesDiv = document.createElement("div")
+                attributesDiv.style.padding = "0px"
+                attributesDiv.style.position = "absolute"
+                attributesDiv.style.display = "flex"
+                attributesDiv.style.alignItems = "center"
+                attributesDiv.style.bottom = "8px"
+                attributesDiv.style.left = "8px"
+                attributesDiv.style.gap = "2px"
+
+                var attribute = ""
+
+                if (userDataDict.wishlist[i]["fly"] == 1) {
+                    attribute = document.createElement("div")
+                    attribute.setAttribute("id", "flyButton")
+                    attribute.style.height = "20px"
+                    attribute.style.width = "20px"
+                    attribute.style.padding = "0px"
+                    attribute.style.borderRadius = "5px"
+                    text = document.createElement("b")
+                    text.innerHTML = "F"
+                    text.style.color = "white"
+                    text.style.fontSize = "12px"
+                    attribute.appendChild(text)
+                    attributesDiv.appendChild(attribute)
+                }
+
+                if (userDataDict.wishlist[i]["ride"] == 1) {
+                    attribute = document.createElement("div")
+                    attribute.setAttribute("id", "rideButton")
+                    attribute.style.height = "20px"
+                    attribute.style.width = "20px"
+                    attribute.style.padding = "0px"
+                    attribute.style.borderRadius = "5px"
+                    text = document.createElement("b")
+                    text.innerHTML = "R"
+                    text.style.color = "white"
+                    text.style.fontSize = "12px"
+                    attribute.appendChild(text)
+                    attributesDiv.appendChild(attribute)
+                }
+
+                if (userDataDict.wishlist[i]["neon"] == 1) {
+                    attribute = document.createElement("div")
+                    attribute.setAttribute("id", "neonButton")
+                    attribute.style.height = "20px"
+                    attribute.style.width = "20px"
+                    attribute.style.padding = "0px"
+                    attribute.style.borderRadius = "5px"
+                    text = document.createElement("b")
+                    text.innerHTML = "N"
+                    text.style.color = "white"
+                    text.style.fontSize = "12px"
+                    attribute.appendChild(text)
+                    attributesDiv.appendChild(attribute)
+                }
+
+                if (userDataDict.wishlist[i]["mega"] == 1) {
+                    attribute = document.createElement("div")
+                    attribute.setAttribute("id", "megaButton")
+                    attribute.style.height = "20px"
+                    attribute.style.width = "20px"
+                    attribute.style.padding = "0px"
+                    attribute.style.borderRadius = "5px"
+                    text = document.createElement("b")
+                    text.innerHTML = "M"
+                    text.style.color = "white"
+                    text.style.fontSize = "12px"
+                    attribute.appendChild(text)
+                    attributesDiv.appendChild(attribute)
+                }
+
+                div.appendChild(img)
+                div.appendChild(attributesDiv)
+                userWishlist.append(div)
+            }
+        } else {
+            for (const i in profileDataDict.wishlist) {
+                const pet = profileDataDict.wishlist[i]
+                const div = document.createElement("div")
+                div.className = 'userInventoryPetImage'
+                div.setAttribute('data-id', pet["id"])
+                div.setAttribute('data-petName', petsDict[pet["id"]].name)
+                div.setAttribute('data-name', petsDict[pet["id"]].type)
+                div.setAttribute('data-value', petsDict[pet["id"]].rarity)
+
+                const img = document.createElement("img")
+                img.style.height = "90px"
+                img.style.width = "90px"
+                img.setAttribute("onerror", 'handleImageError(error)')
+                img.src = petsDict[pet["id"]].image
+
+                div.appendChild(img)
+                userWishlist.append(div)
+            } 
+            if (userWishlist.childElementCount == 0) {
+                userWishlist.innerHTML = "<p style='margin:0px;position:absolute;transform:translate(-50%, -50%);left:50%;top:300%;font-size:25px;text-align:center;margin-top:50px;'>This user has not put anything in their wishlist</p>"
+            }   
+        }
+    }
+
+    showWishlistPets()
+
+    function sendFriendRequest(ID) {
+        formData = new FormData();
+        formData.append('ID', (ID).toString())
+        formData.append('action', "sendFriendRequest");
+
+        fetch('/api', {
+        method: 'POST',
+        body: formData
+        })
+        .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+        })
+        .then(data => {
+        if (data == "SUCCESS") {
+            if (friendButton !== undefined) {
+                friendButton.disabled = "true"
+                if (friendButton.innerText == "Add as friend") {
+                    friendButton.innerText = "You are now friends!"
+                } else {
+                    friendButton.innerText = "Friend request sent!"
+                }
+            }
+            displayMessage("Friend request sent to " + profileDataDict["username"] + "!")
+        }
+        })
+        .catch(error => {
+        console.error('There was a problem with the fetch operation:', error);
+        });
+    }
+
+    function removeFriend(ID) {
+        formData = new FormData();
+        formData.append('ID', (ID).toString())
+        formData.append('action', "removeFriend");
+
+        fetch('/api', {
+        method: 'POST',
+        body: formData
+        })
+        .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+        })
+        .then(data => {
+        if (data == "SUCCESS") {
+            if (friendButton !== undefined) {
+                friendButton.disabled = "true"
+                friendButton.innerText = "Friend removed!"
+            }
+            displayMessage("You removed " + profileDataDict["username"] + " as a friend!")
+        }
+        })
+        .catch(error => {
+        console.error('There was a problem with the fetch operation:', error);
+        });
+    }
+
+
+    function showInventoryPets() {
+        userInventory.innerHTML = '';
+        if (profileID == userID) {
+            const div = document.createElement("div")
+            div.className = 'userInventoryPetImage'
+            div.setAttribute('onclick', 'openInventory(); setAddPetTypeTo("inventory")')
+            const img = document.createElement("img")
+            img.src = "../static/images/misc/add.png"
+            img.style.height = "80px"
+            img.style.width = "80px"
+            img.style.filter = "brightness(0.5)"
+            div.appendChild(img)
+            userInventory.appendChild(div)
+
+            for (const i in userDataDict.inventory) {
+                const pet = userDataDict.inventory[i]
+                const div = document.createElement("div")
+                div.className = 'userInventoryPetImage'
+                div.setAttribute('data-id', pet["id"])
+                div.setAttribute('data-petName', petsDict[pet["id"]].name)
+                div.setAttribute('data-name', petsDict[pet["id"]].type)
+                div.setAttribute('data-value', petsDict[pet["id"]].rarity)
+                div.setAttribute('onclick', "removePetFromInventory('inventory', " + i.toString() + ")")
+
+                const img = document.createElement("img")
+                img.style.height = "90px"
+                img.style.width = "90px"
+                img.setAttribute("onerror", 'handleImageError(error)')
+                img.src = petsDict[pet["id"]].image
+
+                const attributesDiv = document.createElement("div")
+                attributesDiv.style.padding = "0px"
+                attributesDiv.style.position = "absolute"
+                attributesDiv.style.display = "flex"
+                attributesDiv.style.alignItems = "center"
+                attributesDiv.style.bottom = "8px"
+                attributesDiv.style.left = "8px"
+                attributesDiv.style.gap = "2px"
+
+                var attribute = ""
+
+                if (userDataDict.inventory[i]["fly"] == 1) {
+                    attribute = document.createElement("div")
+                    attribute.setAttribute("id", "flyButton")
+                    attribute.style.height = "20px"
+                    attribute.style.width = "20px"
+                    attribute.style.padding = "0px"
+                    attribute.style.borderRadius = "5px"
+                    text = document.createElement("b")
+                    text.innerHTML = "F"
+                    text.style.color = "white"
+                    text.style.fontSize = "12px"
+                    attribute.appendChild(text)
+                    attributesDiv.appendChild(attribute)
+                }
+
+                if (userDataDict.inventory[i]["ride"] == 1) {
+                    attribute = document.createElement("div")
+                    attribute.setAttribute("id", "rideButton")
+                    attribute.style.height = "20px"
+                    attribute.style.width = "20px"
+                    attribute.style.padding = "0px"
+                    attribute.style.borderRadius = "5px"
+                    text = document.createElement("b")
+                    text.innerHTML = "R"
+                    text.style.color = "white"
+                    text.style.fontSize = "12px"
+                    attribute.appendChild(text)
+                    attributesDiv.appendChild(attribute)
+                }
+
+                if (userDataDict.inventory[i]["neon"] == 1) {
+                    attribute = document.createElement("div")
+                    attribute.setAttribute("id", "neonButton")
+                    attribute.style.height = "20px"
+                    attribute.style.width = "20px"
+                    attribute.style.padding = "0px"
+                    attribute.style.borderRadius = "5px"
+                    text = document.createElement("b")
+                    text.innerHTML = "N"
+                    text.style.color = "white"
+                    text.style.fontSize = "12px"
+                    attribute.appendChild(text)
+                    attributesDiv.appendChild(attribute)
+                }
+
+                if (userDataDict.inventory[i]["mega"] == 1) {
+                    attribute = document.createElement("div")
+                    attribute.setAttribute("id", "megaButton")
+                    attribute.style.height = "20px"
+                    attribute.style.width = "20px"
+                    attribute.style.padding = "0px"
+                    attribute.style.borderRadius = "5px"
+                    text = document.createElement("b")
+                    text.innerHTML = "M"
+                    text.style.color = "white"
+                    text.style.fontSize = "12px"
+                    attribute.appendChild(text)
+                    attributesDiv.appendChild(attribute)
+                }
+
+                div.appendChild(img)
+                div.appendChild(attributesDiv)
+                userInventory.append(div)
+            }
+        } else {
+            for (const i in profileDataDict.inventory) {
+                const pet = profileDataDict.inventory[i]
+                const div = document.createElement("div")
+                div.className = 'userInventoryPetImage'
+                div.setAttribute('data-id', pet["id"])
+                div.setAttribute('data-petName', petsDict[pet["id"]].name)
+                div.setAttribute('data-name', petsDict[pet["id"]].type)
+                div.setAttribute('data-value', petsDict[pet["id"]].rarity)
+
+                const img = document.createElement("img")
+                img.style.height = "90px"
+                img.style.width = "90px"
+                img.setAttribute("onerror", 'handleImageError(error)')
+                img.src = petsDict[pet["id"]].image
+
+                div.appendChild(img)
+                userInventory.append(div)
+            }
+            if (userInventory.childElementCount == 0) {
+                userInventory.innerHTML = "<p style='margin:0px;position:absolute;transform:translate(-50%, -50%);left:50%;top:300%;font-size:25px;text-align:center;margin-top:50px;'>This user has not put anything in their inventory</p>"
+            }  
+        }
+    }
+
+    function createListingPetDiv(counter1, counter2, tradePart) {
+        const petDiv = document.createElement("div")
+        petDiv.className = "petDiv"
+        const img = document.createElement("img")
+        img.src = petsDict[profileListings[counter1.toString()]["offer"][tradePart][counter2.toString()]["id"]]["image"]
+        img.style.maxWidth = "25px"
+        img.style.maxHeight = "25px"
+        petDiv.appendChild(img)
+
+        const attributeDiv = document.createElement("div")
+        attributeDiv.className = "attributeDiv"
+
+        if (profileListings[counter1.toString()]["offer"][tradePart][counter2.toString()]["fly"] == "1") {
+            const flyDiv = document.createElement("div")
+            flyDiv.className = "listingPetAttribute"
+            flyDiv.style.background = "linear-gradient(135deg, rgb(142, 202, 232) 0%, rgb(47, 152, 204) 50%, rgb(0, 134, 200) 100%)"
+            const txt1 = document.createElement("b")
+            txt1.innerText = "F"
+            flyDiv.appendChild(txt1)
+            attributeDiv.appendChild(flyDiv)
+        }
+
+        if (profileListings[counter1.toString()]["offer"][tradePart][counter2.toString()]["ride"] == "1") {
+            const rideDiv = document.createElement("div")
+            rideDiv.className = "listingPetAttribute"
+            rideDiv.style.background = "linear-gradient(135deg, rgb(255, 197, 220) 0%, rgb(237, 44, 121) 50%, rgb(255, 0, 101) 100%)"
+            const txt2 = document.createElement("b")
+            txt2.innerText = "R"
+            rideDiv.appendChild(txt2)
+            attributeDiv.appendChild(rideDiv)
+        }
+
+        if (profileListings[counter1.toString()]["offer"][tradePart][counter2.toString()]["neon"] == "1") {
+            const neonDiv = document.createElement("div")
+            neonDiv.className = "listingPetAttribute"
+            neonDiv.style.background = "linear-gradient(135deg, rgb(193, 255, 110) 0%, rgb(140, 198, 63) 50%, rgb(19, 114, 11) 100%)"
+            const txt3 = document.createElement("b")
+            txt3.innerText = "N"
+            neonDiv.appendChild(txt3)
+            attributeDiv.appendChild(neonDiv)
+        }
+
+        if (profileListings[counter1.toString()]["offer"][tradePart][counter2.toString()]["mega"] == "1") {
+            const megaDiv = document.createElement("div")
+            megaDiv.className = "listingPetAttribute"
+            megaDiv.style.background = "linear-gradient(135deg, rgb(187, 80, 253) 0%, rgb(69, 3, 198) 50%, rgb(81, 28, 182) 100%)"
+            const txt4 = document.createElement("b")
+            txt4.innerText = "M"
+            megaDiv.appendChild(txt4)
+            attributeDiv.appendChild(megaDiv)
+        }
+
+        petDiv.appendChild(attributeDiv)
+
+        return petDiv
+    }
+
+    function showUserListings() {
+        userListings.innerHTML = ""
+        for (const i in profileListings) {
+            const div = document.createElement("div")
+            div.className = "userListingsListing"
+            div.style.display = "flex"
+            div.style.flexDirection = "column"
+            div.style.justifyContent = "space-between"
+
+            const div2 = document.createElement("div")
+            div2.style.display = "flex"
+            div2.style.justifyContent = "space-between"
+            div2.style.alignItems = "center"
+
+            const txt1 = document.createElement("b")
+            txt1.innerText = "Your Offer"
+            txt1.style.color = "red"
+            txt1.style.fontSize = "10px"
+
+            const txt2 = document.createElement("b")
+            var text = calculateTradeValueWithInput(profileListings[i]["offer"]["give"], profileListings[i]["offer"]["take"])
+            if (parseFloat(text) <= 0) {
+                txt2.style.color = "black"
+                text = (Math.abs(parseFloat(text))).toString()
+            } else {
+                txt2.style.color = "red"
+            }
+            txt2.innerText = text
+            txt2.style.fontSize = "25px"
+
+            const txt3 = document.createElement("b")
+            txt3.innerText = "Their Offer"
+            txt3.style.fontSize = "10px"
+
+            div2.appendChild(txt1)
+            div2.appendChild(txt2)
+            div2.appendChild(txt3)
+
+            const div3 = document.createElement("div")
+            div3.className = "listingInfo"
+
+            const div4 = document.createElement("div")
+
+            div4.className = "Grid3x3Listing"
+
+            var counter = 0
+            for (const j in profileListings[i]["offer"]["give"]) {
+                if (j > 7) {
+                    if (profileListings[i]["offer"]["give"].length - 8 > 1) {
+                        counter += 1
+                        const petDiv = document.createElement("div")
+                        petDiv.className = "petDiv"
+                        const txt4 = document.createElement("b")
+                        txt4.innerText = "+" + (profileListings[i]["offer"]["give"].length - 8).toString()
+                        txt4.style.fontSize = (25 / ("+" + (profileListings[i]["offer"]["give"].length - 8).toString()).length).toString() + "px"
+                        petDiv.appendChild(txt4)
+                        div4.appendChild(petDiv)
+                    } else {
+                        counter += 1
+                        div4.appendChild(createListingPetDiv(i, j, "give"))
+                    }
+                    break
+                } else {
+                    counter += 1
+                    div4.appendChild(createListingPetDiv(i, j, "give"))
+                }
+            }
+        
+            while (counter < 9) {
+                const petDiv = document.createElement("div")
+                petDiv.className = "petDiv"
+                div4.appendChild(petDiv)
+                counter += 1
+            }
+
+            const div5 = document.createElement("div")
+            div5.style.height = "100%"
+            div5.style.width = "2px"
+            div5.style.backgroundColor = "black"
+
+            const div6 = document.createElement("div")
+            div6.className = "Grid3x3Listing"
+
+            counter = 0
+            for (const j in profileListings[i]["offer"]["take"]) {
+                if (j > 7) {
+                    if (profileListings[i]["offer"]["take"].length - 8 > 1) {
+                        counter += 1
+                        const petDiv = document.createElement("div")
+                        petDiv.className = "petDiv"
+                        const txt4 = document.createElement("b")
+                        txt4.innerText = "+" + (profileListings[i]["offer"]["take"].length - 8).toString()
+                        txt4.style.fontSize = (25 / ("+" + (profileListings[i]["offer"]["take"].length - 8).toString()).length).toString() + "px"
+                        petDiv.appendChild(txt4)
+                        div4.appendChild(petDiv)
+                    } else {
+                        counter += 1
+                        div6.appendChild(createListingPetDiv(i, j, "take"))
+                    }
+                    break
+                } else {
+                    counter += 1
+                    div6.appendChild(createListingPetDiv(i, j, "take"))
+
+                }
+            }
+
+            while (counter < 9) {
+                const petDiv = document.createElement("div")
+                petDiv.className = "petDiv"
+                div6.appendChild(petDiv)
+                counter += 1
+            }
+
+
+
+            div3.appendChild(div4)
+            div3.appendChild(div5)
+            div3.appendChild(div6)
+
+
+
+            div.appendChild(div2)
+            div.appendChild(div3)
+            if (profileID == userID) {
+                div.setAttribute("onclick", "setTradeTo(" + i.toString() + "); openListingInterface(); updateViewsOnTrade(" + i.toString() + ")")
+            } else if ( loggedIn == "True" ) {
+                div.setAttribute("onclick", "openListingInterface2(" + i.toString() + ")")
+            }
+            userListings.appendChild(div)
+        }
+        if (userListings.childElementCount == 0) {
+            if (userID == profileID) {
+                userListings.innerHTML = "<p style='margin:0px;position:absolute;transform:translate(-50%, -50%);left:50%;top:300%;font-size:25px;text-align:center;margin-top:50px;'>Seems like you have no active listings. Create one by clicking <a style='color:red;cursor:pointer;text-decoration:underline' onclick='setTradeTo(-1);openListingInterface()'>here</a>.</p>"
+            } else {
+                userListings.innerHTML = "<p style='margin:0px;position:absolute;transform:translate(-50%, -50%);left:50%;top:300%;font-size:25px;text-align:center;margin-top:50px;'>This user has no listings right now</p>"
+            }
+            
+        }
+    }
+
+    function setTradeTo(index) {
+        if (index == -1) {
+            modifyTrade = -1
+        } else {
+            modifyTrade = index
+            tradePart1 = JSON.parse(JSON.stringify(profileListings[index]["offer"]["give"]))
+            tradePart2 = JSON.parse(JSON.stringify(profileListings[index]["offer"]["take"]))
+
+        }
+        showTradePets()
+
+    }
+
+    function removeListing() {
+        formData = new FormData();
+        formData.append('index', (modifyTrade).toString())
+        formData.append('action', "removeListing");
+
+        fetch('/api', {
+        method: 'POST',
+        body: formData
+        })
+        .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+        })
+        .then(data => {
+        if (data == "SUCCESS") {
+            profileListings.splice(modifyTrade, 1)
+            listingAmount.innerText = (parseInt(listingAmount.innerText) - 1).toString()
+            showUserListings()
+            closeListingInterface()
+            displayError("You remove a listing!")
+        }
+        })
+        .catch(error => {
+        console.error('There was a problem with the fetch operation:', error);
+        });
+
+
+        
+    }
+
+    function showUserListings2(listing, modified) {
+        currentListing = listing
+        if (modified == 0) {
+            listingPart1Dict = JSON.parse(JSON.stringify(profileListings[parseInt(listing)]["offer"]["give"]))
+            listingPart2Dict = JSON.parse(JSON.stringify(profileListings[parseInt(listing)]["offer"]["take"]))
+        } else if (modified == "left") {
+            listingPart1Dict = JSON.parse(JSON.stringify(profileListings[parseInt(listing)]["offer"]["give"]))
+        } else if (modified == "right") {
+            listingPart2Dict = JSON.parse(JSON.stringify(profileListings[parseInt(listing)]["offer"]["take"]))
+        }
+
+        listingPart1.innerHTML = ""
+        listingPart2.innerHTML = ""
+        owner.innerText = profileListings[listing]["ownerUsername"]
+
+        var gridSize = 0
+        if ( mYO == 1 ) {
+            gridSize = Math.ceil(Math.sqrt(listingPart1Dict.length + 1))
+        } else {
+            gridSize = Math.ceil(Math.sqrt(listingPart1Dict.length))
+        }
+        listingPart1.style.gridTemplateColumns = "repeat(" + (gridSize).toString() + ", 1fr)"
+        for (const i in listingPart1Dict) {
+            const div = document.createElement("div")
+            div.style.width = "max(" + (15 / gridSize).toString() + "vw, " + (30 / gridSize).toString() + "vh)"
+            div.style.height = "max(" + (15 / gridSize).toString() + "vw, " + (30 / gridSize).toString() + "vh)"
+            div.style.display = "flex"
+            div.style.justifyContent = "center"
+            div.style.alignItems = "center"
+            div.style.position = "relative"
+            const img = document.createElement("img")
+            img.src = petsDict[listingPart1Dict[i]["id"]]["image"]
+            img.style.width = "90%"
+            img.style.height = "90%"
+            img.style.minWidth = "max(" + (12 / gridSize).toString() + "vw, " + (24 / gridSize).toString() + "vh)"
+            img.style.minHeight = "max(" + (12 / gridSize).toString() + "vw, " + (24 / gridSize).toString() + "vh)"
+            img.style.maxWidth = "max(" + (15 / gridSize).toString() + "vw, " + (30 / gridSize).toString() + "vh)"
+            img.style.maxHeight = "max(" + (15 / gridSize).toString() + "vw, " + (30 / gridSize).toString() + "vh)"
+            div.appendChild(img)
+
+            if ( mYO == 1) {
+                div.setAttribute("onclick", "removePetFromInventory('listing1', " + i.toString() + ")")
+            }
+
+            const attributeDiv = document.createElement("div")
+            attributeDiv.style.position = "absolute"
+            attributeDiv.style.left = "max(" + (2 / gridSize).toString() + "vw, " + (4 / gridSize).toString() + "vh)"
+            attributeDiv.style.bottom = "max(" + (2 / gridSize).toString() + "vw, " + (4 / gridSize).toString() + "vh)"
+            attributeDiv.style.display = "flex"
+            attributeDiv.style.flexDirection = "row"
+            attributeDiv.style.gap = "max(" + (0.5 / gridSize).toString() + "vw, " + (1 / gridSize).toString() + "vh)"
+
+            var attribute = ""
+            var attributeText = ""
+            if (listingPart1Dict[i]["fly"] == "1") {
+                attribute = document.createElement("div")
+                attribute.style.width = "max(" + (3 / gridSize).toString() + "vw, " + (6 / gridSize).toString() + "vh)"
+                attribute.style.height = "max(" + (3 / gridSize).toString() + "vw, " + (6 / gridSize).toString() + "vh)"
+                attribute.style.background = "linear-gradient(135deg, rgb(142, 202, 232) 0%, rgb(47, 152, 204) 50%, rgb(0, 134, 200) 100%)"
+                attribute.style.borderRadius = "max(" + (1 / gridSize).toString() + "vw, " + (2 / gridSize).toString() + "vh)"
+                attribute.style.display = "flex"
+                attribute.style.alignItems = "center"
+                attribute.style.justifyContent = "center"
+                attributeText = document.createElement("b")
+                attributeText.style.color = "white"
+                attributeText.innerText = "F"
+                attributeText.style.fontSize = "max(" + (1.5 / gridSize).toString() + "vw, " + (3 / gridSize).toString() + "vh)"
+
+                attribute.appendChild(attributeText)
+                attributeDiv.appendChild(attribute)
+            }
+
+            if (listingPart1Dict[i]["ride"] == "1") {
+                attribute = document.createElement("div")
+                attribute.style.width = "max(" + (3 / gridSize).toString() + "vw, " + (6 / gridSize).toString() + "vh)"
+                attribute.style.height = "max(" + (3 / gridSize).toString() + "vw, " + (6 / gridSize).toString() + "vh)"
+                attribute.style.background = "linear-gradient(135deg, rgb(255, 197, 220) 0%, rgb(237, 44, 121) 50%, rgb(255, 0, 101) 100%)"
+                attribute.style.borderRadius = "max(" + (1 / gridSize).toString() + "vw, " + (2 / gridSize).toString() + "vh)"
+                attribute.style.display = "flex"
+                attribute.style.alignItems = "center"
+                attribute.style.justifyContent = "center"
+                attributeText = document.createElement("b")
+                attributeText.style.color = "white"
+                attributeText.innerText = "R"
+                attributeText.style.fontSize = "max(" + (1.5 / gridSize).toString() + "vw, " + (3 / gridSize).toString() + "vh)"
+
+                attribute.appendChild(attributeText)
+                attributeDiv.appendChild(attribute)
+            }
+
+            if (listingPart1Dict[i]["neon"] == "1") {
+                attribute = document.createElement("div")
+                attribute.style.width = "max(" + (3 / gridSize).toString() + "vw, " + (6 / gridSize).toString() + "vh)"
+                attribute.style.height = "max(" + (3 / gridSize).toString() + "vw, " + (6 / gridSize).toString() + "vh)"
+                attribute.style.background = "linear-gradient(135deg, rgb(193, 255, 110) 0%, rgb(140, 198, 63) 50%, rgb(19, 114, 11) 100%)"
+                attribute.style.borderRadius = "max(" + (1 / gridSize).toString() + "vw, " + (2 / gridSize).toString() + "vh)"
+                attribute.style.display = "flex"
+                attribute.style.alignItems = "center"
+                attribute.style.justifyContent = "center"
+                attributeText = document.createElement("b")
+                attributeText.style.color = "white"
+                attributeText.innerText = "N"
+                attributeText.style.fontSize = "max(" + (1.5 / gridSize).toString() + "vw, " + (3 / gridSize).toString() + "vh)"
+
+                attribute.appendChild(attributeText)
+                attributeDiv.appendChild(attribute)
+            }
+
+            if (listingPart1Dict[i]["mega"] == "1") {
+                attribute = document.createElement("div")
+                attribute.style.width = "max(" + (3 / gridSize).toString() + "vw, " + (6 / gridSize).toString() + "vh)"
+                attribute.style.height = "max(" + (3 / gridSize).toString() + "vw, " + (6 / gridSize).toString() + "vh)"
+                attribute.style.background = "linear-gradient(135deg, rgb(187, 80, 253) 0%, rgb(69, 3, 198) 50%, rgb(81, 28, 182) 100%)"
+                attribute.style.borderRadius = "max(" + (1 / gridSize).toString() + "vw, " + (2 / gridSize).toString() + "vh)"
+                attribute.style.display = "flex"
+                attribute.style.alignItems = "center"
+                attribute.style.justifyContent = "center"
+                attributeText = document.createElement("b")
+                attributeText.style.color = "white"
+                attributeText.innerText = "M"
+                attributeText.style.fontSize = "max(" + (1.5 / gridSize).toString() + "vw, " + (3 / gridSize).toString() + "vh)"
+
+                attribute.appendChild(attributeText)
+                attributeDiv.appendChild(attribute)
+            }
+
+
+
+            div.appendChild(attributeDiv)
+            listingPart1.appendChild(div)
+        }
+
+        if ( mYO == 1 ) {
+            const div = document.createElement("div")
+            div.style.width = "max(" + (15 / gridSize).toString() + "vw, " + (30 / gridSize).toString() + "vh)"
+            div.style.height = "max(" + (15 / gridSize).toString() + "vw, " + (30 / gridSize).toString() + "vh)"
+            div.style.display = "flex"
+            div.style.justifyContent = "center"
+            div.style.alignItems = "center"
+            div.style.position = "relative"
+            const img = document.createElement("img")
+            img.src = "../static/images/misc/add.png"
+            img.style.width = "90%"
+            img.style.height = "90%"
+            img.style.minWidth = "max(" + (12 / gridSize).toString() + "vw, " + (24 / gridSize).toString() + "vh)"
+            img.style.minHeight = "max(" + (12 / gridSize).toString() + "vw, " + (24 / gridSize).toString() + "vh)"
+            img.style.maxWidth = "max(" + (15 / gridSize).toString() + "vw, " + (30 / gridSize).toString() + "vh)"
+            img.style.maxHeight = "max(" + (15 / gridSize).toString() + "vw, " + (30 / gridSize).toString() + "vh)"
+            div.appendChild(img)
+            div.setAttribute("onclick", "setAddPetTypeTo('listing1'); openInventory()")
+            listingPart1.appendChild(div)
+        }
+
+        if ( mTO == 1 ) {
+            gridSize = Math.ceil(Math.sqrt(listingPart2Dict.length + 1))
+        } else {
+            gridSize = Math.ceil(Math.sqrt(listingPart2Dict.length))
+        }
+        listingPart2.style.gridTemplateColumns = "repeat(" + (gridSize).toString() + ", 1fr)"
+        for (const j in listingPart2Dict) {
+            const div = document.createElement("div")
+            div.style.width = "max(" + (15 / gridSize).toString() + "vw, " + (30 / gridSize).toString() + "vh)"
+            div.style.height = "max(" + (15 / gridSize).toString() + "vw, " + (30 / gridSize).toString() + "vh)"
+            div.style.display = "flex"
+            div.style.justifyContent = "center"
+            div.style.alignItems = "center"
+            div.style.position = "relative"
+            const img = document.createElement("img")
+            img.src = petsDict[listingPart2Dict[j]["id"]]["image"]
+            img.style.width = "90%"
+            img.style.height = "90%"
+            img.style.minWidth = "max(" + (12 / gridSize).toString() + "vw, " + (24 / gridSize).toString() + "vh)"
+            img.style.minHeight = "max(" + (12 / gridSize).toString() + "vw, " + (24 / gridSize).toString() + "vh)"
+            img.style.maxWidth = "max(" + (15 / gridSize).toString() + "vw, " + (30 / gridSize).toString() + "vh)"
+            img.style.maxHeight = "max(" + (15 / gridSize).toString() + "vw, " + (30 / gridSize).toString() + "vh)"
+            div.appendChild(img)
+
+            if ( mTO == 1) {
+                div.setAttribute("onclick", "removePetFromInventory('listing2', " + j.toString() + ")")
+            }
+
+            const attributeDiv = document.createElement("div")
+            attributeDiv.style.position = "absolute"
+            attributeDiv.style.left = "max(" + (2 / gridSize).toString() + "vw, " + (4 / gridSize).toString() + "vh)"
+            attributeDiv.style.bottom = "max(" + (2 / gridSize).toString() + "vw, " + (4 / gridSize).toString() + "vh)"
+            attributeDiv.style.display = "flex"
+            attributeDiv.style.flexDirection = "row"
+            attributeDiv.style.gap = "max(" + (0.5 / gridSize).toString() + "vw, " + (1 / gridSize).toString() + "vh)"
+
+            var attribute = ""
+            var attributeText = ""
+            if (listingPart2Dict[j]["fly"] == "1") {
+                attribute = document.createElement("div")
+                attribute.style.width = "max(" + (3 / gridSize).toString() + "vw, " + (6 / gridSize).toString() + "vh)"
+                attribute.style.height = "max(" + (3 / gridSize).toString() + "vw, " + (6 / gridSize).toString() + "vh)"
+                attribute.style.background = "linear-gradient(135deg, rgb(142, 202, 232) 0%, rgb(47, 152, 204) 50%, rgb(0, 134, 200) 100%)"
+                attribute.style.borderRadius = "max(" + (1 / gridSize).toString() + "vw, " + (2 / gridSize).toString() + "vh)"
+                attribute.style.display = "flex"
+                attribute.style.alignItems = "center"
+                attribute.style.justifyContent = "center"
+                attributeText = document.createElement("b")
+                attributeText.style.color = "white"
+                attributeText.innerText = "F"
+                attributeText.style.fontSize = "max(" + (1.5 / gridSize).toString() + "vw, " + (3 / gridSize).toString() + "vh)"
+
+                attribute.appendChild(attributeText)
+                attributeDiv.appendChild(attribute)
+            }
+
+            if (listingPart2Dict[j]["ride"] == "1") {
+                attribute = document.createElement("div")
+                attribute.style.width = "max(" + (3 / gridSize).toString() + "vw, " + (6 / gridSize).toString() + "vh)"
+                attribute.style.height = "max(" + (3 / gridSize).toString() + "vw, " + (6 / gridSize).toString() + "vh)"
+                attribute.style.background = "linear-gradient(135deg, rgb(255, 197, 220) 0%, rgb(237, 44, 121) 50%, rgb(255, 0, 101) 100%)"
+                attribute.style.borderRadius = "max(" + (1 / gridSize).toString() + "vw, " + (2 / gridSize).toString() + "vh)"
+                attribute.style.display = "flex"
+                attribute.style.alignItems = "center"
+                attribute.style.justifyContent = "center"
+                attributeText = document.createElement("b")
+                attributeText.style.color = "white"
+                attributeText.innerText = "R"
+                attributeText.style.fontSize = "max(" + (1.5 / gridSize).toString() + "vw, " + (3 / gridSize).toString() + "vh)"
+
+                attribute.appendChild(attributeText)
+                attributeDiv.appendChild(attribute)
+            }
+
+            if (listingPart2Dict[j]["neon"] == "1") {
+                attribute = document.createElement("div")
+                attribute.style.width = "max(" + (3 / gridSize).toString() + "vw, " + (6 / gridSize).toString() + "vh)"
+                attribute.style.height = "max(" + (3 / gridSize).toString() + "vw, " + (6 / gridSize).toString() + "vh)"
+                attribute.style.background = "linear-gradient(135deg, rgb(193, 255, 110) 0%, rgb(140, 198, 63) 50%, rgb(19, 114, 11) 100%)"
+                attribute.style.borderRadius = "max(" + (1 / gridSize).toString() + "vw, " + (2 / gridSize).toString() + "vh)"
+                attribute.style.display = "flex"
+                attribute.style.alignItems = "center"
+                attribute.style.justifyContent = "center"
+                attributeText = document.createElement("b")
+                attributeText.style.color = "white"
+                attributeText.innerText = "N"
+                attributeText.style.fontSize = "max(" + (1.5 / gridSize).toString() + "vw, " + (3 / gridSize).toString() + "vh)"
+
+                attribute.appendChild(attributeText)
+                attributeDiv.appendChild(attribute)
+            }
+
+            if (listingPart2Dict[j]["mega"] == "1") {
+                attribute = document.createElement("div")
+                attribute.style.width = "max(" + (3 / gridSize).toString() + "vw, " + (6 / gridSize).toString() + "vh)"
+                attribute.style.height = "max(" + (3 / gridSize).toString() + "vw, " + (6 / gridSize).toString() + "vh)"
+                attribute.style.background = "linear-gradient(135deg, rgb(187, 80, 253) 0%, rgb(69, 3, 198) 50%, rgb(81, 28, 182) 100%)"
+                attribute.style.borderRadius = "max(" + (1 / gridSize).toString() + "vw, " + (2 / gridSize).toString() + "vh)"
+                attribute.style.display = "flex"
+                attribute.style.alignItems = "center"
+                attribute.style.justifyContent = "center"
+                attributeText = document.createElement("b")
+                attributeText.style.color = "white"
+                attributeText.innerText = "M"
+                attributeText.style.fontSize = "max(" + (1.5 / gridSize).toString() + "vw, " + (3 / gridSize).toString() + "vh)"
+
+                attribute.appendChild(attributeText)
+                attributeDiv.appendChild(attribute)
+            }
+
+
+
+            div.appendChild(attributeDiv)
+            listingPart2.appendChild(div)
+        }
+
+        if ( mTO == 1 ) {
+            const div = document.createElement("div")
+            div.style.width = "max(" + (15 / gridSize).toString() + "vw, " + (30 / gridSize).toString() + "vh)"
+            div.style.height = "max(" + (15 / gridSize).toString() + "vw, " + (30 / gridSize).toString() + "vh)"
+            div.style.display = "flex"
+            div.style.justifyContent = "center"
+            div.style.alignItems = "center"
+            div.style.position = "relative"
+            const img = document.createElement("img")
+            img.src = "../static/images/misc/add.png"
+            img.style.width = "90%"
+            img.style.height = "90%"
+            img.style.minWidth = "max(" + (12 / gridSize).toString() + "vw, " + (24 / gridSize).toString() + "vh)"
+            img.style.minHeight = "max(" + (12 / gridSize).toString() + "vw, " + (24 / gridSize).toString() + "vh)"
+            img.style.maxWidth = "max(" + (15 / gridSize).toString() + "vw, " + (30 / gridSize).toString() + "vh)"
+            img.style.maxHeight = "max(" + (15 / gridSize).toString() + "vw, " + (30 / gridSize).toString() + "vh)"
+            div.appendChild(img)
+            div.setAttribute("onclick", "setAddPetTypeTo('listing2'); openInventory()")
+            listingPart2.appendChild(div)
+        }
+
+        var original = true
+
+        if (profileListings[parseInt(listing)]["offer"]["give"].length !== listingPart1Dict.length) {
+            original = false
+        }
+
+        if (profileListings[parseInt(listing)]["offer"]["take"].length !== listingPart2Dict.length) {
+            original = false
+        }
+
+        for (const i in profileListings[parseInt(listing)]["offer"]["give"]) {
+            if (profileListings[parseInt(listing)]["offer"]["give"][i]["id"] !== listingPart1Dict[i]["id"]) {
+                original = false
+            }
+            if (profileListings[parseInt(listing)]["offer"]["give"][i]["fly"] !== listingPart1Dict[i]["fly"]) {
+                original = false
+            }
+            if (profileListings[parseInt(listing)]["offer"]["give"][i]["ride"] !== listingPart1Dict[i]["ride"]) {
+                original = false
+            }
+            if (profileListings[parseInt(listing)]["offer"]["give"][i]["regular"] !== listingPart1Dict[i]["regular"]) {
+                original = false
+            }
+            if (profileListings[parseInt(listing)]["offer"]["give"][i]["neon"] !== listingPart1Dict[i]["neon"]) {
+                original = false
+            }
+            if (profileListings[parseInt(listing)]["offer"]["give"][i]["mega"] !== listingPart1Dict[i]["mega"]) {
+                original = false
+            }
+        }
+
+        for (const j in profileListings[parseInt(listing)]["offer"]["take"]) {
+            if (profileListings[parseInt(listing)]["offer"]["take"][j]["id"] !== listingPart2Dict[j]["id"]) {
+                original = false
+            }
+            if (profileListings[parseInt(listing)]["offer"]["take"][j]["fly"] !== listingPart2Dict[j]["fly"]) {
+                original = false
+            }
+            if (profileListings[parseInt(listing)]["offer"]["take"][j]["ride"] !== listingPart2Dict[j]["ride"]) {
+                original = false
+            }
+            if (profileListings[parseInt(listing)]["offer"]["take"][j]["regular"] !== listingPart2Dict[j]["regular"]) {
+                original = false
+            }
+            if (profileListings[parseInt(listing)]["offer"]["take"][j]["neon"] !== listingPart2Dict[j]["neon"]) {
+                original = false
+            }
+            if (profileListings[parseInt(listing)]["offer"]["take"][j]["mega"] !== listingPart2Dict[j]["mega"]) {
+                original = false
+            }
+        }
+
+        if (profileListings[parseInt(listing)]["ownerRobloxUsername"] == "") {
+            listingAcceptButton.setAttribute("onclick","giveImportantMessage('Accept Trade', 'Are you sure you want to accept this trade? They are responsible for contacting you to complete the trade through roblox. They do not have a linked roblox username, so be aware of that in your inbox on roblox.', 'closeListingInterface2()', 'acceptOffer()')")
+            listingCustomOfferButton.setAttribute("onclick","giveImportantMessage('Send Custom Trade', 'Are you sure you want to send a custom offer? They will receive this offer in their inbox. You are both responsible for contacting eachother to complete the trade through roblox. Their roblox username is " + profileListings[parseInt(listing)]["ownerRobloxUsername"] + ".', 'closeListingInterface2()', 'sendCustomOffer()')")
+        } else {
+            listingAcceptButton.setAttribute("onclick","giveImportantMessage('Accept Trade', 'Are you sure you want to accept this trade? You are responsible for contacting the other party to complete the trade after this through roblox. Their username in roblox is " + profileListings[parseInt(listing)]["ownerRobloxUsername"] + ".', 'closeListingInterface2()', 'acceptOffer()')")
+            listingCustomOfferButton.setAttribute("onclick","giveImportantMessage('Send Custom Trade', 'Are you sure you want to send a custom offer? They will receive this offer in their inbox. They are responsible for contacting you to complete the trade through roblox. They do not have a linked roblox username, so be aware of that in your inbox on roblox.', 'closeListingInterface2()', 'sendCustomOffer()')")
+        }
+
+        if ((profileDataDict["blocked"].includes(userID) == true || userDataDict["blocked"].includes(profileID) == true) && original == false) {
+            listingAcceptButton.style.opacity = 0
+            listingAcceptButton.style.bottom = "-1000%"
+            listingCustomOfferButton.style.opacity = 1
+            listingCustomOfferButton.style.bottom = "max(1vw, 2vh)"
+            listingCustomOfferButton.innerText = "You are blocked!"
+            listingCustomOfferButton.disabled = true
+            listingCustomOfferButton.style.cursor = "default"
+            listingCustomOfferButton.style.width = "max(8vw, 16vh)"
+            listingCustomOfferButton.setAttribute("onclick", "")
+        } else if (original == true) {
+            listingAcceptButton.style.opacity = 1
+            listingAcceptButton.style.bottom = "max(1vw, 2vh)"
+            listingCustomOfferButton.style.opacity = 0
+            listingCustomOfferButton.style.bottom = "-1000%"
+        } else {
+            listingAcceptButton.style.opacity = 0
+            listingAcceptButton.style.bottom = "-1000%"
+            listingCustomOfferButton.style.opacity = 1
+            listingCustomOfferButton.style.bottom = "max(1vw, 2vh)"
+        }
+
+        if (profileDataDict["blocked"].includes(userID) == true || userDataDict["blocked"].includes(profileID) == true) {
+            listingAcceptButton.style.cursor = "default"
+            listingAcceptButton.innerText = "You are blocked!"
+            listingAcceptButton.style.width = "max(8vw, 16vh)"
+            listingAcceptButton.disabled = true
+            listingAcceptButton.setAttribute("onclick", "")
+            offerAccepted = true
+        } else if (profileListings[currentListing]["acceptedBy"] !== null) {
+            listingAcceptButton.style.cursor = "default"
+            listingAcceptButton.innerText = "Offer already accepted"
+            listingAcceptButton.style.width = "max(10vw, 20vh)"
+            listingAcceptButton.setAttribute("onclick", "")
+            offerAccepted = true
+        } else {
+            listingAcceptButton.style.cursor = "pointer"
+            listingAcceptButton.innerText = "Accept"
+            listingAcceptButton.style.width = "max(5vw, 10vh)"
+            offerAccepted = false
+        }
+
+
+
+        var txt = calculateTradeValueWithInput(listingPart1Dict, listingPart2Dict)
+
+        if (txt >= 0) {
+            listingValue.style.color = "red"
+        } else {
+            listingValue.style.color = "black"
+            txt = (Math.abs(parseInt(txt))).toString()
+        }
+        listingValue.innerText = txt
+    }
+
+
+    showUserListings()
+
+    function acceptOffer() {
+        if (offerAccepted == false) {
+            formData = new FormData();
+            formData.append('listing', JSON.stringify(currentListing))
+            formData.append('user', profileID)
+            formData.append('action', "acceptOffer");
+
+            fetch('/api', {
+            method: 'POST',
+            body: formData
+            })
+            .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+            })
+            .then(data => {
+            if (data == "SUCCESS") {
+                displayMessage("You accepted the offer!")
+                profileListings[currentListing]["acceptedBy"] = userID
+                closeListingInterface2()
+            } else {
+                displayError(data)
+            }
+            })
+            .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+            });  
+        }
+    }
+
+    function sendCustomOffer() {
+        formData = new FormData();
+        formData.append('trade1', JSON.stringify(listingPart1Dict))
+        formData.append('trade2', JSON.stringify(listingPart2Dict))
+        formData.append('user', profileID)
+        formData.append('action', "sendCustomOffer");
+
+        fetch('/api', {
+        method: 'POST',
+        body: formData
+        })
+        .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+        })
+        .then(data => {
+        if (data == "SUCCESS") {
+            displayMessage("You sent a custom offer!")
+            closeListingInterface2()
+        } else {
+            displayError(data)
+        }
+        })
+        .catch(error => {
+        console.error('There was a problem with the fetch operation:', error);
+        }); 
+    }
+
+
+    function createListing() {
+        formData = new FormData();
+        formData.append('trade1', JSON.stringify(tradePart1))
+        formData.append('trade2', JSON.stringify(tradePart2))
+        formData.append('action', "createListing");
+
+        fetch('/api', {
+        method: 'POST',
+        body: formData
+        })
+        .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+        })
+        .then(data => {
+        if (data == "SUCCESS") {
+            listingAmount.innerText = (parseInt(listingAmount.innerText) + 1).toString()
+            displayMessage("You created a listing!")
+            profileListings.push({
+                "owner":userID,
+                "offer":{
+                    "give":tradePart1,
+                    "take":tradePart2
+                },
+                "completed":false,
+                "acceptedBy":null,
+                "customOffers":{}
+            })
+            showUserListings()
+        } else {
+            displayError(data)
+        }
+        })
+        .catch(error => {
+        console.error('There was a problem with the fetch operation:', error);
+        });  
+    }
+
+    function saveListing() {
+        formData = new FormData();
+        formData.append('trade1', JSON.stringify(tradePart1))
+        formData.append('trade2', JSON.stringify(tradePart2))
+        formData.append('index', JSON.stringify(modifyTrade))
+        formData.append('action', "saveListing");
+
+        fetch('/api', {
+        method: 'POST',
+        body: formData
+        })
+        .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+        })
+        .then(data => {
+        if (data == "SUCCESS") {
+            displayMessage("The listing has been updated!")
+            profileListings[modifyTrade]["offer"]["give"] = JSON.parse(JSON.stringify(tradePart1))
+            profileListings[modifyTrade]["offer"]["take"] = JSON.parse(JSON.stringify(tradePart2))
+            showUserListings()
+        } else {
+            displayError(data)
+        }
+        })
+        .catch(error => {
+        console.error('There was a problem with the fetch operation:', error);
+        });  
+    }
+
+    function displayError(error) {
+        errorDiv.style.bottom = "10%"
+        errorText.innerText = error
+        setTimeout((event) => {
+            errorDiv.style.bottom = "-100%"
+        }, 2000)
+    }
+
+    function displayMessage(message) {
+        messageDiv.style.bottom = "10%"
+        messageText.innerText = message
+        setTimeout((event) => {
+            messageDiv.style.bottom = "-100%"
+        }, 2000)
+    }
+
+    function calculateTradeValue() {
+        var totalValue = 0
+        var value = ""
+        var trade1Value = 0
+        var trade2Value = 0
+        for (const i in tradePart1) {
+            value = ""
+            if (tradePart1[i].regular == "1") {
+                value += "rvalue"
+            } else if (tradePart1[i].neon == "1") {
+                value += "nvalue"
+            } else {
+                value += "mvalue"
+            }
+            if (tradePart1[i].fly == "1" && tradePart1[i].ride == "1") {
+                value += " - fly&ride"
+            } else if (tradePart1[i].fly == "1") {
+                value += " - fly"
+            } else if (tradePart1[i].ride == "1") {
+                value += " - ride"
+            }
+            trade1Value += petsDict[tradePart1[i].id][value]
+        }
+        for (const i in tradePart2) {
+            value = ""
+            if (tradePart2[i].regular == "1") {
+                value += "rvalue"
+            } else if (tradePart2[i].neon == "1") {
+                value += "nvalue"
+            } else {
+                value += "mvalue"
+            }
+            if (tradePart2[i].fly == "1" && tradePart2[i].ride == "1") {
+                value += " - fly&ride"
+            } else if (tradePart2[i].fly == "1") {
+                value += " - fly"
+            } else if (tradePart2[i].ride == "1") {
+                value += " - ride"
+            }
+            trade2Value += petsDict[tradePart2[i].id][value]
+        }
+
+        const oldTrade1Value = trade1Value
+        const oldTrade2Value = trade2Value
+
+        if (trade2Value !== 0 && trade1Value !== 0) {
+            tradeBar.style.width = ((100 / ((trade1Value / trade2Value) + 1)) * (trade1Value / trade2Value)).toString() + "%"
+        } else {
+            tradeBar.style.width = "0%"
+        }
+
+        if (calculateWithValue == "frost") {
+            trade1Value /= 105
+            trade2Value /= 105
+        }
+
+        trade1Value = trade1Value.toFixed(2)
+        trade2Value = trade2Value.toFixed(2)
+
+        if (oldTrade1Value > 0 && trade1Value == 0) {
+            trade1Value = 0.01
+        }
+        if (oldTrade2Value > 0 && trade2Value == 0) {
+            trade2Value = 0.01
+        }
+
+        yourScore.innerText = trade1Value
+        yourScore2.innerText = trade1Value
+        theirScore.innerText = trade2Value
+        theirScore2.innerText = trade2Value
+
+        const finalValue = (trade1Value - trade2Value).toFixed(2)
+        if (finalValue > 0) {
+            tradeArrow.style.transform = "rotate(180deg)"
+            tradeValue.innerText = finalValue.toString()
+            tradeValue.style.color = "red";
+        } else {
+            tradeArrow.style.transform = "rotate(0deg)"
+            tradeValue.innerText = Math.abs(finalValue).toString()
+            tradeValue.style.color = "black";
+        }
+
+        var rect = tradeArrow.getBoundingClientRect()
+        var rect2 = listingInterface.getBoundingClientRect()
+        var posY = rect.top - rect2.top
+        var posX = rect.left - rect2.left
+
+        posY += tradeArrow.offsetHeight / 2
+        posX += tradeArrow.offsetWidth / 2
+
+        tradeValue.style.top = posY + "px"
+        tradeValue.style.left = posX + "px"
+
+        tradeValue.style.fontSize = (150 / finalValue.length).toString() + "px"
+
+        if (finalValue == 0.00) {
+            tradeValue.style.opacity = 0
+            tradeArrow.style.opacity = 0
+
+        } else {
+            tradeValue.style.opacity = 1
+            tradeArrow.style.opacity = 1
+        }
+    }
+
+    function calculateTradeValueWithInput(trade1, trade2) {
+        var totalValue = 0
+        var value = ""
+        var trade1Value = 0
+        var trade2Value = 0
+        for (const i in trade1) {
+            value = ""
+            if (trade1[i].regular == "1") {
+                value += "rvalue"
+            } else if (trade1[i].neon == "1") {
+                value += "nvalue"
+            } else {
+                value += "mvalue"
+            }
+            if (trade1[i].fly == "1" && trade1[i].ride == "1") {
+                value += " - fly&ride"
+            } else if (trade1[i].fly == "1") {
+                value += " - fly"
+            } else if (trade1[i].ride == "1") {
+                value += " - ride"
+            }
+            trade1Value += petsDict[trade1[i].id][value]
+        }
+        for (const i in trade2) {
+            value = ""
+            if (trade2[i].regular == "1") {
+                value += "rvalue"
+            } else if (trade2[i].neon == "1") {
+                value += "nvalue"
+            } else {
+                value += "mvalue"
+            }
+            if (trade2[i].fly == "1" && trade2[i].ride == "1") {
+                value += " - fly&ride"
+            } else if (trade2[i].fly == "1") {
+                value += " - fly"
+            } else if (trade2[i].ride == "1") {
+                value += " - ride"
+            }
+            trade2Value += petsDict[trade2[i].id][value]
+        }
+
+        const oldTrade1Value = trade1Value
+        const oldTrade2Value = trade2Value
+
+        if (calculateWithValue == "frost") {
+            trade1Value /= 105
+            trade2Value /= 105
+        }
+
+        trade1Value = trade1Value.toFixed(2)
+        trade2Value = trade2Value.toFixed(2)
+
+        if (oldTrade1Value > 0 && trade1Value == 0) {
+            trade1Value = 0.01
+        }
+        if (oldTrade2Value > 0 && trade2Value == 0) {
+            trade2Value = 0.01
+        }
+
+        const finalValue = (trade1Value - trade2Value).toFixed(2)
+
+        return finalValue
+    }
+
+    function selectCategoryUser(category) {
+        if (category == "inventory") {
+            userInventory.style.display = "grid"
+            inventoryButton.style.color = "red"
+        } else {
+            userInventory.style.display = "none"
+            inventoryButton.style.color = "black"
+        }
+        if (category == "listings") {
+            userListings.style.display = "grid"
+            listingsButton.style.color = "red"
+        } else {
+            userListings.style.display = "none"
+            listingsButton.style.color = "black"
+        }
+        if (category == "wishlist") {
+            userWishlist.style.display = "grid"
+            wishlistButton.style.color = "red"
+        } else {
+            userWishlist.style.display = "none"
+            wishlistButton.style.color = "black"
+        }
+        if (userID == profileID) {
+            if (category == "inbox") {
+                userInbox.style.display = "grid"
+                inboxButton.style.color = "red"
+            } else {
+                userInbox.style.display = "none"
+                inboxButton.style.color = "black"
+            }
+            if (category == "pending") {
+                userPending.style.display = "grid"
+                pendingButton.style.color = "red"
+            } else {
+                userPending.style.display = "none"
+                pendingButton.style.color = "black"
+            }
+        }
+        if (category == "history") {
+            userHistory.style.display = "grid"
+            historyButton.style.color = "red"
+        } else {
+            userHistory.style.display = "none"
+            historyButton.style.color = "black"
+        }
+    }
+
+    selectCategoryUser("inventory")
+
+    calculateTradeValue()
+
+    showInventoryPets()
+
+    closeFriends()
+    closeHelp()
+
+    function enableFly() {
+        if (fly == 0) {
+            fly = 1
+        } else {
+            fly = 0
+        }
+        updateButtons()
+    }
+
+    function enableRide() {
+        if (ride == 0) {
+            ride = 1
+        } else {
+            ride = 0
+        }
+        updateButtons()
+    }
+
+    function enableRegular() {
+        regular = 1
+        neon = 0
+        mega = 0
+        updateButtons()
+    }
+
+    function enableNeon() {
+        regular = 0
+        neon = 1
+        mega = 0
+        updateButtons()
+    }
+
+    function enableMega() {
+        regular = 0
+        neon = 0
+        mega = 1
+        updateButtons()
+    }
+
+    function addPetToInventory(pet) {
+        if (addPetType == "inventory") {
+            formData = new FormData();
+            formData.append('pet', pet)
+            formData.append('fly', fly)
+            formData.append('ride', ride)
+            formData.append('regular', regular)
+            formData.append('neon', neon)
+            formData.append('mega', mega)
+            formData.append('action', "addPetToInventory");
+
+            fetch('/api', {
+            method: 'POST',
+            body: formData
+            })
+            .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+            })
+            .then(data => {
+            if (data == "SUCCESS") {
+                userDataDict.inventory.push({
+                    "innerID":userDataDict.inventory.length,
+                    "id":pet,
+                    "fly":fly,
+                    "ride":ride,
+                    "regular":regular,
+                    "neon":neon,
+                    "mega":mega
+                })
+                showInventoryPets()
+                petsAdded += 1
+                petAdded.style.bottom = "10%"
+                petAdded.style.backgroundColor = "rgb(0, 255, 0)"
+                petAddedText.innerHTML = "You added " + petsDict[pet]["name"] + " to your inventory!"
+                inventoryLength.innerHTML = parseInt(inventoryLength.innerHTML) + 1
+                var oldPetsAdded = petsAdded
+                setTimeout((event) => {
+                    if (oldPetsAdded == petsAdded) {
+                        petAdded.style.bottom = "-100%"
+                    }
+                }, 1750)
+            }
+            })
+            .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+            });
+        } else if (addPetType == "trade1") {
+            tradePart1.push({
+                    "id":pet,
+                    "fly":fly,
+                    "ride":ride,
+                    "regular":regular,
+                    "neon":neon,
+                    "mega":mega
+                })
+            showTradePets()
+            calculateTradeValue()
+        } else if (addPetType == "trade2") {
+            tradePart2.push({
+                    "id":pet,
+                    "fly":fly,
+                    "ride":ride,
+                    "regular":regular,
+                    "neon":neon,
+                    "mega":mega
+                })
+            showTradePets()
+            calculateTradeValue()
+        } else if (addPetType == "wishlist") {
+            formData = new FormData();
+            formData.append('pet', pet)
+            formData.append('fly', fly)
+            formData.append('ride', ride)
+            formData.append('regular', regular)
+            formData.append('neon', neon)
+            formData.append('mega', mega)
+            formData.append('action', "addPetToWishlist");
+
+            fetch('/api', {
+            method: 'POST',
+            body: formData
+            })
+            .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+            })
+            .then(data => {
+            if (data == "SUCCESS") {
+                userDataDict.wishlist.push({
+                    "innerID":userDataDict.inventory.length,
+                    "id":pet,
+                    "fly":fly,
+                    "ride":ride,
+                    "regular":regular,
+                    "neon":neon,
+                    "mega":mega
+                })
+                showWishlistPets()
+                petsAdded += 1
+                petAdded.style.bottom = "10%"
+                petAdded.style.backgroundColor = "rgb(0, 255, 0)"
+                petAddedText.innerHTML = "You added " + petsDict[pet]["name"] + " to your wishlist!"
+                var oldPetsAdded = petsAdded
+                setTimeout((event) => {
+                    if (oldPetsAdded == petsAdded) {
+                        petAdded.style.bottom = "-100%"
+                    }
+                }, 1750)
+            }
+            })
+            .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+            });
+        } else if (addPetType == "listing1") {
+            listingPart1Dict.push({
+                "id":pet,
+                "fly":fly,
+                "ride":ride,
+                "regular":regular,
+                "neon":neon,
+                "mega":mega
+            })
+            showUserListings2(currentListing, 1)
+        } else if (addPetType == "listing2") {
+            listingPart2Dict.push({
+                "id":pet,
+                "fly":fly,
+                "ride":ride,
+                "regular":regular,
+                "neon":neon,
+                "mega":mega
+            })
+            showUserListings2(currentListing, 1)
+        }
+    };
+
+    function filter(filter, preventLoop) {
+        lastFilter = filter
+        if (filter == "all") {
+            petImage.forEach(pet => {
+                pet.style.display = "flex";
+            });
+            resetFilterButtonBrightness()
+            all.style.filter = "brightness(1.2)"
+        } else if (filter == "pets") {
+            petImage.forEach(pet => {
+                if (pet.getAttribute("data-name") == "pets") {
+                    pet.style.display = "flex";
+                } else {
+                    pet.style.display = "none";
+                    filteredPets += 1
+                }
+            });
+            resetFilterButtonBrightness()
+            pets.style.filter = "brightness(1.2)"
+        } else if (filter == "common") {
+            petImage.forEach(pet => {
+                if (pet.getAttribute("data-value") == "common") {
+                    pet.style.display = "flex";
+                } else {
+                    pet.style.display = "none";
+                    filteredPets += 1
+                }
+            });
+            resetFilterButtonBrightness()
+            common.style.filter = "brightness(1.2)"
+        } else if (filter == "eggs") {
+            petImage.forEach(pet => {
+                if (pet.getAttribute("data-name") == "eggs") {
+                    pet.style.display = "flex";
+                } else {
+                    pet.style.display = "none";
+                    filteredPets += 1
+                }
+            });
+            resetFilterButtonBrightness()
+            eggs.style.filter = "brightness(1.2)"
+        } else if (filter == "legendary") {
+            petImage.forEach(pet => {
+                if (pet.getAttribute("data-value") == "legendary") {
+                    pet.style.display = "flex";
+                } else {
+                    pet.style.display = "none";
+                    filteredPets += 1
+                }
+            });
+            resetFilterButtonBrightness()
+            legendary.style.filter = "brightness(1.2)"
+        } else if (filter == "other") {
+            petImage.forEach(pet => {
+                if (pet.getAttribute("data-name") == "other") {
+                    pet.style.display = "flex";
+                } else {
+                    pet.style.display = "none";
+                    filteredPets += 1
+                }
+            });
+            resetFilterButtonBrightness()
+            other.style.filter = "brightness(1.2)"
+        } else if (filter == "pet wear") {
+            petImage.forEach(pet => {
+                if (pet.getAttribute("data-value") == "") {
+                    pet.style.display = "flex";
+                } else {
+                    pet.style.display = "none";
+                    filteredPets += 1
+                }
+            });
+            resetFilterButtonBrightness()
+            petWear.style.filter = "brightness(1.2)"
+        } else if (filter == "rare") {
+            petImage.forEach(pet => {
+                if (pet.getAttribute("data-value") == "rare") {
+                    pet.style.display = "flex";
+                } else {
+                    pet.style.display = "none";
+                    filteredPets += 1
+                }
+            });
+            resetFilterButtonBrightness()
+            rare.style.filter = "brightness(1.2)"
+        } else if (filter == "ultra rare") {
+            petImage.forEach(pet => {
+                if (pet.getAttribute("data-value") == "ultra rare") {
+                    pet.style.display = "flex";
+                } else {
+                    pet.style.display = "none";
+                    filteredPets += 1
+                }
+            });
+            resetFilterButtonBrightness()
+            ultraRare.style.filter = "brightness(1.2)"
+        } else if (filter == "uncommon") {
+            petImage.forEach(pet => {
+                if (pet.getAttribute("data-value") == "uncommon") {
+                    pet.style.display = "flex";
+                } else {
+                    pet.style.display = "none";
+                    filteredPets += 1
+                }
+            });
+            resetFilterButtonBrightness()
+            uncommon.style.filter = "brightness(1.2)"
+        } else if (filter == "vehicles") {
+            petImage.forEach(pet => {
+                if (pet.getAttribute("data-name") == "vehicles") {
+                    pet.style.display = "flex";
+                } else {
+                    pet.style.display = "none";
+                    filteredPets += 1
+                }
+            });
+            resetFilterButtonBrightness()
+            vehicles.style.filter = "brightness(1.2)"
+        }
+        if (preventLoop == 0) {
+            searchUpPets()
+        }
+    }
+
+    function searchUpPets() {
+        filteredPets = 0
+        filter(lastFilter, 1)
+        petImage = document.querySelectorAll(".petImage")
+        var length = 0
+        petImage.forEach(pet => {
+            if (pet.getAttribute("data-petname").toLowerCase().includes(petSearch.value) == false && pet.getAttribute("data-name").toLowerCase().includes(petSearch.value) == false && pet.getAttribute("data-value").toLowerCase().includes(petSearch.value) == false) {
+                pet.style.display = "none"
+            } else {
+                length += 1
+            };
+        });
+    };
+
+    function resetFilterButtonBrightness() {
+        all.style.filter = "brightness(1)"
+        pets.style.filter = "brightness(1)"
+        common.style.filter = "brightness(1)"
+        eggs.style.filter = "brightness(1)"
+        legendary.style.filter = "brightness(1)"
+        other.style.filter = "brightness(1)"
+        petWear.style.filter = "brightness(1)"
+        rare.style.filter = "brightness(1)"
+        ultraRare.style.filter = "brightness(1)"
+        uncommon.style.filter = "brightness(1)"
+        vehicles.style.filter = "brightness(1)"
+    }
+
+    function openInventory() {
+        displayPets()
+        addInventory.style.display = "block"
+        addInventoryBackground.style.display = "block"
+    }
+
+    function closeInventory() {
+        addInventory.style.display = "none"
+        addInventoryBackground.style.display = "none"
+        calculateTradeValue()
+    }
+
+    function openListingInterface() {
+        listingInterfaceBackground.style.display = "block"
+        listingInterface.style.display = "flex"
+        if (modifyTrade !== -1) {
+            modifyListing.style.display = "flex"
+            noModifyListing.style.display = "none"
+        } else {
+            modifyListing.style.display = "none"
+            noModifyListing.style.display = "flex"
+        }
+        calculateTradeValue()
+    }
+
+    function openListingInterface2(listing) {
+        listingInterface2Background.style.display = "block"
+        listingInterface2.style.display = "flex"
+        showUserListings2(listing, 0)
+    }
+
+    function closeListingInterface() {
+        listingInterfaceBackground.style.display = "none"
+        listingInterface.style.display = "none"
+    }
+
+    function closeListingInterface2() {
+        listingInterface2Background.style.display = "none"
+        listingInterface2.style.display = "none"
+    }
+
+    function showFriends() {
+        friendsDiv.style.display = "flex"
+        pendingDiv.style.display = "none"
+        blockedDiv.style.display = "none"
+        displayFriends()
+    }
+
+    function showPending() {
+        friendsDiv.style.display = "none"
+        pendingDiv.style.display = "flex"
+        blockedDiv.style.display = "none"
+    }
+
+    function showBlocked() {
+        friendsDiv.style.display = "none"
+        pendingDiv.style.display = "none"
+        blockedDiv.style.display = "flex"
+        displayBlocked()
+    }
+
+    showFriends()
+
+    function displayFriends() {
+        friendsDiv.innerHTML = ""
+        formData = new FormData();
+        formData.append('action', "getFriendsDetails");
+
+        fetch('/api', {
+        method: 'POST',
+        body: formData
+        })
+        .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+        })
+        .then(data => {
+            friendData = data
+            Object.keys(data).forEach(key => {
+                    const div = document.createElement("div")
+                    div.className = "friendDiv"
+                    const img = document.createElement("img")
+                    img.src = "../static/images/profile/" + data[key]["profilePicture"]
+                    img.style.height = "max(2.5vw, 5vh)"
+                    img.style.aspectRatio = "1/1"
+                    div.appendChild(img)
+
+                    const div2 = document.createElement("div")
+                    div2.className = "friendInfo"
+                    const txt1 = document.createElement("p")
+                    txt1.innerText = data[key]["username"]
+                    txt1.style.fontSize = "max(1vw, 2vh)"
+                    txt1.style.margin = "0px"
+                    div2.appendChild(txt1)
+                    if (data[key]["robloxUsername"] != "") {
+                        const div3 = document.createElement("div")
+                        div3.className = "robloxUsername"
+                        const img3 = document.createElement("img")
+                        img3.src = "../static/images/misc/robloxLogo.png"
+                        img3.style.height = "max(0.7vw, 1.4vh)"
+                        img3.style.aspectRatio = "1/1"
+                        div3.appendChild(img3)
+                        const txt2 = document.createElement("p")
+                        txt2.innerText = data[key]["robloxUsername"]
+                        txt2.style.fontSize = "max(0.6vw, 1.2vh)"
+                        txt2.style.margin = "0px"
+                        div3.appendChild(txt2)
+
+
+                        div2.appendChild(div3)
+                    }
+                    div.appendChild(div2)
+                    const img2 = document.createElement("img")
+                    img2.src = "../static/images/misc/more.png"
+                    img2.style.transform = "rotate(90deg)"
+                    img2.style.height = "max(0.35vw, 0.7vh)"
+                    img2.style.width = "max(1.2vw, 2.4vh)"
+                    img2.className = "more"
+                    img2.setAttribute("onclick", "moreFriendOptions(" + key.toString() + ")")
+                    div.appendChild(img2)
+                    friendsDiv.appendChild(div)
+            })
+        })
+        .catch(error => {
+        console.error('There was a problem with the fetch operation:', error);
+        });
+
+    }
+    
+
+    function moreFriendOptions(id) {
+        currentFriendSelected = id
+        friendMoreOptions.style.display = "flex"
+        friendMoreOptions.style.left = mouseX.toString() + "px"
+        friendMoreOptions.style.top = mouseY.toString() + "px"
+        more = 1
+    }
+
+
+    window.addEventListener("click", (event) => {
+        if (more == 0) {
+            if (event.target !== friendMoreOptions) {
+                friendMoreOptions.style.display = "none"
+            }
+        } else {
+            more = 0
+        }
+    })
+
+    function removeFriendMore() {
+        removeFriend(currentFriendSelected.toString())
+    }
+
+    function block(ID) {
+        formData = new FormData();
+        formData.append('ID', (ID).toString())
+        formData.append('action', "block");
+
+        fetch('/api', {
+        method: 'POST',
+        body: formData
+        })
+        .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+        })
+        .then(data => {
+        if (data == "SUCCESS") {
+            if (blockButton !== undefined) {
+                blockButton.innerText = "User blocked!"
+            }
+            displayMessage("You blocked " + profileDataDict["username"] + "!")
+        }
+        })
+        .catch(error => {
+        console.error('There was a problem with the fetch operation:', error);
+        });
+    }
+
+    function unblock(ID) {
+        formData = new FormData();
+        formData.append('ID', (ID).toString())
+        formData.append('action', "unblock");
+
+        fetch('/api', {
+        method: 'POST',
+        body: formData
+        })
+        .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+        })
+        .then(data => {
+        if (data == "SUCCESS") {
+            if (blockButton !== undefined) {
+                blockButton.innerText = "User unblocked!"
+            }
+            displayMessage("You unblocked " + profileDataDict["username"] + "!")
+        }
+        })
+        .catch(error => {
+        console.error('There was a problem with the fetch operation:', error);
+        });
+    }
+
+    function displayPending() {
+        pendingDiv.innerHTML = ""
+        formData = new FormData();
+        formData.append('action', "getPendingDetails");
+
+
+        fetch('/api', {
+        method: 'POST',
+        body: formData
+        })
+        .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+        })
+        .then(data => {
+            pendingData = data
+            Object.keys(data).forEach(key => {
+                    const div = document.createElement("div")
+                    div.className = "friendDiv"
+                    const img = document.createElement("img")
+                    img.src = "../static/images/profile/" + data[key]["profilePicture"]
+                    img.style.height = "max(2.5vw, 5vh)"
+                    img.style.aspectRatio = "1/1"
+                    div.appendChild(img)
+
+                    const div2 = document.createElement("div")
+                    div2.className = "friendInfo"
+                    const txt1 = document.createElement("p")
+                    txt1.innerText = data[key]["username"]
+                    txt1.style.fontSize = "max(1vw, 2vh)"
+                    txt1.style.margin = "0px"
+                    div2.appendChild(txt1)
+                    if (data[key]["robloxUsername"] != "") {
+                        const div3 = document.createElement("div")
+                        div3.className = "robloxUsername"
+                        const img3 = document.createElement("img")
+                        img3.src = "../static/images/misc/robloxLogo.png"
+                        img3.style.height = "max(0.7vw, 1.4vh)"
+                        img3.style.aspectRatio = "1/1"
+                        div3.appendChild(img3)
+                        const txt2 = document.createElement("p")
+                        txt2.innerText = data[key]["robloxUsername"]
+                        txt2.style.fontSize = "max(0.6vw, 1.2vh)"
+                        txt2.style.margin = "0px"
+                        div3.appendChild(txt2)
+
+
+                        div2.appendChild(div3)
+                    }
+                    div.appendChild(div2)
+                    const img2 = document.createElement("img")
+                    img2.src = "../static/images/misc/more.png"
+                    img2.style.transform = "rotate(90deg)"
+                    img2.style.height = "max(0.35vw, 0.7vh)"
+                    img2.style.width = "max(1.2vw, 2.4vh)"
+                    img2.className = "more"
+                    img2.setAttribute("onclick", "moreFriendOptions(" + key.toString() + ")")
+                    div.appendChild(img2)
+                    pendingDiv.appendChild(div)
+            })
+        })
+        .catch(error => {
+        console.error('There was a problem with the fetch operation:', error);
+        });
+    }
+
+    displayPending()
+
+    function displayBlocked() {
+        blockedDiv.innerHTML = ""
+        formData = new FormData();
+        formData.append('action', "getBlockedDetails");
+
+        fetch('/api', {
+        method: 'POST',
+        body: formData
+        })
+        .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+        })
+        .then(data => {
+            pendingData = data
+            Object.keys(data).forEach(key => {
+                    const div = document.createElement("div")
+                    div.className = "friendDiv"
+                    const img = document.createElement("img")
+                    img.src = "../static/images/profile/" + data[key]["profilePicture"]
+                    img.style.height = "max(2.5vw, 5vh)"
+                    img.style.aspectRatio = "1/1"
+                    div.appendChild(img)
+
+                    const div2 = document.createElement("div")
+                    div2.className = "friendInfo"
+                    const txt1 = document.createElement("p")
+                    txt1.innerText = data[key]["username"]
+                    txt1.style.fontSize = "max(1vw, 2vh)"
+                    txt1.style.margin = "0px"
+                    div2.appendChild(txt1)
+                    if (data[key]["robloxUsername"] != "") {
+                        const div3 = document.createElement("div")
+                        div3.className = "robloxUsername"
+                        const img3 = document.createElement("img")
+                        img3.src = "../static/images/misc/robloxLogo.png"
+                        img3.style.height = "max(0.7vw, 1.4vh)"
+                        img3.style.aspectRatio = "1/1"
+                        div3.appendChild(img3)
+                        const txt2 = document.createElement("p")
+                        txt2.innerText = data[key]["robloxUsername"]
+                        txt2.style.fontSize = "max(0.6vw, 1.2vh)"
+                        txt2.style.margin = "0px"
+                        div3.appendChild(txt2)
+
+
+                        div2.appendChild(div3)
+                    }
+                    div.appendChild(div2)
+                    const img2 = document.createElement("img")
+                    img2.src = "../static/images/misc/more.png"
+                    img2.style.transform = "rotate(90deg)"
+                    img2.style.height = "max(0.35vw, 0.7vh)"
+                    img2.style.width = "max(1.2vw, 2.4vh)"
+                    img2.className = "more"
+                    img2.setAttribute("onclick", "moreFriendOptions(" + key.toString() + ")")
+                    div.appendChild(img2)
+                    blockedDiv.appendChild(div)
+            })
+        })
+        .catch(error => {
+        console.error('There was a problem with the fetch operation:', error);
+        });
+    }
+
+    displayBlocked()
+
+    function selectMoreOption(type) {
+        if (type == "friends") {
+            friendMoreOptions.innerHTML = ""
+
+            const button1 = document.createElement("button")
+            button1.className = "blank button"
+            button1.id = "removeFriend"
+            button1.setAttribute("onclick", "removeFriendMore()")
+            const txt1 = document.createElement("p")
+            txt1.innerText = "Remove Friend"
+            button1.appendChild(txt1)
+
+            const button2 = document.createElement("button")
+            button2.className = "blank button"
+            button2.id = "blockFriend"
+            button2.setAttribute("onclick", "blockMore()")
+            const txt2 = document.createElement("p")
+            txt2.innerText = "Block Friend"
+            button2.appendChild(txt2)
+
+            friendMoreOptions.appendChild(button1)
+            friendMoreOptions.appendChild(button2)
+
+        } else if (type == "pending") {
+            friendMoreOptions.innerHTML = ""
+
+            const button1 = document.createElement("button")
+            button1.className = "blank button"
+            button1.id = "acceptRequest"
+            button1.setAttribute("onclick", "acceptRequestMore()")
+            const txt1 = document.createElement("p")
+            txt1.innerText = "Accept"
+            button1.appendChild(txt1)
+
+            const button2 = document.createElement("button")
+            button2.className = "blank button"
+            button2.id = "rejectRequest"
+            button2.setAttribute("onclick", "rejectRequestMore()")
+            const txt2 = document.createElement("p")
+            txt2.innerText = "Reject"
+            button2.appendChild(txt2)
+
+            friendMoreOptions.appendChild(button1)
+            friendMoreOptions.appendChild(button2)
+
+        } else if (type == "blocked") {
+            friendMoreOptions.innerHTML = ""
+
+            const button1 = document.createElement("button")
+            button1.className = "blank button"
+            button1.id = "unblock"
+            button1.setAttribute("onclick", "unblockMore()")
+            const txt1 = document.createElement("p")
+            txt1.innerText = "Unblock"
+            button1.appendChild(txt1)
+
+            friendMoreOptions.appendChild(button1)
+
+        }
+
+    }
+
+    function acceptRequestMore() {
+        formData = new FormData();
+        formData.append('ID', (currentFriendSelected).toString())
+        formData.append('action', "sendFriendRequest");
+
+        fetch('/api', {
+        method: 'POST',
+        body: formData
+        })
+        .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+        })
+        .then(data => {
+        if (data == "SUCCESS") {
+            displayMessage("You are now friends with this user!")
+            displayPending()
+        }
+        })
+        .catch(error => {
+        console.error('There was a problem with the fetch operation:', error);
+        });
+    }
+
+    function rejectRequestMore() {
+        formData = new FormData();
+        formData.append('ID', (currentFriendSelected).toString())
+        formData.append('action', "rejectFriendRequest");
+
+        fetch('/api', {
+        method: 'POST',
+        body: formData
+        })
+        .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+        })
+        .then(data => {
+        if (data == "SUCCESS") {
+            displayMessage("You rejected this user!")
+            displayPending()
+        }
+        })
+        .catch(error => {
+        console.error('There was a problem with the fetch operation:', error);
+        });
+    }
+
+    function displayPets() {
+        if (loggedIn == "True" && displayPetsFirstTime == 0) {
+            displayPetsFirstTime = 1
+            petImages.innerHTML = ""
+            Object.keys(petsDict).forEach(key => {
+                pet = petsDict[key]
+                if (pet["image"] !== "") {
+                    const div = document.createElement("div")
+                    div.className = "petImage"
+                    div.setAttribute("data-petname", pet["name"])
+                    div.setAttribute("data-name", pet["type"])
+                    div.setAttribute("data-value", pet["rarity"])
+                    div.setAttribute("onclick", "addPetToInventory(" + key.toString() + ")")
+                    const img = document.createElement("img")
+                    img.style.height = "max(3.5vw, 7vh)"
+                    img.style.aspectRatio = "1/1"
+                    img.setAttribute("onerror", "handleImageError(this)")
+                    img.src = pet["image"]
+                    div.appendChild(img)
+                    petImages.appendChild(div)
+                }
+            })
+        }
+    }
+
+    function unblockMore() {
+        formData = new FormData();
+        formData.append('ID', (currentFriendSelected).toString())
+        formData.append('action', "unblock");
+
+        fetch('/api', {
+        method: 'POST',
+        body: formData
+        })
+        .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+        })
+        .then(data => {
+        if (data == "SUCCESS") {
+            displayMessage("You unblocked this user!")
+            displayBlocked()
+        }
+        })
+        .catch(error => {
+        console.error('There was a problem with the fetch operation:', error);
+        });
+    }
+
+    function ban() {
+        formData = new FormData();
+        formData.append('user', profileID)
+        formData.append('action', "ban");
+
+        fetch('/api', {
+        method: 'POST',
+        body: formData
+        })
+        .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+        })
+        .then(data => {
+        if (data == "SUCCESS") {
+            displayMessage("You banned this user!")
+        }
+        })
+        .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+        });
+    }
+
+    function makeContentCreator() {
+        formData = new FormData();
+        formData.append('user', profileID)
+        formData.append('action', "makeContentCreator");
+
+        fetch('/api', {
+        method: 'POST',
+        body: formData
+        })
+        .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+        })
+        .then(data => {
+        if (data == "SUCCESS") {
+            displayMessage("This user has been marked as a content creator!")
+        }
+        })
+        .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+        });
+    }
+
+    function blockMore() {
+        formData = new FormData();
+        formData.append('ID', (currentFriendSelected).toString())
+        formData.append('action', "block");
+
+        fetch('/api', {
+        method: 'POST',
+        body: formData
+        })
+        .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+        })
+        .then(data => {
+        if (data == "SUCCESS") {
+            displayMessage("You blocked this user!")
+            displayFriends()
+        }
+        })
+        .catch(error => {
+        console.error('There was a problem with the fetch operation:', error);
+        });
+    }
+
+    function createListingPetDiv2(data, key, counter2, tradePart) {
+        const petDiv = document.createElement("div")
+        petDiv.className = "petDiv"
+        const img = document.createElement("img")
+        img.src = petsDict[data[key]["offer"][tradePart][counter2.toString()]["id"]]["image"]
+        img.style.maxWidth = "25px"
+        img.style.maxHeight = "25px"
+        petDiv.appendChild(img)
+
+        const attributeDiv = document.createElement("div")
+        attributeDiv.className = "attributeDiv"
+
+        if (data[key]["offer"][tradePart][counter2.toString()]["fly"] == "1") {
+            const flyDiv = document.createElement("div")
+            flyDiv.className = "listingPetAttribute"
+            flyDiv.style.background = "linear-gradient(135deg, rgb(142, 202, 232) 0%, rgb(47, 152, 204) 50%, rgb(0, 134, 200) 100%)"
+            const txt1 = document.createElement("b")
+            txt1.innerText = "F"
+            flyDiv.appendChild(txt1)
+            attributeDiv.appendChild(flyDiv)
+        }
+
+        if (data[key]["offer"][tradePart][counter2.toString()]["ride"] == "1") {
+            const rideDiv = document.createElement("div")
+            rideDiv.className = "listingPetAttribute"
+            rideDiv.style.background = "linear-gradient(135deg, rgb(255, 197, 220) 0%, rgb(237, 44, 121) 50%, rgb(255, 0, 101) 100%)"
+            const txt2 = document.createElement("b")
+            txt2.innerText = "R"
+            rideDiv.appendChild(txt2)
+            attributeDiv.appendChild(rideDiv)
+        }
+
+        if (data[key]["offer"][tradePart][counter2.toString()]["neon"] == "1") {
+            const neonDiv = document.createElement("div")
+            neonDiv.className = "listingPetAttribute"
+            neonDiv.style.background = "linear-gradient(135deg, rgb(193, 255, 110) 0%, rgb(140, 198, 63) 50%, rgb(19, 114, 11) 100%)"
+            const txt3 = document.createElement("b")
+            txt3.innerText = "N"
+            neonDiv.appendChild(txt3)
+            attributeDiv.appendChild(neonDiv)
+        }
+
+        if (data[key]["offer"][tradePart][counter2.toString()]["mega"] == "1") {
+            const megaDiv = document.createElement("div")
+            megaDiv.className = "listingPetAttribute"
+            megaDiv.style.background = "linear-gradient(135deg, rgb(187, 80, 253) 0%, rgb(69, 3, 198) 50%, rgb(81, 28, 182) 100%)"
+            const txt4 = document.createElement("b")
+            txt4.innerText = "M"
+            megaDiv.appendChild(txt4)
+            attributeDiv.appendChild(megaDiv)
+        }
+
+        petDiv.appendChild(attributeDiv)
+
+        return petDiv
+    }
+
+    function showInbox() {
+        if (userID == profileID) {
+            formData = new FormData();
+            formData.append('action', "getInbox");
+
+            fetch('/api', {
+            method: 'POST',
+            body: formData
+            })
+            .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+            })
+            .then(data => {
+                if (data !== "ERROR") {
+                    userInbox.innerHTML = ""
+                    Object.keys(data).forEach(key => {
+                        const container = document.createElement("div")
+                        container.className = "inboxListing"
+                        const div = document.createElement("div")
+                        div.className = "inboxListingMain"
+                        div.style.display = "flex"
+                        div.style.flexDirection = "column"
+                        div.style.justifyContent = "space-between"
+
+                        const div2 = document.createElement("div")
+                        div2.style.display = "flex"
+                        div2.style.justifyContent = "space-between"
+                        div2.style.alignItems = "center"
+
+                        const txt1 = document.createElement("b")
+                        txt1.innerText = "Your Offer"
+                        txt1.style.color = "red"
+                        txt1.style.fontSize = "10px"
+
+                        const txt2 = document.createElement("b")
+                        var text = calculateTradeValueWithInput(data[key]["offer"]["give"], data[key]["offer"]["take"])
+                        if (parseFloat(text) <= 0) {
+                            txt2.style.color = "black"
+                            text = (Math.abs(parseFloat(text))).toString()
+                        } else {
+                            txt2.style.color = "red"
+                        }
+                        txt2.innerText = text
+                        txt2.style.fontSize = "25px"
+
+                        const txt3 = document.createElement("b")
+                        txt3.innerText = "Their Offer"
+                        txt3.style.fontSize = "10px"
+
+                        div2.appendChild(txt1)
+                        div2.appendChild(txt2)
+                        div2.appendChild(txt3)
+
+                        const div3 = document.createElement("div")
+                        div3.className = "listingInfo"
+
+                        const div4 = document.createElement("div")
+
+                        div4.className = "Grid3x3Listing"
+
+                        var counter = 0
+                        for (const j in data[key]["offer"]["give"]) {
+                            if (j > 7) {
+                                if (data[key]["offer"]["give"].length - 8 > 1) {
+                                    counter += 1
+                                    const petDiv = document.createElement("div")
+                                    petDiv.className = "petDiv"
+                                    const txt4 = document.createElement("b")
+                                    txt4.innerText = "+" + (data[key]["offer"]["give"].length - 8).toString()
+                                    txt4.style.fontSize = (25 / ("+" + (data[key]["offer"]["give"].length - 8).toString()).length).toString() + "px"
+                                    petDiv.appendChild(txt4)
+                                    div4.appendChild(petDiv)
+                                } else {
+                                    counter += 1
+                                    div4.appendChild(createListingPetDiv2(data, key, j, "give"))
+                                }
+                                break
+                            } else {
+                                counter += 1
+                                div4.appendChild(createListingPetDiv2(data, key, j, "give"))
+                            }
+                        }
+                    
+                        while (counter < 9) {
+                            const petDiv = document.createElement("div")
+                            petDiv.className = "petDiv"
+                            div4.appendChild(petDiv)
+                            counter += 1
+                        }
+
+                        const div5 = document.createElement("div")
+                        div5.style.height = "100%"
+                        div5.style.width = "2px"
+                        div5.style.backgroundColor = "black"
+
+                        const div6 = document.createElement("div")
+                        div6.className = "Grid3x3Listing"
+
+                        counter = 0
+                        for (const j in data[key]["offer"]["take"]) {
+                            if (j > 7) {
+                                if (data[key]["offer"]["take"].length - 8 > 1) {
+                                    counter += 1
+                                    const petDiv = document.createElement("div")
+                                    petDiv.className = "petDiv"
+                                    const txt4 = document.createElement("b")
+                                    txt4.innerText = "+" + (data[key]["offer"]["take"].length - 8).toString()
+                                    txt4.style.fontSize = (25 / ("+" + (data[key]["offer"]["take"].length - 8).toString()).length).toString() + "px"
+                                    petDiv.appendChild(txt4)
+                                    div4.appendChild(petDiv)
+                                } else {
+                                    counter += 1
+                                    div6.appendChild(createListingPetDiv2(data, key, j, "take"))
+                                }
+                                break
+                            } else {
+                                counter += 1
+                                div6.appendChild(createListingPetDiv2(data, key, j, "take"))
+
+                            }
+                        }
+
+                        while (counter < 9) {
+                            const petDiv = document.createElement("div")
+                            petDiv.className = "petDiv"
+                            div6.appendChild(petDiv)
+                            counter += 1
+                        }
+
+
+
+                        div3.appendChild(div4)
+                        div3.appendChild(div5)
+                        div3.appendChild(div6)
+
+
+
+                        div.appendChild(div2)
+                        div.appendChild(div3)
+
+                        container.appendChild(div)
+
+                        const div7 = document.createElement("div")
+                        div7.className = "inboxListingOptions"
+
+                        const button1 = document.createElement("button")
+                        button1.className = "inboxButton"
+                        const txt5 = document.createElement("b")
+                        txt5.innerText = "Accept"
+                        button1.setAttribute("onclick", "acceptTradeWithKey(" + key + ")")
+                        button1.style.cursor = "pointer"
+                        button1.appendChild(txt5)
+
+                        const button2 = document.createElement("button")
+                        button2.className = "inboxButton"
+                        const txt6 = document.createElement("b")
+                        txt6.innerText = "Reject"
+                        button2.setAttribute("onclick", "rejectTradeWithKey(" + key + ")")
+                        button2.style.cursor = "pointer"
+                        button2.appendChild(txt6)
+
+                        div7.appendChild(button1)
+                        div7.appendChild(button2)
+
+                        const div8 = document.createElement("div")
+                        div8.className = "inboxNameInfo"
+
+                        const name = document.createElement("b")
+                        name.innerText = data[key]["ownerUsername"]
+
+                        div8.appendChild(name)
+
+                        if (data[key]["ownerRobloxUsername"] !== "") {
+                                const div9 = document.createElement("div")
+                                div9.style.display = "flex"
+                                div9.style.flexDirection = "row"
+                                div9.style.alignItems = "center"
+                                div9.style.justifyContent = "center"
+                                div9.style.gap = "5px"
+
+                                const img = document.createElement("img")
+                                img.src = "../static/images/misc/robloxLogo.png"
+                                img.style.height = "10px"
+                                img.style.aspectRatio = "1/1"
+
+                                const txt7 = document.createElement("p")
+                                txt7.style.margin = "0px"
+
+                                txt7.innerText = data[key]["ownerRobloxUsername"]
+
+                                div9.appendChild(img)
+                                div9.appendChild(txt7)
+
+                                div8.appendChild(div9)
+                            }
+
+                        div7.appendChild(div8)
+
+                        container.appendChild(div7)
+
+                        userInbox.appendChild(container)
+                    })
+                    if (userInbox.childElementCount == 0) {
+                        userInbox.innerHTML = "<p style='margin:0px;position:absolute;transform:translate(-50%, -50%);left:50%;top:300%;font-size:25px;text-align:center;margin-top:50px;'>Your inbox is empty</p>"
+                    }
+                }
+            })
+            .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+            }); 
+        }
+    }
+
+    showInbox()
+
+
+    function acceptTradeWithKey(key) {
+        formData = new FormData();
+        formData.append('key', key)
+        formData.append('action', "acceptTradeWithKey");
+
+        fetch('/api', {
+        method: 'POST',
+        body: formData
+        })
+        .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+        })
+        .then(data => {
+        if (data == "SUCCESS") {
+            showInbox()
+        }
+        })
+        .catch(error => {
+        console.error('There was a problem with the fetch operation:', error);
+        });    
+    }
+
+    function rejectTradeWithKey(key) {
+        formData = new FormData();
+        formData.append('key', key)
+        formData.append('action', "rejectTradeWithKey");
+
+        fetch('/api', {
+        method: 'POST',
+        body: formData
+        })
+        .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+        })
+        .then(data => {
+        if (data == "SUCCESS") {
+            showInbox()
+        }
+        })
+        .catch(error => {
+        console.error('There was a problem with the fetch operation:', error);
+        });
+    }
+
+    function showPendingDiv() {
+        if (userID == profileID) {
+            formData = new FormData();
+            formData.append('action', "getPending");
+
+            fetch('/api', {
+            method: 'POST',
+            body: formData
+            })
+            .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+            })
+            .then(data => {
+                if (data !== "ERROR") {
+                    userPending.innerHTML = ""
+                    Object.keys(data).forEach(key => {
+                        const container = document.createElement("div")
+                        container.className = "pendingListing"
+                        const div = document.createElement("div")
+                        div.className = "inboxListingMain"
+                        div.style.display = "flex"
+                        div.style.flexDirection = "column"
+                        div.style.justifyContent = "space-between"
+
+                        const div2 = document.createElement("div")
+                        div2.style.display = "flex"
+                        div2.style.justifyContent = "space-between"
+                        div2.style.alignItems = "center"
+
+                        const txt1 = document.createElement("b")
+                        txt1.innerText = "Your Offer"
+                        txt1.style.color = "red"
+                        txt1.style.fontSize = "10px"
+
+                        const txt2 = document.createElement("b")
+                        var text = calculateTradeValueWithInput(data[key]["offer"]["give"], data[key]["offer"]["take"])
+                        if (parseFloat(text) <= 0) {
+                            txt2.style.color = "black"
+                            text = (Math.abs(parseFloat(text))).toString()
+                        } else {
+                            txt2.style.color = "red"
+                        }
+                        txt2.innerText = text
+                        txt2.style.fontSize = "25px"
+
+                        const txt3 = document.createElement("b")
+                        txt3.innerText = "Their Offer"
+                        txt3.style.fontSize = "10px"
+
+                        div2.appendChild(txt1)
+                        div2.appendChild(txt2)
+                        div2.appendChild(txt3)
+
+                        const div3 = document.createElement("div")
+                        div3.className = "listingInfo"
+
+                        const div4 = document.createElement("div")
+
+                        div4.className = "Grid3x3Listing"
+
+                        var counter = 0
+                        for (const j in data[key]["offer"]["give"]) {
+                            if (j > 7) {
+                                if (data[key]["offer"]["give"].length - 8 > 1) {
+                                    counter += 1
+                                    const petDiv = document.createElement("div")
+                                    petDiv.className = "petDiv"
+                                    const txt4 = document.createElement("b")
+                                    txt4.innerText = "+" + (data[key]["offer"]["give"].length - 8).toString()
+                                    txt4.style.fontSize = (25 / ("+" + (data[key]["offer"]["give"].length - 8).toString()).length).toString() + "px"
+                                    petDiv.appendChild(txt4)
+                                    div4.appendChild(petDiv)
+                                } else {
+                                    counter += 1
+                                    div4.appendChild(createListingPetDiv2(data, key, j, "give"))
+                                }
+                                break
+                            } else {
+                                counter += 1
+                                div4.appendChild(createListingPetDiv2(data, key, j, "give"))
+                            }
+                        }
+                    
+                        while (counter < 9) {
+                            const petDiv = document.createElement("div")
+                            petDiv.className = "petDiv"
+                            div4.appendChild(petDiv)
+                            counter += 1
+                        }
+
+                        const div5 = document.createElement("div")
+                        div5.style.height = "100%"
+                        div5.style.width = "2px"
+                        div5.style.backgroundColor = "black"
+
+                        const div6 = document.createElement("div")
+                        div6.className = "Grid3x3Listing"
+
+                        counter = 0
+                        for (const j in data[key]["offer"]["take"]) {
+                            if (j > 7) {
+                                if (data[key]["offer"]["take"].length - 8 > 1) {
+                                    counter += 1
+                                    const petDiv = document.createElement("div")
+                                    petDiv.className = "petDiv"
+                                    const txt4 = document.createElement("b")
+                                    txt4.innerText = "+" + (data[key]["offer"]["take"].length - 8).toString()
+                                    txt4.style.fontSize = (25 / ("+" + (data[key]["offer"]["take"].length - 8).toString()).length).toString() + "px"
+                                    petDiv.appendChild(txt4)
+                                    div4.appendChild(petDiv)
+                                } else {
+                                    counter += 1
+                                    div6.appendChild(createListingPetDiv2(data, key, j, "take"))
+                                }
+                                break
+                            } else {
+                                counter += 1
+                                div6.appendChild(createListingPetDiv2(data, key, j, "take"))
+
+                            }
+                        }
+
+                        while (counter < 9) {
+                            const petDiv = document.createElement("div")
+                            petDiv.className = "petDiv"
+                            div6.appendChild(petDiv)
+                            counter += 1
+                        }
+
+
+
+                        div3.appendChild(div4)
+                        div3.appendChild(div5)
+                        div3.appendChild(div6)
+
+
+
+                        div.appendChild(div2)
+                        div.appendChild(div3)
+
+                        container.appendChild(div)
+
+                        const div7 = document.createElement("div")
+                        div7.className = "inboxListingOptions"
+                        div7.style.width = "220px"
+
+                        const button1 = document.createElement("button")
+                        button1.className = "inboxButton"
+                        const txt5 = document.createElement("b")
+                        if (userID.toString() in data[key]["markedAsCompletedBy"]) {
+                            txt5.innerText = "You marked as Completed!"
+                            button1.disabled = true
+                            button1.id = "completeButton" + key
+                            button1.appendChild(txt5)
+                        } else {
+                            txt5.innerText = "Mark as Complete"
+                            button1.setAttribute("onclick", "completeTradeWithKey(" + key + ")")
+                            button1.id = "completeButton" + key
+                            button1.style.cursor = "pointer"
+                            button1.appendChild(txt5)
+                        }
+                        
+                        const txt6 = document.createElement("p")
+                        txt6.innerText = "Make sure to contact eachother on roblox!"
+                        txt6.style.textAlign = "center"
+                        txt6.style.width = "80%"
+                        txt6.style.margin = "0px"
+
+                        div7.appendChild(txt6)
+
+                        const div8 = document.createElement("div")
+                        div8.className = "inboxNameInfo"
+
+                        const name = document.createElement("b")
+                        name.innerText = data[key]["ownerUsername"]
+
+                        div8.appendChild(name)
+
+                        if (data[key]["ownerRobloxUsername"] !== "") {
+                                const div9 = document.createElement("div")
+                                div9.style.display = "flex"
+                                div9.style.flexDirection = "row"
+                                div9.style.alignItems = "center"
+                                div9.style.justifyContent = "center"
+                                div9.style.gap = "5px"
+
+                                const img = document.createElement("img")
+                                img.src = "../static/images/misc/robloxLogo.png"
+                                img.style.height = "10px"
+                                img.style.aspectRatio = "1/1"
+
+                                const txt7 = document.createElement("p")
+                                txt7.style.margin = "0px"
+
+                                txt7.innerText = data[key]["ownerRobloxUsername"]
+
+                                div9.appendChild(img)
+                                div9.appendChild(txt7)
+
+                                div8.appendChild(div9)
+                            }
+
+                        div7.appendChild(div8)
+                        div7.appendChild(button1)
+
+                        container.appendChild(div7)
+
+                        userPending.appendChild(container)
+                    })
+                    if (userPending.childElementCount == 0) {
+                        userPending.innerHTML = "<p style='margin:0px;position:absolute;transform:translate(-50%, -50%);left:50%;top:300%;font-size:25px;text-align:center;margin-top:50px;'>You have no ongoing trades</p>"
+                    }
+                }
+            })
+            .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+            }); 
+        }
+    }
+
+    showPendingDiv()
+
+    function completeTradeWithKey(key) {
+
+        formData = new FormData();
+        formData.append('key', key)
+        formData.append('action', "completeTradeWithKey");
+
+        fetch('/api', {
+        method: 'POST',
+        body: formData
+        })
+        .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+        })
+        .then(data => {
+        if (data == "SUCCESS") {
+            const button = document.getElementById("completeButton" + key)
+            button.innerText = "You marked as Completed!"
+            button.disabled = true
+            button.setAttribute("onclick", "")
+        }
+        })
+        .catch(error => {
+        console.error('There was a problem with the fetch operation:', error);
+        });
+    }
+
+function showHistoryDiv() {
+        formData = new FormData();
+        formData.append('action', "getHistory");
+
+        fetch('/api', {
+        method: 'POST',
+        body: formData
+        })
+        .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+        })
+        .then(data => {
+            if (data !== "ERROR") {
+                userHistory.innerHTML = ""
+                Object.keys(data).forEach(key => {
+                    const container = document.createElement("div")
+                    container.className = "pendingListing"
+                    const div = document.createElement("div")
+                    div.className = "inboxListingMain"
+                    div.style.display = "flex"
+                    div.style.flexDirection = "column"
+                    div.style.justifyContent = "space-between"
+
+                    const div2 = document.createElement("div")
+                    div2.style.display = "flex"
+                    div2.style.justifyContent = "space-between"
+                    div2.style.alignItems = "center"
+
+                    const txt1 = document.createElement("b")
+                    txt1.innerText = "Your Offer"
+                    txt1.style.color = "red"
+                    txt1.style.fontSize = "10px"
+
+                    const txt2 = document.createElement("b")
+                    var text = calculateTradeValueWithInput(data[key]["offer"]["give"], data[key]["offer"]["take"])
+                    if (parseFloat(text) <= 0) {
+                        txt2.style.color = "black"
+                        text = (Math.abs(parseFloat(text))).toString()
+                    } else {
+                        txt2.style.color = "red"
+                    }
+                    txt2.innerText = text
+                    txt2.style.fontSize = "25px"
+
+                    const txt3 = document.createElement("b")
+                    txt3.innerText = "Their Offer"
+                    txt3.style.fontSize = "10px"
+
+                    div2.appendChild(txt1)
+                    div2.appendChild(txt2)
+                    div2.appendChild(txt3)
+
+                    const div3 = document.createElement("div")
+                    div3.className = "listingInfo"
+
+                    const div4 = document.createElement("div")
+
+                    div4.className = "Grid3x3Listing"
+
+                    var counter = 0
+                    for (const j in data[key]["offer"]["give"]) {
+                        if (j > 7) {
+                            if (data[key]["offer"]["give"].length - 8 > 1) {
+                                counter += 1
+                                const petDiv = document.createElement("div")
+                                petDiv.className = "petDiv"
+                                const txt4 = document.createElement("b")
+                                txt4.innerText = "+" + (data[key]["offer"]["give"].length - 8).toString()
+                                txt4.style.fontSize = (25 / ("+" + (data[key]["offer"]["give"].length - 8).toString()).length).toString() + "px"
+                                petDiv.appendChild(txt4)
+                                div4.appendChild(petDiv)
+                            } else {
+                                counter += 1
+                                div4.appendChild(createListingPetDiv2(data, key, j, "give"))
+                            }
+                            break
+                        } else {
+                            counter += 1
+                            div4.appendChild(createListingPetDiv2(data, key, j, "give"))
+                        }
+                    }
+                
+                    while (counter < 9) {
+                        const petDiv = document.createElement("div")
+                        petDiv.className = "petDiv"
+                        div4.appendChild(petDiv)
+                        counter += 1
+                    }
+
+                    const div5 = document.createElement("div")
+                    div5.style.height = "100%"
+                    div5.style.width = "2px"
+                    div5.style.backgroundColor = "black"
+
+                    const div6 = document.createElement("div")
+                    div6.className = "Grid3x3Listing"
+
+                    counter = 0
+                    for (const j in data[key]["offer"]["take"]) {
+                        if (j > 7) {
+                            if (data[key]["offer"]["take"].length - 8 > 1) {
+                                counter += 1
+                                const petDiv = document.createElement("div")
+                                petDiv.className = "petDiv"
+                                const txt4 = document.createElement("b")
+                                txt4.innerText = "+" + (data[key]["offer"]["take"].length - 8).toString()
+                                txt4.style.fontSize = (25 / ("+" + (data[key]["offer"]["take"].length - 8).toString()).length).toString() + "px"
+                                petDiv.appendChild(txt4)
+                                div4.appendChild(petDiv)
+                            } else {
+                                counter += 1
+                                div6.appendChild(createListingPetDiv2(data, key, j, "take"))
+                            }
+                            break
+                        } else {
+                            counter += 1
+                            div6.appendChild(createListingPetDiv2(data, key, j, "take"))
+
+                        }
+                    }
+
+                    while (counter < 9) {
+                        const petDiv = document.createElement("div")
+                        petDiv.className = "petDiv"
+                        div6.appendChild(petDiv)
+                        counter += 1
+                    }
+
+
+
+                    div3.appendChild(div4)
+                    div3.appendChild(div5)
+                    div3.appendChild(div6)
+
+
+
+                    div.appendChild(div2)
+                    div.appendChild(div3)
+
+                    container.appendChild(div)
+
+                    const div7 = document.createElement("div")
+                    div7.className = "inboxListingOptions"
+                    div7.style.width = "220px"
+
+                    
+                    const txt6 = document.createElement("p")
+                    if (profileID == data[key]["owner"]) {
+                        txt6.innerText = "Trade done with: " + data[key]["acceptedByUsername"]
+                    } else {
+                        txt6.innerText = "Trade done with: " + data[key]["ownerUsername"]
+                    }
+                    txt6.style.textAlign = "center"
+                    txt6.style.width = "80%"
+                    txt6.style.margin = "0px"
+
+                    div7.appendChild(txt6)
+
+                    container.appendChild(div7)
+
+                    userHistory.appendChild(container)
+                })
+                if (userHistory.childElementCount == 0) {
+                    if (userID == profileID) {
+                        userHistory.innerHTML = "<p style='margin:0px;position:absolute;transform:translate(-50%, -50%);left:50%;top:300%;font-size:25px;text-align:center;margin-top:50px;'>You have not completed any trades</p>"
+                    } else {
+                        userHistory.innerHTML = "<p style='margin:0px;position:absolute;transform:translate(-50%, -50%);left:50%;top:300%;font-size:25px;text-align:center;margin-top:50px;'>This user has not completed any trades</p>"
+                    }
+                    
+                }
+            }
+        })
+        .catch(error => {
+        console.error('There was a problem with the fetch operation:', error);
+        }); 
+    }
+
+    showHistoryDiv()
+
+    function editProfile() {
+        window.location.href = window.location.href + "/edit"
+    }
+
+    function updateViews(index) {
+        formData = new FormData();
+        formData.append('user2ID', (profileID).toString())
+        formData.append('index', index)
+        formData.append('action', "updateViewsOnTrade");
+
+        fetch('/api', {
+        method: 'POST',
+        body: formData
+        })
+        .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+        })
+        .then(data => {
+        if (data == "SUCCESS") {
+            
+        }
+        })
+        .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+        });
+    }
+
+
+</script>

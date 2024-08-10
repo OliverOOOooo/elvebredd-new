@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Unavailable</title>
+    <link rel="stylesheet" href="https://use.typekit.net/uju1lhj.css">
+    <link rel="stylesheet" href="/static/css/index.css"
+</head>
+<body>
+    <header>
+        {% include "header.html" %}
+    </header>
+    <main style="padding-top:85.5rem;">
+        <div class="center column bigMargin">
+            <h1 style="font-size:52rem;font-weight:bold;font-family:'Aileron', sans-serif;margin:0px;padding-top:70rem;padding-bottom:20rem;">Something went wrong</h1>
+            <p style="font-size:20.7rem;font-weight:normal;font-family:'Aileron', sans-serif;margin:0px;padding-bottom:5rem;color:rgb(108, 106, 112);">Sorry, the page you were looking for does not exist.</p>
+            <p style="font-size:20.7rem;font-weight:normal;font-family:'Aileron', sans-serif;margin:0px;padding-bottom:20rem;color:rgb(108, 106, 112);">Please return to the home page.</p>
+            <div style="display:flex;flex-direction:row;align-items:center;justify-content:center;margin:0px;gap:30rem;">
+                <a class="bland" href="/support">
+                    <button class="frontMenuButton" style="padding:0px;display:flex;align-items:center;justify-content:center;width:160rem;height:40rem;">
+                        <p style="font-size:15rem;font-family:'Aileron', sans-serif; font-weight:normal;">Contact Us</p>
+                    </button>
+                </a>
+                <a class="bland" href="/">
+                    <button class="frontMenuButton" style="padding:0px;display:flex;align-items:center;justify-content:center;width:160rem;height:40rem;">
+                        <p style="font-size:15rem;font-family:'Aileron', sans-serif; font-weight:normal;">Home</p>
+                    </button>
+                </a>
+            </div>
+            <div style="display:flex;flex-direction:row;align-items:center;justify-content:center;padding-top:50rem;">
+                <div style="width:2rem;height:40rem;background-color:rgb(254, 102, 102);margin-right:10rem;color:rgb(108, 106, 112);"></div>
+                <p style="font-size:22.8rem;font-family:'Aileron', sans-serif;font-weight:200;color:rgb(108, 106, 112);">Error Code: </p>
+                <p style="font-size:22.8rem;font-family:'Aileron', sans-serif;font-weight:normal;color:rgb(108, 106, 112);">101</p>
+            </div>
+            <a href="/privacy" style="color:rgb(108, 106, 112);font-size:18rem;font-family:'Aileron', sans-serif;font-weight:normal;padding-top:50rem;">Privacy Policy</a>
+        </div>
+    </main> 
+    <footer>
+        {% include "footer.html" %}
+    </footer>
+</body>
+</html>
