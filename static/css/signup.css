@@ -1,0 +1,143 @@
+
+#signUpForm{
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+    width:500px;
+}
+
+.options{
+    display:flex;
+    width:100%;
+}
+
+.option{
+    width:auto;
+    padding:5px;
+}
+
+.option2{
+    width:45%;
+}
+
+h1{
+    font-size:70rem;
+}
+
+#seperateUsernames{
+    justify-content: space-between;
+    gap:40px;
+    width:100%;
+}
+
+.smallGap{
+    gap:15px;
+}
+
+#createAccountDiv{
+    padding:15px;
+    border-radius:10px;
+    border: 1px solid black;
+    background: linear-gradient(135deg, rgb(243, 231, 214) 0%, rgb(235, 229, 220) 50%, rgb(253, 249, 234) 100%);
+}
+
+#createAccountReadText{
+    margin:0px;
+    font-family: "aileron", sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size:10px;
+    padding-right:20px;
+    padding-left:20px;
+    padding-bottom:15px;
+    padding-top:0px;
+    text-align:center;
+}
+
+#createAccountReadText a{
+    text-decoration:none;
+    color:red;
+}
+
+.buttonText{
+    margin:0px;
+    font-size:20px;
+    padding:10px;
+    font-weight:300;
+}
+
+#infoConsentText{
+    margin:0px;
+    font-size:10px;
+    color:rgb(70,70,70);
+    text-align:center;
+}
+
+.signUpInfoText{
+    padding-left:5px;
+    font-size:10px;
+    text-align:center;
+}
+
+#emailMatchText{
+    display:none;
+    position:absolute;
+}
+
+#passwordMatchText{
+    display:none;
+    position:absolute;
+}
+
+#message{
+    font-size:10px;
+    color:red;
+}
+
+#minPasswordLengthText{
+    display:none;
+}
+
+.signUpInfoText a{
+    text-decoration:none;
+    color:red;
+}
+
+#leftTextAlign{
+    text-align:left;
+}
+
+#resetPasswordForm{
+    border-radius:30px;
+    width:60%;
+    border:1px solid black;
+    background: linear-gradient(135deg, rgb(243, 231, 214) 0%, rgb(235, 229, 220) 50%, rgb(253, 249, 234) 100%);
+    padding:10px;
+}
+
+#resetPasswordInfo{
+    margin:0px;
+    padding:20px;
+    width:90%;
+    text-align:left;
+}
+
+#resetPasswordButtons{
+    display:flex;
+    flex-direction:row;
+    align-items:baseline;
+    justify-content:flex-start;
+    gap:20px;
+    padding-left:40px;
+    padding-right:40px;
+    padding-top:30px;
+}
+
+#optionalText{
+    position:absolute;
+}
+
+#minUsernameLengthText{
+    display:none;
+    position:absolute;
+}

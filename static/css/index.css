@@ -1,0 +1,1069 @@
+
+body{
+    font-family: "aileron", sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    margin:0px;
+    border:0px solid black;
+    padding:0px;
+    top:0px;
+    display:flex;
+    justify-content: center;
+    flex-direction:column;
+    align-items:center;
+}
+
+header{
+    display:block;
+    width:100%;
+}
+
+footer{
+    display:block;
+    width:100%;
+}
+
+main{
+    top:0px;
+    min-height:100vh;
+}
+
+nav{
+    position:fixed;
+    z-index:100;
+}
+
+.center{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.blank{
+    border:0px solid black;
+    margin:0px;
+    background-color: transparent;
+}
+
+.button{
+    cursor:pointer;
+}
+
+.button:focus{
+    outline:none;
+}
+
+.lightHover:hover{
+    transform:scale(1.05, 1.05);
+    transform-origin: center center;
+    transition:transform ease-in-out 0.05s
+}
+
+.auto{
+    width:auto;
+    height:auto;
+}
+
+.line{
+    height:1px;
+    width:100%;
+}
+
+.smallLine{
+    height:0.5px;
+    width:100%;
+}
+
+.blackBackground{
+    background-color:rgb(54, 53, 55);
+}
+
+.bland{
+    text-decoration:none;
+    color:black;
+}
+
+.aileronBlack{
+    font-family: "Aileron", sans-serif;
+    font-weight: 800;
+    font-style: normal;
+}
+
+.row{
+    flex-direction:row;
+}
+
+.column{
+    flex-direction:column;
+}
+
+.bigMargin{
+    margin-top:100px;
+    margin-bottom:100px;
+}
+
+.flex{
+    display:flex;
+}
+
+.maxWidth{
+    width:100%;
+}
+
+.red{
+    color:red;
+}
+
+.darkGray{
+    color:rgb(70,70,70)
+}
+
+.smallMargin{
+    margin:10px;
+}
+
+.buttonDesign1{
+    border-radius:30px;
+    width:60%;
+    border:1px solid black;
+    background: linear-gradient(135deg, rgb(243, 231, 214) 0%, rgb(235, 229, 220) 50%, rgb(253, 249, 234) 100%);
+    transition: 0.2s;
+}
+
+#buttonDesign1:hover{
+    transform:scale(1.02, 1.02);
+}
+
+.form{
+    border-radius:10px;
+    border:1px solid black;
+    background: linear-gradient(135deg, rgb(243, 231, 214) 0%, rgb(235, 229, 220) 50%, rgb(253, 249, 234) 100%); 
+}
+
+.smallPadding{
+    padding:10px;
+}
+
+.noPadding{
+    padding:0px;
+}
+
+.smallTopBottomPadding{
+    padding:0px;
+    padding-top:10px;
+    padding-bottom:10px;
+}
+
+.noMargin{
+    margin:0px;
+}
+
+.petDiv{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    position:relative;
+    width:40px;
+    height:40px;
+}
+
+.Grid3x3Listing{
+    display:grid;
+    grid-template-columns: 40px 40px 40px;
+    grid-template-rows:40px 40px 40px;
+    width:140px;
+    padding:10px;
+    aspect-ratio:1/1;
+    box-sizing:border-box;
+}
+
+.listingInfo{
+    display:flex;
+    flex-direction:row;
+    justify-content:space-between;
+    min-width:282px;
+    max-width:282px;
+}
+
+.userListingsListing{
+    min-width:302px;
+    max-width:302px;
+    min-height:201px;
+    max-height:201px;
+    background: linear-gradient(135deg, rgb(242, 230, 215) 0%, rgb(250, 246, 232) 100%);
+    padding:10px;
+    border:1px solid black;
+    border-radius:20px;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    box-sizing:border-box;
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%, -50%);
+
+}
+
+.userListingsListing img{
+    max-width:80%;
+    max-height:80%;
+    width:auto;
+    height:auto;
+}
+
+.userListingUpper{
+    display:flex;
+    align-items: center;
+    width: 100%;
+    justify-content:space-between;
+    height:20%;
+}
+
+.userListingUpper > :nth-child(1) {
+    width:75px;
+}
+
+.userListingUpper > :nth-child(3) {
+    width:75px;
+}
+
+
+.userListingUpper b{
+    font-size:14px;
+    font-family:'Aileron', sans-serif;
+    font-weight:900;
+}
+
+
+.userListingLine{
+    height:120px;
+    width:2px;
+    margin-top:5px;
+    background-color: black;
+}
+
+.listings{
+    position:relative;
+    width:100%;
+    padding-top:5rem;
+    padding-bottom:5rem;
+    height:201px;
+}
+
+.main{
+    display:flex;
+    flex-direction:row;
+}
+
+.mediumWidth{
+    width:20%;
+}
+
+#listingInterface2{
+    display:none;
+    flex-direction:column;
+    align-items:center;
+    position:absolute;
+    transform:translate(-50%, -0%);
+    top:3%;
+    left:50%;
+    width: 860rem;
+    min-height: 1800rem;
+    background:linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgb(0, 0, 0, 0) 275rem, white 425rem, white 475rem, rgb(237, 230, 219) 650rem), url('/static/images/misc/image100.png'); 
+    background-size: 100% auto;
+    background-repeat: no-repeat; 
+    background-position: top; 
+    border-radius:60rem;
+    z-index:100;
+}
+
+#listingInterface2 p{
+    font-family:'Aileron', sans-serif;
+}
+
+#listingInterface2>img{
+    filter:grayscale(1) brightness(5);
+    height:100rem;
+    width:auto;
+}
+
+#listingInterface2Information{
+    display:flex;
+    flex-direction:row;
+    justify-content:space-between;
+    height:auto;
+    width:90%;
+    position:relative;
+}
+
+#listingInterface2Information > :nth-child(1) {
+    text-align:left;
+    display:flex;
+    flex-direction:column;
+    align-items:start;
+}
+
+#listingInterface2Information > :nth-child(2) {
+    position:absolute;
+    left:50%;
+    top:-15%;
+    transform:translate(-50%, 0%);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+}
+
+#listingInterface2Information > :nth-child(3) {
+    text-align:right;
+    display:flex;
+    flex-direction:column;
+    align-items:end;
+}
+
+#listingInterface2Information > :nth-child(3) > p{
+    color:rgb(255, 102, 102);
+}
+
+
+.listingInterface2PetsDiv{
+    display:grid;
+    grid-template-rows:1fr 1fr 1fr;
+    grid-template-columns:1fr 1fr 1fr 1fr 1fr 1fr;
+    height:175rem;
+    width:350rem;
+    margin-top:15rem;
+}
+
+#listingInterface2Preferences{
+    display:flex;
+    flex-direction:row;
+    gap:3rem;
+}
+
+#listingInterface2Preferences p{
+    font-size:14rem;
+    color:rgb(109, 107, 112);
+}
+
+#listingInterface2 button{
+    background:linear-gradient(rgb(243, 231, 214) 0%, rgb(235, 229, 220) 50%, rgb(253, 249, 234) 100%);
+    border:1rem solid rgb(54, 53, 55);
+    width:180rem;
+    height:45rem;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:25rem;
+    cursor:pointer;
+    transform:scale(1);
+}
+
+#listingInterface2 button:disabled{
+    border:1rem solid rgb(180, 180, 180);
+    background:linear-gradient(rgb(243, 231, 214, 0.5) 0%, rgb(235, 229, 220, 0.5) 50%, rgb(253, 249, 234, 0.5) 100%);
+    cursor:default;
+}
+
+#listingInterface2 button:disabled p{
+    color: rgb(180, 180, 180);
+}
+
+#listingInterface2 button:hover{
+    transform:scale(1.05);
+    transition:0.2s ease;
+}
+
+#listingInterface2 button:disabled:hover{
+    transform:scale(1);
+}
+
+#listingInterface2 button > p {
+    font-size:19rem;
+    color:rgb(54, 53, 55);
+}
+
+#listingInterface2Main{
+    display:flex;
+    flex-direction:row;
+    width:90%;
+    margin-top:40rem;
+}
+
+#offers{
+    width:90%;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+}
+
+.offer{
+    width:100%;
+    height:250rem;
+    padding-top:30rem;
+    padding-bottom:30rem;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:20rem;
+}
+
+.offerLine {
+    height:0.75rem;
+    width:100%;
+    background-color:rgb(109, 107, 112);
+}
+
+.offer > :nth-child(1) {
+    width:100%;
+    height:150rem;
+    display:grid;
+    grid-template-columns:repeat(9, 1fr);
+    grid-template-rows:1fr 1fr;
+    place-items:center;
+}
+
+.offer > :nth-child(2) {
+    display:flex;
+    flex-direction:row;
+    justify-content:space-between;
+    width:70%;
+}
+
+.offer > :nth-child(1) > div {
+    width:100%;
+    height:100%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    position:relative;
+}
+
+.listingInterface2PetsDiv > div {
+    width:100%;
+    height:100%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    position:relative;
+}
+
+.offer > :nth-child(1) > div > img {
+    width:80%;
+    height:80%;
+    object-fit:cover;
+}
+
+.listingInterface2PetsDiv > div > img {
+    width:82.5%;
+    height:82.5%;
+    object-fit:cover;
+}
+  
+
+.offer > :nth-child(1) > div > div {
+    position:absolute;
+    bottom:10%;
+    right:10%;
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    gap:4.25rem;
+}
+
+.listingInterface2PetsDiv > div > div {
+    position:absolute;
+    bottom:10%;
+    right:10%;
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    gap:2.5rem;
+}
+
+.offer > :nth-child(1) > div > div > div {
+    border-radius:2rem;
+    width:14rem;
+    height:14rem;
+    position:relative;
+
+}
+
+.listingInterface2PetsDiv > div > div > div {
+    border-radius:2rem;
+    width:9rem;
+    height:9rem;
+    position:relative;
+}
+
+.offer > :nth-child(1) > div > div > div > p{
+    color:white;
+    font-size:8rem;
+    font-weight:700;
+    position:absolute;
+    top:49%;
+    left:46%;
+    transform:translate(-50%, -50%);
+}
+
+.listingInterface2PetsDiv > div > div > div > p {
+    color:white;
+    font-size:6rem;
+    font-weight:700;
+    position:absolute;
+    top:45%;
+    left:50%;
+    transform:translate(-50%, -50%);
+}
+
+.offer > :nth-child(2) > :nth-child(1) {
+    gap:2rem;
+}
+
+
+.offer > :nth-child(2) > div {
+    display:flex;
+    flex-direction:column-reverse;
+    align-items:center;
+    gap:5rem;
+}
+
+.offer > :nth-child(2) > div > :nth-child(1) {
+    font-size:14rem;
+}
+
+.offer > :nth-child(2) > :nth-child(1) > :nth-child(2) {
+    font-size:37.4rem;
+    font-weight:800;
+    color:rgb(255, 102, 102);
+    text-shadow:1px 1px 0 white, -1px 1px 0 white, 1px -1px 0 white, -1px -1px 0 white;
+}
+
+.offer > :nth-child(2) > :nth-child(3) > p {
+    font-weight:500;
+}
+
+.offer > :nth-child(2) p{
+    font-weight:200;
+}
+
+.offer > :nth-child(2) > div > img {
+    height:40rem;
+    aspect-ratio:1/1;
+    border-radius:100%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.red{
+    color:red;
+}
+
+
+#listingValue{
+    position:absolute;
+    transform:translate(-50%, -50%);
+    top:-12%;
+    width:auto;
+    font-size:max(3vw, 6vh);
+}
+
+#listingPart1Div{
+    position:relative;
+    display:flex;
+    flex-direction:row;
+    justify-content:center;
+    width:100%;
+    height:100%;
+}
+
+#listingPart2Div{
+    position:relative;
+    display:flex;
+    flex-direction:row;
+    justify-content:center;
+    width:100%;
+    height:100%;
+}
+
+#listingPart1{
+    width:max(15vw, 30vh);
+    height:max(15vw, 30vh);
+    display:grid;
+}
+
+#listingPart2{
+    width:max(15vw, 30vh);
+    height:max(15vw, 30vh);
+    display:grid;
+}
+
+#ownerInfo{
+    display:flex;
+    flex-direction:column;
+    position:absolute;
+    right:max(3vw, 6vh);
+    bottom:max(2.5vw, 5vh);
+    font-size:max(0.5vw, 1vh);
+}
+
+#owner{
+    font-size:max(0.5vw, 1vh);
+}
+
+.l2button{
+    background:linear-gradient(135deg, rgb(242, 230, 215) 0%, rgb(250, 246, 232) 100%);
+    padding:max(0.3vw, 0.6vh);
+    border:1px solid black;
+    border-radius:max(2vw, 4vh);
+    width:max(6vw, 12vh);
+    height:max(1.5vw, 3vh);
+    font-size:max(0.4vw, 0.8vh);
+    font-weight:bold;
+    cursor:pointer;
+}
+
+#listingInterface2Background{
+    width:100%;
+    height:100%;
+    z-index:99;
+    background-color:black;
+    opacity:0.5;
+    position:fixed;
+    top:0px;
+    display:none;
+}
+
+#addInventory{
+    background: linear-gradient(135deg, rgb(243, 231, 214) 0%, rgb(235, 229, 220) 50%, rgb(253, 249, 234) 100%);
+    border:3px solid white;
+    border-radius:40px;
+    padding:1vw;
+    width:max(30vw, 60vh);
+    z-index:1000;
+    position:fixed;
+    top:50%;
+    left:50%;
+    transform:translate(-50%, -50%);
+    display:none;
+}
+
+#addInventoryBackground{
+    width:100%;
+    height:100%;
+    z-index:105;
+    background-color:black;
+    opacity:0.5;
+    position:fixed;
+    top:0px;
+    display:none;
+}
+
+#petImages{
+    display:grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-gap:max(1vw, 2vh);
+    overflow:auto;
+    overflow-x:hidden;
+    padding:max(0.4vw, 0.8vh);
+    height:max(18vw, 36vh);
+}
+
+.petImage{
+    border-radius:max(0.35vw, 0.7vh);
+    border:1px solid white;
+    background: linear-gradient(135deg, rgb(243, 231, 214) 0%, rgb(235, 229, 220) 50%, rgb(253, 249, 234) 100%);
+    padding:max(0.1vw, 0.2vh);
+    cursor:pointer;
+    display: flex;
+    width:max(3.5vw, 7vh);
+    height:max(3.5vw, 7vh);
+}
+
+
+#flyButton{
+    background: linear-gradient(135deg, rgb(142, 202, 232) 0%, rgb(47, 152, 204) 50%, rgb(0, 134, 200) 100%);
+    border-radius: max(1.5vw, 3vh);
+    padding: 0;
+    padding-left: max(1.5vw, 3vh);
+    padding-right: max(1.5vw, 3vh);
+    padding-top: max(0.5vw, 1vh);
+    padding-bottom: max(0.5vw, 1vh);
+    text-align: center;
+    font-size: max(0.4vw, 0.8vh);
+    cursor: pointer;
+    height:max(1.4vw, 2.8vh);
+    display:flex;
+    justify-content: center;
+    align-items:center;
+}
+
+#rideButton{
+    background: linear-gradient(135deg, rgb(255, 197, 220) 0%, rgb(237, 44, 121) 50%, rgb(255, 0, 101) 100%);
+    border-radius: max(1.5vw, 3vh);
+    padding: 0;
+    padding-left: max(1.5vw, 3vh);
+    padding-right: max(1.5vw, 3vh);
+    padding-top: max(0.5vw, 1vh);
+    padding-bottom: max(0.5vw, 1vh);
+    text-align: center;
+    font-size: max(0.4vw, 0.8vh);
+    cursor: pointer;
+    height:max(1.4vw, 2.8vh);
+    display:flex;
+    justify-content: center;
+    align-items:center;
+}
+
+#regularButton{
+    background: linear-gradient(135deg, rgb(255, 145, 0) 0%, rgb(255, 102, 102) 50%, rgb(255, 102, 102) 100%);
+    border-radius: max(1.5vw, 3vh);
+    padding: 0;
+    padding-left: max(1.5vw, 3vh);
+    padding-right: max(1.5vw, 3vh);
+    padding-top: max(0.5vw, 1vh);
+    padding-bottom: max(0.5vw, 1vh);
+    text-align: center;
+    font-size: max(0.4vw, 0.8vh);
+    cursor: pointer;
+    height:max(1.4vw, 2.8vh);
+    display:flex;
+    justify-content: center;
+    align-items:center;
+}
+
+#neonButton{
+    background: linear-gradient(135deg, rgb(193, 255, 110) 0%, rgb(140, 198, 63) 50%, rgb(19, 114, 11) 100%);
+    border-radius: max(1.5vw, 3vh);
+    padding: 0;
+    padding-left: max(1.5vw, 3vh);
+    padding-right: max(1.5vw, 3vh);
+    padding-top: max(0.5vw, 1vh);
+    padding-bottom: max(0.5vw, 1vh);
+    text-align: center;
+    font-size: max(0.4vw, 0.8vh);
+    cursor: pointer;
+    height:max(1.4vw, 2.8vh);
+    display:flex;
+    justify-content: center;
+    align-items:center;
+}
+
+#megaButton{
+    background: linear-gradient(135deg, rgb(187, 80, 253) 0%, rgb(69, 3, 198) 50%, rgb(81, 28, 182) 100%);
+    border-radius: max(1.5vw, 3vh);
+    padding: 0;
+    padding-left: max(1.5vw, 3vh);
+    padding-right: max(1.5vw, 3vh);
+    padding-top: max(0.5vw, 1vh);
+    padding-bottom: max(0.5vw, 1vh);
+    text-align: center;
+    font-size: max(0.4vw, 0.8vh);
+    cursor: pointer;
+    height:max(1.4vw, 2.8vh);
+    display:flex;
+    justify-content: center;
+    align-items:center;
+}
+
+#imageButtons{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:max(0.5vw, 1vh);
+    flex-direction:row;
+    gap:max(0.5vw, 1vh);
+    padding-top:max(2vw, 4vh);
+    color:white;
+}
+
+#filter{
+    padding:max(0.4vw, 0.8vh);
+    width:20%;
+}
+
+.filterButton{
+    cursor:pointer;
+    padding:max(0.325vw, 0.65vh);
+    border-radius:max(0.2vw, 0.4vh);
+    border:1px solid white;
+    background: linear-gradient(135deg, rgb(220, 210, 200) 0%, rgb(190, 190, 190) 50%, rgb(220, 210, 200) 100%);
+}
+
+.filterButtonText{
+    color:white;
+    font-size:max(0.6vw, 1.2vh);
+}
+
+#filterText{
+    color:white;
+    font-size:max(0.8vw, 1.6vh);
+    margin:0px;
+}
+
+#filterImage{
+    height:max(0.7vw, 1.4vh);
+    width:max(0.7vw, 1.4vh);
+    filter: invert(100%) contrast(200%);
+}
+
+#filterButtons{
+    display:flex;
+    flex-direction:column;
+    gap:max(0.2vw, 0.4vh);
+}
+
+#petSearch{
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    padding:max(0.2vw, 0.4vh);
+    border-radius:max(0.3vw, 0.6vh);
+    border:1px solid white;
+    cursor:pointer;
+    background: transparent;
+    height:max(1.2vw, 2.4vh);
+    width:100%;
+    color:white;
+    font-size:max(1vw, 2vh);
+}
+
+#petSearchDiv{
+    position:relative;
+    width:70%;
+}
+
+#petSearch:focus{
+    background: linear-gradient(135deg, rgb(243, 231, 214) 0%, rgb(235, 229, 220) 50%, rgb(253, 249, 234) 100%);
+}
+
+#petSearchImage{
+    width:max(1vw, 2vh);
+    height:max(1vw, 2vh);
+    filter: invert(100%) contrast(200%);
+    position:absolute;
+    right:5%;
+}
+
+#petSearch::placeholder{
+    color:white;
+}
+
+#all{
+    filter:brightness(1.2)
+}
+
+#closeButton{
+    z-index:200;
+    position:absolute;
+    top:-6%;
+    right:-6%;
+    filter:invert(1);
+    cursor:pointer;
+}
+
+#mainContent{
+    padding:max(5vw, 10vh);
+    padding-right:max(10vw, 20vh);
+    padding-left:max(10vw, 20vh);
+}
+
+#mainContentSupport{
+    padding:max(5vw, 10vh);
+    padding-right:max(10vw, 20vh);
+    padding-left:max(10vw, 20vh);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    width:100vw;
+    height:40vh;
+}
+
+#errorDiv{
+    position:fixed;
+    display:flex;
+    justify-content: center;
+    align-items:center;
+    left:50%;
+    bottom:-100%;
+    transform:translate(-50%, -50%);
+    height:50px;
+    background-color:red;
+    transition:1s ease;
+    padding:10px;
+    border-radius:10px;
+}
+
+#errorText{
+    color:white;
+}
+
+#messageDiv{
+    position:fixed;
+    display:flex;
+    justify-content: center;
+    align-items:center;
+    left:50%;
+    bottom:-100%;
+    transform:translate(-50%, -50%);
+    height:50px;
+    background-color:lightgreen;
+    transition:1s ease;
+    padding:10px;
+    border-radius:10px;
+}
+
+#messageText{
+    color:white;
+}
+
+.frontMenuButton{
+    background:linear-gradient(135deg, rgb(243, 231, 214) 0%, rgb(235, 229, 220) 50%, rgb(253, 249, 234) 100%);
+    padding:15rem;
+    padding-left:50rem;
+    padding-right:50rem;
+    border:1px solid black;
+    border-radius:40rem;
+    cursor:pointer;
+}
+
+.frontMenuButton p{
+    font-size:22.9rem;
+    font-family:"Aileron", sans-serif;
+    font-weight:normal;
+    margin:0px;
+}
+
+p{
+    font-family:"Aileron", sans-serif;
+    margin:0px;
+}
+
+#slidesInfo{
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:center;
+    gap:7rem;
+}
+
+.slide{
+    position:absolute;
+    left:0%;
+    top:0%;
+    width:100vw;
+    overflow:hidden;
+    transition:opacity 1s ease;
+}
+
+html{
+    overflow-x:hidden;
+}
+
+
+.flyDiv{
+    background:linear-gradient(135deg, rgb(142, 202, 232) 0%, rgb(47, 152, 204) 50%, rgb(0, 134, 200) 100%);
+}
+
+.rideDiv{
+    background:linear-gradient(135deg, rgb(255, 197, 220) 0%, rgb(237, 44, 121) 50%, rgb(255, 0, 101) 100%);
+}
+
+.neonDiv{
+    background:linear-gradient(135deg, rgb(193, 255, 110) 0%, rgb(140, 198, 63) 50%, rgb(19, 114, 11) 100%);
+}
+
+.megaDiv{
+    background:linear-gradient(135deg, rgb(187, 80, 253) 0%, rgb(69, 3, 198) 50%, rgb(81, 28, 182) 100%);
+}
+
+.listingPetAttribute{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    border-radius:3px;
+    aspect-ratio:1/1;
+    height:5.5px;
+    padding:2.5px;
+
+}
+
+.listingPetAttribute b{
+    font-size:5.5px;
+    color:white;
+    margin:0px;
+}
+
+#leftArrow{
+    min-width:302px;
+    max-width:302px;
+    min-height:201px;
+    max-height:201px;
+    padding:10px;
+    border-radius:20px;
+    box-sizing:border-box;
+    position:fixed;
+    transform:translate(-50%, -50%);
+    z-index:200;
+    display:none;
+    flex-direction:row;
+    justify-content: flex-end;
+    align-items:center;
+    background-color:rgb(0,0,0,0);
+    transition:background-color 1s ease;
+}
+
+#leftArrow:hover{
+    background-color:rgb(0,0,0,0.2)
+}
+
+#leftArrow img{
+    height:30px;
+    width:auto;
+    transform:rotate(180deg);
+    filter:invert(1) contrast(2);
+}
+
+#rightArrow{
+    min-width:302px;
+    max-width:302px;
+    min-height:201px;
+    max-height:201px;
+    padding:10px;
+    border-radius:20px;
+    box-sizing:border-box;
+    position:fixed;
+    top:50%;
+    left:50%;
+    transform:translate(-50%, -50%);
+    z-index:200;
+    display:none;
+    flex-direction:row;
+    justify-content: flex-start;
+    align-items:center;
+    background-color:rgb(0,0,0,0);
+    transition:background-color 1s ease;
+    
+}
+
+#rightArrow:hover{
+    background-color:rgb(0,0,0,0.2)
+}
+
+#rightArrow img{
+    height:30px;
+    width:auto;
+    filter:invert(1) contrast(2);
+}

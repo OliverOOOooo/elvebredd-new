@@ -1,0 +1,933 @@
+@keyframes moveUpwards {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 0 -250px;
+    }
+}
+
+body{
+    font-size:15rem;
+}
+
+#dailyStreakDiv{
+    display:flex;
+    border-radius:25px;
+    border:1px solid red;
+    width:135px;
+    height:50px;
+    align-items:center;
+}
+
+#dailyStreakDiv svg{
+    width:15%;
+    height:auto;
+    fill: rgb(255, 102, 102);
+    padding:10px;
+}
+
+#dailyStreakDiv p{
+    padding:10px;
+    margin-left:20px;
+}
+
+#upperUserPage{
+    display:flex;
+    flex-direction:row;
+    justify-content: center;
+    padding-top:75px;
+}
+
+.listingPetAttribute{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    border-radius:2px;
+    width:10px;
+    height:10px;
+}
+
+.listingPetAttribute b{
+    font-size:6px;
+    color:white;
+    padding:1px;
+    margin:0px;
+}
+
+.profileButton{
+    display:flex;
+    align-items:center;
+    justify-content: center;
+    padding:15px;
+    border:1px solid black;
+    border-radius:25px;
+    width:150px;
+    height:40px;
+    background-color:rgb(0, 0, 0, 0);
+    cursor:pointer;
+}
+
+#friendsBackground{
+    width:100%;
+    height:100%;
+    position:fixed;
+    top:0%;
+    left:0%;
+    background-color:rgb(20, 20, 20, 0.35);
+    z-index:2000;
+    display:none;
+}
+
+#friendsMenu{
+    width:max(20vw, 40vh);
+    height:max(25vw, 50vh);
+    position:fixed;
+    left:50%;
+    top:50%;
+    transform:translate(-50%, -50%);
+    z-index:5000;
+    display:none;
+    align-items:center;
+    flex-direction:column;
+    padding:1%;
+    border-radius:5%;
+    border: 1px solid black;
+    background: linear-gradient(135deg, rgb(243, 231, 214) 0%, rgb(235, 229, 220) 50%, rgb(253, 249, 234) 100%);
+}
+
+.menuButton{
+    border-radius:max(1vw, 2vh);
+    padding:max(0.4vw, 0.8vh);
+    padding-right:max(1.3vw, 2.6vh);
+    padding-left:max(1.3vw, 2.6vh);
+    border:1px solid black;
+    background: linear-gradient(135deg, rgb(243, 231, 214) 0%, rgb(235, 229, 220) 50%, rgb(253, 249, 234) 100%);
+    transition: 0.2s;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.menuButton b{
+    font-size:max(0.85vw, 1.7vh);
+}
+
+.menuButton p{
+    font-size:max(0.85vw, 1.7vh);
+}
+
+.scale7{
+    transform:scale(0.7);
+}
+
+#helpBackground{
+    width:100%;
+    height:100%;
+    position:fixed;
+    top:0%;
+    left:0%;
+    background-color:rgb(20, 20, 20, 0.35);
+    z-index:2000;
+    display:none;
+}
+
+#helpMenu{
+    width:max(20vw, 40vh);
+    height:max(25vw, 50vh);
+    position:fixed;
+    left:50%;
+    top:50%;
+    transform:translate(-50%, -50%);
+    z-index:5000;
+    display:none;
+    align-items:center;
+    justify-content:space-between;
+    flex-direction:column;
+    padding:1%;
+    border-radius:5%;
+    border: 1px solid black;
+    background: linear-gradient(135deg, rgb(243, 231, 214) 0%, rgb(235, 229, 220) 50%, rgb(253, 249, 234) 100%);
+}
+#all{
+    filter:brightness(1.2)
+}
+
+#petAdded{
+    border-radius:30px;
+    background-color:lightgreen;
+    padding:30px;
+    position:fixed;
+    left:50vw;
+    transform:translate(-50%, 0%);
+    bottom:-100%;
+    transition: ease-in-out 0.75s;
+    z-index:10000000;
+
+}
+
+#userInventory{
+    width:75%;
+    display:none;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap:10px;
+}
+
+.userInventoryPetImage{
+    border:1px solid black;
+    border-radius:20px;
+    cursor:pointer;
+    height:auto;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    aspect-ratio: 1/1;
+    position:relative;
+}
+
+.orangeRed{
+    background: linear-gradient(135deg, rgb(255, 145, 0) 0%, rgb(255, 102, 102) 50%, rgb(255, 102, 102) 100%);
+}
+
+.sharkFrostButton{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:10px;
+    border-radius:40px;
+    width:max(12vw,24vh);
+    height:max(1.5vw,3vh);
+    max-width:240px;
+    max-height:30px;
+    position:relative;
+    background: linear-gradient(135deg, rgb(255, 145, 0, 0.35) 0%, rgb(255, 102, 102, 0.35) 50%, rgb(255, 102, 102, 0.35) 100%);
+    z-index:20;
+}
+
+.sharkText{
+    position:absolute;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    top:25%;
+    cursor:pointer;
+    width:50%;
+    height:50%;
+}
+
+.frostText{
+    position:absolute;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    z-index:75;
+    right:0%;
+    top:25%;
+    cursor:pointer;
+    width:50%;
+    height:50%;
+}
+
+.sharkFrostText{
+    z-index:75;
+    font-size:min(25px, max(1.2vw,2.4vh));
+    color:white;
+    opacity:1;
+    cursor:pointer;    
+}
+
+.sharkFrostButton{
+    z-index:25;
+}
+
+.buttonSelected{
+    z-index:30;
+    position:absolute;
+    height:max(1.5vw,3vh);
+    max-width:120px;
+    max-height:30px;
+    padding:10px;
+    width:max(6vw,12vh);
+    border-radius:40px;
+    left:0%;
+    top:0px;
+    cursor:pointer;
+    transition:0.33s ease-in-out;
+}
+
+.sharkButton{
+    cursor:pointer;
+    height:100%;
+    width:50%;
+    padding:0px;
+}
+
+.frostButton{
+    cursor:pointer;
+    height:100%;
+    width:50%;
+    padding:0px;
+}
+
+#listingInformation2{
+    display:flex;
+    flex-direction:row;
+    justify-content:center;
+    align-items:center;
+    gap:max(4vw, 8vh)
+}
+
+#listingInformation{
+    display:inline-flex;
+    flex-direction:row;
+    justify-content:space-between;
+    align-items:center;
+    position:relative;
+    gap:max(1vw, 2vh);
+    width:100%;
+}
+
+#winFairLose{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    width:300px;
+    height:50px;
+    border-radius:30px;
+    padding:5px;
+    background: linear-gradient(135deg, rgb(200, 200, 200) 0%, rgb(255, 255, 255) 50%, rgb(200, 200, 200) 100%);
+    transform:scale(0.66);
+    stroke-width:0px;
+}
+
+#winFairLoseText{
+    white-space:pre-wrap;
+    text-shadow:none;
+    stroke:none;
+    stroke-width:0px;
+}
+
+.score{
+    font-size:max(1.5vw,3vh);
+    color:grey;
+}
+
+#tradeBarBackground{
+    opacity:0.3;
+    width:100%;
+    height:10px;
+    border-radius:5px;
+}
+
+#tradeBar{
+    position:absolute;
+    left:0px;
+    top:0px;
+    width:100%;
+    height:10px;
+    border-radius:5px;
+    z-index:90;
+    transition:1s ease;
+}
+
+#listingInterfaceUpper{
+    display:inline-flex;
+    justify-content: center;
+    border-radius:max(8vw,24vh);
+    padding:max(2vw,4vh);
+    padding-top:max(1vw, 2vh);
+    padding-bottom:max(1vw, 2vh);
+    background: linear-gradient(135deg, rgb(242, 230, 215) 0%, rgb(250, 246, 232) 100%);
+    border:1px solid white;
+    z-index:102;
+    width:max(32vw, 64vh);
+}
+
+#listingInterfaceLower{
+    display:inline-flex;
+    flex-direction:column;
+    border-radius:80px;
+    padding:max(3vw,6vh);
+    background: linear-gradient(135deg, rgb(242, 230, 215) 0%, rgb(250, 246, 232) 100%);
+    border:1px solid white;       
+    gap:max(1vw,2vh);
+    z-index:102;
+}
+
+#listingInterface{
+    display:none;
+    flex-direction:column;
+    align-items:center;
+    gap:20px;
+    position:fixed;
+    top:50%;
+    left:50%;
+    transform:translate(-50%, -50%);
+    z-index:102;
+}
+
+#listingInformationMiddle{
+   display:flex;
+   flex-direction:column;
+   justify-content:center;
+   align-items:center;
+   gap:10px;
+}
+
+#listingInformationMiddle b{
+    font-size:25px;
+    color:grey;
+}
+
+#listingInformation2 b{
+    font-size:22px;
+    color:grey;
+}
+
+#tradePart1{
+    display:grid;
+    overflow:auto;
+    overflow-x:hidden;
+    grid-template-columns:1fr 1fr 1fr;
+    background-color:rgb(255, 102, 102);
+    padding:max(0.35vw, 0.7vh);
+    gap:max(0.35vw, 0.7vh);
+    border-radius:max(0.35vw, 0.7vh);
+    z-index:103;
+    width:auto;
+    height:max(12.7vw, 25.4vh);
+}
+
+#tradePart2{
+    display:grid;
+    overflow:auto;
+    overflow-x:hidden;
+    grid-template-columns:1fr 1fr 1fr;
+    background-color:rgb(255, 102, 102);
+    padding:max(0.35vw, 0.7vh);
+    gap:max(0.35vw, 0.7vh);
+    border-radius:max(0.35vw, 0.7vh);
+    z-index:103;
+    width:auto;
+    height:max(12.7vw, 25.4vh);
+}
+
+
+.tradePet{
+    background-color: rgb(246, 238, 225);
+    width:max(4vw, 8vh);
+    height:max(4vw, 8vh);
+}
+
+#tradingPetsInterface{
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:center;
+    gap:max(0.2vw, 0.4vh);
+}
+
+#differenceInValue {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: max(12vw, 24vh);
+    width: 80px;
+    overflow: hidden;
+    z-index:104;
+    opacity: 0;
+}
+
+#differenceInValue::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url("../images/misc/ValueUpV2.png");
+    background-size: 80px 250px;
+    background-repeat: repeat-y;
+    animation: moveUpwards 5s linear infinite;
+    filter: invert(89%) sepia(25%) saturate(218%) hue-rotate(330deg) brightness(108%) contrast(98%);
+    /*transform: rotate(180deg);*/
+}
+
+#differenceInValueText{
+    all:unset;
+    position:absolute;
+    font-size:40px;
+    color:red;
+    transform:translate(-50%, -50%);
+    z-index:110;
+    opacity:0;
+}
+
+#listingInterfaceBackground{
+    width:100%;
+    height:100%;
+    z-index:99;
+    background-color:black;
+    opacity:0.5;
+    position:fixed;
+    top:0px;
+    display:none;
+}
+
+#listingInterface2Background{
+    width:100%;
+    height:100%;
+    z-index:99;
+    background-color:black;
+    opacity:0.5;
+    position:fixed;
+    top:0px;
+    display:none;
+}
+
+#closeButton{
+    z-index:200;
+    position:absolute;
+    top:-6%;
+    right:-6%;
+    filter:invert(1);
+    cursor:pointer;
+}
+
+#errorDiv{
+    position:fixed;
+    display:flex;
+    justify-content: center;
+    align-items:center;
+    left:50%;
+    bottom:-100%;
+    transform:translate(-50%, -50%);
+    height:50px;
+    background-color:red;
+    transition:1s ease;
+    padding:10px;
+    border-radius:10px;
+}
+
+#errorText{
+    color:white;
+}
+
+#messageDiv{
+    position:fixed;
+    display:flex;
+    justify-content: center;
+    align-items:center;
+    left:50%;
+    bottom:-100%;
+    transform:translate(-50%, -50%);
+    height:50px;
+    background-color:lightgreen;
+    transition:1s ease;
+    padding:10px;
+    border-radius:10px;
+}
+
+#messageText{
+    color:white;
+}
+
+#userListings{
+    width:75%;
+    display:none;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap:20px;
+    position:relative;
+}
+
+.userListingsListing{
+    width:180px;
+    height:130px;
+    background: linear-gradient(135deg, rgb(242, 230, 215) 0%, rgb(250, 246, 232) 100%);
+    padding:10px;
+    border:1px solid black;
+    border-radius:20px;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    gap:10px;
+
+}
+
+.listingInfo{
+    display:flex;
+    flex-direction:row;
+    justify-content:space-between;
+    height:100%;
+}
+
+.petDiv{
+    width:25px;
+    height:25px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    position:relative;
+}
+
+.Grid3x3Listing{
+    display:grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap:2px;
+    height:79px;
+}
+
+
+#userWishlist{
+    width:75%;
+    display:none;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap:10px;
+}
+
+.disabled{
+    cursor:default;
+}
+
+#listingInterface2{
+    display:none;
+    flex-direction:column;
+    align-items:center;
+    gap:20px;
+    position:fixed;
+    top:50%;
+    left:50%;
+    transform:translate(-50%, -50%);
+    z-index:102;
+    height:max(25vw, 50vh);
+    width:max(40vw, 80vh);
+    background: linear-gradient(135deg, rgb(242, 230, 215) 0%, rgb(250, 246, 232) 100%);
+    border-radius:max(4vw, 8vh);
+    border:1px solid black;
+
+}
+
+#listingInterface2Upper{
+    width:100%;
+    height:20%;
+}
+
+#listingCloseButton{
+    display:flex;
+    align-items:center;
+    justify-content: center;
+    padding:max(0.4vw, 0.8vh);
+    border:1px solid black;
+    border-radius:max(2vw, 4vh);
+    width:max(5vw, 10vh);
+    height:max(1vw, 2vh);
+    background-color:rgb(0, 0, 0, 0);
+    cursor:pointer;
+    position:absolute;
+    right:max(1vw, 2vh);
+    bottom:max(1vw, 2vh);
+    font-size:max(0.8vw, 1.6vh);
+    background: linear-gradient(135deg, rgb(242, 230, 215) 0%, rgb(250, 246, 232) 100%);
+}
+
+#listingAcceptButton{
+    display:flex;
+    align-items:center;
+    justify-content: center;
+    padding:max(0.4vw, 0.8vh);
+    border:1px solid black;
+    border-radius:max(2vw, 4vh);
+    width:max(5vw, 10vh);
+    height:max(1vw, 2vh);
+    background-color:rgb(0, 0, 0, 0);
+    cursor:pointer;
+    position:absolute;
+    left:max(1vw, 2vh);
+    bottom:max(1vw, 2vh);
+    font-size:max(0.8vw, 1.6vh);
+    background: linear-gradient(135deg, rgb(242, 230, 215) 0%, rgb(250, 246, 232) 100%);
+}
+
+#listingCustomOfferButton{
+    display:flex;
+    align-items:center;
+    justify-content: center;
+    padding:max(0.4vw, 0.8vh);
+    border:1px solid black;
+    border-radius:max(2vw, 4vh);
+    width:max(10vw, 20vh);
+    height:max(1vw, 2vh);
+    background-color:rgb(0, 0, 0, 0);
+    cursor:pointer;
+    position:absolute;
+    left:max(1vw, 2vh);
+    bottom:max(1vw, 2vh);
+    font-size:max(0.8vw, 1.6vh);
+    background: linear-gradient(135deg, rgb(242, 230, 215) 0%, rgb(250, 246, 232) 100%);
+}
+
+.red{
+    color:red;
+}
+
+.listingInterface2TextBig{
+    font-size:max(1.6vw, 3.2vh);
+}
+
+#listingInterface2Lower{
+    height:100%;
+    width:100%;
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:space-between;
+}
+
+#listingValue{
+    position:absolute;
+    transform:translate(-50%, -50%);
+    top:-12%;
+    width:auto;
+    font-size:max(3vw, 6vh);
+}
+
+#listingPart1Div{
+    position:relative;
+    display:flex;
+    flex-direction:row;
+    justify-content:center;
+    width:100%;
+    height:100%;
+}
+
+#listingPart2Div{
+    position:relative;
+    display:flex;
+    flex-direction:row;
+    justify-content:center;
+    width:100%;
+    height:100%;
+}
+
+#listingPart1{
+    width:max(15vw, 30vh);
+    height:max(15vw, 30vh);
+    display:grid;
+}
+
+#listingPart2{
+    width:max(15vw, 30vh);
+    height:max(15vw, 30vh);
+    display:grid;
+}
+
+#ownerInfo{
+    display:flex;
+    flex-direction:column;
+    position:absolute;
+    right:max(3vw, 6vh);
+    bottom:max(2.5vw, 5vh);
+    font-size:max(0.5vw, 1vh);
+}
+
+#owner{
+    font-size:max(0.5vw, 1vh);
+}
+
+.l2button{
+    background:linear-gradient(135deg, rgb(242, 230, 215) 0%, rgb(250, 246, 232) 100%);
+    padding:max(0.3vw, 0.6vh);
+    border:1px solid black;
+    border-radius:max(2vw, 4vh);
+    width:max(6vw, 12vh);
+    height:max(1.5vw, 3vh);
+    font-size:max(0.4vw, 0.8vh);
+    font-weight:bold;
+    cursor:pointer;
+}
+
+#friendsDiv{
+    display:none;
+    height:max(12vw, 24vh);
+    width:100%;
+    overflow:scroll;
+    overflow-x:hidden;
+    flex-direction:column;
+    align-items:center;
+}
+
+#pendingDiv{
+    display:none;
+    height:max(12vw, 24vh);
+    width:100%;
+    overflow:scroll;
+    overflow-x:hidden;
+    flex-direction:column;
+    align-items:center;
+}
+
+#blockedDiv{
+    display:none;
+    height:max(12vw, 24vh);
+    width:100%;
+    overflow:scroll;
+    overflow-x:hidden;
+    flex-direction:column;
+    align-items:center;
+}
+
+.friendDiv{
+    width:90%;
+    height:max(3vw, 6vh);
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:space-between;
+    position:relative;
+}
+
+.friendInfo{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    width:100%;
+    height:100%;
+    padding-left:max(1vw, 2vh);
+}
+
+.robloxUsername{
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:flex-start;
+    gap:max(0.2vw, 0.4vh);
+}
+
+.more{
+    cursor:pointer;
+    filter:grayscale(1);
+}
+
+.more:hover{
+    filter:grayscale(0);
+}
+
+#friendMoreOptions{
+    position:fixed;
+    transform:translate(10%, -50%);
+    background:linear-gradient(135deg, rgb(242, 230, 215) 0%, rgb(250, 246, 232) 100%);
+    padding:max(0.5vw, 1vh);
+    border-radius:max(0.5vw, 1vh);
+    display:none;
+    flex-direction:column;
+    border:1px solid black;
+    gap:max(0.5vw, 1vh);
+    z-index:1000000;
+
+}
+
+#friendMoreOptions p{
+    font-size:max(1vw, 2vh);
+    margin:0px;
+    color:black;
+}
+
+#friendMoreOptions p:hover{
+    color:red
+}
+
+.inboxListing{
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:center;
+    gap:15px;
+}
+
+main{
+    padding-top:85.5rem;
+    background-color:rgb(233, 226, 216);
+}
+
+.inboxListingMain{
+    width:180px;
+    height:130px;
+    background: linear-gradient(135deg, rgb(242, 230, 215) 0%, rgb(250, 246, 232) 100%);
+    padding:10px;
+    border:1px solid black;
+    border-radius:20px;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    gap:10px;
+
+}
+
+.inboxListingOptions{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    height:100%;
+    gap:15px;
+}
+
+.inboxButton{
+    background: linear-gradient(135deg, rgb(242, 230, 215) 0%, rgb(250, 246, 232) 100%);
+    padding:10px;
+    padding-right:50px;
+    padding-left:50px;
+    border-radius:20px;
+    border:1px solid black;
+}
+
+.inboxNameInfo{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:5px;
+}
+
+#userInbox{
+    width:75%;
+    display:none;
+    grid-template-columns: repeat(auto-fill, minmax(363.45px, 1fr));
+    gap:20px;
+    position:relative;
+}
+
+#userPending{
+    width:75%;
+    display:none;
+    grid-template-columns: repeat(auto-fill, minmax(232px, 1fr));
+    gap:20px;
+    position:relative;
+}
+
+#userHistory{
+    width:75%;
+    display:none;
+    grid-template-columns: repeat(auto-fill, minmax(232px, 1fr));
+    gap:20px;
+    position:relative;
+}
+
+
+
+.pendingListing{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    background: linear-gradient(135deg, rgb(242, 230, 215) 0%, rgb(250, 246, 232) 100%);
+    width:210px;
+    padding:10px;
+    border:1px solid black;
+    border-radius:20px;
+
+}

@@ -1,0 +1,66 @@
+#footerLogo{
+    width:auto; 
+    height:12vh;
+}
+
+footer{
+    background: linear-gradient(135deg, rgb(243, 231, 214) 0%, rgb(235, 229, 220) 50%, rgb(253, 249, 234) 100%);
+}
+
+.footerText{
+    margin:0px;
+    font-size:2.2vh;
+    text-decoration:none;
+    padding:10px;
+    text-shadow: 1px 1px 1px rgba(100, 100, 100, 0.25);
+}
+
+.footerImage{
+    width:60px;
+    height:auto;
+    padding:5px;
+}
+
+#footerMenu{
+    width:100%;
+    display:flex;
+    flex-direction:row;
+    justify-content:space-between;
+}
+
+footer a{
+    text-decoration:none;
+    color:black;
+}
+
+#footerQuickLinks1{
+    display:flex;
+}
+
+#footerQuickLinks2{
+    display:none;
+}
+
+#helpCenter1{
+    display:flex;
+}
+
+#helpCenter2{
+    display:none
+}
+
+#footerAvailableOptions{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+#footerLine{
+    width:100%;
+}
+
+#footerSection{
+    padding-right:3vw; 
+    width:100%; 
+    text-align:right;
+}
