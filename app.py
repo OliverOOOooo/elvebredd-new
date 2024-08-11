@@ -4,10 +4,9 @@ openDataFiles()
 
 cleanseTrades()
 
-if __name__ == "__main__":
-    app = flask.Flask("__main__")
-    app.secret_key = str(encrypt(os.urandom(512).hex()))
-    app.permanent_session_lifetime = 60 * 60 * 24 * 7  # 7 Days
+app = flask.Flask("__main__")
+app.secret_key = str(encrypt(os.urandom(512).hex()))
+app.permanent_session_lifetime = 60 * 60 * 24 * 7  # 7 Days
 
 @app.route("/", methods=["GET", "POST"])
 def indexPage():
@@ -509,6 +508,9 @@ def applicationPage():
     validateData()
     return flask.render_template("application.html", storedWebData={}, message="", loggedIn=flask.session.get("loggedIn", False), userID=flask.session.get("userID", ""), userData=flask.session.get("userData", {}))
 
+@app.cli.command("status")
+def status():
+    checkStatus()
 
 #if __name__ == "__main__": 
 #    from waitress import serve

@@ -224,7 +224,7 @@
             <div style="width:50%">
                 <div style="display:flex;flex-direction:row;gap:10rem;">
                     <button id="changeButton" onclick="setAddPetTypeTo('listingInterface2');openInventory()"><p>Change</p></button>
-                    <button id="finishButton"><p>Finish</p></button>
+                    <button id="finishButton" onclick="sendOffer();closeListingInterface2()"><p>Finish</p></button>
                 </div>
                 <div id="sharkValueRequestedDiv" style="display:flex;flex-direction:row;gap:2rem;width:180rem;justify-content:center;margin-top:10rem;">
                     <p style="font-size: 20rem;font-weight:200;color:rgb(54, 53, 55);" id="youAddTheyAdd">YOU ADD: </p>
@@ -1189,29 +1189,34 @@
 
     function showUserListings2(listing) {
         currentListing = listing
+        yourOfferExtraPets = []
+        theirOfferExtraPets = []
         listingInterface2.style.display = "flex"
         listingInterface2Background.style.display = "flex"
         showOffers(listing)
         showPreferences(listing)
+
 
         if (listing["extraSharkValueRequested"] == 0 || listing["extraSharkValueRequested"] == undefined) {
             yourOfferValue.innerText = listing["offer"]["giveValue"].toFixed(2)
             theirOfferValue.innerText = listing["offer"]["takeValue"].toFixed(2)
             finishButton.disabled = false
             sharkValueRequestedDiv.style.display = "none"
-            changeButton.disabled = true
+            changeButton.disabled = false
         } else if (listing["extraSharkValueRequested"] > 0) {
             yourOfferValue.innerText = listing["offer"]["giveValue"].toFixed(2).toString() + " + " + listing["extraSharkValueRequested"].toString()
             theirOfferValue.innerText = listing["offer"]["takeValue"].toFixed(2)
             finishButton.disabled = true
             sharkValueRequestedDiv.style.display = "flex"
             changeButton.disabled = false
+            sharkValueRequested.innerText = listing["extraSharkValueRequested"].toFixed(2)
         } else if (listing["extraSharkValueRequested"] < 0) {
             yourOfferValue.innerText = listing["offer"]["giveValue"].toFixed(2)
             theirOfferValue.innerText = listing["offer"]["takeValue"].toFixed(2).toString() + " + " + Math.abs(listing["extraSharkValueRequested"]).toString()
             finishButton.disabled = true
             sharkValueRequestedDiv.style.display = "flex"
             changeButton.disabled = false
+            sharkValueRequested.innerText = Math.abs(listing["extraSharkValueRequested"]).toFixed(2)
         }
 
 
@@ -1463,6 +1468,8 @@
 
         for (const i in yourOfferExtraPets) {
             const div = document.createElement("div")
+            div.setAttribute("onclick", "removePetFromInventory('listingInterface2', " + i.toString() + ")")
+            div.style.cursor = "pointer"
             const img = document.createElement("img")
             img.src = petsDict[yourOfferExtraPets[i]["id"]]["image"]
             const div2 = document.createElement("div")
@@ -1550,6 +1557,8 @@
 
         for (const i in theirOfferExtraPets) {
             const div = document.createElement("div")
+            div.setAttribute("onclick", "removePetFromInventory('listingInterface2', " + i.toString() + ")")
+            div.style.cursor = "pointer"
             const img = document.createElement("img")
             img.src = petsDict[theirOfferExtraPets[i]["id"]]["image"]
             const div2 = document.createElement("div")
@@ -1592,23 +1601,25 @@
         }
 
         if (listing["extraSharkValueRequested"] == 0 || listing["extraSharkValueRequested"] == undefined) {
-            yourOfferValue.innerText = listing["offer"]["giveValue"].toFixed(2)
-            theirOfferValue.innerText = listing["offer"]["takeValue"].toFixed(2)
+            yourOfferValue.innerText = (listing["offer"]["giveValue"] + calculateValue(yourOfferExtraPets)).toFixed(2)
+            theirOfferValue.innerText = (listing["offer"]["takeValue"] + calculateValue(theirOfferExtraPets)).toFixed(2)
             finishButton.disabled = false
             sharkValueRequestedDiv.style.display = "none"
-            changeButton.disabled = true
+            changeButton.disabled = false
         } else if (listing["extraSharkValueRequested"] > 0 && calculateValue(yourOfferExtraPets) < listing["extraSharkValueRequested"]) {
             yourOfferValue.innerText = (listing["offer"]["giveValue"] + calculateValue(yourOfferExtraPets)).toFixed(2).toString() + " + " + (listing["extraSharkValueRequested"] - calculateValue(yourOfferExtraPets)).toFixed(2).toString()
             theirOfferValue.innerText = listing["offer"]["takeValue"].toFixed(2)
             finishButton.disabled = true
             sharkValueRequestedDiv.style.display = "flex"
             changeButton.disabled = false
+            sharkValueRequested.innerText = (listing["extraSharkValueRequested"] - calculateValue(yourOfferExtraPets)).toFixed(2)
         } else if (listing["extraSharkValueRequested"] < 0 && calculateValue(theirOfferExtraPets) < Math.abs(listing["extraSharkValueRequested"])) {
             yourOfferValue.innerText = listing["offer"]["giveValue"].toFixed(2)
             theirOfferValue.innerText = (listing["offer"]["takeValue"] + calculateValue(theirOfferExtraPets)).toFixed(2).toString() + " + " + (Math.abs(listing["extraSharkValueRequested"]) - calculateValue(theirOfferExtraPets)).toFixed(2).toString()
             finishButton.disabled = true
             sharkValueRequestedDiv.style.display = "flex"
             changeButton.disabled = false
+            sharkValueRequested.innerText = (Math.abs(listing["extraSharkValueRequested"]) - calculateValue(theirOfferExtraPets)).toFixed(2)
         } else {
             yourOfferValue.innerText = (listing["offer"]["giveValue"] + calculateValue(yourOfferExtraPets)).toFixed(2)
             theirOfferValue.innerText = (listing["offer"]["takeValue"] + calculateValue(theirOfferExtraPets)).toFixed(2)
@@ -1720,6 +1731,13 @@
         } else if (type == "listing2") {
             listingPart2Dict.splice(pet, 1)
             showUserListings2(currentListing, 1)
+        } else if (type == "listingInterface2") {
+            if (currentListing["extraSharkValueRequested"] > 0 || currentListing["extraSharkValueRequested"] == 0) {
+                yourOfferExtraPets.splice(pet, 1)
+            } else {
+                theirOfferExtraPets.splice(pet, 1)
+            }
+            updateListingInterface2()
         }
     }
 

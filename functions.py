@@ -10,10 +10,11 @@ import copy
 import os
 import atexit
 from better_profanity import profanity
+import click, requests
 
 ValidateDataCheck = time.time()
 
-WebsiteAddress = "127.0.0.1:5000"
+WebsiteAddress = "https://127.0.0.1:5000"
 SCOPES = ["https://www.googleapis.com/auth/gmail.send"]
 
 def getCredentials():
@@ -34,6 +35,17 @@ def getCredentials():
             token.write(creds.to_json())
 
     return creds
+
+
+def checkStatus():
+    try:
+        response = requests.get(WebsiteAddress)
+        if response.status_code == 200:
+            click.echo("Server is running.")
+        else:
+            click.echo("Server is not responding as expected.")
+    except requests.ConnectionError:
+        click.echo("Server is not running.")
 
 def sendEmail(to_mail, subject, body):
     global SCOPES
