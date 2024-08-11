@@ -773,7 +773,8 @@ def calculateValue(trade):
         try:
             value += Pets[str(pet["id"])][keyValue]
         except KeyError:
-            value += Pets[str(pet["id"])]["value"]
+            if "value" in Pets[str(pet["id"])] and Pets[str(pet["id"])]["value"] != None:
+                value += Pets[str(pet["id"])]["value"]
     return value
 
 
@@ -782,10 +783,12 @@ def createListing(userID, trade1, trade2, public = True, visibleTo = "all", extr
     if userID != "" and len(trade1) > 0 and len(trade2) > 0:
         UserData[userID]["trades"].append(str(len(Trades)))
         giveValue, takeValue = calculateValue(trade1), calculateValue(trade2)
+        tradeID = str(len(Trades))
         trade = {
             "owner":userID,
             "ownerUsername":UserData[userID]["username"],
             "ownerRobloxUsername":UserData[userID]["robloxUsername"],
+            "id":tradeID,
             "offer":{"give":trade1, "take":trade2, "giveValue":giveValue, "takeValue":takeValue},
             "extraSharkValueRequested":extra,
             "completed":False,
@@ -801,7 +804,6 @@ def createListing(userID, trade1, trade2, public = True, visibleTo = "all", extr
             "status":"Pending",
 
         }
-        tradeID = str(len(Trades))
         Trades[tradeID] = trade
         dumpUserData()
         dumpTrades()
@@ -1399,7 +1401,7 @@ def generateListings(amount, user):
                 "neon":0,
                 "mega":0,
             })
-        id, output, success = createListing(user, trade1, trade2, True, "all", random.randint(0,2))
+        id, output, success = createListing(user, trade1, trade2, True, "all", random.randint(-10,10))
         if success == 1:
             for y in range(0, random.randint(0, 10)):
                 pets = []

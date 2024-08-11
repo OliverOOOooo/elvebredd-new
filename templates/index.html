@@ -1018,7 +1018,9 @@
                 keyword += " - ride"
             }            
             if (petsDict[listOfPets[i]["id"]][keyword] == undefined) {
-                value += petsDict[listOfPets[i]["id"]]["value"]
+                if (petsDict[listOfPets[i]["id"]]["value"] != null) {
+                    value += petsDict[listOfPets[i]["id"]]["value"]
+                }
             } else {
                 value += petsDict[listOfPets[i]["id"]][keyword]
             }
@@ -1628,6 +1630,32 @@
             changeButton.disabled = false
         }
 
+    }
+
+    function sendOffer() {
+        formData = new FormData();
+        formData.append('key', key)
+        formData.append('action', "sendOffer");
+        formData.append('action', "sendOffer");
+
+        fetch('/api', {
+        method: 'POST',
+        body: formData
+        })
+        .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+        })
+        .then(data => {
+        if (data == "SUCCESS") {
+            
+        }
+        })
+        .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+        });
     }
 
     function displayPets() {
