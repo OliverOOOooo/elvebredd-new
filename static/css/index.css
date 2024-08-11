@@ -299,6 +299,7 @@ nav{
 
 #listingInterface2 p{
     font-family:'Aileron', sans-serif;
+    margin:0px;
 }
 
 #listingInterface2>img{
@@ -580,88 +581,6 @@ nav{
     font-size:max(1.6vw, 3.2vh);
 }
 
-#listingInterface2Lower{
-    height:100%;
-    width:100%;
-    display:flex;
-    flex-direction:row;
-    align-items:center;
-    justify-content:space-between;
-}
-
-#listingValue{
-    position:absolute;
-    transform:translate(-50%, -50%);
-    top:-12%;
-    width:auto;
-    font-size:max(3vw, 6vh);
-}
-
-#listingPart1Div{
-    position:relative;
-    display:flex;
-    flex-direction:row;
-    justify-content:center;
-    width:100%;
-    height:100%;
-}
-
-#listingPart2Div{
-    position:relative;
-    display:flex;
-    flex-direction:row;
-    justify-content:center;
-    width:100%;
-    height:100%;
-}
-
-#listingPart1{
-    width:max(15vw, 30vh);
-    height:max(15vw, 30vh);
-    display:grid;
-}
-
-#listingPart2{
-    width:max(15vw, 30vh);
-    height:max(15vw, 30vh);
-    display:grid;
-}
-
-#ownerInfo{
-    display:flex;
-    flex-direction:column;
-    position:absolute;
-    right:max(3vw, 6vh);
-    bottom:max(2.5vw, 5vh);
-    font-size:max(0.5vw, 1vh);
-}
-
-#owner{
-    font-size:max(0.5vw, 1vh);
-}
-
-.l2button{
-    background:linear-gradient(135deg, rgb(242, 230, 215) 0%, rgb(250, 246, 232) 100%);
-    padding:max(0.3vw, 0.6vh);
-    border:1px solid black;
-    border-radius:max(2vw, 4vh);
-    width:max(6vw, 12vh);
-    height:max(1.5vw, 3vh);
-    font-size:max(0.4vw, 0.8vh);
-    font-weight:bold;
-    cursor:pointer;
-}
-
-#listingInterface2Background{
-    width:100%;
-    height:100%;
-    z-index:99;
-    background-color:black;
-    opacity:0.5;
-    position:fixed;
-    top:0px;
-    display:none;
-}
 
 #addInventory{
     background: linear-gradient(135deg, rgb(243, 231, 214) 0%, rgb(235, 229, 220) 50%, rgb(253, 249, 234) 100%);
