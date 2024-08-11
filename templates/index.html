@@ -223,11 +223,11 @@
         <div id="listingInterface2Main">
             <div style="width:50%">
                 <div style="display:flex;flex-direction:row;gap:10rem;">
-                    <button id="changeButton"><p>Change</p></button>
+                    <button id="changeButton" onclick="setAddPetTypeTo('listingInterface2');openInventory()"><p>Change</p></button>
                     <button id="finishButton"><p>Finish</p></button>
                 </div>
                 <div id="sharkValueRequestedDiv" style="display:flex;flex-direction:row;gap:2rem;width:180rem;justify-content:center;margin-top:10rem;">
-                    <p style="font-size: 20rem;font-weight:200;color:rgb(54, 53, 55);">YOU ADD: </p>
+                    <p style="font-size: 20rem;font-weight:200;color:rgb(54, 53, 55);" id="youAddTheyAdd">YOU ADD: </p>
                     <p id="sharkValueRequested" style="font-size:20rem;font-weight:500;color:rgb(54, 53, 55);">2</p>
                 </div>
             </div>
@@ -471,6 +471,9 @@
     var completedTradesByUser = document.getElementById("completedTradesByUser")
     var changeButton = document.getElementById("changeButton")
     var finishButton = document.getElementById("finishButton")
+    var youAddTheyAdd = document.getElementById("youAddTheyAdd")
+    var yourOfferExtraPets = []
+    var theirOfferExtraPets = []
     
 
     function setAddPetTypeTo(type) {
@@ -992,6 +995,37 @@
 
     }
 
+    function calculateValue(listOfPets) {
+        let value = 0
+        let keyword = ""
+        for (const i in listOfPets) {
+            keyword = ""
+            if (listOfPets[i]["regular"] == 1) {
+                keyword += "rvalue"
+            } else if (listOfPets[i]["neon"] == 1) {
+                keyword += "nvalue"
+            } else if (listOfPets[i]["mega"] == 1) {
+                keyword += "mvalue"
+            } else {
+                keyword += "rvalue"
+            }
+
+            if (listOfPets[i]["fly"] == 1 && listOfPets[i]["ride"] == 1) {
+                keyword += " - fly&ride"
+            } else if (listOfPets[i]["fly"] == 1) {
+                keyword += " - fly"
+            } else if (listOfPets[i]["ride"] == 1) {
+                keyword += " - ride"
+            }            
+            if (petsDict[listOfPets[i]["id"]][keyword] == undefined) {
+                value += petsDict[listOfPets[i]["id"]]["value"]
+            } else {
+                value += petsDict[listOfPets[i]["id"]][keyword]
+            }
+        }
+        return value
+    }
+
     function calculateTradeValueWithInput(trade1, trade2) {
         var totalValue = 0
         var value = ""
@@ -1159,25 +1193,34 @@
         listingInterface2Background.style.display = "flex"
         showOffers(listing)
         showPreferences(listing)
-        theirOfferValue.innerText = listing["offer"]["takeValue"].toFixed(2)
-    
+
         if (listing["extraSharkValueRequested"] == 0 || listing["extraSharkValueRequested"] == undefined) {
             yourOfferValue.innerText = listing["offer"]["giveValue"].toFixed(2)
-            sharkValueRequestedDiv.style.display = "none"
+            theirOfferValue.innerText = listing["offer"]["takeValue"].toFixed(2)
             finishButton.disabled = false
-        } else {
+            sharkValueRequestedDiv.style.display = "none"
+            changeButton.disabled = true
+        } else if (listing["extraSharkValueRequested"] > 0) {
             yourOfferValue.innerText = listing["offer"]["giveValue"].toFixed(2).toString() + " + " + listing["extraSharkValueRequested"].toString()
+            theirOfferValue.innerText = listing["offer"]["takeValue"].toFixed(2)
             finishButton.disabled = true
             sharkValueRequestedDiv.style.display = "flex"
-            sharkValueRequested.innerText = listing["extraSharkValueRequested"]
+            changeButton.disabled = false
+        } else if (listing["extraSharkValueRequested"] < 0) {
+            yourOfferValue.innerText = listing["offer"]["giveValue"].toFixed(2)
+            theirOfferValue.innerText = listing["offer"]["takeValue"].toFixed(2).toString() + " + " + Math.abs(listing["extraSharkValueRequested"]).toString()
+            finishButton.disabled = true
+            sharkValueRequestedDiv.style.display = "flex"
+            changeButton.disabled = false
         }
+
+
 
         timeAgoListed.innerText = timeSince(listing["createdAt"])
         totalOffers.innerText = listing["customOffers"].length
 
         listingInterface2YourOfferPets.innerHTML = ""
         for (const i in listing["offer"]["give"]) {
-            console.log(petsDict[listing["offer"]["give"][i]["id"]]["image"])
             const div = document.createElement("div")
             const img = document.createElement("img")
             img.src = petsDict[listing["offer"]["give"][i]["id"]]["image"]
@@ -1222,7 +1265,6 @@
 
         listingInterface2TheirOfferPets.innerHTML = ""
         for (const i in listing["offer"]["take"]) {
-            console.log(petsDict[listing["offer"]["take"][i]["id"]]["image"])
             const div = document.createElement("div")
             const img = document.createElement("img")
             img.src = petsDict[listing["offer"]["take"][i]["id"]]["image"]
@@ -1373,6 +1415,210 @@
 
     }
 
+    function updateListingInterface2() {
+        var listing = currentListing
+        listingInterface2YourOfferPets.innerHTML = ""
+        for (const i in listing["offer"]["give"]) {
+            const div = document.createElement("div")
+            const img = document.createElement("img")
+            img.src = petsDict[listing["offer"]["give"][i]["id"]]["image"]
+            const div2 = document.createElement("div")
+            if (listing["offer"]["give"][i]["fly"] == 1) {
+                const div3 = document.createElement("div")
+                div3.style.background = "linear-gradient(135deg, rgb(142, 202, 232) 0%, rgb(47, 152, 204) 50%, rgb(0, 134, 200) 100%)"
+                const p = document.createElement("p")
+                p.innerText = "F"
+                div3.appendChild(p)
+                div2.appendChild(div3)
+            }
+            if (listing["offer"]["give"][i]["ride"] == 1) {
+                const div3 = document.createElement("div")
+                div3.style.background = "linear-gradient(135deg, rgb(255, 197, 220) 0%, rgb(237, 44, 121) 50%, rgb(255, 0, 101) 100%)"
+                const p = document.createElement("p")
+                p.innerText = "F"
+                div3.appendChild(p)
+                div2.appendChild(div3)
+            }
+            if (listing["offer"]["give"][i]["neon"] == 1) {
+                const div3 = document.createElement("div")
+                div3.style.background = "linear-gradient(135deg, rgb(187, 80, 253) 0%, rgb(69, 3, 198) 50%, rgb(81, 28, 182) 100%)"
+                const p = document.createElement("p")
+                p.innerText = "F"
+                div3.appendChild(p)
+                div2.appendChild(div3)
+            }
+            if (listing["offer"]["give"][i]["mega"] == 1) {
+                const div3 = document.createElement("div")
+                div3.style.background = "linear-gradient(135deg, rgb(193, 255, 110) 0%, rgb(140, 198, 63) 50%, rgb(19, 114, 11) 100%)"
+                const p = document.createElement("p")
+                p.innerText = "F"
+                div3.appendChild(p)
+                div2.appendChild(div3)
+            }
+            div.appendChild(img)
+            div.appendChild(div2)
+
+            listingInterface2YourOfferPets.appendChild(div)
+        }
+
+        for (const i in yourOfferExtraPets) {
+            const div = document.createElement("div")
+            const img = document.createElement("img")
+            img.src = petsDict[yourOfferExtraPets[i]["id"]]["image"]
+            const div2 = document.createElement("div")
+            if (yourOfferExtraPets[i]["fly"] == 1) {
+                const div3 = document.createElement("div")
+                div3.style.background = "linear-gradient(135deg, rgb(142, 202, 232) 0%, rgb(47, 152, 204) 50%, rgb(0, 134, 200) 100%)"
+                const p = document.createElement("p")
+                p.innerText = "F"
+                div3.appendChild(p)
+                div2.appendChild(div3)
+            }
+            if (yourOfferExtraPets[i]["ride"] == 1) {
+                const div3 = document.createElement("div")
+                div3.style.background = "linear-gradient(135deg, rgb(255, 197, 220) 0%, rgb(237, 44, 121) 50%, rgb(255, 0, 101) 100%)"
+                const p = document.createElement("p")
+                p.innerText = "F"
+                div3.appendChild(p)
+                div2.appendChild(div3)
+            }
+            if (yourOfferExtraPets[i]["neon"] == 1) {
+                const div3 = document.createElement("div")
+                div3.style.background = "linear-gradient(135deg, rgb(187, 80, 253) 0%, rgb(69, 3, 198) 50%, rgb(81, 28, 182) 100%)"
+                const p = document.createElement("p")
+                p.innerText = "F"
+                div3.appendChild(p)
+                div2.appendChild(div3)
+            }
+            if (yourOfferExtraPets[i]["mega"] == 1) {
+                const div3 = document.createElement("div")
+                div3.style.background = "linear-gradient(135deg, rgb(193, 255, 110) 0%, rgb(140, 198, 63) 50%, rgb(19, 114, 11) 100%)"
+                const p = document.createElement("p")
+                p.innerText = "F"
+                div3.appendChild(p)
+                div2.appendChild(div3)
+            }
+            div.appendChild(img)
+            div.appendChild(div2)
+
+            listingInterface2YourOfferPets.appendChild(div)
+        }
+
+        listingInterface2TheirOfferPets.innerHTML = ""
+        for (const i in listing["offer"]["take"]) {
+            const div = document.createElement("div")
+            const img = document.createElement("img")
+            img.src = petsDict[listing["offer"]["take"][i]["id"]]["image"]
+            const div2 = document.createElement("div")
+            if (listing["offer"]["take"][i]["fly"] == 1) {
+                const div3 = document.createElement("div")
+                div3.style.background = "linear-gradient(135deg, rgb(142, 202, 232) 0%, rgb(47, 152, 204) 50%, rgb(0, 134, 200) 100%)"
+                const p = document.createElement("p")
+                p.innerText = "F"
+                div3.appendChild(p)
+                div2.appendChild(div3)
+            }
+            if (listing["offer"]["take"][i]["ride"] == 1) {
+                const div3 = document.createElement("div")
+                div3.style.background = "linear-gradient(135deg, rgb(255, 197, 220) 0%, rgb(237, 44, 121) 50%, rgb(255, 0, 101) 100%)"
+                const p = document.createElement("p")
+                p.innerText = "F"
+                div3.appendChild(p)
+                div2.appendChild(div3)
+            }
+            if (listing["offer"]["take"][i]["neon"] == 1) {
+                const div3 = document.createElement("div")
+                div3.style.background = "linear-gradient(135deg, rgb(187, 80, 253) 0%, rgb(69, 3, 198) 50%, rgb(81, 28, 182) 100%)"
+                const p = document.createElement("p")
+                p.innerText = "F"
+                div3.appendChild(p)
+                div2.appendChild(div3)
+            }
+            if (listing["offer"]["take"][i]["mega"] == 1) {
+                const div3 = document.createElement("div")
+                div3.style.background = "linear-gradient(135deg, rgb(193, 255, 110) 0%, rgb(140, 198, 63) 50%, rgb(19, 114, 11) 100%)"
+                const p = document.createElement("p")
+                p.innerText = "F"
+                div3.appendChild(p)
+                div2.appendChild(div3)
+            }
+            div.appendChild(img)
+            div.appendChild(div2)
+
+            listingInterface2TheirOfferPets.appendChild(div)
+        }
+
+        for (const i in theirOfferExtraPets) {
+            const div = document.createElement("div")
+            const img = document.createElement("img")
+            img.src = petsDict[theirOfferExtraPets[i]["id"]]["image"]
+            const div2 = document.createElement("div")
+            if (theirOfferExtraPets[i]["fly"] == 1) {
+                const div3 = document.createElement("div")
+                div3.style.background = "linear-gradient(135deg, rgb(142, 202, 232) 0%, rgb(47, 152, 204) 50%, rgb(0, 134, 200) 100%)"
+                const p = document.createElement("p")
+                p.innerText = "F"
+                div3.appendChild(p)
+                div2.appendChild(div3)
+            }
+            if (theirOfferExtraPets[i]["ride"] == 1) {
+                const div3 = document.createElement("div")
+                div3.style.background = "linear-gradient(135deg, rgb(255, 197, 220) 0%, rgb(237, 44, 121) 50%, rgb(255, 0, 101) 100%)"
+                const p = document.createElement("p")
+                p.innerText = "F"
+                div3.appendChild(p)
+                div2.appendChild(div3)
+            }
+            if (theirOfferExtraPets[i]["neon"] == 1) {
+                const div3 = document.createElement("div")
+                div3.style.background = "linear-gradient(135deg, rgb(187, 80, 253) 0%, rgb(69, 3, 198) 50%, rgb(81, 28, 182) 100%)"
+                const p = document.createElement("p")
+                p.innerText = "F"
+                div3.appendChild(p)
+                div2.appendChild(div3)
+            }
+            if (theirOfferExtraPets[i]["mega"] == 1) {
+                const div3 = document.createElement("div")
+                div3.style.background = "linear-gradient(135deg, rgb(193, 255, 110) 0%, rgb(140, 198, 63) 50%, rgb(19, 114, 11) 100%)"
+                const p = document.createElement("p")
+                p.innerText = "F"
+                div3.appendChild(p)
+                div2.appendChild(div3)
+            }
+            div.appendChild(img)
+            div.appendChild(div2)
+
+            listingInterface2TheirOfferPets.appendChild(div)
+        }
+
+        if (listing["extraSharkValueRequested"] == 0 || listing["extraSharkValueRequested"] == undefined) {
+            yourOfferValue.innerText = listing["offer"]["giveValue"].toFixed(2)
+            theirOfferValue.innerText = listing["offer"]["takeValue"].toFixed(2)
+            finishButton.disabled = false
+            sharkValueRequestedDiv.style.display = "none"
+            changeButton.disabled = true
+        } else if (listing["extraSharkValueRequested"] > 0 && calculateValue(yourOfferExtraPets) < listing["extraSharkValueRequested"]) {
+            yourOfferValue.innerText = (listing["offer"]["giveValue"] + calculateValue(yourOfferExtraPets)).toFixed(2).toString() + " + " + (listing["extraSharkValueRequested"] - calculateValue(yourOfferExtraPets)).toFixed(2).toString()
+            theirOfferValue.innerText = listing["offer"]["takeValue"].toFixed(2)
+            finishButton.disabled = true
+            sharkValueRequestedDiv.style.display = "flex"
+            changeButton.disabled = false
+        } else if (listing["extraSharkValueRequested"] < 0 && calculateValue(theirOfferExtraPets) < Math.abs(listing["extraSharkValueRequested"])) {
+            yourOfferValue.innerText = listing["offer"]["giveValue"].toFixed(2)
+            theirOfferValue.innerText = (listing["offer"]["takeValue"] + calculateValue(theirOfferExtraPets)).toFixed(2).toString() + " + " + (Math.abs(listing["extraSharkValueRequested"]) - calculateValue(theirOfferExtraPets)).toFixed(2).toString()
+            finishButton.disabled = true
+            sharkValueRequestedDiv.style.display = "flex"
+            changeButton.disabled = false
+        } else {
+            yourOfferValue.innerText = (listing["offer"]["giveValue"] + calculateValue(yourOfferExtraPets)).toFixed(2)
+            theirOfferValue.innerText = (listing["offer"]["takeValue"] + calculateValue(theirOfferExtraPets)).toFixed(2)
+            finishButton.disabled = false
+            sharkValueRequestedDiv.style.display = "none"
+            changeButton.disabled = false
+        }
+
+    }
+
     function displayPets() {
         if (loggedIn == "True" && displayPetsFirstTime == 0) {
             displayPetsFirstTime = 1
@@ -1435,8 +1681,37 @@
                 "mega":mega
             })
             showUserListings2(currentListing, 1)
+        } else if (addPetType == "listingInterface2") {
+                if (currentListing["extraSharkValueRequested"] > 0 || currentListing["extraSharkValueRequested"] == 0) {
+                    if (currentListing["offer"]["give"].length + yourOfferExtraPets.length < 18) {
+                        yourOfferExtraPets.push({
+                        "id":pet,
+                        "fly":fly,
+                        "ride":ride,
+                        "regular":regular,
+                        "neon":neon,
+                        "mega":mega
+                        })
+                    } else {
+                        displayError("Can't add more than 18 pets!")
+                    }
+                } else if (currentListing["extraSharkValueRequested"] < 0) {
+                    if (currentListing["offer"]["take"].length + theirOfferExtraPets.length < 18) {
+                        theirOfferExtraPets.push({
+                        "id":pet,
+                        "fly":fly,
+                        "ride":ride,
+                        "regular":regular,
+                        "neon":neon,
+                        "mega":mega
+                        })
+                    } else {
+                        displayError("Can't add more than 18 pets!") 
+                    }
+                }
+                updateListingInterface2()
+            }  
         }
-    };
 
     function removePetFromInventory(type, pet) {
         if (type == "listing1") {

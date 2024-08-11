@@ -761,7 +761,7 @@ def calculateValue(trade):
         try:
             value += Pets[str(pet["id"])][keyValue]
         except KeyError:
-            value += 0
+            value += Pets[str(pet["id"])]["value"]
     return value
 
 

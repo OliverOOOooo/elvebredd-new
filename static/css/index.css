@@ -297,6 +297,17 @@ nav{
     z-index:100;
 }
 
+#listingInterface2Background{
+    z-index:99;
+    position:fixed;
+    left:0%;
+    top:0%;
+    width:100vw;
+    height:100vh;
+    background-color:rgb(0,0,0,0.3);
+    display:none;
+}
+
 #listingInterface2 p{
     font-family:'Aileron', sans-serif;
     margin:0px;
