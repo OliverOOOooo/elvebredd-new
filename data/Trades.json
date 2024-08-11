@@ -9536,7 +9536,9 @@
             }
         ],
         "createdAt": 1723226674.8939223,
-        "views": [],
+        "views": [
+            "6"
+        ],
         "markedAsCompletedBy": [],
         "status": "Pending"
     },
