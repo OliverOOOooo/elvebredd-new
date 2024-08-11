@@ -13,11 +13,12 @@ body{
 
 #dailyStreakDiv{
     display:flex;
-    border-radius:25px;
+    border-radius:15vw;
     border:1px solid red;
-    width:135px;
-    height:50px;
+    width: 11vw;
+    height: 3vw;
     align-items:center;
+    font-size: 15rem;
 }
 
 #dailyStreakDiv svg{
@@ -28,8 +29,7 @@ body{
 }
 
 #dailyStreakDiv p{
-    padding:10px;
-    margin-left:20px;
+    margin-left: 3.1vw;
 }
 
 #upperUserPage{
@@ -61,10 +61,10 @@ body{
     justify-content: center;
     padding:15px;
     border:1px solid black;
-    border-radius:25px;
-    width:150px;
-    height:40px;
-    background-color:rgb(0, 0, 0, 0);
+    border-radius:15vw;
+    width:11vw;
+    height: 3vw;
+    background: linear-gradient(135deg, rgb(243, 231, 214) 0%, rgb(235, 229, 220) 50%, rgb(253, 249, 234) 100%);
     cursor:pointer;
 }
 
@@ -168,14 +168,15 @@ body{
 }
 
 #userInventory{
-    width:75%;
+    width: 60vw;
     display:none;
     grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
     gap:10px;
 }
 
 .userInventoryPetImage{
-    border:1px solid black;
+    border: 0.5px solid;
+    border-color: #6D6B70;
     border-radius:20px;
     cursor:pointer;
     height:auto;
@@ -184,6 +185,12 @@ body{
     align-items:center;
     aspect-ratio: 1/1;
     position:relative;
+    background: linear-gradient(135deg, rgb(243, 231, 214) 0%, rgb(235, 229, 220) 50%, rgb(253, 249, 234) 100%);;
+}
+
+.userInventoryPetImage:first-child {
+    border: none;
+    background: transparent;
 }
 
 .orangeRed{
@@ -584,7 +591,7 @@ body{
 
 
 #userWishlist{
-    width:75%;
+    width: 60vw;
     display:none;
     grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
     gap:10px;
@@ -931,3 +938,44 @@ main{
     border-radius:20px;
 
 }
+
+#listingsButton {
+    font-size: 16rem;
+}
+
+#inventoryButton {
+    font-size: 16rem;
+}
+
+#wishlistButton {
+    font-size: 16rem;
+}
+
+#inboxButton {
+    font-size: 16rem;
+}
+
+#pendingButton {
+    font-size: 16rem;
+}
+
+#historyButton {
+    font-size: 16rem;
+}
+
+#Username1 {
+    font-size: 16rem;
+    font-weight: bolder;
+}
+
+.UnderProfile {
+    font-size: 10rem;
+    color: #6D6B70;
+}
+
+.UnderProfile2 {
+    font-size: 16rem;
+    font-weight: bolder;
+    color: #363537;
+}
+

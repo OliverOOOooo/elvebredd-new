@@ -218,8 +218,8 @@ nav{
     align-items:center;
     flex-direction:column;
     padding:max(1vw, 2vh);
-    border-radius:max(2vw, 4vh);
-    border: 1px solid black;
+    border-radius: 4vw;
+    border: 1px solid white;
     background: linear-gradient(135deg, rgb(243, 231, 214) 0%, rgb(235, 229, 220) 50%, rgb(253, 249, 234) 100%);
 }
 
@@ -266,13 +266,13 @@ nav{
 }
 
 #headerSearchBar{
-    border-radius:11rem;
+    border-radius: 15vw;
     display:flex;
     flex-direction:column;
     align-items:center;
     justify-content:center;
     gap:5%;
-    background-color:white;
+    background: linear-gradient(135deg, #F3E7D6 0%, #EBE5DC 50%, #FDF9EA 100%);
     padding-right:5%;
     padding-left:5%;
     border:1px solid black;
@@ -285,7 +285,7 @@ nav{
     align-items:center;
     justify-content:center;
     gap:5%;
-    background-color:white;
+    background-color:transparent;
     padding-right:5%;
     padding-left:5%;
 }
@@ -302,7 +302,7 @@ nav{
     padding:0px;
     height:23rem;
     aspect-ratio:8.1/1;
-    font-size:14.6rem;
+    font-size:15rem;
     font-family:"Aileron", sans-serif;
     font-style:normal;
     font-weight:bold;
@@ -343,15 +343,17 @@ nav{
     align-items:center;
     justify-content:center;
     cursor:pointer;
-    border-radius: max(1vw, 2vh);
-    width: 70%;
+    border-radius: 15vw;
+    width: 10vw;
+    height: 2.5vw;
     padding:max(1vw, 2vh);
     border: 1px solid black;
-    background: linear-gradient(135deg, rgb(243, 231, 214) 0%, rgb(235, 229, 220) 50%, rgb(249, 249, 249) 100%);
+    background: transparent;
+    margin-top: 3vw;
 }
 
 #closeButtonSettings p{
-    font-size:max(1vw, 2vh);
+    font-size: 15rem;
     margin:0px;
 }
 
@@ -390,14 +392,18 @@ nav{
     aspect-ratio:1/1;
 }
 
+/* here */
+
 #openPreferencesButtonText{
     margin:0px;
     font-size:max(1.5vw, 3vh);
-    font-family:"Aileron"
+    font-family:"Aileron";
+    margin-right: 1vw;
+    margin-left: 1vw;
 }
 
 #preferences{
-    padding-top:4%;
+    padding-top:8%;
     padding-bottom:4%;
     height:75%;
     display:flex;
@@ -411,19 +417,43 @@ nav{
 #openMiscButtonText{
     margin:0px;
     font-size:max(1.5vw, 3vh);
-    font-family:"Aileron"
+    font-family:"Aileron";
+    margin-right: 1vw;
+    margin-left: 1vw;
 }
 
 #openPreferencesButton{
     border-right:1px solid white;
     border-left:1px solid white;
     border-top:1px solid white;
+
+    border-top-left-radius: 1.5vw;  /* Adjust the radius as needed */
+    border-top-right-radius: 1.5vw; /* Adjust the radius as needed */
+    
+    /* Optional: If you want to prevent a border radius at the bottom corners */
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+#openPreferencesButton1{
+    border-bottom:1px solid white;
 }
 
 #openMiscButton{
     border-right:1px solid white;
     border-left:1px solid white;
     border-top:1px solid white;
+
+    border-top-left-radius: 1.5vw;  /* Adjust the radius as needed */
+    border-top-right-radius: 1.5vw; /* Adjust the radius as needed */
+    
+    /* Optional: If you want to prevent a border radius at the bottom corners */
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+#openMiscButton1{
+    border-bottom:1px solid white;
 }
 
 .whiteUnderline{
@@ -443,6 +473,8 @@ nav{
     width:100%;
     gap:max(1vw, 2vh);
 }
+
+/* here */
 
 #infoDiv{
     position:fixed;

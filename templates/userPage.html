@@ -12,7 +12,7 @@
     <header>
         {% include "header.html" %}
     </header>
-    <main style="width:75%">
+    <main style="width:100%">
         <div id="upperUserPage">
             <div style="width:25vw; display:flex; justify-content:center;">
                 <div id="dailyStreakDiv">
@@ -25,38 +25,38 @@
                 </div>
             </div>
             <div style="width:25vw;display:flex;flex-direction:column;align-items:center;">
-                <img style="width:100px;height:100px;" src="{{ url_for('static', filename=('images/profile/' + profileData['profilePicture'])) }}">
-                <div style="display:flex;flex-direction:row;align-items:center;justify-content:center;gap:5px;">
+                <img style="width:7vw;height:7vw;" src="{{ url_for('static', filename=('images/profile/' + profileData['profilePicture'])) }}">
+                <div id="Username1" style="display:flex;flex-direction:row;align-items:center;justify-content:center;gap:5px;margin-top: -1vw;">
                     <p>{{ profileData["username"] }}</p>
                     {% if profileData["verified"] %}
                         <img id="verified" src="/static/images/misc/verified.png" style="width:10px;height:auto;">
                     {% endif %}
                 </div>
-                <div class="center" style="gap:25px; text-align:center;">
+                <div class="center" style="gap:45px; text-align:center;">
                     <div>
-                        <b id="listingAmount" class="noMargin">{{ profileData["trades"]|length }}</b>
-                        <p class="noMargin">Listings</p>
+                        <b id="listingAmount" class="noMargin UnderProfile2">{{ profileData["trades"]|length }}</b>
+                        <p class="noMargin UnderProfile">Listings</p>
                     </div>
                     <div>
-                        <b class="noMargin">{{ profileData["completedTrades"]|length }}</b>
-                        <p class="noMargin">Trades</p>
+                        <b class="noMargin UnderProfile2">{{ profileData["completedTrades"]|length }}</b>
+                        <p class="noMargin UnderProfile">Trades</p>
                     </div>
                     <div>
-                        <b class="noMargin" id="inventoryLength">{{ profileData["inventory"]|length }}</b>
-                        <p class="noMargin">Inventory</p>
+                        <b class="noMargin UnderProfile2" id="inventoryLength">{{ profileData["inventory"]|length }}</b>
+                        <p class="noMargin UnderProfile">Inventory</p>
                     </div>
                 </div>
                 <div class="center" style="padding-top:25px;gap:15px;">
                     {% if profileID|string == userID|string %}
                         <button onclick="setTradeTo(-1);openListingInterface()" class="profileButton" style="display:flex;align-items:center;justify-content:center;">
-                            <p class="noMargin" style="font-size:15px;">New Listing</p>
+                            <p class="noMargin" style="font-size:15rem;">New Listing</p>
                         </button>
                         <button onclick="openInventory(); setAddPetTypeTo('inventory')" class="profileButton" style="display:flex;align-items:center;justify-content:center;">
-                            <p class="noMargin" style="font-size:15px;">Edit Inventory</p>
+                            <p class="noMargin" style="font-size:15rem;">Edit Inventory</p>
                         </button>
                     {% endif %}
                 </div>
-                <div class="center" style="padding-top:25px;gap:15px;flex-direction:column;">
+                <div class="center" style="padding-top:16px;gap:5px;flex-direction:column;">
                     <div>
                         <div class="sharkFrostButton orangeRed">
                             <div class="sharkText" onclick="selectSharkButton()"><b class="sharkFrostText">SHARK</b></div>
@@ -72,27 +72,27 @@
                             </div>
                         </div>
                     </div>
-                    <div class="center" style="flex-direction:row;gap:10px;align-items:center;">
+                    <div class="center RobloxUser1" style="flex-direction:row;gap:5px;align-items:center;">
                         {% if profileData["robloxUsername"] %}
                             <img style="width:12px;height:auto;" src="../static/images/misc/robloxLogo.png">
                         {% endif %}
-                        <p style="font-size:12px;">{{ profileData["robloxUsername"] }}</p>
+                        <p style="font-size:12rem;color:#6D6B70;">{{ profileData["robloxUsername"] }}</p>
                     </div>
                 </div>
             </div>
             <div class="center" style="width:25vw;display:flex;flex-direction:column;justify-content: flex-start;gap:10px;">
                 {% if profileID|string == userID|string %}
                     <button onclick="openPreferences()" class="profileButton" style="display:flex;align-items:center;justify-content:center;">
-                        <p class="noMargin" style="font-size:15px;">Settings</p>
+                        <p class="noMargin" style="font-size:15rem;">Settings</p>
                     </button>
                     <button onclick="openHelp()" class="profileButton" style="display:flex;align-items:center;justify-content:center;">
-                        <p class="noMargin" style="font-size:15px;">Help</p>
+                        <p class="noMargin" style="font-size:15rem;">Help</p>
                     </button>
                     <button onclick="openFriends()" class="profileButton" style="display:flex;align-items:center;justify-content:center;">
-                        <p class="noMargin" style="font-size:15px;">Friends</p>
+                        <p class="noMargin" style="font-size:15rem;">Friends</p>
                     </button>
                     <button onclick="editProfile()" class="profileButton" style="display:flex;align-items:center;justify-content:center;">
-                        <p class="noMargin" style="font-size:15px;text-decoration:none;color:black;">Edit Profile</p>
+                        <p class="noMargin" style="font-size:15rem;text-decoration:none;color:black;">Edit Profile</p>
                     </button>
                 {% elif loggedIn %}
 
@@ -197,7 +197,7 @@
             </button>
         </div>
         <div id="lowerUserPage" style="padding-top:25px;">
-            <div class="center" style="flex-direction:row;gap:50px;">
+            <div class="center" style="flex-direction:row;gap:65px;">
                 <b class="noMargin button bland" id="listingsButton" onclick="selectCategoryUser('listings')">Listings</b>
                 <b class="noMargin button bland" id="inventoryButton" onclick="selectCategoryUser('inventory')">Inventory</b>
                 <b class="noMargin button bland" id="wishlistButton" onclick="selectCategoryUser('wishlist'); ">Wishlist</b>
@@ -1549,7 +1549,7 @@
         }
         if (userListings.childElementCount == 0) {
             if (userID == profileID) {
-                userListings.innerHTML = "<p style='margin:0px;position:absolute;transform:translate(-50%, -50%);left:50%;top:300%;font-size:25px;text-align:center;margin-top:50px;'>Seems like you have no active listings. Create one by clicking <a style='color:red;cursor:pointer;text-decoration:underline' onclick='setTradeTo(-1);openListingInterface()'>here</a>.</p>"
+                userListings.innerHTML = "<p style='margin:0px;position:absolute;transform:translate(-50%, -50%);left:50%;top:300%;font-size:16rem;text-align:center;margin-top:30px;color:#6D6B70;'>Seems like you have no active listings. Create one by clicking <a style='color:red;cursor:pointer;text-decoration:underline' onclick='setTradeTo(-1);openListingInterface()'>here</a>.</p>"
             } else {
                 userListings.innerHTML = "<p style='margin:0px;position:absolute;transform:translate(-50%, -50%);left:50%;top:300%;font-size:25px;text-align:center;margin-top:50px;'>This user has no listings right now</p>"
             }
@@ -3573,7 +3573,7 @@
                         userInbox.appendChild(container)
                     })
                     if (userInbox.childElementCount == 0) {
-                        userInbox.innerHTML = "<p style='margin:0px;position:absolute;transform:translate(-50%, -50%);left:50%;top:300%;font-size:25px;text-align:center;margin-top:50px;'>Your inbox is empty</p>"
+                        userInbox.innerHTML = "<p style='margin:0px;position:absolute;transform:translate(-50%, -50%);left:50%;top:300%;font-size:16rem;text-align:center;margin-top:30px;color:#6D6B70'>Your inbox is empty.</p>"
                     }
                 }
             })
@@ -3849,7 +3849,7 @@
                         userPending.appendChild(container)
                     })
                     if (userPending.childElementCount == 0) {
-                        userPending.innerHTML = "<p style='margin:0px;position:absolute;transform:translate(-50%, -50%);left:50%;top:300%;font-size:25px;text-align:center;margin-top:50px;'>You have no ongoing trades</p>"
+                        userPending.innerHTML = "<p style='margin:0px;position:absolute;transform:translate(-50%, -50%);left:50%;top:300%;font-size:16rem;text-align:center;margin-top:30px;color:#6D6B70;'>You have no ongoing trades.</p>"
                     }
                 }
             })
@@ -4057,7 +4057,7 @@ function showHistoryDiv() {
                 })
                 if (userHistory.childElementCount == 0) {
                     if (userID == profileID) {
-                        userHistory.innerHTML = "<p style='margin:0px;position:absolute;transform:translate(-50%, -50%);left:50%;top:300%;font-size:25px;text-align:center;margin-top:50px;'>You have not completed any trades</p>"
+                        userHistory.innerHTML = "<p style='margin:0px;position:absolute;transform:translate(-50%, -50%);left:50%;top:300%;font-size:16rem;text-align:center;margin-top:30px;color:#6D6B70;'>You have not completed any trades, yet.</p>"
                     } else {
                         userHistory.innerHTML = "<p style='margin:0px;position:absolute;transform:translate(-50%, -50%);left:50%;top:300%;font-size:25px;text-align:center;margin-top:50px;'>This user has not completed any trades</p>"
                     }

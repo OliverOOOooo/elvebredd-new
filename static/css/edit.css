@@ -3,6 +3,7 @@
     width:max(50vw, 100vh);
     grid-template-columns: repeat(auto-fill, minmax(121.6px, 1fr));
     gap:10px;
+    margin-top: 10vw;
 }
 
 .blockTitle{

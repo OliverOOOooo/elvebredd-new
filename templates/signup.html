@@ -20,8 +20,8 @@
             <form method="post" id="signUpForm" class="center column options smallGap">
                 <div id="seperateUsernames" class="flex row">
                     <div class="column options">
-                        <input id="usernameInput" class="option blank" type="text" name="username" value="{{storedWebData['username']}}" placeholder="Choose a Username" autocomplete="on">
-                        <div class="line blackBackground">
+                        <input id="usernameInput" class="option blank" type="text" name="username" value="{{storedWebData['username']}}" placeholder="Choose a Username" autocomplete="off">
+                        <div class="line1 blackBackground">
                             &nbsp;
                         </div>
                         <div>
@@ -33,17 +33,14 @@
                     </div>
                     <div class="column options">
                         <input class="option blank" type="text" name="robloxUsername" value="{{storedWebData['robloxUsername']}}" placeholder="Roblox Username" autocomplete="off">
-                        <div class="line blackBackground">
+                        <div class="line1 blackBackground">
                             &nbsp;
-                        </div>
-                        <div>
-                            <p class="signUpInfoText darkgray leftTextAlign" id="optionalText">Optional</p>
                         </div>
                     </div>
                 </div>
                 <div class="options column">
-                    <input id="emailInput" class="option blank" type="text" name="email" value="{{storedWebData['email']}}" placeholder="Email Address" autocomplete="on">
-                    <div class="line blackBackground">
+                    <input id="emailInput" class="option blank" type="text" name="email" value="{{storedWebData['email']}}" placeholder="Email Address" autocomplete="off">
+                    <div class="line1 blackBackground">
                         &nbsp;
                     </div>
                     <div>
@@ -52,7 +49,7 @@
                 </div>
                 <div class="options column">
                     <input id="confirmEmailInput" class="option blank" type="text" name="confirmEmail" value="{{storedWebData['confirmEmail']}}" placeholder="Confirm Email Address" autocomplete="off">
-                    <div class="line blackBackground">
+                    <div class="line1 blackBackground">
                         &nbsp;
                     </div>
                     <div>
@@ -64,7 +61,7 @@
                 </div>
                 <div class="options column">
                     <input id="passwordInput" class="option blank" type="password" name="password" value="{{storedWebData['password']}}" placeholder="Password" autocomplete="off">
-                    <div class="line blackBackground">
+                    <div class="line1 blackBackground">
                         &nbsp;
                     </div>
                     <div>
@@ -76,7 +73,7 @@
                 </div>
                 <div class="options column">
                     <input id="confirmPasswordInput" class="option blank" type="password" name="confirmPassword" value="{{storedWebData['confirmPassword']}}" placeholder="Confirm Password" autocomplete="off">
-                    <div class="line blackBackground">
+                    <div class="line1 blackBackground">
                         &nbsp;
                     </div>
                     <div>
@@ -105,9 +102,9 @@
         {% else %}
         <div class="center column bigMargin">
             <h1 class="aileronBlack">Sign In</h1>
-            <form method="post" id="signUpForm" class="center column options smallGap">
+            <form method="post" id="signUpForm1" class="center column options smallGap">
                 <div class="options column">
-                    <input id="emailInput" class="option blank" type="text" name="email" value="{{storedWebData['email']}}" placeholder="Email Address" autocomplete="on">
+                    <input id="emailInput" class="option blank" type="text" name="email" value="{{storedWebData['email']}}" placeholder="Email Address" autocomplete="off">
                     <div class="line blackBackground">
                         &nbsp;
                     </div>
@@ -133,13 +130,13 @@
                     </button>
                 </div>
                 <div class="center maxWidth smallMargin">
-                    <button type="submit" name="action" value="goBack" class="blank button buttonDesign1 lightHover">
-                        <p class="buttonText">Go Back</p>
+                    <button type="submit" name="action" value="goBack" class="blank button buttonDesign2 lightHover">
+                        <p class="buttonText" id="CloseButton1">Close</p>
                     </button>
                 </div>
-                <div>
-                    <p class="signUpInfoText">Don't have an account? <a href="/signup">Sign Up</a></p>
-                    <p class="signUpInfoText"><a href="/reset-password">Forgot Password?</a></p>
+                <div class="SignUpInfoText1">
+                    <p id="SignUpInfoText3" class="signUpInfoText">Don't have an account? <a href="/signup">Sign Up</a></p>
+                    <p id="SignUpInfoText4" class="signUpInfoText"><a href="/reset-password">Forgot Password?</a></p>
                 </div>
             </form>
         </div>

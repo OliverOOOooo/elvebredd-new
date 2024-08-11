@@ -3,7 +3,14 @@
     display:flex;
     flex-direction:column;
     gap:15px;
-    width:500px;
+    width:44vw;
+}
+
+#signUpForm1{
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+    width:30vw;
 }
 
 .options{
@@ -13,7 +20,15 @@
 
 .option{
     width:auto;
-    padding:5px;
+    padding-left: 5px;
+    font-size: 18rem;
+    font-weight: 400;
+}
+
+.option::placeholder{
+    width:auto;
+    font-size: 18rem;
+    font-weight: 400;
 }
 
 .option2{
@@ -21,7 +36,9 @@
 }
 
 h1{
-    font-size:70rem;
+    font-size:40rem;
+    margin-bottom: 5vw;
+    margin-top: 4vw;
 }
 
 #seperateUsernames{
@@ -35,10 +52,11 @@ h1{
 }
 
 #createAccountDiv{
-    padding:15px;
-    border-radius:10px;
+    padding:1vw;
+    border-radius: 1.5vw;
     border: 1px solid black;
     background: linear-gradient(135deg, rgb(243, 231, 214) 0%, rgb(235, 229, 220) 50%, rgb(253, 249, 234) 100%);
+    width: 44vw;
 }
 
 #createAccountReadText{
@@ -46,42 +64,55 @@ h1{
     font-family: "aileron", sans-serif;
     font-style: normal;
     font-weight: 400;
-    font-size:10px;
+    font-size:14rem;
     padding-right:20px;
     padding-left:20px;
     padding-bottom:15px;
     padding-top:0px;
     text-align:center;
+    color: #6D6B70;
 }
 
 #createAccountReadText a{
     text-decoration:none;
-    color:red;
+    color:#FF6666;
+    font-weight: bolder;
+    font-size: 14rem;
 }
 
 .buttonText{
     margin:0px;
-    font-size:20px;
-    padding:10px;
-    font-weight:300;
+    font-size:20rem;
+    padding:1vw;
+    font-weight:400;
+    padding: 1vw;
+    margin-left: 1vw;
+    margin-right: 1vw;
 }
 
 #infoConsentText{
     margin:0px;
-    font-size:10px;
-    color:rgb(70,70,70);
+    font-size:14rem;
+    color:#6D6B70;
     text-align:center;
+    width: 44vw;
 }
 
-.signUpInfoText{
+.signUpInfoText {
     padding-left:5px;
-    font-size:10px;
+    font-size:14rem;
     text-align:center;
 }
 
 #emailMatchText{
     display:none;
     position:absolute;
+    color:#FF6666;
+    display: none;
+    position: absolute;
+    margin-top: -0.5vw;
+    margin-left: 0;
+    font-size: 10rem;
 }
 
 #passwordMatchText{
@@ -91,16 +122,23 @@ h1{
 
 #message{
     font-size:10px;
-    color:red;
+    color:#FF6666;
 }
 
 #minPasswordLengthText{
     display:none;
+    color:#FF6666;
+    display: none;
+    position: absolute;
+    margin-top: -0.5vw;
+    margin-left: 0;
+    font-size: 10rem;
+
 }
 
 .signUpInfoText a{
     text-decoration:none;
-    color:red;
+    color:#FF6666;
 }
 
 #leftTextAlign{
@@ -108,11 +146,13 @@ h1{
 }
 
 #resetPasswordForm{
-    border-radius:30px;
-    width:60%;
-    border:1px solid black;
+    border-radius:5vw;
+    width:57vw;
+    height: 19vw;
+    border:0.5px solid black;
     background: linear-gradient(135deg, rgb(243, 231, 214) 0%, rgb(235, 229, 220) 50%, rgb(253, 249, 234) 100%);
     padding:10px;
+    align-items: center;
 }
 
 #resetPasswordInfo{
@@ -120,6 +160,8 @@ h1{
     padding:20px;
     width:90%;
     text-align:left;
+    font-size: 18rem;
+    color: #6D6B70;
 }
 
 #resetPasswordButtons{
@@ -127,7 +169,6 @@ h1{
     flex-direction:row;
     align-items:baseline;
     justify-content:flex-start;
-    gap:20px;
     padding-left:40px;
     padding-right:40px;
     padding-top:30px;
@@ -140,4 +181,37 @@ h1{
 #minUsernameLengthText{
     display:none;
     position:absolute;
+    margin-top: -0.5vw;
+    margin-left: 0;
+    font-size: 10rem;
 }
+
+.lineblackBackground {
+    height: 3px;
+}
+
+.line {
+    border-top: 0.5px solid #6D6B70; /* Use this to create a thicker line */
+    margin: 10px 0; /* Optional: adjust spacing if needed */
+    border-radius: 20vw;
+}
+
+.line1 {
+    border-top: 0.5px solid #6D6B70; /* Use this to create a thicker line */
+    margin: 10px 0; /* Optional: adjust spacing if needed */
+    border-radius: 20vw;
+}
+
+.option.blank::placeholder {
+    color: #6D6B70; /* Makes the placeholder text color white */
+}
+
+.SignUpInfoText1 {
+    margin-top: 0.7vw;
+}
+
+#SignUpInfoText3 {
+    color: #6D6B70;
+}
+
+

@@ -4,6 +4,7 @@
     <link rel="stylesheet" href="/static/css/fonts.css">
 
     <script src="{{ url_for('static', filename='js/header.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/Martin.js') }}"></script>
 </div>
 <div>
     <nav>
@@ -16,7 +17,7 @@
             </button>
             <div id="headerSearchBar">
                 <div id="headerSearchBarMain">
-                    <input id="searchInput" placeholder="Search">
+                    <input id="searchInput" placeholder="Search" autocomplete="off">
                     <img id="searchIcon" src="{{ url_for('static', filename='images/misc/search.png')}}">
                 </div>
                 <div id="resultsPets">
@@ -95,7 +96,7 @@
         &nbsp;
     </div>
     <div id="settingsMenu">
-        <h1 style="margin:0px;padding:max(0.5vw, 1vh);font-size:max(2vw, 4vh);">Settings</h1>
+        <h1 style="margin:0px;padding:max(1.2vw, 1vh);font-size:25rem;font-weight: 100;font-style:italic;letter-spacing: 30px;">Settings</h1>
         <div style="display:flex;flex-direction:row;justify-content:center;align-items:center;width:100%;">
             <div class="whiteUnderline">
 
@@ -103,11 +104,11 @@
             <button id="openPreferencesButton" onclick="openPreferences()" class="bland blank button">
                 <b id="openPreferencesButtonText">Preferences</b>
             </button>
-            <div class="whiteUnderline">
+            <div>
 
             </div>
             <button id="openMiscButton" onclick="openMisc()" class="bland blank button">
-                <b id="openMiscButtonText">Misc</b>
+                <b id="openMiscButtonText">Other</b>
             </button>
             <div class="whiteUnderline">
 
@@ -119,7 +120,7 @@
         <div id="misc">
 
         </div>
-        <button id="closeButtonSettings" onclick="closeSettings()" style="width:100px;height:30px;">
+        <button id="closeButtonSettings" onclick="closeSettings()">
             <p>Close</p>
         </button>
     </div>
@@ -201,7 +202,7 @@
 
     var verified = document.getElementById("verified")
 
-    var neonLegendaryPets = document.getElementById("neonLegendaryPets")
+    var neonLegendaryPets = document.getElementById("NeonLegendaryPets")
     var defaultLegendaryPets = document.getElementById("defaultLegendaryPets")
     var highTiers = document.getElementById("highTiers")
     var items = document.getElementById("items")
@@ -248,7 +249,7 @@
 
     window.addEventListener("mousemove", (event) => {
         verified = document.getElementById("verified")
-        neonLegendaryPets = document.getElementById("neonLegendaryPets")
+        neonLegendaryPets = document.getElementById("NeonLegendaryPets")
         defaultLegendaryPets = document.getElementById("defaultLegendaryPets")
         highTiers = document.getElementById("highTiers")
         items = document.getElementById("items")
@@ -628,7 +629,7 @@
                 p.className = "noMargin"
                 p.style.width = "100%"
                 p.style.paddingLeft = "max(1vw, 2vh)"
-                p.style.fontSize = "max(1.2vw, 2.4vh)"
+                p.style.fontSize = "20rem"
                 p.innerText = nameKey(key)
                 const div2 = document.createElement("div")
                 div2.className = "preference"
