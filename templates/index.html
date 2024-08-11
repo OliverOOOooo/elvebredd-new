@@ -149,43 +149,152 @@
         </div>
     </div>
     <div id="listingInterface2">
-        <div id="listingInterface2Upper">
-            <div style="padding:max(2vw, 4vh);display:flex;flex-direction:row;justify-content:space-between;height:100%;">
-                <div style="display:flex;flex-direction:column;gap:4px;">
-                    <b class="listingInterface2TextBig">Your Offer</b>
-                    <button id="modifyYourOffer" class="l2button" onclick="modifyYourOffer()">Modify Your Offer</button>
+        <img src="/static/images/misc/logo.png">
+        <div id="listingInterface2Information">
+            <div>
+                <p style="font-size:40rem;font-weight:900;color:rgb(253, 249, 234);">Your Offer</p>
+                <p id="yourOfferValue" style="font-size:25rem;font-weight:800;margin-left:10rem;color:rgb(253, 249, 234);">69420</p>
+                <div id="listingInterface2YourOfferPets" class="listingInterface2PetsDiv">
+                    <div>
+                        <img src="/static/images/pets/Birthday Butterfly 2023.png">
+                        <div>
+                            <div style="background:linear-gradient(135deg, rgb(142, 202, 232) 0%, rgb(47, 152, 204) 50%, rgb(0, 134, 200) 100%);">
+                                <p>F</p>
+                            </div>
+                            <div style="background:linear-gradient(135deg, rgb(255, 197, 220) 0%, rgb(237, 44, 121) 50%, rgb(255, 0, 101) 100%);">
+                                <p>R</p>
+                            </div>
+                            <div style="background:linear-gradient(135deg, rgb(187, 80, 253) 0%, rgb(69, 3, 198) 50%, rgb(81, 28, 182) 100%);">
+                                <p>M</p>
+                            </div>
+                            <div style="background:linear-gradient(135deg, rgb(193, 255, 110) 0%, rgb(140, 198, 63) 50%, rgb(19, 114, 11) 100%);">
+                                <p>N</p>
+                            </div>
+                        </div>
+                    </div>   
                 </div>
-                <div style="display:flex;flex-direction:column;gap:4px;">
-                    <b class="listingInterface2TextBig red">Their Offer</b>
-                    <button id="modifyTheirOffer" class="l2button" onclick="modifyTheirOffer()">Modify Their Offer</button>
+            </div>
+            <div>
+                <p style="font-size:100rem;font-weight:900;color:rgb(253, 249, 234);">2</p>
+                <div style="width:0.5rem;height:225rem;background-color:rgb(243, 239, 223)"></div>
+            </div>
+            <div>
+                <p style="font-size:40rem;font-weight:900;">Their Offer</p>
+                <p id="theirOfferValue"  style="font-size:25rem;font-weight:800;margin-right:10rem;">69420</p>
+                <div id="listingInterface2TheirOfferPets" class="listingInterface2PetsDiv">
+                    <div>
+                        <img src="/static/images/pets/Birthday Butterfly 2023.png">
+                        <div>
+                            <div style="background:linear-gradient(135deg, rgb(142, 202, 232) 0%, rgb(47, 152, 204) 50%, rgb(0, 134, 200) 100%);">
+                                <p>F</p>
+                            </div>
+                            <div style="background:linear-gradient(135deg, rgb(255, 197, 220) 0%, rgb(237, 44, 121) 50%, rgb(255, 0, 101) 100%);">
+                                <p>R</p>
+                            </div>
+                            <div style="background:linear-gradient(135deg, rgb(187, 80, 253) 0%, rgb(69, 3, 198) 50%, rgb(81, 28, 182) 100%);">
+                                <p>M</p>
+                            </div>
+                            <div style="background:linear-gradient(135deg, rgb(193, 255, 110) 0%, rgb(140, 198, 63) 50%, rgb(19, 114, 11) 100%);">
+                                <p>N</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        <div id="listingInterface2Lower">
-            <div id="listingPart1Div">
-                <div id="listingPart1">
-
+        <p style="font-size:16rem;font-weight:bold;color:rgb(109, 107, 112);margin-top:110rem;">You Can Offer With</p>
+        <div id="listingInterface2Preferences">
+            <p>High Tiers</p>
+            <p style="font-weight:bold;">|</p>
+            <p>Mega Legs</p>
+            <p style="font-weight:bold;">|</p>
+            <p>Neon Legs</p>
+            <p style="font-weight:bold;">|</p>
+            <p>Default Legs</p>
+            <p style="font-weight:bold;">|</p>
+            <p>Preppy</p>
+            <p style="font-weight:bold;">|</p>
+            <p>2019 Pets</p>
+            <p style="font-weight:bold;">|</p>
+            <p>Randoms</p>
+            <p style="font-weight:bold;">|</p>
+            <p>Items</p>
+        </div>
+        <div id="listingInterface2Main">
+            <div style="width:50%">
+                <div style="display:flex;flex-direction:row;gap:10rem;">
+                    <button id="changeButton"><p>Change</p></button>
+                    <button id="finishButton"><p>Finish</p></button>
                 </div>
-                <b id="listingCloseButton" onclick="closeListingInterface2()">Close</b>
-            </div>
-            <div style="height:100%;width:1px;background-color:black;position:relative;">
-                <b id="listingValue">0</b>
-            </div>
-            <div id="listingPart2Div">
-                <div id="listingPart2">
-
+                <div id="sharkValueRequestedDiv" style="display:flex;flex-direction:row;gap:2rem;width:180rem;justify-content:center;margin-top:10rem;">
+                    <p style="font-size: 20rem;font-weight:200;color:rgb(54, 53, 55);">YOU ADD: </p>
+                    <p id="sharkValueRequested" style="font-size:20rem;font-weight:500;color:rgb(54, 53, 55);">2</p>
                 </div>
-                <b id="listingAcceptButton">Accept</b>
-                <b id="listingCustomOfferButton">Send Custom Offer</b>
-                <div id="ownerInfo">
-                    <b>Listing made by:</b>
-                    <b id="owner"></b>
+            </div>
+            <div style="width:35%;display:flex;flex-direction:column;margin-left:20%;gap:10rem;">
+                <div style="display:flex;flex-direction:row;gap:3rem;">
+                    <p style="color:rgb(54, 53, 55);font-size:14rem;font-weight:200;">Listed: </p>
+                    <p id="timeAgoListed" style="color:rgb(54, 53, 55);font-size:14rem;font-weight:500;">24 Minutes Ago</p>
+                </div>
+                <div style="display:flex;flex-direction:row;gap:3rem;">
+                    <p style="color:rgb(54, 53, 55);font-size:14rem;font-weight:200;">Total Offers: </p>
+                    <p id="totalOffers" style="color:rgb(54, 53, 55);font-size:14rem;font-weight:500;">3</p>
+                </div>
+                <div style="display:flex;flex-direction:row;gap:3rem;">
+                    <p style="color:rgb(54, 53, 55);font-size:14rem;font-weight:200;">Roblox User: </p>
+                    <p id="listingRobloxUsername" style="color:rgb(54, 53, 55);font-size:14rem;font-weight:500;">EmanuelNorsk</p>
+                </div>
+                <div style="display:flex;flex-direction:row;gap:3rem;">
+                    <p style="color:rgb(54, 53, 55);font-size:14rem;font-weight:200;">Trades Completed by This User: </p>
+                    <p id="completedTradesByUser" style="color:rgb(54, 53, 55);font-size:14rem;font-weight:500;">62</p>
                 </div>
             </div>
         </div>
-    </div>
-    <div>
-
+        <div style="display:flex;flex-direction:row;justify-content:space-between;align-items:center;width:90%;margin-top:35rem;">
+            <div style="height:0.75rem;width:275rem;background-color:rgb(109, 107, 112);"></div>
+            <p style="font-size:25rem;font-weight:700;color:rgb(109, 107, 112);letter-spacing:2.5rem;">OFFERS</p>
+            <div style="height:0.75rem;width:275rem;background-color:rgb(109, 107, 112);"></div>
+        </div>
+        <div id="offers">
+            <div class="offer">
+                <div>
+                    <div>
+                        <img src="/static/images/pets/Birthday Butterfly 2023.png">
+                        <div>
+                            <div style="background:linear-gradient(135deg, rgb(142, 202, 232) 0%, rgb(47, 152, 204) 50%, rgb(0, 134, 200) 100%);">
+                                <p>F</p>
+                            </div>
+                            <div style="background:linear-gradient(135deg, rgb(255, 197, 220) 0%, rgb(237, 44, 121) 50%, rgb(255, 0, 101) 100%);">
+                                <p>R</p>
+                            </div>
+                            <div style="background:linear-gradient(135deg, rgb(187, 80, 253) 0%, rgb(69, 3, 198) 50%, rgb(81, 28, 182) 100%);">
+                                <p>M</p>
+                            </div>
+                            <div style="background:linear-gradient(135deg, rgb(193, 255, 110) 0%, rgb(140, 198, 63) 50%, rgb(19, 114, 11) 100%);">
+                                <p>N</p>
+                            </div>
+                        </div>
+                    </div>              
+                </div>
+                <div>
+                    <div>
+                        <p>SHARK VALUE</p>
+                        <p>2</p>
+                    </div>
+                    <div>
+                        <p>EmanuelNorsk</p>
+                        <img src="/static/images/profile/coolDragon.png">
+                    </div>
+                    <div>
+                        <p>24 Minutes Ago</p>
+                    </div>
+                    <div>
+                        <p>Pending</p>
+                    </div>
+                </div>
+            </div>
+            <div class="offerLine"></div>
+        </div>
     </div>
     <div onclick="closeListingInterface2()" id="listingInterface2Background">
         &nbsp;

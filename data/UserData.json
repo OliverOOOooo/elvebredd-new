@@ -281,8 +281,8 @@
         ],
         "badges": {},
         "verified": 0,
-        "dailyStreak": 1,
-        "dailyStreakActivated": 1723219110.2760074,
+        "dailyStreak": 0,
+        "dailyStreakActivated": 1723393208.096498,
         "wishlist": [
             {
                 "id": "0",
@@ -350,9 +350,9 @@
             }
         ],
         "lastActivity": [
-            "20/37:09:08:24",
+            "18/20:11:08:24",
             [
-                "api",
+                "indexPage",
                 "127.0.0.1"
             ]
         ],
@@ -3135,6 +3135,10 @@
             ],
             "20/37:09:08:24": [
                 "api",
+                "127.0.0.1"
+            ],
+            "18/20:11:08:24": [
+                "indexPage",
                 "127.0.0.1"
             ]
         },
