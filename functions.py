@@ -14,7 +14,7 @@ import click, requests
 
 ValidateDataCheck = time.time()
 
-WebsiteAddress = "https://127.0.0.1:5000"
+WebsiteAddress = "http://127.0.0.1:5000"
 SCOPES = ["https://www.googleapis.com/auth/gmail.send"]
 
 def getCredentials():
