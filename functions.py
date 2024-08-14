@@ -10,10 +10,11 @@ import copy
 import os
 import atexit
 from better_profanity import profanity
+import click, requests
 
 ValidateDataCheck = time.time()
 
-WebsiteAddress = "127.0.0.1:5000"
+WebsiteAddress = "http://127.0.0.1:5000"
 SCOPES = ["https://www.googleapis.com/auth/gmail.send"]
 
 def getCredentials():
@@ -34,6 +35,17 @@ def getCredentials():
             token.write(creds.to_json())
 
     return creds
+
+
+def checkStatus():
+    try:
+        response = requests.get(WebsiteAddress)
+        if response.status_code == 200:
+            click.echo("Server is running.")
+        else:
+            click.echo("Server is not responding as expected.")
+    except requests.ConnectionError:
+        click.echo("Server is not running.")
 
 def sendEmail(to_mail, subject, body):
     global SCOPES
@@ -761,7 +773,8 @@ def calculateValue(trade):
         try:
             value += Pets[str(pet["id"])][keyValue]
         except KeyError:
-            value += 0
+            if "value" in Pets[str(pet["id"])] and Pets[str(pet["id"])]["value"] != None:
+                value += Pets[str(pet["id"])]["value"]
     return value
 
 
@@ -770,10 +783,12 @@ def createListing(userID, trade1, trade2, public = True, visibleTo = "all", extr
     if userID != "" and len(trade1) > 0 and len(trade2) > 0:
         UserData[userID]["trades"].append(str(len(Trades)))
         giveValue, takeValue = calculateValue(trade1), calculateValue(trade2)
+        tradeID = str(len(Trades))
         trade = {
             "owner":userID,
             "ownerUsername":UserData[userID]["username"],
             "ownerRobloxUsername":UserData[userID]["robloxUsername"],
+            "id":tradeID,
             "offer":{"give":trade1, "take":trade2, "giveValue":giveValue, "takeValue":takeValue},
             "extraSharkValueRequested":extra,
             "completed":False,
@@ -789,7 +804,6 @@ def createListing(userID, trade1, trade2, public = True, visibleTo = "all", extr
             "status":"Pending",
 
         }
-        tradeID = str(len(Trades))
         Trades[tradeID] = trade
         dumpUserData()
         dumpTrades()
@@ -1387,7 +1401,7 @@ def generateListings(amount, user):
                 "neon":0,
                 "mega":0,
             })
-        id, output, success = createListing(user, trade1, trade2, True, "all", random.randint(0,2))
+        id, output, success = createListing(user, trade1, trade2, True, "all", random.randint(-10,10))
         if success == 1:
             for y in range(0, random.randint(0, 10)):
                 pets = []
