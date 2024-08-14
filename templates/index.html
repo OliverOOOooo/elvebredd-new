@@ -1634,9 +1634,18 @@
 
     function sendOffer() {
         formData = new FormData();
-        formData.append('key', key)
+        formData.append('id', currentListing["id"])
         formData.append('action', "sendOffer");
-        formData.append('action', "sendOffer");
+        if (currentListing["extraSharkValueRequested"] == 0 || currentListing["extraSharkValueRequested"] > 0) {
+            var pets = JSON.parse(JSON.stringify(currentListing["offer"]["give"]))
+            pets.concat(yourOfferExtraPets)
+            formData.append('pets', pets);
+        } else {
+            var pets = JSON.parse(JSON.stringify(currentListing["offer"]["take"]))
+            pets.concat(theirOfferExtraPets)
+            formData.append('pets', pets);
+        }
+        
 
         fetch('/api', {
         method: 'POST',
@@ -1650,7 +1659,9 @@
         })
         .then(data => {
         if (data == "SUCCESS") {
-            
+            displayMessage("You successfully sent an offer!")
+        } else {
+            displayError("Something went wrong with your offer!")
         }
         })
         .catch(error => {
