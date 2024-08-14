@@ -593,6 +593,298 @@
                 "ownerRobloxUsername": "",
                 "createdAt": 1723634673.265435,
                 "status": "Pending"
+            },
+            {
+                "pets": [
+                    {
+                        "id": 25,
+                        "fly": 0,
+                        "ride": 0,
+                        "regular": 1,
+                        "neon": 0,
+                        "mega": 0
+                    },
+                    {
+                        "id": 25,
+                        "fly": 0,
+                        "ride": 0,
+                        "regular": 1,
+                        "neon": 0,
+                        "mega": 0
+                    },
+                    {
+                        "id": 25,
+                        "fly": 0,
+                        "ride": 0,
+                        "regular": 1,
+                        "neon": 0,
+                        "mega": 0
+                    },
+                    {
+                        "id": 35,
+                        "fly": 0,
+                        "ride": 0,
+                        "regular": 1,
+                        "neon": 0,
+                        "mega": 0
+                    },
+                    {
+                        "id": 35,
+                        "fly": 0,
+                        "ride": 0,
+                        "regular": 1,
+                        "neon": 0,
+                        "mega": 0
+                    },
+                    {
+                        "id": 35,
+                        "fly": 0,
+                        "ride": 0,
+                        "regular": 1,
+                        "neon": 0,
+                        "mega": 0
+                    }
+                ],
+                "type": "take",
+                "tradePets": [
+                    {
+                        "id": 234,
+                        "fly": 1,
+                        "ride": 1,
+                        "regular": 1,
+                        "neon": 0,
+                        "mega": 0
+                    },
+                    {
+                        "id": 199,
+                        "fly": 0,
+                        "ride": 0,
+                        "regular": 1,
+                        "neon": 0,
+                        "mega": 0
+                    },
+                    {
+                        "id": 155,
+                        "fly": 0,
+                        "ride": 0,
+                        "regular": 1,
+                        "neon": 0,
+                        "mega": 0
+                    },
+                    {
+                        "id": 311,
+                        "fly": 0,
+                        "ride": 0,
+                        "regular": 1,
+                        "neon": 0,
+                        "mega": 0
+                    },
+                    {
+                        "id": 356,
+                        "fly": 1,
+                        "ride": 0,
+                        "regular": 1,
+                        "neon": 0,
+                        "mega": 0
+                    },
+                    {
+                        "id": 230,
+                        "fly": 1,
+                        "ride": 1,
+                        "regular": 1,
+                        "neon": 0,
+                        "mega": 0
+                    },
+                    {
+                        "id": 2,
+                        "fly": 1,
+                        "ride": 0,
+                        "regular": 1,
+                        "neon": 0,
+                        "mega": 0
+                    },
+                    {
+                        "id": 67,
+                        "fly": 1,
+                        "ride": 1,
+                        "regular": 1,
+                        "neon": 0,
+                        "mega": 0
+                    },
+                    {
+                        "id": 307,
+                        "fly": 1,
+                        "ride": 0,
+                        "regular": 1,
+                        "neon": 0,
+                        "mega": 0
+                    },
+                    {
+                        "id": 196,
+                        "fly": 1,
+                        "ride": 0,
+                        "regular": 1,
+                        "neon": 0,
+                        "mega": 0
+                    }
+                ],
+                "value": 255.09,
+                "owner": "0",
+                "ownerProfilePicture": "dino.png",
+                "ownerUsername": "EmanuelNorsk69420",
+                "ownerRobloxUsername": "",
+                "createdAt": 1723655023.1017525,
+                "status": "Pending"
+            },
+            {
+                "pets": [
+                    {
+                        "id": 0,
+                        "fly": 0,
+                        "ride": 0,
+                        "regular": 1,
+                        "neon": 0,
+                        "mega": 0
+                    },
+                    {
+                        "id": 0,
+                        "fly": 0,
+                        "ride": 0,
+                        "regular": 1,
+                        "neon": 0,
+                        "mega": 0
+                    },
+                    {
+                        "id": 0,
+                        "fly": 0,
+                        "ride": 0,
+                        "regular": 1,
+                        "neon": 0,
+                        "mega": 0
+                    },
+                    {
+                        "id": 0,
+                        "fly": 0,
+                        "ride": 0,
+                        "regular": 1,
+                        "neon": 0,
+                        "mega": 0
+                    },
+                    {
+                        "id": 0,
+                        "fly": 0,
+                        "ride": 0,
+                        "regular": 1,
+                        "neon": 0,
+                        "mega": 0
+                    },
+                    {
+                        "id": 86,
+                        "fly": 0,
+                        "ride": 0,
+                        "regular": 1,
+                        "neon": 0,
+                        "mega": 0
+                    },
+                    {
+                        "id": 86,
+                        "fly": 0,
+                        "ride": 0,
+                        "regular": 1,
+                        "neon": 0,
+                        "mega": 0
+                    }
+                ],
+                "type": "take",
+                "tradePets": [
+                    {
+                        "id": 234,
+                        "fly": 1,
+                        "ride": 1,
+                        "regular": 1,
+                        "neon": 0,
+                        "mega": 0
+                    },
+                    {
+                        "id": 199,
+                        "fly": 0,
+                        "ride": 0,
+                        "regular": 1,
+                        "neon": 0,
+                        "mega": 0
+                    },
+                    {
+                        "id": 155,
+                        "fly": 0,
+                        "ride": 0,
+                        "regular": 1,
+                        "neon": 0,
+                        "mega": 0
+                    },
+                    {
+                        "id": 311,
+                        "fly": 0,
+                        "ride": 0,
+                        "regular": 1,
+                        "neon": 0,
+                        "mega": 0
+                    },
+                    {
+                        "id": 356,
+                        "fly": 1,
+                        "ride": 0,
+                        "regular": 1,
+                        "neon": 0,
+                        "mega": 0
+                    },
+                    {
+                        "id": 230,
+                        "fly": 1,
+                        "ride": 1,
+                        "regular": 1,
+                        "neon": 0,
+                        "mega": 0
+                    },
+                    {
+                        "id": 2,
+                        "fly": 1,
+                        "ride": 0,
+                        "regular": 1,
+                        "neon": 0,
+                        "mega": 0
+                    },
+                    {
+                        "id": 67,
+                        "fly": 1,
+                        "ride": 1,
+                        "regular": 1,
+                        "neon": 0,
+                        "mega": 0
+                    },
+                    {
+                        "id": 307,
+                        "fly": 1,
+                        "ride": 0,
+                        "regular": 1,
+                        "neon": 0,
+                        "mega": 0
+                    },
+                    {
+                        "id": 196,
+                        "fly": 1,
+                        "ride": 0,
+                        "regular": 1,
+                        "neon": 0,
+                        "mega": 0
+                    }
+                ],
+                "value": 10.75,
+                "owner": "0",
+                "ownerProfilePicture": "dino.png",
+                "ownerUsername": "EmanuelNorsk69420",
+                "ownerRobloxUsername": "",
+                "createdAt": 1723655489.1110597,
+                "status": "Pending"
             }
         ],
         "createdAt": 1723632613.274252,

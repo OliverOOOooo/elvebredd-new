@@ -333,6 +333,8 @@
 </script>
 
 <script>
+    var body = document.body
+
     var autoScroll = 0
 
     var tradesDictElement = document.getElementById("tradesDict")
@@ -458,6 +460,7 @@
     var offers = document.getElementById("offers")
     var listingInterface2Preferences = document.getElementById("listingInterface2Preferences")
     var listingInterface2Main = document.getElementById("listingInterface2Main")
+    var listingInterface2 = document.getElementById("listingInterface2")
     var listingInterface2Background = document.getElementById("listingInterface2Background")
     var listingInterface2YourOfferPets = document.getElementById("listingInterface2YourOfferPets")
     var listingInterface2TheirOfferPets = document.getElementById("listingInterface2TheirOfferPets")
@@ -474,7 +477,55 @@
     var youAddTheyAdd = document.getElementById("youAddTheyAdd")
     var yourOfferExtraPets = []
     var theirOfferExtraPets = []
-    
+    var remainingScroll = 0.00
+    var scrolling = false
+    var scrollSharpness = 1
+    var scrollStrength = 1
+
+    function enableScrolling() {
+        body.style.overflow = '';
+        document.removeEventListener('wheel', preventBodyScroll, { passive: false });
+    }
+
+    function disableScrolling() {
+        body.style.overflow = 'hidden';
+        document.addEventListener('wheel', preventBodyScroll, { passive: false });
+    }
+
+    function preventBodyScroll(event) {
+    const target = event.target;
+    const petImagesElement = document.getElementById('petImages');
+
+    const isInsidePetImages = petImagesElement && (petImagesElement.contains(target) || target === petImagesElement);
+    const isInsideListingInterface2 = listingInterface2 && (listingInterface2.contains(target) || target === listingInterface2);
+
+    if (!isInsidePetImages && !isInsideListingInterface2) {
+        event.preventDefault();
+        event.stopPropagation();
+    }
+}
+    listingInterface2Background.addEventListener("wheel", event => {
+        if (remainingScroll * event.deltaY < 0) {
+            remainingScroll = 0
+        }
+        remainingScroll += event.deltaY * scrollStrength
+        if (scrolling == false) {
+            scroll()
+        }
+    })
+
+    function scroll() {
+        scrolling = true
+        listingInterface2.scrollTop += remainingScroll * scrollSharpness
+        remainingScroll -= remainingScroll * scrollSharpness
+        if (remainingScroll * scrollSharpness > 1) {
+            setTimeout(scroll(), (1000 / 60))
+        } else {
+            listingInterface2.scrollTop += remainingScroll
+            remainingScroll = 0
+            scrolling = false
+        }
+    }
 
     function setAddPetTypeTo(type) {
         addPetType = type
@@ -850,6 +901,30 @@
         }
     }
 
+    function adjustGradientHeight() {
+
+        let existingStyle = document.querySelector('#gradientHeightStyle');
+        if (!existingStyle) {
+            existingStyle = document.createElement('style');
+            existingStyle.id = 'gradientHeightStyle';
+            document.head.appendChild(existingStyle);
+        }
+
+        existingStyle.textContent = `
+            #listingInterface2::before {
+                height: 0px;
+            }
+        `;
+
+        const contentHeight = listingInterface2.scrollHeight;
+
+        existingStyle.textContent = `
+            #listingInterface2::before {
+                height: ${contentHeight}px;
+            }
+        `;
+    }
+
     document.addEventListener("mousemove", event => {
         var hover = 0
         mouseX = event.clientX
@@ -1190,6 +1265,7 @@
 
 
     function showUserListings2(listing) {
+        disableScrolling()
         currentListing = listing
         yourOfferExtraPets = []
         theirOfferExtraPets = []
@@ -1197,10 +1273,6 @@
         listingInterface2Background.style.display = "flex"
         showOffers(listing)
         showPreferences(listing)
-
-        if (listing["extraSharkValueRequested"] < 0) {
-            console.log("Here")
-        }
 
         if (listing["extraSharkValueRequested"] == 0 || listing["extraSharkValueRequested"] == undefined) {
             yourOfferValue.innerText = listing["offer"]["giveValue"].toFixed(2)
@@ -1319,11 +1391,14 @@
             listingInterface2TheirOfferPets.appendChild(div)
         }
 
+        adjustGradientHeight()
+
     }
 
     function closeListingInterface2() {
         listingInterface2.style.display = "none"
         listingInterface2Background.style.display = "none"
+        enableScrolling()
     }
 
     function showOffers(listing) {
@@ -1436,7 +1511,6 @@
             } else {
                 p4.innerText = listing["customOffers"][i]["ownerUsername"]
             }       
-            console.log(listing["customOffers"][i])
             const img2 = document.createElement("img")
             img2.src = "/static/images/profile/" + listing["customOffers"][i]["ownerProfilePicture"]
             div8.appendChild(p4)
