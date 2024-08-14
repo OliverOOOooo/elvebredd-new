@@ -333,6 +333,8 @@
 </script>
 
 <script>
+    var body = document.body
+
     var autoScroll = 0
 
     var tradesDictElement = document.getElementById("tradesDict")
@@ -458,6 +460,7 @@
     var offers = document.getElementById("offers")
     var listingInterface2Preferences = document.getElementById("listingInterface2Preferences")
     var listingInterface2Main = document.getElementById("listingInterface2Main")
+    var listingInterface2 = document.getElementById("listingInterface2")
     var listingInterface2Background = document.getElementById("listingInterface2Background")
     var listingInterface2YourOfferPets = document.getElementById("listingInterface2YourOfferPets")
     var listingInterface2TheirOfferPets = document.getElementById("listingInterface2TheirOfferPets")
@@ -474,7 +477,55 @@
     var youAddTheyAdd = document.getElementById("youAddTheyAdd")
     var yourOfferExtraPets = []
     var theirOfferExtraPets = []
-    
+    var remainingScroll = 0.00
+    var scrolling = false
+    var scrollSharpness = 1
+    var scrollStrength = 1
+
+    function enableScrolling() {
+        body.style.overflow = '';
+        document.removeEventListener('wheel', preventBodyScroll, { passive: false });
+    }
+
+    function disableScrolling() {
+        body.style.overflow = 'hidden';
+        document.addEventListener('wheel', preventBodyScroll, { passive: false });
+    }
+
+    function preventBodyScroll(event) {
+    const target = event.target;
+    const petImagesElement = document.getElementById('petImages');
+
+    const isInsidePetImages = petImagesElement && (petImagesElement.contains(target) || target === petImagesElement);
+    const isInsideListingInterface2 = listingInterface2 && (listingInterface2.contains(target) || target === listingInterface2);
+
+    if (!isInsidePetImages && !isInsideListingInterface2) {
+        event.preventDefault();
+        event.stopPropagation();
+    }
+}
+    listingInterface2Background.addEventListener("wheel", event => {
+        if (remainingScroll * event.deltaY < 0) {
+            remainingScroll = 0
+        }
+        remainingScroll += event.deltaY * scrollStrength
+        if (scrolling == false) {
+            scroll()
+        }
+    })
+
+    function scroll() {
+        scrolling = true
+        listingInterface2.scrollTop += remainingScroll * scrollSharpness
+        remainingScroll -= remainingScroll * scrollSharpness
+        if (remainingScroll * scrollSharpness > 1) {
+            setTimeout(scroll(), (1000 / 60))
+        } else {
+            listingInterface2.scrollTop += remainingScroll
+            remainingScroll = 0
+            scrolling = false
+        }
+    }
 
     function setAddPetTypeTo(type) {
         addPetType = type
@@ -850,6 +901,30 @@
         }
     }
 
+    function adjustGradientHeight() {
+
+        let existingStyle = document.querySelector('#gradientHeightStyle');
+        if (!existingStyle) {
+            existingStyle = document.createElement('style');
+            existingStyle.id = 'gradientHeightStyle';
+            document.head.appendChild(existingStyle);
+        }
+
+        existingStyle.textContent = `
+            #listingInterface2::before {
+                height: 0px;
+            }
+        `;
+
+        const contentHeight = listingInterface2.scrollHeight;
+
+        existingStyle.textContent = `
+            #listingInterface2::before {
+                height: ${contentHeight}px;
+            }
+        `;
+    }
+
     document.addEventListener("mousemove", event => {
         var hover = 0
         mouseX = event.clientX
@@ -1190,6 +1265,7 @@
 
 
     function showUserListings2(listing) {
+        disableScrolling()
         currentListing = listing
         yourOfferExtraPets = []
         theirOfferExtraPets = []
@@ -1197,7 +1273,6 @@
         listingInterface2Background.style.display = "flex"
         showOffers(listing)
         showPreferences(listing)
-
 
         if (listing["extraSharkValueRequested"] == 0 || listing["extraSharkValueRequested"] == undefined) {
             yourOfferValue.innerText = listing["offer"]["giveValue"].toFixed(2)
@@ -1212,6 +1287,7 @@
             sharkValueRequestedDiv.style.display = "flex"
             changeButton.disabled = false
             sharkValueRequested.innerText = listing["extraSharkValueRequested"].toFixed(2)
+            youAddTheyAdd.innerText = "YOU ADD:"
         } else if (listing["extraSharkValueRequested"] < 0) {
             yourOfferValue.innerText = listing["offer"]["giveValue"].toFixed(2)
             theirOfferValue.innerText = listing["offer"]["takeValue"].toFixed(2).toString() + " + " + Math.abs(listing["extraSharkValueRequested"]).toString()
@@ -1219,6 +1295,7 @@
             sharkValueRequestedDiv.style.display = "flex"
             changeButton.disabled = false
             sharkValueRequested.innerText = Math.abs(listing["extraSharkValueRequested"]).toFixed(2)
+            youAddTheyAdd.innerText = "THEY ADD:"
         }
 
 
@@ -1314,11 +1391,14 @@
             listingInterface2TheirOfferPets.appendChild(div)
         }
 
+        adjustGradientHeight()
+
     }
 
     function closeListingInterface2() {
         listingInterface2.style.display = "none"
         listingInterface2Background.style.display = "none"
+        enableScrolling()
     }
 
     function showOffers(listing) {
@@ -1327,6 +1407,48 @@
             const div = document.createElement("div")
             div.className = "offer"
             const div2 = document.createElement("div")
+            for (const j in listing["customOffers"][i]["tradePets"]) {
+                const img = document.createElement("img")
+                img.src = petsDict[listing["customOffers"][i]["tradePets"][j]["id"]]["image"]
+                const div4 = document.createElement("div")
+                div4.appendChild(img)
+                const div5 = document.createElement("div")
+                if (listing["customOffers"][i]["tradePets"][j]["fly"] == 1) {
+                    const div6 = document.createElement("div")
+                    div6.style.background = "linear-gradient(135deg, rgb(142, 202, 232) 0%, rgb(47, 152, 204) 50%, rgb(0, 134, 200) 100%)"
+                    const p = document.createElement("p")
+                    p.innerText = "F"
+                    div6.appendChild(p)
+                    div5.appendChild(div6)
+                }
+                if (listing["customOffers"][i]["tradePets"][j]["ride"] == 1) {
+                    const div6 = document.createElement("div")
+                    div6.style.background = "linear-gradient(135deg, rgb(255, 197, 220) 0%, rgb(237, 44, 121) 50%, rgb(255, 0, 101) 100%)"
+                    const p = document.createElement("p")
+                    p.innerText = "R"
+                    div6.appendChild(p)
+                    div5.appendChild(div6)
+                }
+                if (listing["customOffers"][i]["tradePets"][j]["neon"] == 1) {
+                    const div6 = document.createElement("div")
+                    div6.style.background = "linear-gradient(135deg, rgb(193, 255, 110) 0%, rgb(140, 198, 63) 50%, rgb(19, 114, 11) 100%)"
+                    const p = document.createElement("p")
+                    p.innerText = "N"
+                    div6.appendChild(p)
+                    div5.appendChild(div6)
+                }
+                if (listing["customOffers"][i]["tradePets"][j]["mega"] == 1) {
+                    const div5 = document.createElement("div")
+                    div5.style.background = "linear-gradient(135deg, rgb(187, 80, 253) 0%, rgb(69, 3, 198) 50%, rgb(81, 28, 182) 100%)"
+                    const p = document.createElement("p")
+                    p.innerText = "M"
+                    div6.appendChild(p)
+                    div5.appendChild(div6)
+                }
+                div4.appendChild(div5)
+                div2.appendChild(div4)
+            }
+
             for (const j in listing["customOffers"][i]["pets"]) {
                 const img = document.createElement("img")
                 img.src = petsDict[listing["customOffers"][i]["pets"][j]["id"]]["image"]
@@ -1370,7 +1492,6 @@
             }
 
 
-
             div.appendChild(div2)
             const div3 = document.createElement("div")
 
@@ -1390,7 +1511,6 @@
             } else {
                 p4.innerText = listing["customOffers"][i]["ownerUsername"]
             }       
-            console.log(listing["customOffers"][i])
             const img2 = document.createElement("img")
             img2.src = "/static/images/profile/" + listing["customOffers"][i]["ownerProfilePicture"]
             div8.appendChild(p4)
@@ -1417,6 +1537,24 @@
             if (i - 1 <= listing["customOffers"].length) {
                 offers.appendChild(line)
             }
+
+        }
+
+        if (listing["customOffers"] == 0) {
+            const div = document.createElement("div")
+            const text = document.createElement("p")
+            text.style.fontSize = "40rem"
+            text.style.fontWeight = "700"
+            text.style.margin = "0px"
+            text.style.color = "rgb(109, 107, 112)"
+            text.innerText = "There Are No Current Offers"
+            div.appendChild(text)
+            div.style.display = "flex"
+            div.style.width = "100%"
+            div.style.height = "200rem"
+            div.style.justifyContent = "center"
+            div.style.alignItems = "center"
+            offers.appendChild(div)
 
         }
 
@@ -1634,9 +1772,18 @@
 
     function sendOffer() {
         formData = new FormData();
-        formData.append('key', key)
+        formData.append('id', currentListing["id"])
         formData.append('action', "sendOffer");
-        formData.append('action', "sendOffer");
+        if (currentListing["extraSharkValueRequested"] == 0 || currentListing["extraSharkValueRequested"] > 0) {
+            var pets = currentListing["offer"]["give"]
+            formData.append('pets', JSON.stringify(yourOfferExtraPets));
+            formData.append('type', "give");
+        } else {
+            var pets = currentListing["offer"]["take"]
+            formData.append('pets', JSON.stringify(theirOfferExtraPets));
+            formData.append('type', "take");
+        }
+        
 
         fetch('/api', {
         method: 'POST',
@@ -1650,7 +1797,9 @@
         })
         .then(data => {
         if (data == "SUCCESS") {
-            
+            displayMessage("You successfully sent an offer!")
+        } else {
+            displayError("Something went wrong with your offer!")
         }
         })
         .catch(error => {

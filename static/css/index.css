@@ -279,22 +279,62 @@ nav{
     width:20%;
 }
 
-#listingInterface2{
-    display:none;
-    flex-direction:column;
-    align-items:center;
-    position:absolute;
-    transform:translate(-50%, -0%);
-    top:3%;
-    left:50%;
+#listingInterface2 {
+    display: none;
+    overflow-y: scroll;
+    overflow-x:hidden;
+    flex-direction: column;
+    align-items: center;
+    position: fixed;
+    transform: translate(-50%, 0%);
+    top: 3%;
+    left: 50%;
     width: 860rem;
-    min-height: 1800rem;
-    background:linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgb(0, 0, 0, 0) 275rem, white 425rem, white 475rem, rgb(237, 230, 219) 650rem), url('/static/images/misc/image100.png'); 
-    background-size: 100% auto;
-    background-repeat: no-repeat; 
-    background-position: top; 
-    border-radius:60rem;
-    z-index:100;
+    height: 95%;
+    background-color: white; /* Base background color */
+    border-radius: 60rem;
+    z-index: 100; /* Ensure it stays on top of other elements */
+    box-sizing: border-box;
+    padding: 20px;
+}
+
+#listingInterface2::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 175rem,
+    rgb(253, 249, 234) 475rem, rgb(253, 249, 234) 525rem, rgb(237, 230, 219) 700rem);
+
+    z-index: -1; /* Keep it behind the content */
+    pointer-events: none; /* No interaction with the background */
+}
+
+#listingInterface2::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 485rem;
+    background: url('/static/images/misc/image100.png') no-repeat top;
+    background-size: auto 100%;
+    z-index: -2; /* Keep it below the gradient */
+    pointer-events: none; /* No interaction with the background */
+}
+
+#listingInterface2::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+}
+
+#listingInterface2 {
+    scrollbar-width: none;
+}
+
+#listingInterface2 {
+    -ms-overflow-style: none;
 }
 
 #listingInterface2Background{
@@ -303,9 +343,11 @@ nav{
     left:0%;
     top:0%;
     width:100vw;
-    height:100vh;
+    height:200vh;
     background-color:rgb(0,0,0,0.3);
     display:none;
+    pointer-events:auto;
+    overflow:auto;
 }
 
 #listingInterface2 p{
@@ -856,6 +898,7 @@ nav{
 
 #errorText{
     color:white;
+    font-size:20rem;
 }
 
 #messageDiv{
@@ -875,6 +918,7 @@ nav{
 
 #messageText{
     color:white;
+    font-size:20rem;
 }
 
 .frontMenuButton{
