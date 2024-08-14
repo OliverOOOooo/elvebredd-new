@@ -417,6 +417,12 @@ def api():
                 return flask.jsonify(output)
             else:
                 return flask.jsonify("ERROR")
+        elif action == "sendOffer":
+            id, output, success = addCustomOffer(flask.session.get("userID", ""), args["id"], list(json.loads(args["pets"])), args["type"])
+            if success == 1:
+                return flask.jsonify("SUCCESS")
+            else:
+                return flask.jsonify("ERROR")
 
 
         else:

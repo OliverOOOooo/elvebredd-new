@@ -288,7 +288,6 @@ nav{
     top:3%;
     left:50%;
     width: 860rem;
-    min-height: 1800rem;
     background:linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgb(0, 0, 0, 0) 275rem, white 425rem, white 475rem, rgb(237, 230, 219) 650rem), url('/static/images/misc/image100.png'); 
     background-size: 100% auto;
     background-repeat: no-repeat; 
@@ -856,6 +855,7 @@ nav{
 
 #errorText{
     color:white;
+    font-size:20rem;
 }
 
 #messageDiv{
@@ -875,6 +875,7 @@ nav{
 
 #messageText{
     color:white;
+    font-size:20rem;
 }
 
 .frontMenuButton{

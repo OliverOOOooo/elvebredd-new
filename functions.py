@@ -362,13 +362,16 @@ def searchUpAccount(searchKey = "username/email"):
         return 3, "BadRequest 110 # Missing arguments", -1
 
 
-def addCustomOffer(userID = "", trade = "", pets = []):
+def addCustomOffer(userID = "", trade = "", pets = [], type = ""):
     global UserData, Trades
-    if userID != "" and trade != "" and pets != []:
+    print(pets)
+    if userID != "" and trade != "" and pets != [] and type != "":
         extraSharkValue = calculateValue(pets)
         if extraSharkValue >= Trades[trade]["extraSharkValueRequested"]:
             Trades[trade]["customOffers"].append({
                 "pets":pets,
+                "type":type,
+                "tradePets":Trades[trade]["offer"][type],
                 "value":calculateValue(pets),
                 "owner":userID,
                 "ownerProfilePicture":UserData[userID]["profilePicture"],
@@ -377,6 +380,7 @@ def addCustomOffer(userID = "", trade = "", pets = []):
                 "createdAt":time.time(),
                 "status":"Pending"
             })
+            dumpTrades()
             return 1, "Offer created", 1
         else:
             return 2, "Offer invalid", -1
@@ -1403,9 +1407,9 @@ def generateListings(amount, user):
             })
         id, output, success = createListing(user, trade1, trade2, True, "all", random.randint(-10,10))
         if success == 1:
-            for y in range(0, random.randint(0, 10)):
+            for y in range(0, random.randint(5, 16)):
                 pets = []
-                for z in range(0, random.randint(1, 16)):
+                for z in range(0, random.randint(1, 8)):
                     pets.append({
                         "id":random.randint(0, len(Pets.keys()) - 1),
                         "fly":random.randint(0, 1),
@@ -1414,7 +1418,7 @@ def generateListings(amount, user):
                         "neon":0,
                         "mega":0,
                     })
-                addCustomOffer(user, output, pets)
+                addCustomOffer(user, output, pets, random.choice(["give", "take"]))
 
 
 openDataFiles()
