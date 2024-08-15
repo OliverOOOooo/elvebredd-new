@@ -520,8 +520,11 @@ def searchPets(input):
     global Pets
     if input != "":
         for petID, pet in Pets.items():
+            petName = pet["name"].lstrip("'").lower()
+            inputNew = input.lstrip("'").lower()
+            print(petName, inputNew)
             if len(output) < 5:
-                if input in pet["name"]:
+                if petName.startswith(inputNew) or pet["name"].lower().startswith(input.lower()):
                     output.append(pet)
                     output2.append(petID)
             else:
