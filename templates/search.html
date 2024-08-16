@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search</title>
+    <script src="../static/js/index.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/search.css') }}">
+    <link rel="stylesheet" href="https://use.typekit.net/uju1lhj.css">
+</head>
+<body>
+    <header>
+        {% include "header.html" %}
+    </header>
+    <main class="maxWidth main">
+        <div style="width:20%;min-height:100vh;"></div>
+        <div style="width:60%;min-height:100vh;">
+            <div id="searchGrid">
+                <div>
+                    <div>
+                        <p><i>Legendary</i></p>
+                        <p><i>#</i></p>
+                        <p><i>000</i></p>
+                    </div>
+                    <div>
+                        <img src="/static/images/pets/Chicken.png">
+                    </div>
+                    <p>Shark</p>
+                    <div></div>
+                    <div>
+                        <div>
+                            <p>Default</p>
+                            <p>Neon</p>
+                            <p>Mega</p>
+                        </div>
+                        <div>
+                            <p>0</p>
+                            <p>00</p>
+                            <p>000</p>
+                        </div>
+                    </div>
+                    <p>SHARK VALUES</p>
+                </div>
+            </div>
+        </div>
+        <div style="width:20%;min-height:100vh;"></div>
+    </main>
+    <footer>
+        {% include "footer.html" %}
+    </footer>
+</body>
+</html>
+
+<script type="application/data" id="resultsList">
+    {{ results | tojson | safe }}
+</script>
+
+<script>
+    var resultsListElement = document.getElementById("resultsList")
+    var results = JSON.parse(resultsList.textContent)
+    var searchGrid = document.getElementById("searchGrid")
+
+    function capitalizeFirstLetter(string) {
+        if (!string) return string;
+        return string.charAt(0).toUpperCase() + string.slice(1);
+    }
+
+    function goToPetPage(id) {
+        window.location.href = "/pet/" + id
+    }
+
+    function showSearch() {
+        searchGrid.innerHTML = ""
+        results.forEach(pet => {
+            const div = document.createElement("div")
+            div.setAttribute("onclick", "goToPetPage(" + pet["id"] + ")")
+            div.style.cursor = "pointer"
+            const div2 = document.createElement("div")
+            const p = document.createElement("p")
+            const i = document.createElement("i")
+            i.innerText = capitalizeFirstLetter(pet["rarity"])
+            p.appendChild(i)
+            const p2 = document.createElement("p")
+            const i2 = document.createElement("i")
+            i2.innerText = "#"
+            p2.appendChild(i2)
+            const p3 = document.createElement("p")
+            const i3 = document.createElement("i")
+            i3.innerText = "000"
+            p3.appendChild(i3)
+            div2.appendChild(p)
+            div2.appendChild(p2)
+            div2.appendChild(p3)
+            div.appendChild(div2)
+            const div3 = document.createElement("div")
+            const img = document.createElement("img")
+            img.src = pet["image"]
+            div3.appendChild(img)
+            div.appendChild(div3)
+            const div8 = document.createElement("div")
+            const p4 = document.createElement("p")
+            p4.innerText = pet["name"]
+            div8.appendChild(p4)
+            div.appendChild(div8)
+            const div4 = document.createElement("div")
+            div.appendChild(div4)
+            const div5 = document.createElement("div")
+            const div6 = document.createElement("div")
+            const p5 = document.createElement("p")
+            const p6 = document.createElement("p")
+            const p7 = document.createElement("p")
+            p5.innerText = "Default"
+            p6.innerText = "Neon"
+            p7.innerText = "Mega"
+            div6.appendChild(p5)
+            div6.appendChild(p6)
+            div6.appendChild(p7)
+            const div7 = document.createElement("div")
+            const p8 = document.createElement("p")
+            const p9 = document.createElement("p")
+            const p10 = document.createElement("p")
+            if ("rvalue" in pet) {
+                p8.innerText = pet["rvalue"]
+                p9.innerText = pet["nvalue"]
+                p10.innerText = pet["mvalue"]
+            } else {
+                p8.innerText = pet["value"]
+                p9.innerText = "X"
+                p10.innerText = "X"
+            }
+            div7.appendChild(p8)
+            div7.appendChild(p9)
+            div7.appendChild(p10)
+            div5.appendChild(div6)
+            div5.appendChild(div7)
+            div.appendChild(div5)
+            const p11 = document.createElement("p")
+            p11.innerText = "SHARK VALUES"
+            div.appendChild(p11)
+            searchGrid.appendChild(div)
+        });  
+    }
+
+    showSearch()
+</script>

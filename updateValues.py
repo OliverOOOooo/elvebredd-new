@@ -46,7 +46,8 @@ for fileName in os.listdir("values"):
     print("Fixing json convertion artifacts...")
 
     for key in dictionary.keys():
-        dictionary[key]["Image"] = "../static/images/pets/" + str(dictionary[key]["Name"]) + ".png"
+        dictionary[key]["image"] = "/static/images/pets/" + str(dictionary[key]["Name"]) + ".png"
+        dictionary[key]["id"] = str(key)
 
         delList = []
         for innerKey in dictionary[key].keys():

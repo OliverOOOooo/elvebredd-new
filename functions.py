@@ -513,6 +513,15 @@ def search(input):
     
     return 3, "Nothing Found", -1
 
+def searchForPets(input = ""):
+    output = []
+    global Pets
+    if input != "":
+        for petID, pet in Pets.items():
+            if input.lstrip("'") in pet["name"].lstrip("'"):
+                output.append(pet)
+    return output
+
 
 def searchPets(input):
     output = []

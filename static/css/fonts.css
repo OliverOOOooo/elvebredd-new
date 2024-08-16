@@ -164,5 +164,5 @@ body {
 
 html {
     font-size: 0.0694444444444vw;
-    background: linear-gradient(135deg, rgb(226, 217, 205) 0%, rgb(241, 237, 230) 50%, rgb(246, 243, 233) 100%);
+    background: linear-gradient(135deg, rgb(226, 217, 205) 0vh, rgb(241, 237, 230) 50vh, rgb(246, 243, 233) 100vh)
 }
