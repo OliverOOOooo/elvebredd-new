@@ -186,6 +186,7 @@
 }
 
 #all {
+    filter: brightness(1);
     border: 1px solid var(--theme-Highlight);
     color: var(--theme-Highlight);
 }
