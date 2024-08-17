@@ -32,11 +32,7 @@ nav{
     z-index:100;
 }
 
-.center{
-    display:flex;
-    justify-content:center;
-    align-items:center;
-}
+
 
 .blank{
     border:0px solid black;
@@ -635,19 +631,7 @@ nav{
 }
 
 
-#addInventory{
-    background: linear-gradient(135deg, rgb(243, 231, 214) 0%, rgb(235, 229, 220) 50%, rgb(253, 249, 234) 100%);
-    border:3px solid white;
-    border-radius:40px;
-    padding:1vw;
-    width:max(30vw, 60vh);
-    z-index:1000;
-    position:fixed;
-    top:50%;
-    left:50%;
-    transform:translate(-50%, -50%);
-    display:none;
-}
+
 
 #addInventoryBackground{
     width:100%;
@@ -660,208 +644,11 @@ nav{
     display:none;
 }
 
-#petImages{
-    display:grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-gap:max(1vw, 2vh);
-    overflow:auto;
-    overflow-x:hidden;
-    padding:max(0.4vw, 0.8vh);
-    height:max(18vw, 36vh);
-}
-
-.petImage{
-    border-radius:max(0.35vw, 0.7vh);
-    border:1px solid white;
-    background: linear-gradient(135deg, rgb(243, 231, 214) 0%, rgb(235, 229, 220) 50%, rgb(253, 249, 234) 100%);
-    padding:max(0.1vw, 0.2vh);
-    cursor:pointer;
-    display: flex;
-    width:max(3.5vw, 7vh);
-    height:max(3.5vw, 7vh);
-}
 
 
-#flyButton{
-    background: linear-gradient(135deg, rgb(142, 202, 232) 0%, rgb(47, 152, 204) 50%, rgb(0, 134, 200) 100%);
-    border-radius: max(1.5vw, 3vh);
-    padding: 0;
-    padding-left: max(1.5vw, 3vh);
-    padding-right: max(1.5vw, 3vh);
-    padding-top: max(0.5vw, 1vh);
-    padding-bottom: max(0.5vw, 1vh);
-    text-align: center;
-    font-size: max(0.4vw, 0.8vh);
-    cursor: pointer;
-    height:max(1.4vw, 2.8vh);
-    display:flex;
-    justify-content: center;
-    align-items:center;
-}
 
-#rideButton{
-    background: linear-gradient(135deg, rgb(255, 197, 220) 0%, rgb(237, 44, 121) 50%, rgb(255, 0, 101) 100%);
-    border-radius: max(1.5vw, 3vh);
-    padding: 0;
-    padding-left: max(1.5vw, 3vh);
-    padding-right: max(1.5vw, 3vh);
-    padding-top: max(0.5vw, 1vh);
-    padding-bottom: max(0.5vw, 1vh);
-    text-align: center;
-    font-size: max(0.4vw, 0.8vh);
-    cursor: pointer;
-    height:max(1.4vw, 2.8vh);
-    display:flex;
-    justify-content: center;
-    align-items:center;
-}
 
-#regularButton{
-    background: linear-gradient(135deg, rgb(255, 145, 0) 0%, rgb(255, 102, 102) 50%, rgb(255, 102, 102) 100%);
-    border-radius: max(1.5vw, 3vh);
-    padding: 0;
-    padding-left: max(1.5vw, 3vh);
-    padding-right: max(1.5vw, 3vh);
-    padding-top: max(0.5vw, 1vh);
-    padding-bottom: max(0.5vw, 1vh);
-    text-align: center;
-    font-size: max(0.4vw, 0.8vh);
-    cursor: pointer;
-    height:max(1.4vw, 2.8vh);
-    display:flex;
-    justify-content: center;
-    align-items:center;
-}
 
-#neonButton{
-    background: linear-gradient(135deg, rgb(193, 255, 110) 0%, rgb(140, 198, 63) 50%, rgb(19, 114, 11) 100%);
-    border-radius: max(1.5vw, 3vh);
-    padding: 0;
-    padding-left: max(1.5vw, 3vh);
-    padding-right: max(1.5vw, 3vh);
-    padding-top: max(0.5vw, 1vh);
-    padding-bottom: max(0.5vw, 1vh);
-    text-align: center;
-    font-size: max(0.4vw, 0.8vh);
-    cursor: pointer;
-    height:max(1.4vw, 2.8vh);
-    display:flex;
-    justify-content: center;
-    align-items:center;
-}
-
-#megaButton{
-    background: linear-gradient(135deg, rgb(187, 80, 253) 0%, rgb(69, 3, 198) 50%, rgb(81, 28, 182) 100%);
-    border-radius: max(1.5vw, 3vh);
-    padding: 0;
-    padding-left: max(1.5vw, 3vh);
-    padding-right: max(1.5vw, 3vh);
-    padding-top: max(0.5vw, 1vh);
-    padding-bottom: max(0.5vw, 1vh);
-    text-align: center;
-    font-size: max(0.4vw, 0.8vh);
-    cursor: pointer;
-    height:max(1.4vw, 2.8vh);
-    display:flex;
-    justify-content: center;
-    align-items:center;
-}
-
-#imageButtons{
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    padding:max(0.5vw, 1vh);
-    flex-direction:row;
-    gap:max(0.5vw, 1vh);
-    padding-top:max(2vw, 4vh);
-    color:white;
-}
-
-#filter{
-    padding:max(0.4vw, 0.8vh);
-    width:20%;
-}
-
-.filterButton{
-    cursor:pointer;
-    padding:max(0.325vw, 0.65vh);
-    border-radius:max(0.2vw, 0.4vh);
-    border:1px solid white;
-    background: linear-gradient(135deg, rgb(220, 210, 200) 0%, rgb(190, 190, 190) 50%, rgb(220, 210, 200) 100%);
-}
-
-.filterButtonText{
-    color:white;
-    font-size:max(0.6vw, 1.2vh);
-}
-
-#filterText{
-    color:white;
-    font-size:max(0.8vw, 1.6vh);
-    margin:0px;
-}
-
-#filterImage{
-    height:max(0.7vw, 1.4vh);
-    width:max(0.7vw, 1.4vh);
-    filter: invert(100%) contrast(200%);
-}
-
-#filterButtons{
-    display:flex;
-    flex-direction:column;
-    gap:max(0.2vw, 0.4vh);
-}
-
-#petSearch{
-    display:flex;
-    flex-direction:row;
-    align-items:center;
-    padding:max(0.2vw, 0.4vh);
-    border-radius:max(0.3vw, 0.6vh);
-    border:1px solid white;
-    cursor:pointer;
-    background: transparent;
-    height:max(1.2vw, 2.4vh);
-    width:100%;
-    color:white;
-    font-size:max(1vw, 2vh);
-}
-
-#petSearchDiv{
-    position:relative;
-    width:70%;
-}
-
-#petSearch:focus{
-    background: linear-gradient(135deg, rgb(243, 231, 214) 0%, rgb(235, 229, 220) 50%, rgb(253, 249, 234) 100%);
-}
-
-#petSearchImage{
-    width:max(1vw, 2vh);
-    height:max(1vw, 2vh);
-    filter: invert(100%) contrast(200%);
-    position:absolute;
-    right:5%;
-}
-
-#petSearch::placeholder{
-    color:white;
-}
-
-#all{
-    filter:brightness(1.2)
-}
-
-#closeButton{
-    z-index:200;
-    position:absolute;
-    top:-6%;
-    right:-6%;
-    filter:invert(1);
-    cursor:pointer;
-}
 
 #mainContent{
     padding:max(5vw, 10vh);
