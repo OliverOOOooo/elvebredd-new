@@ -247,7 +247,7 @@
         "badges": {},
         "verified": 0,
         "dailyStreak": 0,
-        "dailyStreakActivated": 1723761588.2493284,
+        "dailyStreakActivated": 1723920716.7846055,
         "wishlist": [
             {
                 "id": "0",
@@ -315,9 +315,9 @@
             }
         ],
         "lastActivity": [
-            "03/04:16:08:24",
+            "20/51:17:08:24",
             [
-                "petPage7",
+                "indexPage",
                 "127.0.0.1"
             ]
         ],
@@ -3780,6 +3780,10 @@
             ],
             "03/04:16:08:24": [
                 "petPage7",
+                "127.0.0.1"
+            ],
+            "20/51:17:08:24": [
+                "indexPage",
                 "127.0.0.1"
             ]
         },
