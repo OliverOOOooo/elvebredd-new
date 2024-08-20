@@ -859,6 +859,7 @@ body{
 main{
     padding-top:85.5rem;
     background-color:rgb(233, 226, 216);
+    min-height:100vh;
 }
 
 .inboxListingMain{
