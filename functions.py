@@ -11,6 +11,7 @@ import os
 import atexit
 from better_profanity import profanity
 import click, requests
+import numba, numpy
 
 ValidateDataCheck = time.time()
 
@@ -144,6 +145,7 @@ def createAccount(username = "", robloxUsername = "", email = "", password = "")
             if email not in emails and username not in usernames:
                 id = str(len(UserData))
                 UserData[id] = {
+                    "id":str(id),
                     "username": profanity.censor(username),
                     "robloxUsername": profanity.censor(robloxUsername),
                     "email": email,
@@ -362,16 +364,19 @@ def searchUpAccount(searchKey = "username/email"):
         return 3, "BadRequest 110 # Missing arguments", -1
 
 
-def addCustomOffer(userID = "", trade = "", pets = [], type = ""):
+def addCustomOffer(userID = "", trade = "", pets = []):
     global UserData, Trades
-    print(pets)
-    if userID != "" and trade != "" and pets != [] and type != "":
+    if userID != "" and trade != "" and pets != []:
         extraSharkValue = calculateValue(pets)
         if extraSharkValue >= Trades[trade]["extraSharkValueRequested"]:
+            if Trades[trade]["extraSharkValueRequested"] >= 0:
+                type = "give"
+            else:
+                type = "take"
             Trades[trade]["customOffers"].append({
+                "id":int(len(Trades[trade]["customOffers"])),
                 "pets":pets,
                 "type":type,
-                "tradePets":Trades[trade]["offer"][type],
                 "value":calculateValue(pets),
                 "owner":userID,
                 "ownerProfilePicture":UserData[userID]["profilePicture"],
@@ -386,6 +391,44 @@ def addCustomOffer(userID = "", trade = "", pets = [], type = ""):
             return 2, "Offer invalid", -1
     else:
         return 0, "Bad Request 110 # Missing arguments", -1
+
+def declineOffer(userID = "", tradeID = "", offerID = ""):
+    global Trades
+    try:
+        if userID != "" and tradeID != "" and offerID != "":
+            if Trades[tradeID]["owner"] == userID:
+                Trades[tradeID]["customOffers"][int(offerID)]["status"] = "Declined"
+                dumpTrades()
+                return 2, "Success", 1
+            else:
+                return 1, "Error", -1
+        else:
+            return 0, "Error", -1
+    except Exception:
+        return 3, "Critical Error", -1
+    
+def acceptOffer(userID = "", tradeID = "", offerID = ""):
+    global Trades, UserData
+    try:
+        if userID != "" and tradeID != "" and offerID != "":
+            if Trades[tradeID]["owner"] == userID:
+                Trades[tradeID]["customOffers"][int(offerID)]["status"] = "Accepted"
+                Trades[tradeID]["acceptedUser"] = Trades[tradeID]["customOffers"][int(offerID)]["owner"]
+                Trades[tradeID]["acceptedUserUsername"] = Trades[tradeID]["customOffers"][int(offerID)]["ownerUsername"]
+                Trades[tradeID]["acceptedUserRobloxUsername"] = Trades[tradeID]["customOffers"][int(offerID)]["ownerRobloxUsername"]
+                Trades[tradeID]["acceptedAt"] = int(time.time())
+                Trades[tradeID]["acceptedOfferID"] = offerID
+                UserData[Trades[tradeID]["customOffers"][int(offerID)]["owner"]]["pending"].append([tradeID, offerID])
+                UserData[Trades[tradeID]["owner"]]["pending"].append([tradeID, offerID])
+                dumpTrades()
+                dumpUserData()
+                return 2, "Success", 1
+            else:
+                return 1, "Error", -1
+        else:
+            return 0, "Error", -1
+    except Exception:
+        return 3, "Critical Error", -1
 
 
 
@@ -585,7 +628,7 @@ def getIDFromEmail(email = ""):
     else:
         return 0, "Bad Request 100 # Missing arguments"
     
-def acceptOffer(userID, user2ID, listing):
+def acceptOfferOld(userID, user2ID, listing):
     global Trades, UserData
     if userID != "" and user2ID != "" and userID not in UserData[user2ID]["blocked"] and user2ID not in UserData[userID]["blocked"] and Trades[str(UserData[user2ID]["trades"][int(listing)])]["acceptedBy"] == None:
         key = str(UserData[user2ID]["trades"][int(listing)])
@@ -808,16 +851,17 @@ def createListing(userID, trade1, trade2, public = True, visibleTo = "all", extr
             "offer":{"give":trade1, "take":trade2, "giveValue":giveValue, "takeValue":takeValue},
             "extraSharkValueRequested":extra,
             "completed":False,
-            "acceptedBy":None,
-            "acceptedByUsername":None,
-            "acceptedByRobloxUsername":None,
+            "acceptedAt":-1,
+            "acceptedOfferID":-1,
+            "acceptedUser":None,
+            "acceptedUserUsername":None,
+            "acceptedUserRobloxUsername":None,
             "public":public,
             "visibleTo":visibleTo,
             "customOffers":[],
             "createdAt":time.time(),
             "views":[],
             "markedAsCompletedBy":[],
-            "status":"Pending",
 
         }
         Trades[tradeID] = trade
@@ -1388,49 +1432,55 @@ def getTradesForMainPage(userID):
             overpay[trade[1]] = Trades[trade[1]]
 
         return {"Suggested":suggested,"Recent":recent,"Overpay":overpay}
-        
+
+@numba.njit     
+def generatePet(maxID):
+    return {"id":numpy.random.randint(0, maxID),
+            "fly":numpy.random.randint(0, 1),
+            "ride":numpy.random.randint(0, 1),
+            "regular":1,
+            "neon":0,
+            "mega":0
+            }
+
+def createTrades(maxID):
+    trade1 = []
+    trade2 = []
+    for y in range(0, numpy.random.randint(1, 10)):
+        trade1.append(dict({"id":numpy.random.randint(0, maxID),
+            "fly":numpy.random.randint(0, 1),
+            "ride":numpy.random.randint(0, 1),
+            "regular":1,
+            "neon":0,
+            "mega":0
+            }))
+    for y in range(0, numpy.random.randint(1, 10)):
+        trade2.append(dict({"id":numpy.random.randint(0, maxID),
+            "fly":numpy.random.randint(0, 1),
+            "ride":numpy.random.randint(0, 1),
+            "regular":1,
+            "neon":0,
+            "mega":0
+            }))
+    return trade1, trade2
 
 
 
-
-
-def generateListings(amount, user):
-    global Pets    
+def generateListings(amount, user, offerUser):
+    global Pets
     for x in range(amount):
-        trade1 = []
-        trade2 = []
-        for y in range(0, random.randint(1, 10)):
-            trade1.append({
-                "id":random.randint(0, len(Pets.keys()) - 1),
-                "fly":random.randint(0, 1),
-                "ride":random.randint(0,1),
-                "regular":1,
-                "neon":0,
-                "mega":0,
-            })
-        for y in range(0, random.randint(1, 10)):
-            trade2.append({
-                "id":random.randint(0, len(Pets.keys()) - 1),
-                "fly":random.randint(0, 1),
-                "ride":random.randint(0,1),
-                "regular":1,
-                "neon":0,
-                "mega":0,
-            })
+        print(x)
+        trade1, trade2 = createTrades(len(Pets.keys()) - 1)
         id, output, success = createListing(user, trade1, trade2, True, "all", random.randint(-10,10))
         if success == 1:
             for y in range(0, random.randint(5, 16)):
                 pets = []
                 for z in range(0, random.randint(1, 8)):
-                    pets.append({
-                        "id":random.randint(0, len(Pets.keys()) - 1),
-                        "fly":random.randint(0, 1),
-                        "ride":random.randint(0,1),
-                        "regular":1,
-                        "neon":0,
-                        "mega":0,
-                    })
-                addCustomOffer(user, output, pets, random.choice(["give", "take"]))
+                    pets.append(dict(generatePet(len(Pets.keys()) - 1)))
+                addCustomOffer(offerUser, output, pets)
+
+
 
 
 openDataFiles()
+#generateListings(30, "0", "1")

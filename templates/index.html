@@ -328,7 +328,7 @@
     {{ pets | tojson | safe }}
 </script>
 
-<script type="application/data" id="userDataDict-data">
+<script type="application/data" id="userData-data">
     {{ userData | tojson | safe }}
 </script>
 
@@ -342,6 +342,9 @@
 
     var petsDictElement = document.getElementById("petsDict-data")
     var petsDict = JSON.parse(petsDictElement.textContent)
+
+    var userDataElement = document.getElementById("userData-data")
+    var userData = JSON.parse(userDataElement.textContent)
 
     var listingsCategory1 = document.getElementById("listingsCategory1")
     var listingsCategory2 = document.getElementById("listingsCategory2")
@@ -685,7 +688,7 @@
             txt1.style.color = "red"
 
             const txt2 = document.createElement("b")
-            var text = (listings[key]["offer"]["giveValue"] - listings[key]["offer"]["takeValue"]).toFixed(1)
+            var text = (listings[key]["offer"]["giveValue"] - listings[key]["offer"]["takeValue"] + listings[key]["extraSharkValueRequested"]).toFixed(1)
             if (parseFloat(text) <= 0) {
                 txt2.style.color = "black"
                 text = (Math.abs(parseFloat(text))).toString()
@@ -1298,7 +1301,9 @@
             youAddTheyAdd.innerText = "THEY ADD:"
         }
 
-
+        if (userData["id"] == listing["owner"]) {
+            finishButton.disabled = true
+        }
 
         timeAgoListed.innerText = timeSince(listing["createdAt"])
         totalOffers.innerText = listing["customOffers"].length
@@ -1321,7 +1326,7 @@
                 const div3 = document.createElement("div")
                 div3.style.background = "linear-gradient(135deg, rgb(255, 197, 220) 0%, rgb(237, 44, 121) 50%, rgb(255, 0, 101) 100%)"
                 const p = document.createElement("p")
-                p.innerText = "F"
+                p.innerText = "R"
                 div3.appendChild(p)
                 div2.appendChild(div3)
             }
@@ -1329,7 +1334,7 @@
                 const div3 = document.createElement("div")
                 div3.style.background = "linear-gradient(135deg, rgb(187, 80, 253) 0%, rgb(69, 3, 198) 50%, rgb(81, 28, 182) 100%)"
                 const p = document.createElement("p")
-                p.innerText = "F"
+                p.innerText = "N"
                 div3.appendChild(p)
                 div2.appendChild(div3)
             }
@@ -1337,7 +1342,7 @@
                 const div3 = document.createElement("div")
                 div3.style.background = "linear-gradient(135deg, rgb(193, 255, 110) 0%, rgb(140, 198, 63) 50%, rgb(19, 114, 11) 100%)"
                 const p = document.createElement("p")
-                p.innerText = "F"
+                p.innerText = "M"
                 div3.appendChild(p)
                 div2.appendChild(div3)
             }
@@ -1365,7 +1370,7 @@
                 const div3 = document.createElement("div")
                 div3.style.background = "linear-gradient(135deg, rgb(255, 197, 220) 0%, rgb(237, 44, 121) 50%, rgb(255, 0, 101) 100%)"
                 const p = document.createElement("p")
-                p.innerText = "F"
+                p.innerText = "R"
                 div3.appendChild(p)
                 div2.appendChild(div3)
             }
@@ -1373,7 +1378,7 @@
                 const div3 = document.createElement("div")
                 div3.style.background = "linear-gradient(135deg, rgb(187, 80, 253) 0%, rgb(69, 3, 198) 50%, rgb(81, 28, 182) 100%)"
                 const p = document.createElement("p")
-                p.innerText = "F"
+                p.innerText = "N"
                 div3.appendChild(p)
                 div2.appendChild(div3)
             }
@@ -1381,7 +1386,7 @@
                 const div3 = document.createElement("div")
                 div3.style.background = "linear-gradient(135deg, rgb(193, 255, 110) 0%, rgb(140, 198, 63) 50%, rgb(19, 114, 11) 100%)"
                 const p = document.createElement("p")
-                p.innerText = "F"
+                p.innerText = "M"
                 div3.appendChild(p)
                 div2.appendChild(div3)
             }
@@ -1407,13 +1412,14 @@
             const div = document.createElement("div")
             div.className = "offer"
             const div2 = document.createElement("div")
-            for (const j in listing["customOffers"][i]["tradePets"]) {
+
+            for (const j in listing["offer"][listing["customOffers"][i]["type"]]) {
                 const img = document.createElement("img")
-                img.src = petsDict[listing["customOffers"][i]["tradePets"][j]["id"]]["image"]
+                img.src = petsDict[listing["offer"][listing["customOffers"][i]["type"]][j]["id"]]["image"]
                 const div4 = document.createElement("div")
                 div4.appendChild(img)
                 const div5 = document.createElement("div")
-                if (listing["customOffers"][i]["tradePets"][j]["fly"] == 1) {
+                if (listing["offer"][listing["customOffers"][i]["type"]][j]["fly"] == 1) {
                     const div6 = document.createElement("div")
                     div6.style.background = "linear-gradient(135deg, rgb(142, 202, 232) 0%, rgb(47, 152, 204) 50%, rgb(0, 134, 200) 100%)"
                     const p = document.createElement("p")
@@ -1421,7 +1427,7 @@
                     div6.appendChild(p)
                     div5.appendChild(div6)
                 }
-                if (listing["customOffers"][i]["tradePets"][j]["ride"] == 1) {
+                if (listing["offer"][listing["customOffers"][i]["type"]][j]["ride"] == 1) {
                     const div6 = document.createElement("div")
                     div6.style.background = "linear-gradient(135deg, rgb(255, 197, 220) 0%, rgb(237, 44, 121) 50%, rgb(255, 0, 101) 100%)"
                     const p = document.createElement("p")
@@ -1429,7 +1435,7 @@
                     div6.appendChild(p)
                     div5.appendChild(div6)
                 }
-                if (listing["customOffers"][i]["tradePets"][j]["neon"] == 1) {
+                if (listing["offer"][listing["customOffers"][i]["type"]][j]["neon"] == 1) {
                     const div6 = document.createElement("div")
                     div6.style.background = "linear-gradient(135deg, rgb(193, 255, 110) 0%, rgb(140, 198, 63) 50%, rgb(19, 114, 11) 100%)"
                     const p = document.createElement("p")
@@ -1437,7 +1443,7 @@
                     div6.appendChild(p)
                     div5.appendChild(div6)
                 }
-                if (listing["customOffers"][i]["tradePets"][j]["mega"] == 1) {
+                if (listing["offer"][listing["customOffers"][i]["type"]][j]["mega"] == 1) {
                     const div5 = document.createElement("div")
                     div5.style.background = "linear-gradient(135deg, rgb(187, 80, 253) 0%, rgb(69, 3, 198) 50%, rgb(81, 28, 182) 100%)"
                     const p = document.createElement("p")
@@ -1491,7 +1497,6 @@
                 div2.appendChild(div4)
             }
 
-
             div.appendChild(div2)
             const div3 = document.createElement("div")
 
@@ -1526,6 +1531,11 @@
             const div10 = document.createElement("div")
             const p6 = document.createElement("p")
             p6.innerText = listing["customOffers"][i]["status"]
+            if (listing["customOffers"][i]["status"] == "Accepted") {
+                p6.style.color = "rgb(0, 220, 0)"
+            } else if (listing["customOffers"][i]["status"] == "Declined") {
+                p6.style.color = "rgb(220, 0, 0)"
+            }
             div10.appendChild(p6)
             div3.appendChild(div10)
 
@@ -1536,6 +1546,24 @@
             line.className = "offerLine"
             if (i - 1 <= listing["customOffers"].length) {
                 offers.appendChild(line)
+            }
+
+
+            if (listing["ownerUsername"] == userData["username"] && listing["acceptedAt"] == -1 && listing["customOffers"][i]["status"] == "Pending") {
+                const div11 = document.createElement("div")
+                const button1 = document.createElement("button")
+                button1.setAttribute("onclick", "declineOffer(" + i.toString() + ")")
+                const button2 = document.createElement("button")
+                button2.setAttribute("onclick", "acceptOffer(" + i.toString() + ")")
+                const p7 = document.createElement("p")
+                p7.innerText = "Decline"
+                const p8 = document.createElement("p")
+                p8.innerText = "Accept"
+                button1.appendChild(p7)
+                button2.appendChild(p8)
+                div11.appendChild(button1)
+                div11.appendChild(button2)
+                div.appendChild(div11)
             }
 
         }
@@ -1772,6 +1800,10 @@
             changeButton.disabled = false
         }
 
+        if (userData["id"] == listing["owner"]) {
+            finishButton.disabled = true
+        }
+
     }
 
     function sendOffer() {
@@ -1780,12 +1812,12 @@
         formData.append('action', "sendOffer");
         if (currentListing["extraSharkValueRequested"] == 0 || currentListing["extraSharkValueRequested"] > 0) {
             var pets = currentListing["offer"]["give"]
+            var type = "give"
             formData.append('pets', JSON.stringify(yourOfferExtraPets));
-            formData.append('type', "give");
         } else {
             var pets = currentListing["offer"]["take"]
+            var type = "take"
             formData.append('pets', JSON.stringify(theirOfferExtraPets));
-            formData.append('type', "take");
         }
         
 
@@ -1802,8 +1834,113 @@
         .then(data => {
         if (data == "SUCCESS") {
             displayMessage("You successfully sent an offer!")
+            const listingDiv = document.querySelector(`div.userListingsListing[data-key="${currentListing["id"]}"]`)
+            if (listingDiv) {
+                const onClick = listingDiv.getAttribute('onclick');
+                var extractedValue = onClick.slice(18, -1).trim();
+                if (type == "give") {
+                    pets = yourOfferExtraPets
+                } else {
+                    pets = theirOfferExtraPets
+                }
+                extractedValue = JSON.parse(extractedValue)
+                extractedValue["customOffers"].push({
+                    "id":parseInt(extractedValue["customOffers"].length),
+                    "pets":pets,
+                    "type":type,
+                    "value":calculateValue(pets),
+                    "owner":userData["id"],
+                    "ownerProfilePicture":userData["profilePicture"],
+                    "ownerUsername":userData["username"],
+                    "ownerRobloxUsername":userData["robloxUsername"],
+                    "createdAt":Math.floor(Date.now() / 1000),
+                    "status":"Pending"
+                })
+                listingDiv.setAttribute("onclick", "showUserListings2(" + JSON.stringify(extractedValue) + ")")
+                currentListing = extractedValue
+            }
         } else {
             displayError("Something went wrong with your offer!")
+        }
+        })
+        .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+        });
+    }
+
+    function declineOffer(offerID) {
+        formData = new FormData();
+        formData.append('id', currentListing["id"])
+        formData.append('offerID', offerID)
+        formData.append('action', "declineOffer");  
+
+        fetch('/api', {
+        method: 'POST',
+        body: formData
+        })
+        .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+        })
+        .then(data => {
+        if (data == "SUCCESS") {
+            displayMessage("You successfully declined an offer!")
+            const listingDiv = document.querySelector(`div.userListingsListing[data-key="${currentListing["id"]}"]`)
+            if (listingDiv) {
+                const onClick = listingDiv.getAttribute('onclick');
+                var extractedValue = onClick.slice(18, -1).trim();
+                extractedValue = JSON.parse(extractedValue)
+                extractedValue["customOffers"][offerID]["status"] = "Declined"
+                listingDiv.setAttribute("onclick", "showUserListings2(" + JSON.stringify(extractedValue) + ")")
+                currentListing = extractedValue
+                showOffers(currentListing)
+            }
+        } else {
+            displayError("Something went wrong!")
+        }
+        })
+        .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+        });
+    }
+
+    function acceptOffer(offerID) {
+        formData = new FormData();
+        formData.append('id', currentListing["id"])
+        formData.append('offerID', offerID)
+        formData.append('action', "acceptOffer");   
+
+        fetch('/api', {
+        method: 'POST',
+        body: formData
+        })
+        .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+        })
+        .then(data => {
+        if (data == "SUCCESS") {
+            displayMessage("You successfully accepted an offer!")
+            const listingDiv = document.querySelector(`div.userListingsListing[data-key="${currentListing["id"]}"]`)
+            if (listingDiv) {
+                const onClick = listingDiv.getAttribute('onclick');
+                var extractedValue = onClick.slice(18, -1).trim();
+                extractedValue = JSON.parse(extractedValue)
+                extractedValue["customOffers"][offerID]["status"] = "Accepted"
+                extractedValue["acceptedAt"] = Math.floor(Date.now() / 1000)
+                extractedValue["acceptedUser"] = userData["id"]
+                extractedValue["acceptedUserUsername"] = userData["username"]
+                extractedValue["acceptedUserRobloxUsername"] = userData["robloxUsername"]
+                listingDiv.setAttribute("onclick", "showUserListings2(" + JSON.stringify(extractedValue) + ")")
+                currentListing = extractedValue
+                showOffers(currentListing)
+            }
+        } else {
+            displayError("Something went wrong!")
         }
         })
         .catch(error => {

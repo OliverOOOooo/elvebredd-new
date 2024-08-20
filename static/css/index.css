@@ -472,7 +472,6 @@ nav{
 
 .offer{
     width:100%;
-    height:250rem;
     padding-top:30rem;
     padding-bottom:30rem;
     display:flex;
@@ -510,6 +509,13 @@ nav{
     justify-content:center;
     align-items:center;
     position:relative;
+}
+
+.offer > :nth-child(3) {
+    display:flex;
+    flex-direction:row;
+    justify-content:space-between;
+    width:50%;
 }
 
 .listingInterface2PetsDiv > div {

@@ -261,8 +261,8 @@ def api():
                 return flask.jsonify("SUCCESS")
             else:
                 return flask.jsonify("ERROR")
-        elif action == "acceptOffer":
-            id, output, success = acceptOffer(flask.session.get("userID", ""), args["user"], args["listing"])
+        elif action == "acceptOfferOld":
+            id, output, success = acceptOfferOld(flask.session.get("userID", ""), args["user"], args["listing"])
             if success == 1:
                 return flask.jsonify("SUCCESS")
             else:
@@ -418,11 +418,23 @@ def api():
             else:
                 return flask.jsonify("ERROR")
         elif action == "sendOffer":
-            id, output, success = addCustomOffer(flask.session.get("userID", ""), args["id"], list(json.loads(args["pets"])), args["type"])
+            id, output, success = addCustomOffer(flask.session.get("userID", ""), args["id"], list(json.loads(args["pets"])))
             if success == 1:
                 return flask.jsonify("SUCCESS")
             else:
                 return flask.jsonify("ERROR")
+        elif action == "declineOffer":
+            id, output, success = declineOffer(flask.session.get("userID", ""), args["id"], args["offerID"])
+            if success == 1:
+                return flask.jsonify("SUCCESS")
+            else:
+                return flask.jsonify(output)
+        elif action == "acceptOffer":
+            id, output, success = acceptOffer(flask.session.get("userID", ""), args["id"], args["offerID"])
+            if success == 1:
+                return flask.jsonify("SUCCESS")
+            else:
+                return flask.jsonify(output)
 
 
         else:
