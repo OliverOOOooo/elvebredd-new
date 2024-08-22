@@ -709,11 +709,11 @@ def getInbox(userID):
 
 def getPending(userID):
     global UserData, Trades
-    output = {}
+    output = []
     if userID != "":
-        for tradeID in UserData[userID]["pending"]:
+        for tradeDetails in UserData[userID]["pending"]:
             try:
-                output[tradeID] = Trades[tradeID]
+                output.append([Trades[tradeDetails[0]], tradeDetails[1]])
             except KeyError:
                 continue
     return 0, output, 1
@@ -1351,7 +1351,7 @@ def cleanseTrades():
 
         list = []
         for trade in userData["pending"]:
-            if trade in Trades.keys():
+            if trade[0] in Trades.keys():
                 list.append(trade)
         UserData[userID]["pending"] = list
 

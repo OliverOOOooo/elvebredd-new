@@ -496,17 +496,17 @@
     }
 
     function preventBodyScroll(event) {
-    const target = event.target;
-    const petImagesElement = document.getElementById('petImages');
+        const target = event.target;
+        const petImagesElement = document.getElementById('petImages');
 
-    const isInsidePetImages = petImagesElement && (petImagesElement.contains(target) || target === petImagesElement);
-    const isInsideListingInterface2 = listingInterface2 && (listingInterface2.contains(target) || target === listingInterface2);
+        const isInsidePetImages = petImagesElement && (petImagesElement.contains(target) || target === petImagesElement);
+        const isInsideListingInterface2 = listingInterface2 && (listingInterface2.contains(target) || target === listingInterface2);
 
-    if (!isInsidePetImages && !isInsideListingInterface2) {
-        event.preventDefault();
-        event.stopPropagation();
+        if (!isInsidePetImages && !isInsideListingInterface2) {
+            event.preventDefault();
+            event.stopPropagation();
+        }
     }
-}
     listingInterface2Background.addEventListener("wheel", event => {
         if (remainingScroll * event.deltaY < 0) {
             remainingScroll = 0

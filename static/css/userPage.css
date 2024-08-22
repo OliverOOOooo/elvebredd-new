@@ -547,46 +547,9 @@ body{
 #userListings{
     width:75%;
     display:none;
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(302px, 1fr));
     gap:20px;
     position:relative;
-}
-
-.userListingsListing{
-    width:180px;
-    height:130px;
-    background: linear-gradient(135deg, rgb(242, 230, 215) 0%, rgb(250, 246, 232) 100%);
-    padding:10px;
-    border:1px solid black;
-    border-radius:20px;
-    display:flex;
-    flex-direction:column;
-    justify-content:space-between;
-    gap:10px;
-
-}
-
-.listingInfo{
-    display:flex;
-    flex-direction:row;
-    justify-content:space-between;
-    height:100%;
-}
-
-.petDiv{
-    width:25px;
-    height:25px;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    position:relative;
-}
-
-.Grid3x3Listing{
-    display:grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap:2px;
-    height:79px;
 }
 
 

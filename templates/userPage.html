@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>UserProfile</title>
     <link rel="stylesheet" href="https://use.typekit.net/uju1lhj.css">
-    <link rel="stylesheet" href="../static/css/index.css">
     <link rel="stylesheet" href="../static/css/userPage.css">
+    <link rel="stylesheet" href="../static/css/index.css">
 </head>
 <body>
     <header>
@@ -362,39 +362,151 @@
             </div>
         </div>
         <div id="listingInterface2">
-            <div id="listingInterface2Upper">
-                <div style="padding:max(2vw, 4vh);display:flex;flex-direction:row;justify-content:space-between;height:100%;">
-                    <div style="display:flex;flex-direction:column;gap:4px;">
-                        <b class="listingInterface2TextBig">Your Offer</b>
-                        <button id="modifyYourOffer" class="l2button" onclick="modifyYourOffer()">Modify Your Offer</button>
+            <img src="/static/images/misc/logo.png">
+            <div id="listingInterface2Information">
+                <div>
+                    <p style="font-size:40rem;font-weight:900;color:rgb(253, 249, 234);">Your Offer</p>
+                    <p id="yourOfferValue" style="font-size:25rem;font-weight:800;margin-left:10rem;color:rgb(253, 249, 234);">69420</p>
+                    <div id="listingInterface2YourOfferPets" class="listingInterface2PetsDiv">
+                        <div>
+                            <img src="/static/images/pets/Birthday Butterfly 2023.png">
+                            <div>
+                                <div style="background:linear-gradient(135deg, rgb(142, 202, 232) 0%, rgb(47, 152, 204) 50%, rgb(0, 134, 200) 100%);">
+                                    <p>F</p>
+                                </div>
+                                <div style="background:linear-gradient(135deg, rgb(255, 197, 220) 0%, rgb(237, 44, 121) 50%, rgb(255, 0, 101) 100%);">
+                                    <p>R</p>
+                                </div>
+                                <div style="background:linear-gradient(135deg, rgb(187, 80, 253) 0%, rgb(69, 3, 198) 50%, rgb(81, 28, 182) 100%);">
+                                    <p>M</p>
+                                </div>
+                                <div style="background:linear-gradient(135deg, rgb(193, 255, 110) 0%, rgb(140, 198, 63) 50%, rgb(19, 114, 11) 100%);">
+                                    <p>N</p>
+                                </div>
+                            </div>
+                        </div>   
                     </div>
-                    <div style="display:flex;flex-direction:column;gap:4px;">
-                        <b class="listingInterface2TextBig red">Their Offer</b>
-                        <button id="modifyTheirOffer" class="l2button" onclick="modifyTheirOffer()">Modify Their Offer</button>
+                </div>
+                <div>
+                    <p style="font-size:100rem;font-weight:900;color:rgb(253, 249, 234);">2</p>
+                    <div style="width:0.5rem;height:225rem;background-color:rgb(243, 239, 223)"></div>
+                </div>
+                <div>
+                    <p style="font-size:40rem;font-weight:900;">Their Offer</p>
+                    <p id="theirOfferValue"  style="font-size:25rem;font-weight:800;margin-right:10rem;">69420</p>
+                    <div id="listingInterface2TheirOfferPets" class="listingInterface2PetsDiv">
+                        <div>
+                            <img src="/static/images/pets/Birthday Butterfly 2023.png">
+                            <div>
+                                <div style="background:linear-gradient(135deg, rgb(142, 202, 232) 0%, rgb(47, 152, 204) 50%, rgb(0, 134, 200) 100%);">
+                                    <p>F</p>
+                                </div>
+                                <div style="background:linear-gradient(135deg, rgb(255, 197, 220) 0%, rgb(237, 44, 121) 50%, rgb(255, 0, 101) 100%);">
+                                    <p>R</p>
+                                </div>
+                                <div style="background:linear-gradient(135deg, rgb(187, 80, 253) 0%, rgb(69, 3, 198) 50%, rgb(81, 28, 182) 100%);">
+                                    <p>M</p>
+                                </div>
+                                <div style="background:linear-gradient(135deg, rgb(193, 255, 110) 0%, rgb(140, 198, 63) 50%, rgb(19, 114, 11) 100%);">
+                                    <p>N</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div id="listingInterface2Lower">
-                <div id="listingPart1Div">
-                    <div id="listingPart1">
-
+            <p style="font-size:16rem;font-weight:bold;color:rgb(109, 107, 112);margin-top:110rem;">You Can Offer With</p>
+            <div id="listingInterface2Preferences">
+                <p>High Tiers</p>
+                <p style="font-weight:bold;">|</p>
+                <p>Mega Legs</p>
+                <p style="font-weight:bold;">|</p>
+                <p>Neon Legs</p>
+                <p style="font-weight:bold;">|</p>
+                <p>Default Legs</p>
+                <p style="font-weight:bold;">|</p>
+                <p>Preppy</p>
+                <p style="font-weight:bold;">|</p>
+                <p>2019 Pets</p>
+                <p style="font-weight:bold;">|</p>
+                <p>Randoms</p>
+                <p style="font-weight:bold;">|</p>
+                <p>Items</p>
+            </div>
+            <div id="listingInterface2Main">
+                <div style="width:50%">
+                    <div style="display:flex;flex-direction:row;gap:10rem;">
+                        <button id="changeButton" onclick="setAddPetTypeTo('listingInterface2');openInventory()"><p>Change</p></button>
+                        <button id="finishButton" onclick="sendOffer();closeListingInterface2()"><p>Finish</p></button>
                     </div>
-                    <b id="listingCloseButton" onclick="closeListingInterface2()">Close</b>
-                </div>
-                <div style="height:100%;width:1px;background-color:black;position:relative;">
-                    <b id="listingValue">0</b>
-                </div>
-                <div id="listingPart2Div">
-                    <div id="listingPart2">
-
-                    </div>
-                    <b id="listingAcceptButton" onclick="acceptOffer()">Accept</b>
-                    <b id="listingCustomOfferButton" onclick="sendCustomOffer()">Send Custom Offer</b>
-                    <div id="ownerInfo">
-                        <b>Listing made by:</b>
-                        <b id="owner"></b>
+                    <div id="sharkValueRequestedDiv" style="display:flex;flex-direction:row;gap:2rem;width:180rem;justify-content:center;margin-top:10rem;">
+                        <p style="font-size: 20rem;font-weight:200;color:rgb(54, 53, 55);" id="youAddTheyAdd">YOU ADD: </p>
+                        <p id="sharkValueRequested" style="font-size:20rem;font-weight:500;color:rgb(54, 53, 55);">2</p>
                     </div>
                 </div>
+                <div style="width:35%;display:flex;flex-direction:column;margin-left:20%;gap:10rem;">
+                    <div style="display:flex;flex-direction:row;gap:3rem;">
+                        <p style="color:rgb(54, 53, 55);font-size:14rem;font-weight:200;">Listed: </p>
+                        <p id="timeAgoListed" style="color:rgb(54, 53, 55);font-size:14rem;font-weight:500;">24 Minutes Ago</p>
+                    </div>
+                    <div style="display:flex;flex-direction:row;gap:3rem;">
+                        <p style="color:rgb(54, 53, 55);font-size:14rem;font-weight:200;">Total Offers: </p>
+                        <p id="totalOffers" style="color:rgb(54, 53, 55);font-size:14rem;font-weight:500;">3</p>
+                    </div>
+                    <div style="display:flex;flex-direction:row;gap:3rem;">
+                        <p style="color:rgb(54, 53, 55);font-size:14rem;font-weight:200;">Roblox User: </p>
+                        <p id="listingRobloxUsername" style="color:rgb(54, 53, 55);font-size:14rem;font-weight:500;">EmanuelNorsk</p>
+                    </div>
+                    <div style="display:flex;flex-direction:row;gap:3rem;">
+                        <p style="color:rgb(54, 53, 55);font-size:14rem;font-weight:200;">Trades Completed by This User: </p>
+                        <p id="completedTradesByUser" style="color:rgb(54, 53, 55);font-size:14rem;font-weight:500;">62</p>
+                    </div>
+                </div>
+            </div>
+            <div style="display:flex;flex-direction:row;justify-content:space-between;align-items:center;width:90%;margin-top:35rem;">
+                <div style="height:0.75rem;width:275rem;background-color:rgb(109, 107, 112);"></div>
+                <p style="font-size:25rem;font-weight:700;color:rgb(109, 107, 112);letter-spacing:2.5rem;">OFFERS</p>
+                <div style="height:0.75rem;width:275rem;background-color:rgb(109, 107, 112);"></div>
+            </div>
+            <div id="offers">
+                <div class="offer">
+                    <div>
+                        <div>
+                            <img src="/static/images/pets/Birthday Butterfly 2023.png">
+                            <div>
+                                <div style="background:linear-gradient(135deg, rgb(142, 202, 232) 0%, rgb(47, 152, 204) 50%, rgb(0, 134, 200) 100%);">
+                                    <p>F</p>
+                                </div>
+                                <div style="background:linear-gradient(135deg, rgb(255, 197, 220) 0%, rgb(237, 44, 121) 50%, rgb(255, 0, 101) 100%);">
+                                    <p>R</p>
+                                </div>
+                                <div style="background:linear-gradient(135deg, rgb(187, 80, 253) 0%, rgb(69, 3, 198) 50%, rgb(81, 28, 182) 100%);">
+                                    <p>M</p>
+                                </div>
+                                <div style="background:linear-gradient(135deg, rgb(193, 255, 110) 0%, rgb(140, 198, 63) 50%, rgb(19, 114, 11) 100%);">
+                                    <p>N</p>
+                                </div>
+                            </div>
+                        </div>              
+                    </div>
+                    <div>
+                        <div>
+                            <p>SHARK VALUE</p>
+                            <p>2</p>
+                        </div>
+                        <div>
+                            <p>EmanuelNorsk</p>
+                            <img src="/static/images/profile/coolDragon.png">
+                        </div>
+                        <div>
+                            <p>24 Minutes Ago</p>
+                        </div>
+                        <div>
+                            <p>Pending</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="offerLine"></div>
             </div>
         </div>
     </main>
@@ -430,7 +542,7 @@
     {{ pets | tojson | safe }}
 </script>
 
-<script type="application/data" id="userDataDict-data">
+<script type="application/data" id="userData-data">
     {{ userData | tojson | safe }}
 </script>
 
@@ -465,8 +577,8 @@
     var userPending = document.getElementById("userPending")
     var userHistory = document.getElementById("userHistory")
 
-    var userDataDictElement = document.getElementById("userDataDict-data")
-    var userDataDict = JSON.parse(userDataDictElement.textContent)
+    var userDataElement = document.getElementById("userData-data")
+    var userData = JSON.parse(userDataElement.textContent)
     
     var profileDataDictElement = document.getElementById("profileDataDict-data")
     var profileDataDict = JSON.parse(profileDataDictElement.textContent)
@@ -601,6 +713,41 @@
 
     var displayPetsFirstTime = 0
     var verified = document.getElementById("verified")
+    var body = document.body
+
+    function enableScrolling() {
+        body.style.overflow = '';
+        document.removeEventListener('wheel', preventBodyScroll, { passive: false });
+    }
+
+    function disableScrolling() {
+        body.style.overflow = 'hidden';
+        document.addEventListener('wheel', preventBodyScroll, { passive: false });
+    }
+
+    function preventBodyScroll(event) {
+        const target = event.target;
+        const petImagesElement = document.getElementById('petImages');
+
+        const isInsidePetImages = petImagesElement && (petImagesElement.contains(target) || target === petImagesElement);
+        const isInsideListingInterface2 = listingInterface2 && (listingInterface2.contains(target) || target === listingInterface2);
+
+        if (!isInsidePetImages && !isInsideListingInterface2) {
+            event.preventDefault();
+            event.stopPropagation();
+        }
+    }   
+
+    listingInterface2Background.addEventListener("wheel", event => {
+        if (remainingScroll * event.deltaY < 0) {
+            remainingScroll = 0
+        }
+        remainingScroll += event.deltaY * scrollStrength
+        if (scrolling == false) {
+            scroll()
+        }
+    })
+
 
     document.addEventListener('mousemove', function(event) {
         mouseX = event.clientX;
@@ -642,7 +789,7 @@
         })
         calculateWithValue = "shark"
         calculateTradeValue()
-        showUserListings()
+        showUserListings(profileListings, userListings)
     }
 
     window.addEventListener("resize", (event) => {
@@ -662,7 +809,7 @@
         })
         calculateWithValue = "frost"
         calculateTradeValue()
-        showUserListings()
+        showUserListings(profileListings, userListings)
     }
 
     function updateButtons() {
@@ -959,8 +1106,8 @@
             })
             .then(data => {
             if (data == "SUCCESS") {
-                const id = userDataDict.inventory[pet].id
-                userDataDict.inventory.splice(pet, 1)
+                const id = userData.inventory[pet].id
+                userData.inventory.splice(pet, 1)
 
                 showInventoryPets()
                 
@@ -1005,8 +1152,8 @@
             })
             .then(data => {
             if (data == "SUCCESS") {
-                const id = userDataDict.wishlist[pet].id
-                userDataDict.wishlist.splice(pet, 1)
+                const id = userData.wishlist[pet].id
+                userData.wishlist.splice(pet, 1)
 
                 showWishlistPets()
                 
@@ -1027,10 +1174,10 @@
             });
         } else if (type == "listing1") {
             listingPart1Dict.splice(pet, 1)
-            showUserListings2(currentListing, 1)
+            updateListingInterface2()
         } else if (type == "listing2") {
             listingPart2Dict.splice(pet, 1)
-            showUserListings2(currentListing, 1)
+            updateListingInterface2()
         }
     }
 
@@ -1048,8 +1195,8 @@
             div.appendChild(img)
             userWishlist.appendChild(div)
 
-            for (const i in userDataDict.wishlist) {
-                const pet = userDataDict.wishlist[i]
+            for (const i in userData.wishlist) {
+                const pet = userData.wishlist[i]
                 const div = document.createElement("div")
                 div.className = 'userInventoryPetImage'
                 div.setAttribute('data-id', pet["id"])
@@ -1075,7 +1222,7 @@
 
                 var attribute = ""
 
-                if (userDataDict.wishlist[i]["fly"] == 1) {
+                if (userData.wishlist[i]["fly"] == 1) {
                     attribute = document.createElement("div")
                     attribute.setAttribute("id", "flyButton")
                     attribute.style.height = "20px"
@@ -1090,7 +1237,7 @@
                     attributesDiv.appendChild(attribute)
                 }
 
-                if (userDataDict.wishlist[i]["ride"] == 1) {
+                if (userData.wishlist[i]["ride"] == 1) {
                     attribute = document.createElement("div")
                     attribute.setAttribute("id", "rideButton")
                     attribute.style.height = "20px"
@@ -1105,7 +1252,7 @@
                     attributesDiv.appendChild(attribute)
                 }
 
-                if (userDataDict.wishlist[i]["neon"] == 1) {
+                if (userData.wishlist[i]["neon"] == 1) {
                     attribute = document.createElement("div")
                     attribute.setAttribute("id", "neonButton")
                     attribute.style.height = "20px"
@@ -1120,7 +1267,7 @@
                     attributesDiv.appendChild(attribute)
                 }
 
-                if (userDataDict.wishlist[i]["mega"] == 1) {
+                if (userData.wishlist[i]["mega"] == 1) {
                     attribute = document.createElement("div")
                     attribute.setAttribute("id", "megaButton")
                     attribute.style.height = "20px"
@@ -1243,8 +1390,8 @@
             div.appendChild(img)
             userInventory.appendChild(div)
 
-            for (const i in userDataDict.inventory) {
-                const pet = userDataDict.inventory[i]
+            for (const i in userData.inventory) {
+                const pet = userData.inventory[i]
                 const div = document.createElement("div")
                 div.className = 'userInventoryPetImage'
                 div.setAttribute('data-id', pet["id"])
@@ -1270,7 +1417,7 @@
 
                 var attribute = ""
 
-                if (userDataDict.inventory[i]["fly"] == 1) {
+                if (userData.inventory[i]["fly"] == 1) {
                     attribute = document.createElement("div")
                     attribute.setAttribute("id", "flyButton")
                     attribute.style.height = "20px"
@@ -1285,7 +1432,7 @@
                     attributesDiv.appendChild(attribute)
                 }
 
-                if (userDataDict.inventory[i]["ride"] == 1) {
+                if (userData.inventory[i]["ride"] == 1) {
                     attribute = document.createElement("div")
                     attribute.setAttribute("id", "rideButton")
                     attribute.style.height = "20px"
@@ -1300,7 +1447,7 @@
                     attributesDiv.appendChild(attribute)
                 }
 
-                if (userDataDict.inventory[i]["neon"] == 1) {
+                if (userData.inventory[i]["neon"] == 1) {
                     attribute = document.createElement("div")
                     attribute.setAttribute("id", "neonButton")
                     attribute.style.height = "20px"
@@ -1315,7 +1462,7 @@
                     attributesDiv.appendChild(attribute)
                 }
 
-                if (userDataDict.inventory[i]["mega"] == 1) {
+                if (userData.inventory[i]["mega"] == 1) {
                     attribute = document.createElement("div")
                     attribute.setAttribute("id", "megaButton")
                     attribute.style.height = "20px"
@@ -1416,39 +1563,46 @@
         return petDiv
     }
 
-    function showUserListings() {
-        userListings.innerHTML = ""
-        for (const i in profileListings) {
+    function showUserListings(listings, target) {
+        target.innerHTML = ""
+        var id = 0
+        Object.keys(listings).forEach(key => {
             const div = document.createElement("div")
             div.className = "userListingsListing"
-            div.style.display = "flex"
-            div.style.flexDirection = "column"
-            div.style.justifyContent = "space-between"
+            div.style.position = "relative"
+            div.setAttribute("id", id)
+
+            div.setAttribute("data-key", key)
 
             const div2 = document.createElement("div")
-            div2.style.display = "flex"
-            div2.style.justifyContent = "space-between"
-            div2.style.alignItems = "center"
+            div2.className = "userListingUpper"
+
+            const div5 = document.createElement("div")
+            div5.className = "userListingLine"
 
             const txt1 = document.createElement("b")
             txt1.innerText = "Your Offer"
             txt1.style.color = "red"
-            txt1.style.fontSize = "10px"
 
             const txt2 = document.createElement("b")
-            var text = calculateTradeValueWithInput(profileListings[i]["offer"]["give"], profileListings[i]["offer"]["take"])
+            var text = (listings[key]["offer"]["giveValue"] - listings[key]["offer"]["takeValue"] + listings[key]["extraSharkValueRequested"]).toFixed(1)
             if (parseFloat(text) <= 0) {
                 txt2.style.color = "black"
                 text = (Math.abs(parseFloat(text))).toString()
             } else {
                 txt2.style.color = "red"
+                div5.style.backgroundColor = "red"
+            }
+            if (text.length > 3) {
+                txt2.style.fontSize = (32 / (text.length / 3)).toString() + "px"
+            } else {
+                txt2.style.fontSize = "32px"
             }
             txt2.innerText = text
-            txt2.style.fontSize = "25px"
+            txt2.className = "userListingValue"
 
             const txt3 = document.createElement("b")
             txt3.innerText = "Their Offer"
-            txt3.style.fontSize = "10px"
 
             div2.appendChild(txt1)
             div2.appendChild(txt2)
@@ -1462,99 +1616,376 @@
             div4.className = "Grid3x3Listing"
 
             var counter = 0
-            for (const j in profileListings[i]["offer"]["give"]) {
-                if (j > 7) {
-                    if (profileListings[i]["offer"]["give"].length - 8 > 1) {
-                        counter += 1
+        
+            while (counter < 9) {
+                if (listings[key]["offer"]["give"][counter] == undefined) {
+                    const petDiv = document.createElement("div")
+                    petDiv.className = "petDiv"
+                    div4.appendChild(petDiv)
+                } else {
+                    if (counter == 8 && listings[key]["offer"]["give"].length > 9) {
                         const petDiv = document.createElement("div")
                         petDiv.className = "petDiv"
                         const txt4 = document.createElement("b")
-                        txt4.innerText = "+" + (profileListings[i]["offer"]["give"].length - 8).toString()
-                        txt4.style.fontSize = (25 / ("+" + (profileListings[i]["offer"]["give"].length - 8).toString()).length).toString() + "px"
+                        txt4.innerText = "+" + (listings[key]["offer"]["give"].length - 8).toString()
+                        txt4.style.fontSize = "16px"
                         petDiv.appendChild(txt4)
                         div4.appendChild(petDiv)
                     } else {
-                        counter += 1
-                        div4.appendChild(createListingPetDiv(i, j, "give"))
+                        const petDiv = document.createElement("div")
+                        petDiv.className = "petDiv"
+                        const img = document.createElement("img")
+                        img.src = petsDict[listings[key]["offer"]["give"][counter]["id"]]["image"]
+                        petDiv.appendChild(img)
+
+                        const attributeDiv = document.createElement("div")
+                        attributeDiv.className = "attributeDiv"
+
+                        if (listings[key]["offer"]["give"][counter]["fly"] == "1") {
+                            const flyDiv = document.createElement("div")
+                            flyDiv.className = "listingPetAttribute flyDiv"
+                            const txt1 = document.createElement("b")
+                            txt1.innerText = "F"
+                            flyDiv.appendChild(txt1)
+                            attributeDiv.appendChild(flyDiv)
+                        }
+
+                        if (listings[key]["offer"]["give"][counter]["ride"] == "1") {
+                            const rideDiv = document.createElement("div")
+                            rideDiv.className = "listingPetAttribute rideDiv"
+                            const txt2 = document.createElement("b")
+                            txt2.innerText = "R"
+                            rideDiv.appendChild(txt2)
+                            attributeDiv.appendChild(rideDiv)
+                        }
+
+                        if (listings[key]["offer"]["give"][counter]["neon"] == "1") {
+                            const neonDiv = document.createElement("div")
+                            neonDiv.className = "listingPetAttribute neonDiv"
+                            const txt3 = document.createElement("b")
+                            txt3.innerText = "N"
+                            neonDiv.appendChild(txt3)
+                            attributeDiv.appendChild(neonDiv)
+                        }
+
+                        if (listings[key]["offer"]["give"][counter]["mega"] == "1") {
+                            const megaDiv = document.createElement("div")
+                            megaDiv.className = "listingPetAttribute"
+                            const txt4 = document.createElement("b")
+                            txt4.innerText = "M"
+                            megaDiv.appendChild(txt4)
+                            attributeDiv.appendChild(megaDiv)
+                        }
+
+                        petDiv.appendChild(attributeDiv)
+                        div4.appendChild(petDiv)
                     }
-                    break
-                } else {
-                    counter += 1
-                    div4.appendChild(createListingPetDiv(i, j, "give"))
                 }
-            }
-        
-            while (counter < 9) {
-                const petDiv = document.createElement("div")
-                petDiv.className = "petDiv"
-                div4.appendChild(petDiv)
                 counter += 1
             }
-
-            const div5 = document.createElement("div")
-            div5.style.height = "100%"
-            div5.style.width = "2px"
-            div5.style.backgroundColor = "black"
 
             const div6 = document.createElement("div")
             div6.className = "Grid3x3Listing"
 
             counter = 0
-            for (const j in profileListings[i]["offer"]["take"]) {
-                if (j > 7) {
-                    if (profileListings[i]["offer"]["take"].length - 8 > 1) {
-                        counter += 1
+
+            while (counter < 9) {
+                if (listings[key]["offer"]["take"][counter] == undefined) {
+                    const petDiv = document.createElement("div")
+                    petDiv.className = "petDiv"
+                    div6.appendChild(petDiv)
+                } else {
+                    if (counter == 8 && listings[key]["offer"]["take"].length > 9) {
                         const petDiv = document.createElement("div")
                         petDiv.className = "petDiv"
                         const txt4 = document.createElement("b")
-                        txt4.innerText = "+" + (profileListings[i]["offer"]["take"].length - 8).toString()
-                        txt4.style.fontSize = (25 / ("+" + (profileListings[i]["offer"]["take"].length - 8).toString()).length).toString() + "px"
+                        txt4.innerText = "+" + (listings[key]["offer"]["take"].length - 8).toString()
+                        txt4.style.fontSize = "16px"
                         petDiv.appendChild(txt4)
-                        div4.appendChild(petDiv)
+                        div6.appendChild(petDiv)
                     } else {
-                        counter += 1
-                        div6.appendChild(createListingPetDiv(i, j, "take"))
+                        const petDiv = document.createElement("div")
+                        petDiv.className = "petDiv"
+                        const img = document.createElement("img")
+                        img.src = petsDict[listings[key]["offer"]["take"][counter]["id"]]["image"]
+                        petDiv.appendChild(img)
+
+                        const attributeDiv = document.createElement("div")
+                        attributeDiv.className = "attributeDiv"
+
+                        if (listings[key]["offer"]["take"][counter]["fly"] == "1") {
+                            const flyDiv = document.createElement("div")
+                            flyDiv.className = "listingPetAttribute flyDiv"
+                            const txt1 = document.createElement("b")
+                            txt1.innerText = "F"
+                            flyDiv.appendChild(txt1)
+                            attributeDiv.appendChild(flyDiv)
+                        }
+
+                        if (listings[key]["offer"]["take"][counter]["ride"] == "1") {
+                            const rideDiv = document.createElement("div")
+                            rideDiv.className = "listingPetAttribute rideDiv"
+                            const txt2 = document.createElement("b")
+                            txt2.innerText = "R"
+                            rideDiv.appendChild(txt2)
+                            attributeDiv.appendChild(rideDiv)
+                        }
+
+                        if (listings[key]["offer"]["take"][counter]["neon"] == "1") {
+                            const neonDiv = document.createElement("div")
+                            neonDiv.className = "listingPetAttribute neonDiv"
+                            const txt3 = document.createElement("b")
+                            txt3.innerText = "N"
+                            neonDiv.appendChild(txt3)
+                            attributeDiv.appendChild(neonDiv)
+                        }
+
+                        if (listings[key]["offer"]["take"][counter]["mega"] == "1") {
+                            const megaDiv = document.createElement("div")
+                            megaDiv.className = "listingPetAttribute"
+                            const txt4 = document.createElement("b")
+                            txt4.innerText = "M"
+                            megaDiv.appendChild(tx4t4)
+                            attributeDiv.appendChild(megaDiv)
+                        }
+
+                        petDiv.appendChild(attributeDiv)
+                        div6.appendChild(petDiv)
                     }
-                    break
-                } else {
-                    counter += 1
-                    div6.appendChild(createListingPetDiv(i, j, "take"))
-
                 }
-            }
-
-            while (counter < 9) {
-                const petDiv = document.createElement("div")
-                petDiv.className = "petDiv"
-                div6.appendChild(petDiv)
                 counter += 1
             }
-
-
 
             div3.appendChild(div4)
             div3.appendChild(div5)
             div3.appendChild(div6)
 
-
-
             div.appendChild(div2)
             div.appendChild(div3)
-            if (profileID == userID) {
-                div.setAttribute("onclick", "setTradeTo(" + i.toString() + "); openListingInterface(); updateViewsOnTrade(" + i.toString() + ")")
-            } else if ( loggedIn == "True" ) {
-                div.setAttribute("onclick", "openListingInterface2(" + i.toString() + ")")
+            if ( loggedIn == "True" ) {
+                div.setAttribute("onclick", "showUserListings2(" + JSON.stringify(listings[key]) + ")");
             }
-            userListings.appendChild(div)
-        }
-        if (userListings.childElementCount == 0) {
-            if (userID == profileID) {
-                userListings.innerHTML = "<p style='margin:0px;position:absolute;transform:translate(-50%, -50%);left:50%;top:300%;font-size:16rem;text-align:center;margin-top:30px;color:#6D6B70;'>Seems like you have no active listings. Create one by clicking <a style='color:red;cursor:pointer;text-decoration:underline' onclick='setTradeTo(-1);openListingInterface()'>here</a>.</p>"
-            } else {
-                userListings.innerHTML = "<p style='margin:0px;position:absolute;transform:translate(-50%, -50%);left:50%;top:300%;font-size:25px;text-align:center;margin-top:50px;'>This user has no listings right now</p>"
+            target.appendChild(div)
+            id += 1
+        })
+    }
+
+    function updateListingInterface2() {
+        var listing = currentListing
+        listingInterface2YourOfferPets.innerHTML = ""
+        for (const i in listing["offer"]["give"]) {
+            const div = document.createElement("div")
+            const img = document.createElement("img")
+            img.src = petsDict[listing["offer"]["give"][i]["id"]]["image"]
+            const div2 = document.createElement("div")
+            if (listing["offer"]["give"][i]["fly"] == 1) {
+                const div3 = document.createElement("div")
+                div3.style.background = "linear-gradient(135deg, rgb(142, 202, 232) 0%, rgb(47, 152, 204) 50%, rgb(0, 134, 200) 100%)"
+                const p = document.createElement("p")
+                p.innerText = "F"
+                div3.appendChild(p)
+                div2.appendChild(div3)
             }
-            
+            if (listing["offer"]["give"][i]["ride"] == 1) {
+                const div3 = document.createElement("div")
+                div3.style.background = "linear-gradient(135deg, rgb(255, 197, 220) 0%, rgb(237, 44, 121) 50%, rgb(255, 0, 101) 100%)"
+                const p = document.createElement("p")
+                p.innerText = "F"
+                div3.appendChild(p)
+                div2.appendChild(div3)
+            }
+            if (listing["offer"]["give"][i]["neon"] == 1) {
+                const div3 = document.createElement("div")
+                div3.style.background = "linear-gradient(135deg, rgb(187, 80, 253) 0%, rgb(69, 3, 198) 50%, rgb(81, 28, 182) 100%)"
+                const p = document.createElement("p")
+                p.innerText = "F"
+                div3.appendChild(p)
+                div2.appendChild(div3)
+            }
+            if (listing["offer"]["give"][i]["mega"] == 1) {
+                const div3 = document.createElement("div")
+                div3.style.background = "linear-gradient(135deg, rgb(193, 255, 110) 0%, rgb(140, 198, 63) 50%, rgb(19, 114, 11) 100%)"
+                const p = document.createElement("p")
+                p.innerText = "F"
+                div3.appendChild(p)
+                div2.appendChild(div3)
+            }
+            div.appendChild(img)
+            div.appendChild(div2)
+
+            listingInterface2YourOfferPets.appendChild(div)
         }
+
+        for (const i in yourOfferExtraPets) {
+            const div = document.createElement("div")
+            div.setAttribute("onclick", "removePetFromInventory('listingInterface2', " + i.toString() + ")")
+            div.style.cursor = "pointer"
+            div.style.border = "1px solid white"
+            div.style.borderRadius = "1vw"
+            const img = document.createElement("img")
+            img.src = petsDict[yourOfferExtraPets[i]["id"]]["image"]
+            const div2 = document.createElement("div")
+            if (yourOfferExtraPets[i]["fly"] == 1) {
+                const div3 = document.createElement("div")
+                div3.style.background = "linear-gradient(135deg, rgb(142, 202, 232) 0%, rgb(47, 152, 204) 50%, rgb(0, 134, 200) 100%)"
+                const p = document.createElement("p")
+                p.innerText = "F"
+                div3.appendChild(p)
+                div2.appendChild(div3)
+            }
+            if (yourOfferExtraPets[i]["ride"] == 1) {
+                const div3 = document.createElement("div")
+                div3.style.background = "linear-gradient(135deg, rgb(255, 197, 220) 0%, rgb(237, 44, 121) 50%, rgb(255, 0, 101) 100%)"
+                const p = document.createElement("p")
+                p.innerText = "F"
+                div3.appendChild(p)
+                div2.appendChild(div3)
+            }
+            if (yourOfferExtraPets[i]["neon"] == 1) {
+                const div3 = document.createElement("div")
+                div3.style.background = "linear-gradient(135deg, rgb(187, 80, 253) 0%, rgb(69, 3, 198) 50%, rgb(81, 28, 182) 100%)"
+                const p = document.createElement("p")
+                p.innerText = "F"
+                div3.appendChild(p)
+                div2.appendChild(div3)
+            }
+            if (yourOfferExtraPets[i]["mega"] == 1) {
+                const div3 = document.createElement("div")
+                div3.style.background = "linear-gradient(135deg, rgb(193, 255, 110) 0%, rgb(140, 198, 63) 50%, rgb(19, 114, 11) 100%)"
+                const p = document.createElement("p")
+                p.innerText = "F"
+                div3.appendChild(p)
+                div2.appendChild(div3)
+            }
+            div.appendChild(img)
+            div.appendChild(div2)
+
+            listingInterface2YourOfferPets.appendChild(div)
+        }
+
+        listingInterface2TheirOfferPets.innerHTML = ""
+        for (const i in listing["offer"]["take"]) {
+            const div = document.createElement("div")
+            const img = document.createElement("img")
+            img.src = petsDict[listing["offer"]["take"][i]["id"]]["image"]
+            const div2 = document.createElement("div")
+            if (listing["offer"]["take"][i]["fly"] == 1) {
+                const div3 = document.createElement("div")
+                div3.style.background = "linear-gradient(135deg, rgb(142, 202, 232) 0%, rgb(47, 152, 204) 50%, rgb(0, 134, 200) 100%)"
+                const p = document.createElement("p")
+                p.innerText = "F"
+                div3.appendChild(p)
+                div2.appendChild(div3)
+            }
+            if (listing["offer"]["take"][i]["ride"] == 1) {
+                const div3 = document.createElement("div")
+                div3.style.background = "linear-gradient(135deg, rgb(255, 197, 220) 0%, rgb(237, 44, 121) 50%, rgb(255, 0, 101) 100%)"
+                const p = document.createElement("p")
+                p.innerText = "F"
+                div3.appendChild(p)
+                div2.appendChild(div3)
+            }
+            if (listing["offer"]["take"][i]["neon"] == 1) {
+                const div3 = document.createElement("div")
+                div3.style.background = "linear-gradient(135deg, rgb(187, 80, 253) 0%, rgb(69, 3, 198) 50%, rgb(81, 28, 182) 100%)"
+                const p = document.createElement("p")
+                p.innerText = "F"
+                div3.appendChild(p)
+                div2.appendChild(div3)
+            }
+            if (listing["offer"]["take"][i]["mega"] == 1) {
+                const div3 = document.createElement("div")
+                div3.style.background = "linear-gradient(135deg, rgb(193, 255, 110) 0%, rgb(140, 198, 63) 50%, rgb(19, 114, 11) 100%)"
+                const p = document.createElement("p")
+                p.innerText = "F"
+                div3.appendChild(p)
+                div2.appendChild(div3)
+            }
+            div.appendChild(img)
+            div.appendChild(div2)
+
+            listingInterface2TheirOfferPets.appendChild(div)
+        }
+
+        for (const i in theirOfferExtraPets) {
+            const div = document.createElement("div")
+            div.setAttribute("onclick", "removePetFromInventory('listingInterface2', " + i.toString() + ")")
+            div.style.cursor = "pointer"
+            div.style.border = "1px solid white"
+            div.style.borderRadius = "1vw"
+            const img = document.createElement("img")
+            img.src = petsDict[theirOfferExtraPets[i]["id"]]["image"]
+            const div2 = document.createElement("div")
+            if (theirOfferExtraPets[i]["fly"] == 1) {
+                const div3 = document.createElement("div")
+                div3.style.background = "linear-gradient(135deg, rgb(142, 202, 232) 0%, rgb(47, 152, 204) 50%, rgb(0, 134, 200) 100%)"
+                const p = document.createElement("p")
+                p.innerText = "F"
+                div3.appendChild(p)
+                div2.appendChild(div3)
+            }
+            if (theirOfferExtraPets[i]["ride"] == 1) {
+                const div3 = document.createElement("div")
+                div3.style.background = "linear-gradient(135deg, rgb(255, 197, 220) 0%, rgb(237, 44, 121) 50%, rgb(255, 0, 101) 100%)"
+                const p = document.createElement("p")
+                p.innerText = "F"
+                div3.appendChild(p)
+                div2.appendChild(div3)
+            }
+            if (theirOfferExtraPets[i]["neon"] == 1) {
+                const div3 = document.createElement("div")
+                div3.style.background = "linear-gradient(135deg, rgb(187, 80, 253) 0%, rgb(69, 3, 198) 50%, rgb(81, 28, 182) 100%)"
+                const p = document.createElement("p")
+                p.innerText = "F"
+                div3.appendChild(p)
+                div2.appendChild(div3)
+            }
+            if (theirOfferExtraPets[i]["mega"] == 1) {
+                const div3 = document.createElement("div")
+                div3.style.background = "linear-gradient(135deg, rgb(193, 255, 110) 0%, rgb(140, 198, 63) 50%, rgb(19, 114, 11) 100%)"
+                const p = document.createElement("p")
+                p.innerText = "F"
+                div3.appendChild(p)
+                div2.appendChild(div3)
+            }
+            div.appendChild(img)
+            div.appendChild(div2)
+
+            listingInterface2TheirOfferPets.appendChild(div)
+        }
+
+        if (listing["extraSharkValueRequested"] == 0 || listing["extraSharkValueRequested"] == undefined) {
+            yourOfferValue.innerText = (listing["offer"]["giveValue"] + calculateValue(yourOfferExtraPets)).toFixed(2)
+            theirOfferValue.innerText = (listing["offer"]["takeValue"] + calculateValue(theirOfferExtraPets)).toFixed(2)
+            finishButton.disabled = false
+            sharkValueRequestedDiv.style.display = "none"
+            changeButton.disabled = false
+        } else if (listing["extraSharkValueRequested"] > 0 && calculateValue(yourOfferExtraPets) < listing["extraSharkValueRequested"]) {
+            yourOfferValue.innerText = (listing["offer"]["giveValue"] + calculateValue(yourOfferExtraPets)).toFixed(2).toString() + " + " + (listing["extraSharkValueRequested"] - calculateValue(yourOfferExtraPets)).toFixed(2).toString()
+            theirOfferValue.innerText = listing["offer"]["takeValue"].toFixed(2)
+            finishButton.disabled = true
+            sharkValueRequestedDiv.style.display = "flex"
+            changeButton.disabled = false
+            sharkValueRequested.innerText = (listing["extraSharkValueRequested"] - calculateValue(yourOfferExtraPets)).toFixed(2)
+        } else if (listing["extraSharkValueRequested"] < 0 && calculateValue(theirOfferExtraPets) < Math.abs(listing["extraSharkValueRequested"])) {
+            yourOfferValue.innerText = listing["offer"]["giveValue"].toFixed(2)
+            theirOfferValue.innerText = (listing["offer"]["takeValue"] + calculateValue(theirOfferExtraPets)).toFixed(2).toString() + " + " + (Math.abs(listing["extraSharkValueRequested"]) - calculateValue(theirOfferExtraPets)).toFixed(2).toString()
+            finishButton.disabled = true
+            sharkValueRequestedDiv.style.display = "flex"
+            changeButton.disabled = false
+            sharkValueRequested.innerText = (Math.abs(listing["extraSharkValueRequested"]) - calculateValue(theirOfferExtraPets)).toFixed(2)
+        } else {
+            yourOfferValue.innerText = (listing["offer"]["giveValue"] + calculateValue(yourOfferExtraPets)).toFixed(2)
+            theirOfferValue.innerText = (listing["offer"]["takeValue"] + calculateValue(theirOfferExtraPets)).toFixed(2)
+            finishButton.disabled = false
+            sharkValueRequestedDiv.style.display = "none"
+            changeButton.disabled = false
+        }
+
+        if (userData["id"] == listing["owner"]) {
+            finishButton.disabled = true
+        }
+
     }
 
     function setTradeTo(index) {
@@ -1589,7 +2020,7 @@
         if (data == "SUCCESS") {
             profileListings.splice(modifyTrade, 1)
             listingAmount.innerText = (parseInt(listingAmount.innerText) - 1).toString()
-            showUserListings()
+            showUserListings(profileListings, userListings)
             closeListingInterface()
             displayError("You remove a listing!")
         }
@@ -1602,413 +2033,474 @@
         
     }
 
-    function showUserListings2(listing, modified) {
-        currentListing = listing
-        if (modified == 0) {
-            listingPart1Dict = JSON.parse(JSON.stringify(profileListings[parseInt(listing)]["offer"]["give"]))
-            listingPart2Dict = JSON.parse(JSON.stringify(profileListings[parseInt(listing)]["offer"]["take"]))
-        } else if (modified == "left") {
-            listingPart1Dict = JSON.parse(JSON.stringify(profileListings[parseInt(listing)]["offer"]["give"]))
-        } else if (modified == "right") {
-            listingPart2Dict = JSON.parse(JSON.stringify(profileListings[parseInt(listing)]["offer"]["take"]))
-        }
-
-        listingPart1.innerHTML = ""
-        listingPart2.innerHTML = ""
-        owner.innerText = profileListings[listing]["ownerUsername"]
-
-        var gridSize = 0
-        if ( mYO == 1 ) {
-            gridSize = Math.ceil(Math.sqrt(listingPart1Dict.length + 1))
-        } else {
-            gridSize = Math.ceil(Math.sqrt(listingPart1Dict.length))
-        }
-        listingPart1.style.gridTemplateColumns = "repeat(" + (gridSize).toString() + ", 1fr)"
-        for (const i in listingPart1Dict) {
-            const div = document.createElement("div")
-            div.style.width = "max(" + (15 / gridSize).toString() + "vw, " + (30 / gridSize).toString() + "vh)"
-            div.style.height = "max(" + (15 / gridSize).toString() + "vw, " + (30 / gridSize).toString() + "vh)"
-            div.style.display = "flex"
-            div.style.justifyContent = "center"
-            div.style.alignItems = "center"
-            div.style.position = "relative"
-            const img = document.createElement("img")
-            img.src = petsDict[listingPart1Dict[i]["id"]]["image"]
-            img.style.width = "90%"
-            img.style.height = "90%"
-            img.style.minWidth = "max(" + (12 / gridSize).toString() + "vw, " + (24 / gridSize).toString() + "vh)"
-            img.style.minHeight = "max(" + (12 / gridSize).toString() + "vw, " + (24 / gridSize).toString() + "vh)"
-            img.style.maxWidth = "max(" + (15 / gridSize).toString() + "vw, " + (30 / gridSize).toString() + "vh)"
-            img.style.maxHeight = "max(" + (15 / gridSize).toString() + "vw, " + (30 / gridSize).toString() + "vh)"
-            div.appendChild(img)
-
-            if ( mYO == 1) {
-                div.setAttribute("onclick", "removePetFromInventory('listing1', " + i.toString() + ")")
+    function calculateValue(listOfPets) {
+        let value = 0
+        let keyword = ""
+        for (const i in listOfPets) {
+            keyword = ""
+            if (listOfPets[i]["regular"] == 1) {
+                keyword += "rvalue"
+            } else if (listOfPets[i]["neon"] == 1) {
+                keyword += "nvalue"
+            } else if (listOfPets[i]["mega"] == 1) {
+                keyword += "mvalue"
+            } else {
+                keyword += "rvalue"
             }
 
-            const attributeDiv = document.createElement("div")
-            attributeDiv.style.position = "absolute"
-            attributeDiv.style.left = "max(" + (2 / gridSize).toString() + "vw, " + (4 / gridSize).toString() + "vh)"
-            attributeDiv.style.bottom = "max(" + (2 / gridSize).toString() + "vw, " + (4 / gridSize).toString() + "vh)"
-            attributeDiv.style.display = "flex"
-            attributeDiv.style.flexDirection = "row"
-            attributeDiv.style.gap = "max(" + (0.5 / gridSize).toString() + "vw, " + (1 / gridSize).toString() + "vh)"
-
-            var attribute = ""
-            var attributeText = ""
-            if (listingPart1Dict[i]["fly"] == "1") {
-                attribute = document.createElement("div")
-                attribute.style.width = "max(" + (3 / gridSize).toString() + "vw, " + (6 / gridSize).toString() + "vh)"
-                attribute.style.height = "max(" + (3 / gridSize).toString() + "vw, " + (6 / gridSize).toString() + "vh)"
-                attribute.style.background = "linear-gradient(135deg, rgb(142, 202, 232) 0%, rgb(47, 152, 204) 50%, rgb(0, 134, 200) 100%)"
-                attribute.style.borderRadius = "max(" + (1 / gridSize).toString() + "vw, " + (2 / gridSize).toString() + "vh)"
-                attribute.style.display = "flex"
-                attribute.style.alignItems = "center"
-                attribute.style.justifyContent = "center"
-                attributeText = document.createElement("b")
-                attributeText.style.color = "white"
-                attributeText.innerText = "F"
-                attributeText.style.fontSize = "max(" + (1.5 / gridSize).toString() + "vw, " + (3 / gridSize).toString() + "vh)"
-
-                attribute.appendChild(attributeText)
-                attributeDiv.appendChild(attribute)
-            }
-
-            if (listingPart1Dict[i]["ride"] == "1") {
-                attribute = document.createElement("div")
-                attribute.style.width = "max(" + (3 / gridSize).toString() + "vw, " + (6 / gridSize).toString() + "vh)"
-                attribute.style.height = "max(" + (3 / gridSize).toString() + "vw, " + (6 / gridSize).toString() + "vh)"
-                attribute.style.background = "linear-gradient(135deg, rgb(255, 197, 220) 0%, rgb(237, 44, 121) 50%, rgb(255, 0, 101) 100%)"
-                attribute.style.borderRadius = "max(" + (1 / gridSize).toString() + "vw, " + (2 / gridSize).toString() + "vh)"
-                attribute.style.display = "flex"
-                attribute.style.alignItems = "center"
-                attribute.style.justifyContent = "center"
-                attributeText = document.createElement("b")
-                attributeText.style.color = "white"
-                attributeText.innerText = "R"
-                attributeText.style.fontSize = "max(" + (1.5 / gridSize).toString() + "vw, " + (3 / gridSize).toString() + "vh)"
-
-                attribute.appendChild(attributeText)
-                attributeDiv.appendChild(attribute)
-            }
-
-            if (listingPart1Dict[i]["neon"] == "1") {
-                attribute = document.createElement("div")
-                attribute.style.width = "max(" + (3 / gridSize).toString() + "vw, " + (6 / gridSize).toString() + "vh)"
-                attribute.style.height = "max(" + (3 / gridSize).toString() + "vw, " + (6 / gridSize).toString() + "vh)"
-                attribute.style.background = "linear-gradient(135deg, rgb(193, 255, 110) 0%, rgb(140, 198, 63) 50%, rgb(19, 114, 11) 100%)"
-                attribute.style.borderRadius = "max(" + (1 / gridSize).toString() + "vw, " + (2 / gridSize).toString() + "vh)"
-                attribute.style.display = "flex"
-                attribute.style.alignItems = "center"
-                attribute.style.justifyContent = "center"
-                attributeText = document.createElement("b")
-                attributeText.style.color = "white"
-                attributeText.innerText = "N"
-                attributeText.style.fontSize = "max(" + (1.5 / gridSize).toString() + "vw, " + (3 / gridSize).toString() + "vh)"
-
-                attribute.appendChild(attributeText)
-                attributeDiv.appendChild(attribute)
-            }
-
-            if (listingPart1Dict[i]["mega"] == "1") {
-                attribute = document.createElement("div")
-                attribute.style.width = "max(" + (3 / gridSize).toString() + "vw, " + (6 / gridSize).toString() + "vh)"
-                attribute.style.height = "max(" + (3 / gridSize).toString() + "vw, " + (6 / gridSize).toString() + "vh)"
-                attribute.style.background = "linear-gradient(135deg, rgb(187, 80, 253) 0%, rgb(69, 3, 198) 50%, rgb(81, 28, 182) 100%)"
-                attribute.style.borderRadius = "max(" + (1 / gridSize).toString() + "vw, " + (2 / gridSize).toString() + "vh)"
-                attribute.style.display = "flex"
-                attribute.style.alignItems = "center"
-                attribute.style.justifyContent = "center"
-                attributeText = document.createElement("b")
-                attributeText.style.color = "white"
-                attributeText.innerText = "M"
-                attributeText.style.fontSize = "max(" + (1.5 / gridSize).toString() + "vw, " + (3 / gridSize).toString() + "vh)"
-
-                attribute.appendChild(attributeText)
-                attributeDiv.appendChild(attribute)
-            }
-
-
-
-            div.appendChild(attributeDiv)
-            listingPart1.appendChild(div)
-        }
-
-        if ( mYO == 1 ) {
-            const div = document.createElement("div")
-            div.style.width = "max(" + (15 / gridSize).toString() + "vw, " + (30 / gridSize).toString() + "vh)"
-            div.style.height = "max(" + (15 / gridSize).toString() + "vw, " + (30 / gridSize).toString() + "vh)"
-            div.style.display = "flex"
-            div.style.justifyContent = "center"
-            div.style.alignItems = "center"
-            div.style.position = "relative"
-            const img = document.createElement("img")
-            img.src = "../static/images/misc/add.png"
-            img.style.width = "90%"
-            img.style.height = "90%"
-            img.style.minWidth = "max(" + (12 / gridSize).toString() + "vw, " + (24 / gridSize).toString() + "vh)"
-            img.style.minHeight = "max(" + (12 / gridSize).toString() + "vw, " + (24 / gridSize).toString() + "vh)"
-            img.style.maxWidth = "max(" + (15 / gridSize).toString() + "vw, " + (30 / gridSize).toString() + "vh)"
-            img.style.maxHeight = "max(" + (15 / gridSize).toString() + "vw, " + (30 / gridSize).toString() + "vh)"
-            div.appendChild(img)
-            div.setAttribute("onclick", "setAddPetTypeTo('listing1'); openInventory()")
-            listingPart1.appendChild(div)
-        }
-
-        if ( mTO == 1 ) {
-            gridSize = Math.ceil(Math.sqrt(listingPart2Dict.length + 1))
-        } else {
-            gridSize = Math.ceil(Math.sqrt(listingPart2Dict.length))
-        }
-        listingPart2.style.gridTemplateColumns = "repeat(" + (gridSize).toString() + ", 1fr)"
-        for (const j in listingPart2Dict) {
-            const div = document.createElement("div")
-            div.style.width = "max(" + (15 / gridSize).toString() + "vw, " + (30 / gridSize).toString() + "vh)"
-            div.style.height = "max(" + (15 / gridSize).toString() + "vw, " + (30 / gridSize).toString() + "vh)"
-            div.style.display = "flex"
-            div.style.justifyContent = "center"
-            div.style.alignItems = "center"
-            div.style.position = "relative"
-            const img = document.createElement("img")
-            img.src = petsDict[listingPart2Dict[j]["id"]]["image"]
-            img.style.width = "90%"
-            img.style.height = "90%"
-            img.style.minWidth = "max(" + (12 / gridSize).toString() + "vw, " + (24 / gridSize).toString() + "vh)"
-            img.style.minHeight = "max(" + (12 / gridSize).toString() + "vw, " + (24 / gridSize).toString() + "vh)"
-            img.style.maxWidth = "max(" + (15 / gridSize).toString() + "vw, " + (30 / gridSize).toString() + "vh)"
-            img.style.maxHeight = "max(" + (15 / gridSize).toString() + "vw, " + (30 / gridSize).toString() + "vh)"
-            div.appendChild(img)
-
-            if ( mTO == 1) {
-                div.setAttribute("onclick", "removePetFromInventory('listing2', " + j.toString() + ")")
-            }
-
-            const attributeDiv = document.createElement("div")
-            attributeDiv.style.position = "absolute"
-            attributeDiv.style.left = "max(" + (2 / gridSize).toString() + "vw, " + (4 / gridSize).toString() + "vh)"
-            attributeDiv.style.bottom = "max(" + (2 / gridSize).toString() + "vw, " + (4 / gridSize).toString() + "vh)"
-            attributeDiv.style.display = "flex"
-            attributeDiv.style.flexDirection = "row"
-            attributeDiv.style.gap = "max(" + (0.5 / gridSize).toString() + "vw, " + (1 / gridSize).toString() + "vh)"
-
-            var attribute = ""
-            var attributeText = ""
-            if (listingPart2Dict[j]["fly"] == "1") {
-                attribute = document.createElement("div")
-                attribute.style.width = "max(" + (3 / gridSize).toString() + "vw, " + (6 / gridSize).toString() + "vh)"
-                attribute.style.height = "max(" + (3 / gridSize).toString() + "vw, " + (6 / gridSize).toString() + "vh)"
-                attribute.style.background = "linear-gradient(135deg, rgb(142, 202, 232) 0%, rgb(47, 152, 204) 50%, rgb(0, 134, 200) 100%)"
-                attribute.style.borderRadius = "max(" + (1 / gridSize).toString() + "vw, " + (2 / gridSize).toString() + "vh)"
-                attribute.style.display = "flex"
-                attribute.style.alignItems = "center"
-                attribute.style.justifyContent = "center"
-                attributeText = document.createElement("b")
-                attributeText.style.color = "white"
-                attributeText.innerText = "F"
-                attributeText.style.fontSize = "max(" + (1.5 / gridSize).toString() + "vw, " + (3 / gridSize).toString() + "vh)"
-
-                attribute.appendChild(attributeText)
-                attributeDiv.appendChild(attribute)
-            }
-
-            if (listingPart2Dict[j]["ride"] == "1") {
-                attribute = document.createElement("div")
-                attribute.style.width = "max(" + (3 / gridSize).toString() + "vw, " + (6 / gridSize).toString() + "vh)"
-                attribute.style.height = "max(" + (3 / gridSize).toString() + "vw, " + (6 / gridSize).toString() + "vh)"
-                attribute.style.background = "linear-gradient(135deg, rgb(255, 197, 220) 0%, rgb(237, 44, 121) 50%, rgb(255, 0, 101) 100%)"
-                attribute.style.borderRadius = "max(" + (1 / gridSize).toString() + "vw, " + (2 / gridSize).toString() + "vh)"
-                attribute.style.display = "flex"
-                attribute.style.alignItems = "center"
-                attribute.style.justifyContent = "center"
-                attributeText = document.createElement("b")
-                attributeText.style.color = "white"
-                attributeText.innerText = "R"
-                attributeText.style.fontSize = "max(" + (1.5 / gridSize).toString() + "vw, " + (3 / gridSize).toString() + "vh)"
-
-                attribute.appendChild(attributeText)
-                attributeDiv.appendChild(attribute)
-            }
-
-            if (listingPart2Dict[j]["neon"] == "1") {
-                attribute = document.createElement("div")
-                attribute.style.width = "max(" + (3 / gridSize).toString() + "vw, " + (6 / gridSize).toString() + "vh)"
-                attribute.style.height = "max(" + (3 / gridSize).toString() + "vw, " + (6 / gridSize).toString() + "vh)"
-                attribute.style.background = "linear-gradient(135deg, rgb(193, 255, 110) 0%, rgb(140, 198, 63) 50%, rgb(19, 114, 11) 100%)"
-                attribute.style.borderRadius = "max(" + (1 / gridSize).toString() + "vw, " + (2 / gridSize).toString() + "vh)"
-                attribute.style.display = "flex"
-                attribute.style.alignItems = "center"
-                attribute.style.justifyContent = "center"
-                attributeText = document.createElement("b")
-                attributeText.style.color = "white"
-                attributeText.innerText = "N"
-                attributeText.style.fontSize = "max(" + (1.5 / gridSize).toString() + "vw, " + (3 / gridSize).toString() + "vh)"
-
-                attribute.appendChild(attributeText)
-                attributeDiv.appendChild(attribute)
-            }
-
-            if (listingPart2Dict[j]["mega"] == "1") {
-                attribute = document.createElement("div")
-                attribute.style.width = "max(" + (3 / gridSize).toString() + "vw, " + (6 / gridSize).toString() + "vh)"
-                attribute.style.height = "max(" + (3 / gridSize).toString() + "vw, " + (6 / gridSize).toString() + "vh)"
-                attribute.style.background = "linear-gradient(135deg, rgb(187, 80, 253) 0%, rgb(69, 3, 198) 50%, rgb(81, 28, 182) 100%)"
-                attribute.style.borderRadius = "max(" + (1 / gridSize).toString() + "vw, " + (2 / gridSize).toString() + "vh)"
-                attribute.style.display = "flex"
-                attribute.style.alignItems = "center"
-                attribute.style.justifyContent = "center"
-                attributeText = document.createElement("b")
-                attributeText.style.color = "white"
-                attributeText.innerText = "M"
-                attributeText.style.fontSize = "max(" + (1.5 / gridSize).toString() + "vw, " + (3 / gridSize).toString() + "vh)"
-
-                attribute.appendChild(attributeText)
-                attributeDiv.appendChild(attribute)
-            }
-
-
-
-            div.appendChild(attributeDiv)
-            listingPart2.appendChild(div)
-        }
-
-        if ( mTO == 1 ) {
-            const div = document.createElement("div")
-            div.style.width = "max(" + (15 / gridSize).toString() + "vw, " + (30 / gridSize).toString() + "vh)"
-            div.style.height = "max(" + (15 / gridSize).toString() + "vw, " + (30 / gridSize).toString() + "vh)"
-            div.style.display = "flex"
-            div.style.justifyContent = "center"
-            div.style.alignItems = "center"
-            div.style.position = "relative"
-            const img = document.createElement("img")
-            img.src = "../static/images/misc/add.png"
-            img.style.width = "90%"
-            img.style.height = "90%"
-            img.style.minWidth = "max(" + (12 / gridSize).toString() + "vw, " + (24 / gridSize).toString() + "vh)"
-            img.style.minHeight = "max(" + (12 / gridSize).toString() + "vw, " + (24 / gridSize).toString() + "vh)"
-            img.style.maxWidth = "max(" + (15 / gridSize).toString() + "vw, " + (30 / gridSize).toString() + "vh)"
-            img.style.maxHeight = "max(" + (15 / gridSize).toString() + "vw, " + (30 / gridSize).toString() + "vh)"
-            div.appendChild(img)
-            div.setAttribute("onclick", "setAddPetTypeTo('listing2'); openInventory()")
-            listingPart2.appendChild(div)
-        }
-
-        var original = true
-
-        if (profileListings[parseInt(listing)]["offer"]["give"].length !== listingPart1Dict.length) {
-            original = false
-        }
-
-        if (profileListings[parseInt(listing)]["offer"]["take"].length !== listingPart2Dict.length) {
-            original = false
-        }
-
-        for (const i in profileListings[parseInt(listing)]["offer"]["give"]) {
-            if (profileListings[parseInt(listing)]["offer"]["give"][i]["id"] !== listingPart1Dict[i]["id"]) {
-                original = false
-            }
-            if (profileListings[parseInt(listing)]["offer"]["give"][i]["fly"] !== listingPart1Dict[i]["fly"]) {
-                original = false
-            }
-            if (profileListings[parseInt(listing)]["offer"]["give"][i]["ride"] !== listingPart1Dict[i]["ride"]) {
-                original = false
-            }
-            if (profileListings[parseInt(listing)]["offer"]["give"][i]["regular"] !== listingPart1Dict[i]["regular"]) {
-                original = false
-            }
-            if (profileListings[parseInt(listing)]["offer"]["give"][i]["neon"] !== listingPart1Dict[i]["neon"]) {
-                original = false
-            }
-            if (profileListings[parseInt(listing)]["offer"]["give"][i]["mega"] !== listingPart1Dict[i]["mega"]) {
-                original = false
+            if (listOfPets[i]["fly"] == 1 && listOfPets[i]["ride"] == 1) {
+                keyword += " - fly&ride"
+            } else if (listOfPets[i]["fly"] == 1) {
+                keyword += " - fly"
+            } else if (listOfPets[i]["ride"] == 1) {
+                keyword += " - ride"
+            }            
+            if (petsDict[listOfPets[i]["id"]][keyword] == undefined) {
+                if (petsDict[listOfPets[i]["id"]]["value"] != null) {
+                    value += petsDict[listOfPets[i]["id"]]["value"]
+                }
+            } else {
+                value += petsDict[listOfPets[i]["id"]][keyword]
             }
         }
-
-        for (const j in profileListings[parseInt(listing)]["offer"]["take"]) {
-            if (profileListings[parseInt(listing)]["offer"]["take"][j]["id"] !== listingPart2Dict[j]["id"]) {
-                original = false
-            }
-            if (profileListings[parseInt(listing)]["offer"]["take"][j]["fly"] !== listingPart2Dict[j]["fly"]) {
-                original = false
-            }
-            if (profileListings[parseInt(listing)]["offer"]["take"][j]["ride"] !== listingPart2Dict[j]["ride"]) {
-                original = false
-            }
-            if (profileListings[parseInt(listing)]["offer"]["take"][j]["regular"] !== listingPart2Dict[j]["regular"]) {
-                original = false
-            }
-            if (profileListings[parseInt(listing)]["offer"]["take"][j]["neon"] !== listingPart2Dict[j]["neon"]) {
-                original = false
-            }
-            if (profileListings[parseInt(listing)]["offer"]["take"][j]["mega"] !== listingPart2Dict[j]["mega"]) {
-                original = false
-            }
-        }
-
-        if (profileListings[parseInt(listing)]["ownerRobloxUsername"] == "") {
-            listingAcceptButton.setAttribute("onclick","giveImportantMessage('Accept Trade', 'Are you sure you want to accept this trade? They are responsible for contacting you to complete the trade through roblox. They do not have a linked roblox username, so be aware of that in your inbox on roblox.', 'closeListingInterface2()', 'acceptOffer()')")
-            listingCustomOfferButton.setAttribute("onclick","giveImportantMessage('Send Custom Trade', 'Are you sure you want to send a custom offer? They will receive this offer in their inbox. You are both responsible for contacting eachother to complete the trade through roblox. Their roblox username is " + profileListings[parseInt(listing)]["ownerRobloxUsername"] + ".', 'closeListingInterface2()', 'sendCustomOffer()')")
-        } else {
-            listingAcceptButton.setAttribute("onclick","giveImportantMessage('Accept Trade', 'Are you sure you want to accept this trade? You are responsible for contacting the other party to complete the trade after this through roblox. Their username in roblox is " + profileListings[parseInt(listing)]["ownerRobloxUsername"] + ".', 'closeListingInterface2()', 'acceptOffer()')")
-            listingCustomOfferButton.setAttribute("onclick","giveImportantMessage('Send Custom Trade', 'Are you sure you want to send a custom offer? They will receive this offer in their inbox. They are responsible for contacting you to complete the trade through roblox. They do not have a linked roblox username, so be aware of that in your inbox on roblox.', 'closeListingInterface2()', 'sendCustomOffer()')")
-        }
-
-        if ((profileDataDict["blocked"].includes(userID) == true || userDataDict["blocked"].includes(profileID) == true) && original == false) {
-            listingAcceptButton.style.opacity = 0
-            listingAcceptButton.style.bottom = "-1000%"
-            listingCustomOfferButton.style.opacity = 1
-            listingCustomOfferButton.style.bottom = "max(1vw, 2vh)"
-            listingCustomOfferButton.innerText = "You are blocked!"
-            listingCustomOfferButton.disabled = true
-            listingCustomOfferButton.style.cursor = "default"
-            listingCustomOfferButton.style.width = "max(8vw, 16vh)"
-            listingCustomOfferButton.setAttribute("onclick", "")
-        } else if (original == true) {
-            listingAcceptButton.style.opacity = 1
-            listingAcceptButton.style.bottom = "max(1vw, 2vh)"
-            listingCustomOfferButton.style.opacity = 0
-            listingCustomOfferButton.style.bottom = "-1000%"
-        } else {
-            listingAcceptButton.style.opacity = 0
-            listingAcceptButton.style.bottom = "-1000%"
-            listingCustomOfferButton.style.opacity = 1
-            listingCustomOfferButton.style.bottom = "max(1vw, 2vh)"
-        }
-
-        if (profileDataDict["blocked"].includes(userID) == true || userDataDict["blocked"].includes(profileID) == true) {
-            listingAcceptButton.style.cursor = "default"
-            listingAcceptButton.innerText = "You are blocked!"
-            listingAcceptButton.style.width = "max(8vw, 16vh)"
-            listingAcceptButton.disabled = true
-            listingAcceptButton.setAttribute("onclick", "")
-            offerAccepted = true
-        } else if (profileListings[currentListing]["acceptedBy"] !== null) {
-            listingAcceptButton.style.cursor = "default"
-            listingAcceptButton.innerText = "Offer already accepted"
-            listingAcceptButton.style.width = "max(10vw, 20vh)"
-            listingAcceptButton.setAttribute("onclick", "")
-            offerAccepted = true
-        } else {
-            listingAcceptButton.style.cursor = "pointer"
-            listingAcceptButton.innerText = "Accept"
-            listingAcceptButton.style.width = "max(5vw, 10vh)"
-            offerAccepted = false
-        }
-
-
-
-        var txt = calculateTradeValueWithInput(listingPart1Dict, listingPart2Dict)
-
-        if (txt >= 0) {
-            listingValue.style.color = "red"
-        } else {
-            listingValue.style.color = "black"
-            txt = (Math.abs(parseInt(txt))).toString()
-        }
-        listingValue.innerText = txt
+        return value
     }
 
+    function timeSince(timestamp) {
+        const nowInSeconds = Math.floor(Date.now() / 1000);
+        const timeAgoInSeconds = nowInSeconds - timestamp;
 
-    showUserListings()
+        const seconds = timeAgoInSeconds.toFixed(0);
+        const minutes = Math.floor(seconds / 60).toFixed(0);
+        const hours = Math.floor(minutes / 60).toFixed(0);
+        const days = Math.floor(hours / 24).toFixed(0);
+        const months = Math.floor(days / 30).toFixed(0);
+        const years = Math.floor(months / 12).toFixed(0);
+
+        if (seconds < 100) {
+            return `${seconds} Seconds Ago`;
+        } else if (minutes < 100) {
+            return `${minutes} Minutes Ago`;
+        } else if (hours < 100) {
+            return `${hours} Hours Ago`;
+        } else if (days < 100) {
+            return `${days} Days Ago`;
+        } else if (years < 2) {
+            return `${months} Months Ago`;
+        } else {
+            return `${years} Years Ago`;
+        }
+    }
+
+    function showPreferences(listing) {
+        formData = new FormData();
+        formData.append('user', listing["owner"])
+        formData.append('action', "getUserData");
+
+        fetch('/api', {
+        method: 'POST',
+        body: formData
+        })
+        .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+        })
+        .then(data => {
+        if (data !== "ERROR") {
+            const userData = data
+            completedTradesByUser.innerText = userData["completedTrades"].length
+            if (userData["preferences"]["highTiers"] == 1) {
+                listingInterface2Preferences.children[0].style.fontWeight = "bold"
+            } else {
+                listingInterface2Preferences.children[0].style.fontWeight = "200"
+            }
+            if (userData["preferences"]["megaLegendaryPets"] == 1) {
+                listingInterface2Preferences.children[2].style.fontWeight = "bold"
+            } else {
+                listingInterface2Preferences.children[2].style.fontWeight = "200"
+            }
+            if (userData["preferences"]["neonLegendaryPets"] == 1) {
+                listingInterface2Preferences.children[4].style.fontWeight = "bold"
+            } else {
+                listingInterface2Preferences.children[4].style.fontWeight = "200"
+            }
+            if (userData["preferences"]["defaultLegendaryPets"] == 1) {
+                listingInterface2Preferences.children[6].style.fontWeight = "bold"
+            } else {
+                listingInterface2Preferences.children[6].style.fontWeight = "200"
+            }
+            if (userData["preferences"]["preppyPets"] == 1) {
+                listingInterface2Preferences.children[8].style.fontWeight = "bold"
+            } else {
+                listingInterface2Preferences.children[8].style.fontWeight = "200"
+            }
+            if (userData["preferences"]["randoms"] == 1) {
+                listingInterface2Preferences.children[10].style.fontWeight = "bold"
+            } else {
+                listingInterface2Preferences.children[10].style.fontWeight = "200"
+            }
+            if (userData["preferences"]["items"] == 1) {
+                listingInterface2Preferences.children[12].style.fontWeight = "bold"
+            } else {
+                listingInterface2Preferences.children[12].style.fontWeight = "200"
+            }
+            if (userData["preferences"]["allowUnderpays"] == 1) {
+                listingInterface2Preferences.children[14].style.fontWeight = "bold"
+            } else {
+                listingInterface2Preferences.children[14].style.fontWeight = "200"
+            }
+        } else {
+            
+        }
+        })
+        .catch(error => {
+        console.error('There was a problem with the fetch operation:', error);
+        }); 
+    }
+
+    function showUserListings2(listing) {
+        disableScrolling()
+        currentListing = listing
+        yourOfferExtraPets = []
+        theirOfferExtraPets = []
+        listingInterface2.style.display = "flex"
+        listingInterface2Background.style.display = "flex"
+        showOffers(listing)
+        showPreferences(listing)
+
+        if (listing["extraSharkValueRequested"] == 0 || listing["extraSharkValueRequested"] == undefined) {
+            yourOfferValue.innerText = listing["offer"]["giveValue"].toFixed(2)
+            theirOfferValue.innerText = listing["offer"]["takeValue"].toFixed(2)
+            finishButton.disabled = false
+            sharkValueRequestedDiv.style.display = "none"
+            changeButton.disabled = false
+        } else if (listing["extraSharkValueRequested"] > 0) {
+            yourOfferValue.innerText = listing["offer"]["giveValue"].toFixed(2).toString() + " + " + listing["extraSharkValueRequested"].toString()
+            theirOfferValue.innerText = listing["offer"]["takeValue"].toFixed(2)
+            finishButton.disabled = true
+            sharkValueRequestedDiv.style.display = "flex"
+            changeButton.disabled = false
+            sharkValueRequested.innerText = listing["extraSharkValueRequested"].toFixed(2)
+            youAddTheyAdd.innerText = "YOU ADD:"
+        } else if (listing["extraSharkValueRequested"] < 0) {
+            yourOfferValue.innerText = listing["offer"]["giveValue"].toFixed(2)
+            theirOfferValue.innerText = listing["offer"]["takeValue"].toFixed(2).toString() + " + " + Math.abs(listing["extraSharkValueRequested"]).toString()
+            finishButton.disabled = true
+            sharkValueRequestedDiv.style.display = "flex"
+            changeButton.disabled = false
+            sharkValueRequested.innerText = Math.abs(listing["extraSharkValueRequested"]).toFixed(2)
+            youAddTheyAdd.innerText = "THEY ADD:"
+        }
+
+        if (userData["id"] == listing["owner"]) {
+            finishButton.disabled = true
+        }
+
+        timeAgoListed.innerText = timeSince(listing["createdAt"])
+        totalOffers.innerText = listing["customOffers"].length
+
+        listingInterface2YourOfferPets.innerHTML = ""
+        for (const i in listing["offer"]["give"]) {
+            const div = document.createElement("div")
+            const img = document.createElement("img")
+            img.src = petsDict[listing["offer"]["give"][i]["id"]]["image"]
+            const div2 = document.createElement("div")
+            if (listing["offer"]["give"][i]["fly"] == 1) {
+                const div3 = document.createElement("div")
+                div3.style.background = "linear-gradient(135deg, rgb(142, 202, 232) 0%, rgb(47, 152, 204) 50%, rgb(0, 134, 200) 100%)"
+                const p = document.createElement("p")
+                p.innerText = "F"
+                div3.appendChild(p)
+                div2.appendChild(div3)
+            }
+            if (listing["offer"]["give"][i]["ride"] == 1) {
+                const div3 = document.createElement("div")
+                div3.style.background = "linear-gradient(135deg, rgb(255, 197, 220) 0%, rgb(237, 44, 121) 50%, rgb(255, 0, 101) 100%)"
+                const p = document.createElement("p")
+                p.innerText = "R"
+                div3.appendChild(p)
+                div2.appendChild(div3)
+            }
+            if (listing["offer"]["give"][i]["neon"] == 1) {
+                const div3 = document.createElement("div")
+                div3.style.background = "linear-gradient(135deg, rgb(187, 80, 253) 0%, rgb(69, 3, 198) 50%, rgb(81, 28, 182) 100%)"
+                const p = document.createElement("p")
+                p.innerText = "N"
+                div3.appendChild(p)
+                div2.appendChild(div3)
+            }
+            if (listing["offer"]["give"][i]["mega"] == 1) {
+                const div3 = document.createElement("div")
+                div3.style.background = "linear-gradient(135deg, rgb(193, 255, 110) 0%, rgb(140, 198, 63) 50%, rgb(19, 114, 11) 100%)"
+                const p = document.createElement("p")
+                p.innerText = "M"
+                div3.appendChild(p)
+                div2.appendChild(div3)
+            }
+            div.appendChild(img)
+            div.appendChild(div2)
+
+            listingInterface2YourOfferPets.appendChild(div)
+        }
+
+        listingInterface2TheirOfferPets.innerHTML = ""
+        for (const i in listing["offer"]["take"]) {
+            const div = document.createElement("div")
+            const img = document.createElement("img")
+            img.src = petsDict[listing["offer"]["take"][i]["id"]]["image"]
+            const div2 = document.createElement("div")
+            if (listing["offer"]["take"][i]["fly"] == 1) {
+                const div3 = document.createElement("div")
+                div3.style.background = "linear-gradient(135deg, rgb(142, 202, 232) 0%, rgb(47, 152, 204) 50%, rgb(0, 134, 200) 100%)"
+                const p = document.createElement("p")
+                p.innerText = "F"
+                div3.appendChild(p)
+                div2.appendChild(div3)
+            }
+            if (listing["offer"]["take"][i]["ride"] == 1) {
+                const div3 = document.createElement("div")
+                div3.style.background = "linear-gradient(135deg, rgb(255, 197, 220) 0%, rgb(237, 44, 121) 50%, rgb(255, 0, 101) 100%)"
+                const p = document.createElement("p")
+                p.innerText = "R"
+                div3.appendChild(p)
+                div2.appendChild(div3)
+            }
+            if (listing["offer"]["take"][i]["neon"] == 1) {
+                const div3 = document.createElement("div")
+                div3.style.background = "linear-gradient(135deg, rgb(187, 80, 253) 0%, rgb(69, 3, 198) 50%, rgb(81, 28, 182) 100%)"
+                const p = document.createElement("p")
+                p.innerText = "N"
+                div3.appendChild(p)
+                div2.appendChild(div3)
+            }
+            if (listing["offer"]["take"][i]["mega"] == 1) {
+                const div3 = document.createElement("div")
+                div3.style.background = "linear-gradient(135deg, rgb(193, 255, 110) 0%, rgb(140, 198, 63) 50%, rgb(19, 114, 11) 100%)"
+                const p = document.createElement("p")
+                p.innerText = "M"
+                div3.appendChild(p)
+                div2.appendChild(div3)
+            }
+            div.appendChild(img)
+            div.appendChild(div2)
+
+            listingInterface2TheirOfferPets.appendChild(div)
+        }
+
+        adjustGradientHeight()
+
+    }
+
+    function showOffers(listing) {
+        offers.innerHTML = ""
+        for (const i in listing["customOffers"]) {
+            const div = document.createElement("div")
+            div.className = "offer"
+            const div2 = document.createElement("div")
+
+            for (const j in listing["offer"][listing["customOffers"][i]["type"]]) {
+                const img = document.createElement("img")
+                img.src = petsDict[listing["offer"][listing["customOffers"][i]["type"]][j]["id"]]["image"]
+                const div4 = document.createElement("div")
+                div4.appendChild(img)
+                const div5 = document.createElement("div")
+                if (listing["offer"][listing["customOffers"][i]["type"]][j]["fly"] == 1) {
+                    const div6 = document.createElement("div")
+                    div6.style.background = "linear-gradient(135deg, rgb(142, 202, 232) 0%, rgb(47, 152, 204) 50%, rgb(0, 134, 200) 100%)"
+                    const p = document.createElement("p")
+                    p.innerText = "F"
+                    div6.appendChild(p)
+                    div5.appendChild(div6)
+                }
+                if (listing["offer"][listing["customOffers"][i]["type"]][j]["ride"] == 1) {
+                    const div6 = document.createElement("div")
+                    div6.style.background = "linear-gradient(135deg, rgb(255, 197, 220) 0%, rgb(237, 44, 121) 50%, rgb(255, 0, 101) 100%)"
+                    const p = document.createElement("p")
+                    p.innerText = "R"
+                    div6.appendChild(p)
+                    div5.appendChild(div6)
+                }
+                if (listing["offer"][listing["customOffers"][i]["type"]][j]["neon"] == 1) {
+                    const div6 = document.createElement("div")
+                    div6.style.background = "linear-gradient(135deg, rgb(193, 255, 110) 0%, rgb(140, 198, 63) 50%, rgb(19, 114, 11) 100%)"
+                    const p = document.createElement("p")
+                    p.innerText = "N"
+                    div6.appendChild(p)
+                    div5.appendChild(div6)
+                }
+                if (listing["offer"][listing["customOffers"][i]["type"]][j]["mega"] == 1) {
+                    const div5 = document.createElement("div")
+                    div5.style.background = "linear-gradient(135deg, rgb(187, 80, 253) 0%, rgb(69, 3, 198) 50%, rgb(81, 28, 182) 100%)"
+                    const p = document.createElement("p")
+                    p.innerText = "M"
+                    div6.appendChild(p)
+                    div5.appendChild(div6)
+                }
+                div4.appendChild(div5)
+                div2.appendChild(div4)
+            }
+
+            for (const j in listing["customOffers"][i]["pets"]) {
+                const img = document.createElement("img")
+                img.src = petsDict[listing["customOffers"][i]["pets"][j]["id"]]["image"]
+                const div4 = document.createElement("div")
+                div4.appendChild(img)
+                const div5 = document.createElement("div")
+                if (listing["customOffers"][i]["pets"][j]["fly"] == 1) {
+                    const div6 = document.createElement("div")
+                    div6.style.background = "linear-gradient(135deg, rgb(142, 202, 232) 0%, rgb(47, 152, 204) 50%, rgb(0, 134, 200) 100%)"
+                    const p = document.createElement("p")
+                    p.innerText = "F"
+                    div6.appendChild(p)
+                    div5.appendChild(div6)
+                }
+                if (listing["customOffers"][i]["pets"][j]["ride"] == 1) {
+                    const div6 = document.createElement("div")
+                    div6.style.background = "linear-gradient(135deg, rgb(255, 197, 220) 0%, rgb(237, 44, 121) 50%, rgb(255, 0, 101) 100%)"
+                    const p = document.createElement("p")
+                    p.innerText = "R"
+                    div6.appendChild(p)
+                    div5.appendChild(div6)
+                }
+                if (listing["customOffers"][i]["pets"][j]["neon"] == 1) {
+                    const div6 = document.createElement("div")
+                    div6.style.background = "linear-gradient(135deg, rgb(193, 255, 110) 0%, rgb(140, 198, 63) 50%, rgb(19, 114, 11) 100%)"
+                    const p = document.createElement("p")
+                    p.innerText = "N"
+                    div6.appendChild(p)
+                    div5.appendChild(div6)
+                }
+                if (listing["customOffers"][i]["pets"][j]["mega"] == 1) {
+                    const div5 = document.createElement("div")
+                    div5.style.background = "linear-gradient(135deg, rgb(187, 80, 253) 0%, rgb(69, 3, 198) 50%, rgb(81, 28, 182) 100%)"
+                    const p = document.createElement("p")
+                    p.innerText = "M"
+                    div6.appendChild(p)
+                    div5.appendChild(div6)
+                }
+                div4.appendChild(div5)
+                div2.appendChild(div4)
+            }
+
+            div.appendChild(div2)
+            const div3 = document.createElement("div")
+
+            const div7 = document.createElement("div")
+            const p2 = document.createElement("p")
+            p2.innerText = "SHARK VALUE"
+            const p3 = document.createElement("p")
+            p3.innerText = (parseInt(listing["customOffers"][i]["value"]).toFixed(1)).toString()
+            div7.appendChild(p2)
+            div7.appendChild(p3)
+            div3.appendChild(div7)
+
+            const div8 = document.createElement("div")
+            const p4 = document.createElement("p")
+            if (listing["customOffers"][i]["ownerRobloxUsername"] != "") {
+                p4.innerText = listing["customOffers"][i]["ownerRobloxUsername"]
+            } else {
+                p4.innerText = listing["customOffers"][i]["ownerUsername"]
+            }       
+            const img2 = document.createElement("img")
+            img2.src = "/static/images/profile/" + listing["customOffers"][i]["ownerProfilePicture"]
+            div8.appendChild(p4)
+            div8.appendChild(img2)
+            div3.appendChild(div8)
+
+            const div9 = document.createElement("div")
+            const p5 = document.createElement("p")
+            p5.innerText = timeSince(listing["customOffers"][i]["createdAt"])
+            div9.appendChild(p5)
+            div3.appendChild(div9)
+        
+            const div10 = document.createElement("div")
+            const p6 = document.createElement("p")
+            p6.innerText = listing["customOffers"][i]["status"]
+            if (listing["customOffers"][i]["status"] == "Accepted") {
+                p6.style.color = "rgb(0, 220, 0)"
+            } else if (listing["customOffers"][i]["status"] == "Declined") {
+                p6.style.color = "rgb(220, 0, 0)"
+            }
+            div10.appendChild(p6)
+            div3.appendChild(div10)
+
+            div.appendChild(div3)
+
+            offers.appendChild(div)
+            const line = document.createElement("div")
+            line.className = "offerLine"
+            if (i - 1 <= listing["customOffers"].length) {
+                offers.appendChild(line)
+            }
+
+
+            if (listing["ownerUsername"] == userData["username"] && listing["acceptedAt"] == -1 && listing["customOffers"][i]["status"] == "Pending") {
+                const div11 = document.createElement("div")
+                const button1 = document.createElement("button")
+                button1.setAttribute("onclick", "declineOffer(" + i.toString() + ")")
+                const button2 = document.createElement("button")
+                button2.setAttribute("onclick", "acceptOffer(" + i.toString() + ")")
+                const p7 = document.createElement("p")
+                p7.innerText = "Decline"
+                const p8 = document.createElement("p")
+                p8.innerText = "Accept"
+                button1.appendChild(p7)
+                button2.appendChild(p8)
+                div11.appendChild(button1)
+                div11.appendChild(button2)
+                div.appendChild(div11)
+            }
+
+        }
+
+        if (listing["customOffers"] == 0) {
+            const div = document.createElement("div")
+            const text = document.createElement("p")
+            text.style.fontSize = "40rem"
+            text.style.fontWeight = "700"
+            text.style.margin = "0px"
+            text.style.color = "rgb(109, 107, 112)"
+            text.innerText = "There Are No Current Offers"
+            div.appendChild(text)
+            div.style.display = "flex"
+            div.style.width = "100%"
+            div.style.height = "200rem"
+            div.style.justifyContent = "center"
+            div.style.alignItems = "center"
+            offers.appendChild(div)
+
+        }
+
+    }
+
+    function adjustGradientHeight() {
+
+        let existingStyle = document.querySelector('#gradientHeightStyle');
+        if (!existingStyle) {
+            existingStyle = document.createElement('style');
+            existingStyle.id = 'gradientHeightStyle';
+            document.head.appendChild(existingStyle);
+        }
+
+        existingStyle.textContent = `
+            #listingInterface2::before {
+                height: 0px;
+            }
+        `;
+
+        const contentHeight = listingInterface2.scrollHeight;
+
+        existingStyle.textContent = `
+            #listingInterface2::before {
+                height: ${contentHeight}px;
+            }
+        `;
+        }
+
+
+    showUserListings(profileListings, userListings)
 
     function acceptOffer() {
         if (offerAccepted == false) {
@@ -2103,7 +2595,7 @@
                 "acceptedBy":null,
                 "customOffers":{}
             })
-            showUserListings()
+            showUserListings(profileListings, userListings)
         } else {
             displayError(data)
         }
@@ -2135,7 +2627,7 @@
             displayMessage("The listing has been updated!")
             profileListings[modifyTrade]["offer"]["give"] = JSON.parse(JSON.stringify(tradePart1))
             profileListings[modifyTrade]["offer"]["take"] = JSON.parse(JSON.stringify(tradePart2))
-            showUserListings()
+            showUserListings(profileListings, userListings)
         } else {
             displayError(data)
         }
@@ -2449,8 +2941,8 @@
             })
             .then(data => {
             if (data == "SUCCESS") {
-                userDataDict.inventory.push({
-                    "innerID":userDataDict.inventory.length,
+                userData.inventory.push({
+                    "innerID":userData.inventory.length,
                     "id":pet,
                     "fly":fly,
                     "ride":ride,
@@ -2519,8 +3011,8 @@
             })
             .then(data => {
             if (data == "SUCCESS") {
-                userDataDict.wishlist.push({
-                    "innerID":userDataDict.inventory.length,
+                userData.wishlist.push({
+                    "innerID":userData.inventory.length,
                     "id":pet,
                     "fly":fly,
                     "ride":ride,
@@ -2553,7 +3045,7 @@
                 "neon":neon,
                 "mega":mega
             })
-            showUserListings2(currentListing, 1)
+            updateListingInterface2()
         } else if (addPetType == "listing2") {
             listingPart2Dict.push({
                 "id":pet,
@@ -2563,7 +3055,7 @@
                 "neon":neon,
                 "mega":mega
             })
-            showUserListings2(currentListing, 1)
+            updateListingInterface2()
         }
     };
 
@@ -2747,7 +3239,7 @@
     function openListingInterface2(listing) {
         listingInterface2Background.style.display = "block"
         listingInterface2.style.display = "flex"
-        showUserListings2(listing, 0)
+        showUserListings2(listing)
     }
 
     function closeListingInterface() {
@@ -3654,7 +4146,7 @@
             .then(data => {
                 if (data !== "ERROR") {
                     userPending.innerHTML = ""
-                    Object.keys(data).forEach(key => {
+                    data.forEach(key => {
                         const container = document.createElement("div")
                         container.className = "pendingListing"
                         const div = document.createElement("div")
