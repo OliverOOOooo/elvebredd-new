@@ -6,6 +6,7 @@
     <title>Index</title>
     <script src="../static/js/index.js"></script>
     <link rel="stylesheet" href="https://use.typekit.net/uju1lhj.css">
+    <link rel="stylesheet" href="../static/css/inventory.css">
 </head>
 <body style="background-color:rgb(253, 249, 234);">
     <header>
@@ -95,7 +96,6 @@
     </main>
 
     <div id="addInventory">
-        <div style="display:flex;flex-direction:row;justify-content:space-between;padding-right:5%;padding-left:5%;">
             <div class="center" style="gap:max(0.25vw, 0.5vh);padding:max(0.5vw, 1vh);">
                 <img id="filterImage" src="../static/images/misc/menu.png">
                 <p id="filterText">Filter</p>
@@ -104,8 +104,6 @@
                 <input id="petSearch" placeholder="Search" onkeyup="searchUpPets()">
                 <img id="petSearchImage" src="../static/images/misc/search.png">
             </div>
-        </div>
-        <div style="display:flex;flex-direction:row;justify-content:space-between;gap:0.5vw">
             <div id="filter">
                 <div id="filterButtons">
                     <button id="all" class="filterButton" onclick="filter('all', 0)"><b class="filterButtonText">All</b></button>
@@ -121,29 +119,26 @@
                     <button id="vehicles" class="filterButton" onclick="filter('vehicles', 0)"><b class="filterButtonText">Vehicles</b></button>
                 </div>
             </div>
-            <div class="center">
-                <div id="petImages">
+            <div id="petImages">
 
-                </div>
             </div>
-        </div>
-        <div id="imageButtons">
-            <button id="flyButton" onclick="enableFly()">
-                <h1 style="color:white;">F</h1>
-            </button>
-            <button id="rideButton" onclick="enableRide()">
-                <h1 style="color:white;">R</h1>
-            </button>
-            <button id="regularButton" onclick="enableRegular()">
-                <h1 style="color:white;">D</h1>
-            </button>
-            <button id="neonButton" onclick="enableNeon()">
-                <h1 style="color:white;">N</h1>
-            </button>
-            <button id="megaButton" onclick="enableMega()">
-                <h1 style="color:white;">M</h1>
-            </button>
-        </div>
+            <div id="imageButtons">
+                <button id="flyButton" onclick="enableFly()">
+                    <h1>F</h1>
+                </button>
+                <button id="rideButton" onclick="enableRide()">
+                    <h1>R</h1>
+                </button>
+                <button id="regularButton" onclick="enableRegular()">
+                    <h1>D</h1>
+                </button>
+                <button id="neonButton" onclick="enableNeon()">
+                    <h1>N</h1>
+                </button>
+                <button id="megaButton" onclick="enableMega()">
+                    <h1>M</h1>
+                </button>
+            </div>
         <div id="closeButton" onclick="closeInventory()">
             <img style="width:max(1.5vw, 3vh);aspect-ratio: 1/1;" src="../static/images/misc/close.svg">
         </div>
@@ -1962,8 +1957,6 @@
                     div.setAttribute("data-value", pet["rarity"])
                     div.setAttribute("onclick", "addPetToInventory(" + key.toString() + ")")
                     const img = document.createElement("img")
-                    img.style.height = "max(3.5vw, 7vh)"
-                    img.style.aspectRatio = "1/1"
                     img.setAttribute("onerror", "handleImageError(this)")
                     img.src = pet["image"]
                     div.appendChild(img)
@@ -1975,9 +1968,9 @@
 
     function openInventory() {
         displayPets()
-        addInventory.style.display = "block"
+        addInventory.style.display = "grid"
         addInventoryBackground.style.display = "block"
-        petImages.style.height = filterButtons.clientHeight + "px";
+        // petImages.style.height = filterButtons.clientHeight + "px";
     }
 
     function closeInventory() {
@@ -1987,6 +1980,64 @@
 
     function handleImageError(image) {
         image.style.display = 'none';
+    }
+
+
+    
+    function updateButtons() {
+    const buttons = [fly, ride, regular, neon, mega];
+    const gradients = [
+        'linear-gradient(135deg, rgb(142, 202, 232) 0%, rgb(47, 152, 204) 50%, rgb(0, 134, 200) 100%)',
+        'linear-gradient(135deg, rgb(255, 197, 220) 0%, rgb(237, 44, 121) 50%, rgb(255, 0, 101) 100%)',
+        'linear-gradient(135deg, rgb(255, 145, 0) 0%, rgb(255, 102, 102) 50%, rgb(255, 102, 102) 100%)',
+        'linear-gradient(135deg, rgb(193, 255, 110) 0%, rgb(140, 198, 63) 50%, rgb(19, 114, 11) 100%)',
+        'linear-gradient(135deg, rgb(187, 80, 253) 0%, rgb(69, 3, 198) 50%, rgb(81, 28, 182) 100%)'
+    ];
+    buttons.forEach((value, i) => {
+        const button = document.getElementById(['fly', 'ride', 'regular', 'neon', 'mega'][i] + 'Button');
+        button.style.background = value ? gradients[i] : '';
+    });
+}
+
+    updateButtons()
+
+    function enableFly() {
+        if (fly == 0) {
+            fly = 1
+        } else {
+            fly = 0
+        }
+        updateButtons()
+    }
+
+    function enableRide() {
+        if (ride == 0) {
+            ride = 1
+        } else {
+            ride = 0
+        }
+        updateButtons()
+    }
+
+    function enableRegular() {
+        regular = 1
+        neon = 0
+        mega = 0
+        updateButtons()
+    }
+
+    function enableNeon() {
+        regular = 0
+        neon = 1
+        mega = 0
+        updateButtons()
+    }
+
+    function enableMega() {
+        regular = 0
+        neon = 0
+        mega = 1
+        updateButtons()
     }
 
     function addPetToInventory(pet) {
@@ -2099,7 +2150,12 @@
                 pet.style.display = "flex";
             });
             resetFilterButtonBrightness()
-            all.style.filter = "brightness(1.2)"
+            all.style.border = "1px solid var(--theme-Highlight)"
+            all.style.color = "var(--theme-Highlight)"
+
+
+
+
         } else if (filter == "pets") {
             petImage.forEach(pet => {
                 if (pet.getAttribute("data-name") == "pets") {
@@ -2110,7 +2166,8 @@
                 }
             });
             resetFilterButtonBrightness()
-            pets.style.filter = "brightness(1.2)"
+            pets.style.border = "1px solid var(--theme-Highlight)"
+            pets.style.color = "var(--theme-Highlight)"
         } else if (filter == "common") {
             petImage.forEach(pet => {
                 if (pet.getAttribute("data-value") == "common") {
@@ -2121,7 +2178,8 @@
                 }
             });
             resetFilterButtonBrightness()
-            common.style.filter = "brightness(1.2)"
+            common.style.border = "1px solid var(--theme-Highlight)"
+            common.style.color = "var(--theme-Highlight)"
         } else if (filter == "eggs") {
             petImage.forEach(pet => {
                 if (pet.getAttribute("data-name") == "eggs") {
@@ -2132,7 +2190,8 @@
                 }
             });
             resetFilterButtonBrightness()
-            eggs.style.filter = "brightness(1.2)"
+            eggs.style.border = "1px solid var(--theme-Highlight)"
+            eggs.style.color = "var(--theme-Highlight)"
         } else if (filter == "legendary") {
             petImage.forEach(pet => {
                 if (pet.getAttribute("data-value") == "legendary") {
@@ -2143,7 +2202,8 @@
                 }
             });
             resetFilterButtonBrightness()
-            legendary.style.filter = "brightness(1.2)"
+            legendary.style.border = "1px solid var(--theme-Highlight)"
+            legendary.style.color = "var(--theme-Highlight)"
         } else if (filter == "other") {
             petImage.forEach(pet => {
                 if (pet.getAttribute("data-name") == "other") {
@@ -2154,7 +2214,8 @@
                 }
             });
             resetFilterButtonBrightness()
-            other.style.filter = "brightness(1.2)"
+            other.style.border = "1px solid var(--theme-Highlight)"
+            other.style.color = "var(--theme-Highlight)"
         } else if (filter == "pet wear") {
             petImage.forEach(pet => {
                 if (pet.getAttribute("data-value") == "") {
@@ -2165,7 +2226,8 @@
                 }
             });
             resetFilterButtonBrightness()
-            petWear.style.filter = "brightness(1.2)"
+            petWear.style.border = "1px solid var(--theme-Highlight)"
+            petWear.style.color = "var(--theme-Highlight)"
         } else if (filter == "rare") {
             petImage.forEach(pet => {
                 if (pet.getAttribute("data-value") == "rare") {
@@ -2176,7 +2238,8 @@
                 }
             });
             resetFilterButtonBrightness()
-            rare.style.filter = "brightness(1.2)"
+            rare.style.border = "1px solid var(--theme-Highlight)"
+            rare.style.color = "var(--theme-Highlight)"
         } else if (filter == "ultra rare") {
             petImage.forEach(pet => {
                 if (pet.getAttribute("data-value") == "ultra rare") {
@@ -2187,7 +2250,8 @@
                 }
             });
             resetFilterButtonBrightness()
-            ultraRare.style.filter = "brightness(1.2)"
+            ultraRare.style.border = "1px solid var(--theme-Highlight)"
+            ultraRare.style.color = "var(--theme-Highlight)"
         } else if (filter == "uncommon") {
             petImage.forEach(pet => {
                 if (pet.getAttribute("data-value") == "uncommon") {
@@ -2198,7 +2262,8 @@
                 }
             });
             resetFilterButtonBrightness()
-            uncommon.style.filter = "brightness(1.2)"
+            uncommon.style.border = "1px solid var(--theme-Highlight)"
+            uncommon.style.color = "var(--theme-Highlight)"
         } else if (filter == "vehicles") {
             petImage.forEach(pet => {
                 if (pet.getAttribute("data-name") == "vehicles") {
@@ -2209,7 +2274,8 @@
                 }
             });
             resetFilterButtonBrightness()
-            vehicles.style.filter = "brightness(1.2)"
+            vehicles.style.border = "1px solid var(--theme-Highlight)"
+            vehicles.style.color = "var(--theme-Highlight)"
         }
         if (preventLoop == 0) {
             searchUpPets()
@@ -2231,18 +2297,12 @@
     };
 
     function resetFilterButtonBrightness() {
-        all.style.filter = "brightness(1)"
-        pets.style.filter = "brightness(1)"
-        common.style.filter = "brightness(1)"
-        eggs.style.filter = "brightness(1)"
-        legendary.style.filter = "brightness(1)"
-        other.style.filter = "brightness(1)"
-        petWear.style.filter = "brightness(1)"
-        rare.style.filter = "brightness(1)"
-        ultraRare.style.filter = "brightness(1)"
-        uncommon.style.filter = "brightness(1)"
-        vehicles.style.filter = "brightness(1)"
-    }
+    var selectableElements = document.querySelectorAll('.filterButton');
+    selectableElements.forEach(element => {
+        element.style.border = "1px solid var(--theme-borderColor)";
+        element.style.color = "var(--theme-textoption)";
+    });
+}
 
     function updateSlides() {
         slidesInfo.innerHTML = "";

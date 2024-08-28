@@ -1,66 +1,205 @@
-#footerLogo{
-    width:auto; 
-    height:12vh;
+
+a {
+    text-decoration: none;
 }
 
-footer{
-    background: linear-gradient(135deg, rgb(243, 231, 214) 0%, rgb(235, 229, 220) 50%, rgb(253, 249, 234) 100%);
+
+#foot {
+    background: var(--theme-background);
+    background-size: 100% 100%;
+    height: auto;
+    width: 100%;
+    margin-bottom: -2vw;
+    padding-bottom: 120px;
+
+    display: grid;
+    grid-template-columns: 10vw 1fr min-content 1fr 10vw;
+    grid-template-rows: min-content 4vw 4vw min-content min-content;
+    grid-template-areas: 
+    ". . logooo . ."
+    ". playwireText linksss linksss2 ."
+    ". playwireLogo linksss . ."
+    ". playwireLogo . . ."
+    ". subtext subtext subtext .";
+    
+    margin-top: 10vw;
+    font-size: min(3vw, 1.8vh);
+    font-weight: bold;
+    color: var(--theme-textoptionTwo);
 }
 
-.footerText{
-    margin:0px;
-    font-size:2.2vh;
-    text-decoration:none;
-    padding:10px;
-    text-shadow: 1px 1px 1px rgba(100, 100, 100, 0.25);
+
+#foot a {
+    color: var(--theme-textoptionTwo);
+}
+#linksss {
+    width: min-content;
+    margin: auto;
+    gap: 1vw;
+    grid-area: linksss;
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-areas: 
+    "di yt ro";
 }
 
-.footerImage{
-    width:60px;
-    height:auto;
-    padding:5px;
+
+
+
+#subtext {
+    color: var(--theme-textoptionThree);
+    grid-area: subtext;
+    font-size: 1.1em;
+    text-align: center;
+    justify-self: end;
+    margin: auto;
 }
 
-#footerMenu{
-    width:100%;
-    display:flex;
-    flex-direction:row;
-    justify-content:space-between;
+
+#yt, #di, #ro, #logooo {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 0;
 }
 
-footer a{
-    text-decoration:none;
-    color:black;
+#playwireLogo{
+    grid-area: playwireLogo;
 }
 
-#footerQuickLinks1{
-    display:flex;
+#playwireText, #linksss2 {
+    margin-top: 0;
+    height: 4vw;
+    width: 30vw;
+    line-height: 2;
+    gap: 2vw;
+    display: flex;
+    justify-content: center; 
+    justify-content: flex-start;
+    align-items: flex-end; 
+    border-bottom: 1px solid var(--theme-textoptionThree);
 }
 
-#footerQuickLinks2{
-    display:none;
+#linksss img {
+    height: 1.9vw;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    filter: var(--theme-FilteroptionTwo);
 }
 
-#helpCenter1{
-    display:flex;
+#logooo {
+    width: 15vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    margin-top: 1vw;
+    filter: var(--theme-FilteroptionTwo);
 }
 
-#helpCenter2{
-    display:none
-}
+#playwireLogo img {
+    margin: 0 auto 0 0.5vw !important;
+  }
 
-#footerAvailableOptions{
-    display:flex;
-    justify-content:center;
-    align-items:center;
-}
+#logooo {grid-area: logooo;}
+#yt { grid-area: yt;}
+#di { grid-area: di;}
+#ro { grid-area: ro;}
+#linksss2 { grid-area: linksss2; justify-content: flex-end; padding-right: 1vw;}
+#playwireText { grid-area: playwireText; padding-left: 1vw;}
 
-#footerLine{
-    width:100%;
-}
 
-#footerSection{
-    padding-right:3vw; 
-    width:100%; 
-    text-align:right;
+@media (orientation: portrait) {
+
+
+
+    #foot {
+        background: var(--theme-background);
+        background-size: 100% 100%;
+        height: auto;
+        width: 100%;
+        margin-bottom: -2vw;
+    
+        display: grid;
+        grid-template-columns: 3vw 28vw 1fr 28vw 3vw;
+        grid-template-rows: min-content 12vw min-content min-content min-content min-content;
+        grid-template-areas: 
+        ". logooo logooo logooo . "
+        ". empty-box1 linksss empty-box2 . "
+        ". . linksss . . "
+        ". linksss2 linksss2 linksss2 . "
+        ". playwireLogo playwireLogo playwireLogo . "
+        ". playwireText playwireText playwireText . "
+        ". subtext subtext subtext . ";
+        
+        margin-top: 30vh;
+        font-size: min(3vw, 1.8vh);
+    }
+
+    /* #playwireText a{
+        color: var(--theme-textoptionThree);
+    } */
+
+    #logooo {
+        width: 50vw;
+        margin-top: 5vw;
+    }
+
+
+    #linksss {
+        position: relative;
+        gap: 5vw;
+    }
+
+    #empty-box1{ grid-area: empty-box1; margin-right: 0; margin: auto;}
+    #empty-box2{ grid-area: empty-box2; margin-left: 0; margin: auto;}
+
+    #empty-box1, #empty-box2{
+        content: ""; 
+        width: 25vw;
+        border-bottom: 1px solid var(--theme-textoptionThree);
+        display: flex !important;
+    }
+    
+    /* #linksss::before,
+    #linksss::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        width: 22vw;
+        height: 1px;
+        background-color: var(--theme-textoptionThree);
+        transform: translateY(-50%);
+    }
+    
+    #linksss::before {
+        left: 0;
+        transform: translateY(-50%) translateX(-120%);
+    }
+    
+    #linksss::after {
+        right: 0;
+        transform: translateY(-50%) translateX(120%);
+    } */
+
+    #linksss img {
+        height: 5vw;
+    }
+
+    #playwireText, #linksss2 {
+        justify-content: center;
+        margin: auto;
+        width: 100%;
+        border: none;
+    }
+
+    #playwireLogo img {
+    margin-left: auto !important;
+    margin-right: auto !important;
+    }
+
+    #subtext {
+        font-size: 1em;
+    }
 }
